@@ -15,97 +15,81 @@ public class BookIssueDetails {
 	private Long id;
 	
 	@Column(name = "book_Id")
-	private Long book_Id;
+	private Long bookId;
 	
 	@Column(name = "user_Id")
-	private Long user_Id;
+	private Long userId;
 	
 	@Column(name = "issue_Date")
-	private Date issue_Date;
+	private Date issueDate;
 	
 	@Column(name = "issue_End_Date")
-	private Date issue_End_Date;
+	private Date issueEndDate;
 	
 	@Column(name = "return_Date")
-	private Date return_Date;
-	
-	
+	private Date returnDate;
+
+	public BookIssueDetails(Long id, Long bookId, Long userId, Date issueDate, Date issueEndDate, Date returnDate) {
+		this.bookId = bookId;
+		this.userId = userId;
+		this.issueDate = issueDate;
+		this.issueEndDate = issueEndDate;
+		this.returnDate = returnDate;
+	}
 
 	public BookIssueDetails() {
-
+		
 	}
-
-
-	public BookIssueDetails(Long id, Long book_Id, Long user_Id, Date issue_Date, Date issue_End_Date,
-			Date return_Date) {
-		this.id = id;
-		this.book_Id = book_Id;
-		this.user_Id = user_Id;
-		this.issue_Date = issue_Date;
-		this.issue_End_Date = issue_End_Date;
-		this.return_Date = return_Date;
-	}
-
 
 	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public Long getBookId() {
+		return bookId;
 	}
 
-
-	public Long getBook_Id() {
-		return book_Id;
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
 	}
 
-
-	public void setBook_Id(Long book_Id) {
-		this.book_Id = book_Id;
+	public Long getUserId() {
+		return userId;
 	}
 
-
-	public Long getUser_Id() {
-		return user_Id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-
-	public void setUser_Id(Long user_Id) {
-		this.user_Id = user_Id;
+	public Date getIssueDate() {
+		return issueDate;
 	}
 
-
-	public Date getIssue_Date() {
-		return issue_Date;
+	public void setIssueDate(Date issueDate) {
+		this.issueDate = issueDate;
 	}
 
-
-	public void setIssue_Date(Date issue_Date) {
-		this.issue_Date = issue_Date;
+	public Date getIssueEndDate() {
+		return issueEndDate;
 	}
 
-
-	public Date getIssue_End_Date() {
-		return issue_End_Date;
+	public void setIssueEndDate(Date issueEndDate) {
+		this.issueEndDate = issueEndDate;
 	}
 
-
-	public void setIssue_End_Date(Date issue_End_Date) {
-		this.issue_End_Date = issue_End_Date;
+	public Date getReturnDate() {
+		return returnDate;
 	}
 
-
-	public Date getReturn_Date() {
-		return return_Date;
-	}
-
-
-	public void setReturn_Date(Date return_Date) {
-		this.return_Date = return_Date;
+	public void setReturnDate(Date returnDate) {
+		this.returnDate = returnDate;
 	}
 	
+	
+	
+	
+
 	
 	
 
