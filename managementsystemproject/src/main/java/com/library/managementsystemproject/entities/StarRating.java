@@ -17,6 +17,6 @@ public enum StarRating {
 	    private String rating;
 	    private StarRating(String rating){
 	        this.rating=rating;
-	    }
+    }
 
 }
