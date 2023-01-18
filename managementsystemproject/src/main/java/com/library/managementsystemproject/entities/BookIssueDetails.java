@@ -32,7 +32,7 @@ public class BookIssueDetails {
 	private Date returnDate;
 	
 	@ManyToOne
-	@JoinColumn(name="book_id")
+	@JoinColumn(name="bookId")
 	private BookDetails bookDetails;
 
 	public BookIssueDetails(Long id, Long bookId, Long userId, Date issueDate, Date issueEndDate, Date returnDate) {
