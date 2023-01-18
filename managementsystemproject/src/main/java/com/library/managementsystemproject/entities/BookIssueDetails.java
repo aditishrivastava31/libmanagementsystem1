@@ -1,66 +1,52 @@
 package com.library.managementsystemproject.entities;
 import java.util.Date;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class BookIssueDetails {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "book_Id")
-	private Long bookId;
-	
-	@Column(name = "user_Id")
-	private Long userId;
-	
-	@Column(name = "issue_Date")
+	private Long id;	
 	private Date issueDate;
-	
-	@Column(name = "issue_End_Date")
 	private Date issueEndDate;
-	
-	@Column(name = "return_Date")
 	private Date returnDate;
+	
+	@ManyToOne
+	@JoinColumn(name="bookId")
+	private BookDetails bookDetails;
+	
+	@ManyToOne
+	@JoinColumn(name="userId")
+	private UserDetail userDetail;
+	
 
-	public BookIssueDetails(Long id, Long bookId, Long userId, Date issueDate, Date issueEndDate, Date returnDate) {
-		this.bookId = bookId;
-		this.userId = userId;
+	public BookIssueDetails() {
+
+	}
+
+	public BookIssueDetails(Long id, Date issueDate, Date issueEndDate, Date returnDate, BookDetails bookDetails,
+			UserDetail userDetail) {
+		this.id = id;
 		this.issueDate = issueDate;
 		this.issueEndDate = issueEndDate;
 		this.returnDate = returnDate;
-	}
-
-	public BookIssueDetails() {
-		
-		
+		this.bookDetails = bookDetails;
+		this.userDetail = userDetail;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-
-	public Long getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(Long bookId) {
-		this.bookId = bookId;
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Date getIssueDate() {
@@ -86,5 +72,22 @@ public class BookIssueDetails {
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
+
+	public BookDetails getBookDetails() {
+		return bookDetails;
+	}
+
+	public void setBookDetails(BookDetails bookDetails) {
+		this.bookDetails = bookDetails;
+	}
+
+	public UserDetail getUserDetail() {
+		return userDetail;
+	}
+
+	public void setUserDetail(UserDetail userDetail) {
+		this.userDetail = userDetail;
+	}
+	
 	
 }
