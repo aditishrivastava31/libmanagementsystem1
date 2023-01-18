@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class BookIssueDetails {
@@ -28,6 +30,10 @@ public class BookIssueDetails {
 	
 	@Column(name = "return_Date")
 	private Date returnDate;
+	
+	@ManyToOne
+	@JoinColumn(name="book_id")
+	private BookDetails bookDetails;
 
 	public BookIssueDetails(Long id, Long bookId, Long userId, Date issueDate, Date issueEndDate, Date returnDate) {
 		this.bookId = bookId;
