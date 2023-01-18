@@ -14,7 +14,7 @@ public class Category {
 	
 	private String categoryName;
 
-	public long getCid() {
+	public long getCid(){
 		return cid;
 	}
 
@@ -29,6 +29,18 @@ public class Category {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+
+	public Category(long cid, String categoryName) {
+		this.cid = cid;
+		this.categoryName = categoryName;
+	}
+
+	public Category() {
+		
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	
 	

@@ -74,4 +74,19 @@ public class BookDetails {
 		this.authors = authors;
 	}
 
+	public BookDetails(long bookId, long quantity, String bookName, String category, List<Author> authors) {
+		
+		this.bookId = bookId;
+		this.quantity = quantity;
+		this.bookName = bookName;
+		this.category = category;
+		this.authors = authors;
+	}
+
+	public BookDetails() {
+	
+		// TODO Auto-generated constructor stub
+	}
+	
+
 }
