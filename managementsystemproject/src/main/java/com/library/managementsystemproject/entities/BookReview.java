@@ -14,7 +14,7 @@ public class BookReview {
 	@Enumerated
 	private StarRating starRating;
 
-	private Long bookId;
+	
 
 	public Long getRatingId() {
 		return ratingId;
@@ -36,25 +36,34 @@ public class BookReview {
 		return starRating;
 	}
 
+	public BookDetails getBookdetails() {
+		return bookdetails;
+	}
+
+	public void setBookdetails(BookDetails bookdetails) {
+		this.bookdetails = bookdetails;
+	}
+
 	public void setStarRating(StarRating starRating) {
 		this.starRating = starRating;
 	}
 
-	public Long getBookId() {
-		return bookId;
+	
+	@ManyToOne(targetEntity =BookDetails.class)
+	@JoinColumn(name="book_id",referencedColumnName = "bookId")
+	public BookDetails bookdetails;
+	
+	public BookReview() {
+	
 	}
 
-	public BookReview(Long ratingId, String comments, StarRating starRating, Long bookId) {
+	public BookReview(Long ratingId, String comments, StarRating starRating, BookDetails bookdetails) {
+		super();
 		this.ratingId = ratingId;
 		this.comments = comments;
 		this.starRating = starRating;
-		this.bookId = bookId;
+		this.bookdetails = bookdetails;
 	}
 
-	public BookReview() {
-	}
-
-	public void setBookId(Long bookId) {
-		this.bookId = bookId;
-	}
+	
 }

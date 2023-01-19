@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class UserDetail {
+public class UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long userId;
@@ -68,7 +68,7 @@ public class UserDetail {
 	public void setUserAddress(Address userAddress) {
 		this.userAddress = userAddress;
 	}
-	public UserDetail(long userId, String userName, String password, String email, long number, boolean isAdmin,
+	public UserDetails(long userId, String userName, String password, String email, long number, boolean isAdmin,
 			long lendCount, Address userAddress) {
 		this.userId = userId;
 		this.userName = userName;
