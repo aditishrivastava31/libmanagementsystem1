@@ -4,9 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.library.managementsystemproject.entities.BookReview;
 
-public interface BookReviewRepository extends JpaRepository<BookReview, Long> {
+public interface BookReviewRepository extends JpaRepository<BookReview, Long>{
 	
 	
-
 	
 }
