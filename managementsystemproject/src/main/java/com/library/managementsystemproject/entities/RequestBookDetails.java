@@ -7,7 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class RequestBookDetail {
+public class RequestBookDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class RequestBookDetail {
 	private String bookName;
 	@ManyToOne
 	@JoinColumn(name="userId")
-	private UserDetail userDetail;
+	private UserDetails userDetail;
 	
 	public long getRequestBookId() {
 		return requestBookId;
@@ -43,14 +43,14 @@ public class RequestBookDetail {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-	public UserDetail getUserDetail() {
+	public UserDetails getUserDetail() {
 		return userDetail;
 	}
-	public void setUserDetail(UserDetail userDetail) {
+	public void setUserDetail(UserDetails userDetail) {
 		this.userDetail = userDetail;
 	}
-	public RequestBookDetail(long requestBookId, boolean isActive, String authorName, String bookName,
-			UserDetail userDetail) {
+	public RequestBookDetails(long requestBookId, boolean isActive, String authorName, String bookName,
+			UserDetails userDetail) {
 		this.requestBookId = requestBookId;
 		this.isActive = isActive;
 		this.authorName = authorName;
