@@ -14,6 +14,4 @@ import com.library.managementsystemproject.entities.UserDetails;
 @EnableJpaRepositories
 public interface UserDetailsRepository extends JpaRepository<UserDetails, Long> {
 	
-	
-	
 }
