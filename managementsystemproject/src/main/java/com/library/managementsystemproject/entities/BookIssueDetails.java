@@ -24,7 +24,7 @@ public class BookIssueDetails {
 	
 	@ManyToOne
 	@JoinColumn(name="userId")
-	private UserDetails userDetail;
+	private UserDetail userDetail;
 	
 
 	public BookIssueDetails() {
@@ -32,7 +32,7 @@ public class BookIssueDetails {
 	}
 
 	public BookIssueDetails(Long id, Date issueDate, Date issueEndDate, Date returnDate, BookDetails bookDetails,
-			UserDetails userDetail) {
+			UserDetail userDetail) {
 		this.id = id;
 		this.issueDate = issueDate;
 		this.issueEndDate = issueEndDate;
@@ -81,11 +81,11 @@ public class BookIssueDetails {
 		this.bookDetails = bookDetails;
 	}
 
-	public UserDetails getUserDetail() {
+	public UserDetail getUserDetail() {
 		return userDetail;
 	}
 
-	public void setUserDetail(UserDetails userDetail) {
+	public void setUserDetail(UserDetail userDetail) {
 		this.userDetail = userDetail;
 	}
 	
