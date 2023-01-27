@@ -25,15 +25,9 @@ public class BookDetails {
 	
 	@ManyToOne(cascade = CascadeType.ALL,targetEntity = Category.class)
 	@JoinColumn(name="category_id",referencedColumnName = "cid")
-	private String category;
+	private Category category;
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
+	
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Book_Author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -74,8 +68,16 @@ public class BookDetails {
 		this.authors = authors;
 	}
 
-	public BookDetails(long bookId, long quantity, String bookName, String category, List<Author> authors) {
-		
+	
+
+	@Override
+	public String toString() {
+		return "BookDetails [bookId=" + bookId + ", quantity=" + quantity + ", bookName=" + bookName + ", category="
+				+ category + ", authors=" + authors + "]";
+	}
+
+	public BookDetails(long bookId, long quantity, String bookName, Category category, List<Author> authors) {
+	
 		this.bookId = bookId;
 		this.quantity = quantity;
 		this.bookName = bookName;
@@ -83,7 +85,15 @@ public class BookDetails {
 		this.authors = authors;
 	}
 
-	public BookDetails() {
+	public Category getCategory(){
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public BookDetails(){
 	
 		// TODO Auto-generated constructor stub
 	}

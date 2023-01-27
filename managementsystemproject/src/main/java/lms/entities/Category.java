@@ -1,5 +1,7 @@
 package lms.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,11 +16,12 @@ public class Category {
 	
 	private String categoryName;
 
-	public long getCid(){
+	public long getCid()
+	{
 		return cid;
 	}
 
-	public void setCid(long cid) {
+	public void setCid(long cid){
 		this.cid = cid;
 	}
 
@@ -39,6 +42,9 @@ public class Category {
 		
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	
 
 
 
