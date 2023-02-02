@@ -23,13 +23,12 @@ public class BookDetails {
 	private String bookName;
 
 	
-	@ManyToOne(cascade = CascadeType.ALL,targetEntity = Category.class)
+	@ManyToOne(targetEntity = Category.class)
 	@JoinColumn(name="category_id",referencedColumnName = "cid")
 	private Category category;
 
 	
-
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(targetEntity = Author.class)
 	@JoinTable(name = "Book_Author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
 	private List<Author> authors;
 
@@ -95,7 +94,6 @@ public class BookDetails {
 
 	public BookDetails(){
 	
-		// TODO Auto-generated constructor stub
 	}
 	
 

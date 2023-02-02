@@ -1,7 +1,5 @@
 package lms.entities;
 
-import java.util.Objects;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,19 +7,18 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Category {
- 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long cid;
-	
+
 	private String categoryName;
 
-	public long getCid()
-	{
+	public long getCid() {
 		return cid;
 	}
 
-	public void setCid(long cid){
+	public void setCid(long cid) {
 		this.cid = cid;
 	}
 
@@ -39,16 +36,7 @@ public class Category {
 	}
 
 	public Category() {
-		
-		// TODO Auto-generated constructor stub
+
 	}
 
-	
-	
-
-
-
-	
-	
-	
 }
