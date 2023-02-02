@@ -17,6 +17,7 @@ public class RequestBookDetails {
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private UserDetails userDetail;
+	private Object isActive;
 	
 	public enum isActive{
 		Cancelled,
@@ -25,31 +26,48 @@ public class RequestBookDetails {
 		Approved
 		
 	}
-	
+
 	public long getRequestBookId() {
 		return requestBookId;
 	}
+
 	public void setRequestBookId(long requestBookId) {
 		this.requestBookId = requestBookId;
 	}
-	
+
 	public String getAuthorName() {
 		return authorName;
 	}
+
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
 	}
+
 	public String getBookName() {
 		return bookName;
 	}
+
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
+
 	public UserDetails getUserDetail() {
 		return userDetail;
 	}
+
 	public void setUserDetail(UserDetails userDetail) {
 		this.userDetail = userDetail;
 	}
+
+	public isActive getActive() {
+		
+		return getActive();
+	}
+
+	public void setActive(isActive pending) {
+		this.isActive=isActive;
+		
+	}
+	
 	
 }
