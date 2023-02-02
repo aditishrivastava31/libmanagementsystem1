@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -12,25 +13,21 @@ public class Address {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long addressId;
 	
 	private String address;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Country country;
+	@JoinColumn(name = "id")
+	private StateAndCity stateAndCity;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private State state;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private City city;
-
-	public long getId() {
-		return id;
+	public long getAddressId() {
+		return addressId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
 	}
 
 	public String getAddress() {
@@ -41,29 +38,23 @@ public class Address {
 		this.address = address;
 	}
 
-	public Country getCountry() {
-		return country;
+	public StateAndCity getStateAndCity() {
+		return stateAndCity;
 	}
 
-	public void setCountry(Country country) {
-		this.country = country;
+	public void setStateAndCity(StateAndCity stateAndCity) {
+		this.stateAndCity = stateAndCity;
 	}
 
-	public State getState() {
-		return state;
+	public Address(long addressId, String address, StateAndCity stateAndCity) {
+		this.addressId = addressId;
+		this.address = address;
+		this.stateAndCity = stateAndCity;
 	}
 
-	public void setState(State state) {
-		this.state = state;
-	}
-
-	public City getCity() {
-		return city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
+	public Address() {
+		
 	}
 	
-
 }
+
