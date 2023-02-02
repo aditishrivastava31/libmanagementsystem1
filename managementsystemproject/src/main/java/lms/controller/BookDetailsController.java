@@ -38,20 +38,12 @@ public class BookDetailsController {
 	@PostMapping("/addbookDetails")
 	public ResponseEntity<BookDetails> addbookdetails(@RequestBody BookDetails bookDetails) {
 
-		// return
-		// ResponseEntity.ok().body(bookDetailsService.addbookdetails(bookDetails));
-		
-		
-		
 		try {
-				return new ResponseEntity<>(bookDetailsService.addbookdetails(bookDetails), HttpStatus.OK);
-		}
-			catch (Exception e) {
+			return new ResponseEntity<>(bookDetailsService.addbookdetails(bookDetails), HttpStatus.OK);
+		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		
-		
 
 	}
 
