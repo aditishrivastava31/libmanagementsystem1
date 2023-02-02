@@ -17,6 +17,7 @@ public class UserDetails {
 	private long number;
 	private boolean isAdmin;
 	private long lendCount;
+	
 	@OneToOne
 	private Address userAddress;
 	
@@ -79,6 +80,13 @@ public class UserDetails {
 		this.lendCount = lendCount;
 		this.userAddress = userAddress;
 	}
+	public UserDetails() {
+		
+		
+	}
+	
+	
+	
 
 	
 }

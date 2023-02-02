@@ -41,6 +41,7 @@ public class BookIssueDetails {
 		this.userDetail = userDetail;
 	}
 
+	
 	public Long getId() {
 		return id;
 	}
