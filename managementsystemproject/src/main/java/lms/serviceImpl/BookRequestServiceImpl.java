@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import lms.dto.BookRequestDto;
 import lms.entities.RequestBookDetails;
-import lms.entities.RequestBookDetails.isActive;
+import lms.entities.RequestBookDetails.IsActive;
 import lms.entities.UserDetails;
 import lms.repositories.RequestBookDetailsRepository;
 import lms.repositories.UserDetailsRepository;
@@ -40,7 +40,7 @@ public class BookRequestServiceImpl implements BookRequestService {
 			if ((requestBookDetails.getBookName().toLowerCase()).equals(requestBookDetails2.getBookName().toLowerCase())) {
 				return "Book is already requested..";
 			} else {
-				requestBookDetails.setActive(isActive.Pending);
+				requestBookDetails.setIsActive(IsActive.Pending);
 				requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
 				requestBookDetailsRepository.save(requestBookDetails);
 				return "Your request has been submitted..";
@@ -80,7 +80,7 @@ public class BookRequestServiceImpl implements BookRequestService {
 			bookRequestDto.setsNo(i++);
 			bookRequestDto.setBookName(requestBookDetails2.getBookName());
 			bookRequestDto.setAuthorName(requestBookDetails2.getAuthorName());
-			bookRequestDto.setIsActive(requestBookDetails2.getActive());
+			bookRequestDto.setIsActive(requestBookDetails2.getIsActive());
 			bookRequestDtos.add(bookRequestDto);
 		}
 		return bookRequestDtos;

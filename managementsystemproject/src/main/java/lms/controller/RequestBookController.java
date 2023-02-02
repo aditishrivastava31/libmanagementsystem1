@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lms.dto.BookRequestDto;
 import lms.entities.RequestBookDetails;
-import lms.entities.RequestBookDetails.isActive;
 import lms.entities.UserDetails;
 import lms.services.BookRequestService;
 

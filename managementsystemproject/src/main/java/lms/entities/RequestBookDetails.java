@@ -1,5 +1,6 @@
 package lms.entities;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,9 +18,11 @@ public class RequestBookDetails {
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private UserDetails userDetail;
-	private Object isActive;
 	
-	public enum isActive{
+	@Enumerated
+	private  IsActive isActive;
+	
+	public enum IsActive{
 		Cancelled,
 		Pending,
 		Pending_Purchase,
@@ -59,15 +62,15 @@ public class RequestBookDetails {
 		this.userDetail = userDetail;
 	}
 
-	public isActive getActive() {
-		
-		return getActive();
+	public IsActive getIsActive() {
+		return isActive;
 	}
 
-	public void setActive(isActive pending) {
-		this.isActive=isActive;
-		
+	public void setIsActive(IsActive isActive) {
+		this.isActive = isActive;
 	}
+
+	
 	
 	
 }
