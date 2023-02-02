@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import lms.dto.BookRequestDto;
 import lms.entities.RequestBookDetails;
 import lms.entities.UserDetails;
-import lms.entities.RequestBookDetails.isActive;
 
 /**
  * this interface will be used to connect BookRequestService

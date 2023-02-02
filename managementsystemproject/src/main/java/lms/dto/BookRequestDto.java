@@ -1,26 +1,12 @@
 package lms.dto;
 
-import lms.entities.RequestBookDetails.isActive;
+import lms.entities.RequestBookDetails.IsActive;
 
 public class BookRequestDto {
 	private long sNo;
 	private String bookName;
 	private String authorName;
-	private isActive isActive;
-	
-	
-	
-	public BookRequestDto() {
-		
-	}
-	public BookRequestDto(long sNo, String bookName, String authorName,
-			lms.entities.RequestBookDetails.isActive isActive) {
-
-		this.sNo = sNo;
-		this.bookName = bookName;
-		this.authorName = authorName;
-		this.isActive = isActive;
-	}
+	private IsActive isActive;
 	public long getsNo() {
 		return sNo;
 	}
@@ -39,20 +25,22 @@ public class BookRequestDto {
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
 	}
-	public isActive getIsActive() {
+	public IsActive getIsActive() {
 		return isActive;
 	}
-	public void setIsActive(isActive isActive) {
+	public void setIsActive(IsActive isActive) {
 		this.isActive = isActive;
 	}
-	@Override
-	public String toString() {
-		return "BookRequestDto [sNo=" + sNo + ", bookName=" + bookName + ", authorName=" + authorName + ", isActive="
-				+ isActive + "]";
+	public BookRequestDto(long sNo, String bookName, String authorName, IsActive isActive) {
+		this.sNo = sNo;
+		this.bookName = bookName;
+		this.authorName = authorName;
+		this.isActive = isActive;
+	}
+	public BookRequestDto() {
 	}
 	
-	
-	
+
 	
 
 }
