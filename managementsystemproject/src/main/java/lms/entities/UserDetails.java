@@ -11,6 +11,9 @@ public class UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long userId;
+	public UserDetails() {
+		super();
+	}
 	private String userName;
 	private String password;
 	private String email;

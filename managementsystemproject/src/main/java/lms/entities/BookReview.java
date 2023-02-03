@@ -11,7 +11,7 @@ public class BookReview {
 	
 	private String comments;
 	
-	@Enumerated
+	@Enumerated(EnumType.ORDINAL)
 	private StarRating starRating;
 
 	
@@ -53,17 +53,40 @@ public class BookReview {
 	@JoinColumn(name="book_id",referencedColumnName = "bookId")
 	public BookDetails bookdetails;
 	
+	
+	@ManyToOne(targetEntity =UserDetails.class)
+	@JoinColumn(name="User_id",referencedColumnName ="userId")
+	public UserDetails userdetails;
+	
 	public BookReview() {
 	
 	}
 
-	public BookReview(Long ratingId, String comments, StarRating starRating, BookDetails bookdetails) {
+	public UserDetails getUserdetails() {
+		return userdetails;
+	}
+
+	public void setUserdetails(UserDetails userdetails) {
+		this.userdetails = userdetails;
+	}
+
+	public BookReview(Long ratingId, String comments, StarRating starRating, BookDetails bookdetails,
+			UserDetails userdetails) {
 		super();
 		this.ratingId = ratingId;
 		this.comments = comments;
 		this.starRating = starRating;
 		this.bookdetails = bookdetails;
+		this.userdetails = userdetails;
 	}
+
+	@Override
+	public String toString() {
+		return "BookReview [ratingId=" + ratingId + ", comments=" + comments + ", starRating=" + starRating
+				+ ", bookdetails=" + bookdetails + ", userdetails=" + userdetails + "]";
+	}
+
+	
 
 	
 }
