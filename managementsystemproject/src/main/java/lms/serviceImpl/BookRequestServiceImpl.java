@@ -35,7 +35,9 @@ public class BookRequestServiceImpl implements BookRequestService {
 	@Override
 	public String addrequestBookDetails(RequestBookDetails requestBookDetails, long id) {
 		List<RequestBookDetails> requestBookDetailsList = requestBookDetailsRepository.findAll();
-
+		if(requestBookDetailsList.size()==0) {
+			requestBookDetailsRepository.save(requestBookDetails);
+		}else {
 		for (RequestBookDetails requestBookDetails2 : requestBookDetailsList) {
 			if ((requestBookDetails.getBookName().toLowerCase()).equals(requestBookDetails2.getBookName().toLowerCase())) {
 				return "Book is already requested..";
@@ -45,6 +47,7 @@ public class BookRequestServiceImpl implements BookRequestService {
 				requestBookDetailsRepository.save(requestBookDetails);
 				return "Your request has been submitted..";
 			} 
+		}
 		}
 		return null;
 
