@@ -1,6 +1,10 @@
 package lms.serviceImpl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import java.util.stream.Collectors;
@@ -11,9 +15,11 @@ import org.springframework.stereotype.Service;
 import lms.dto.BookDetailssenddto;
 import lms.entities.Author;
 import lms.entities.BookDetails;
+import lms.entities.BookIssueDetails;
 import lms.entities.Category;
 import lms.entities.UserDetails;
 import lms.repositories.AuthorRepository;
+import lms.repositories.BookIssueRepository;
 import lms.repositories.BookRepository;
 import lms.repositories.CategoryRepository;
 import lms.repositories.UserDetailsRepository;
@@ -35,17 +41,22 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 	public AuthorRepository authorRepository;
 	
 	public CategoryRepository categoryRepository;
-
-	@Autowired
-	public BookDetailsServiceImpl(BookRepository bookRepository, UserDetailsRepository userDetailsRepository,AuthorRepository authorRepository,CategoryRepository categoryRepository) {
-		this.bookRepository = bookRepository;
-		this.userDetailsRepository = userDetailsRepository;
-		this.authorRepository=authorRepository;
-		this.categoryRepository=categoryRepository;
-	}
+	
+	public BookIssueRepository bookIssueRepository;
 
 	public BookDetailsServiceImpl() {
 
+	}
+
+	@Autowired
+	public BookDetailsServiceImpl(BookRepository bookRepository, UserDetailsRepository userDetailsRepository,
+			AuthorRepository authorRepository, CategoryRepository categoryRepository,
+			BookIssueRepository bookIssueRepository) {
+		this.bookRepository = bookRepository;
+		this.userDetailsRepository = userDetailsRepository;
+		this.authorRepository = authorRepository;
+		this.categoryRepository = categoryRepository;
+		this.bookIssueRepository = bookIssueRepository;
 	}
 
 	@Override
@@ -115,6 +126,25 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 				book.setQuantity(book.getQuantity() - 1);
 				userDetailsRepository.save(user);
 				bookRepository.save(book);
+				BookIssueDetails bookIssueDetails=new BookIssueDetails();
+				bookIssueDetails.setBookDetails(book);
+				bookIssueDetails.setUserDetail(user);
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				 LocalDateTime localDateTime = LocalDateTime.now();  
+				// System.out.println(formatter.format(now));
+				 
+				
+				try {
+					bookIssueDetails.setIssueDate(formatter.parse(localDateTime.toString()));
+					bookIssueDetails.setIssueEndDate(formatter.parse(localDateTime.plusDays(7).toString()));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				
+				//bookIssueDetails.setIssueEndDate(null);
+				bookIssueDetails.setReturnDate(null);
+				bookIssueRepository.save(bookIssueDetails);
+				System.out.println(bookIssueDetails);
 				return "success";
 			} else if (user.getLendCount() == 0) {
 				return "sorry limit exceeded!!!";
