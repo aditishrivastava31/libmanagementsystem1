@@ -1,6 +1,8 @@
 package lms.entities;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,9 +15,15 @@ public class BookIssueDetails {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date issueDate;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date issueEndDate;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date returnDate;
 	
 	@ManyToOne
@@ -88,6 +96,12 @@ public class BookIssueDetails {
 
 	public void setUserDetail(UserDetails userDetail) {
 		this.userDetail = userDetail;
+	}
+
+	@Override
+	public String toString() {
+		return "BookIssueDetails [id=" + id + ", issueDate=" + issueDate + ", issueEndDate=" + issueEndDate
+				+ ", returnDate=" + returnDate + ", bookDetails=" + bookDetails + ", userDetail=" + userDetail + "]";
 	}
 	
 	

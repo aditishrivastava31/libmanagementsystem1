@@ -40,7 +40,7 @@ public class UserController {
 			@RequestParam (name = "countryname") String countryName ,
 			@RequestParam (name = "statename") String stateName , 
 			@RequestParam (name = "cityname") String cityName) {
-		
+		System.out.println(userDetails);
 		try {
 			return ResponseEntity.of(Optional.of(userService.signUp(userDetails, 
 					countryName , stateName , cityName)));
