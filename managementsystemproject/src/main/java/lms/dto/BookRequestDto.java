@@ -1,7 +1,9 @@
 package lms.dto;
 
-import lms.entities.RequestBookDetails.IsActive;
+import org.springframework.stereotype.Component;
 
+import lms.entities.RequestBookDetails.IsActive;
+@Component
 public class BookRequestDto {
 	private long sNo;
 	private String bookName;
