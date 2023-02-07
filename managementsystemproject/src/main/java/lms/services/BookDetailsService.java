@@ -23,8 +23,6 @@ public interface BookDetailsService
 
 	List<BookDetailssenddto> getallbookdetails(String name);
 
-	String lend_book(long uid, long bid);
-
 	BookDetails getbookdetailsbyid(long id);
 
 }
