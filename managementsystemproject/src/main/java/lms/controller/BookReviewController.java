@@ -57,5 +57,7 @@ public class BookReviewController {
 	public List<BookReviewdto> getreviewbybookid(@PathVariable("id") long id) {
 		return bookReviewService.getreviewbybookid(id);
 	}
+	
+	
 
 }

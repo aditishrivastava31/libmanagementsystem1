@@ -32,6 +32,8 @@ public class BookRequestServiceImpl implements BookRequestService {
 	@Autowired
 	private UserDetailsRepository userDetailsRepository;
 
+	
+
 	@Override
 	public String addrequestBookDetails(RequestBookDetails requestBookDetails, long id) {
 		List<RequestBookDetails> requestBookDetailsList = requestBookDetailsRepository.findAll();
@@ -77,16 +79,45 @@ public class BookRequestServiceImpl implements BookRequestService {
 	public List<BookRequestDto> getAllRequestBook(long id){
 		List<BookRequestDto> bookRequestDtos = new  ArrayList<>();
 		List<RequestBookDetails> requestBookDetails =requestBookDetailsRepository.findByUserDetail(userDetailsRepository.findById(id));
+		System.out.println(requestBookDetails);
 		long i=1;
 		for(RequestBookDetails requestBookDetails2:requestBookDetails) {
 			BookRequestDto bookRequestDto=new BookRequestDto();
 			bookRequestDto.setsNo(i++);
 			bookRequestDto.setBookName(requestBookDetails2.getBookName());
 			bookRequestDto.setAuthorName(requestBookDetails2.getAuthorName());
-			bookRequestDto.setIsActive(requestBookDetails2.getIsActive());
+			bookRequestDto.setIsActive(IsActive.Pending);
 			bookRequestDtos.add(bookRequestDto);
 		}
 		return bookRequestDtos;
 	}
+
 	
+
+	@Override
+	public List<BookRequestDto> updatestatus(long id,RequestBookDetails statusIsActive){
+		Optional<RequestBookDetails> requestBookDetails= requestBookDetailsRepository.findById(id);
+		requestBookDetails.get().setIsActive(statusIsActive.getIsActive());
+		requestBookDetailsRepository.save(requestBookDetails.get());
+		System.out.println("successfully save");
+		
+		BookRequestDto bookRequestDto1=new BookRequestDto();
+		List<BookRequestDto> bookRequestDtos1 = new  ArrayList<>();
+		List<RequestBookDetails> requestBookDetails1 =requestBookDetailsRepository.findByUserDetail(userDetailsRepository.findById(id));
+		System.out.println(requestBookDetails);
+		long i=1;
+		for(RequestBookDetails requestBookDetails2:requestBookDetails1) {
+			bookRequestDto1.setsNo(i++);
+			bookRequestDto1.setBookName(requestBookDetails2.getBookName());
+			bookRequestDto1.setAuthorName(requestBookDetails2.getAuthorName());
+			bookRequestDto1.setIsActive(requestBookDetails2.getIsActive());
+			bookRequestDtos1.add(bookRequestDto1);
+		}
+		return bookRequestDtos1;
+		
+	}
 }
+	
+
+			
+

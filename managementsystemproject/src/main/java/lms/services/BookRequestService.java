@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import lms.dto.BookRequestDto;
 import lms.entities.RequestBookDetails;
 import lms.entities.UserDetails;
+import lms.entities.RequestBookDetails.IsActive;
 
 /**
  * this interface will be used to connect BookRequestService
@@ -25,5 +26,8 @@ public interface BookRequestService {
 	public List<RequestBookDetails> getAllRequestDetails(long id);
 	
 	public List<BookRequestDto> getAllRequestBook(long id);
+	
+	public  List<BookRequestDto> updatestatus(long id ,RequestBookDetails statusIsActive);
+	
 
 }

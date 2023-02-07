@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lms.dto.BookRequestDto;
 import lms.entities.RequestBookDetails;
 import lms.entities.UserDetails;
+import lms.entities.RequestBookDetails.IsActive;
 import lms.services.BookRequestService;
 
 
@@ -58,6 +60,12 @@ public class RequestBookController {
 	public List<BookRequestDto> getAllData(@PathVariable("userId") long id){
 		List<BookRequestDto> bookRequestDtos=bookRequestService.getAllRequestBook(id);
 		return bookRequestDtos;
+	}
+	
+	@PutMapping("/requestBookstatus/admin/{userId}")
+	public List<BookRequestDto> getAllStatus(@PathVariable("userId") long id,@RequestBody RequestBookDetails statusIsActive){
+		List<BookRequestDto> bookRequestDtos1 = bookRequestService.updatestatus(id, statusIsActive);
+		 return bookRequestDtos1;
 	}
 
 }

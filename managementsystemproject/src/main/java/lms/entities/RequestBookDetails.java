@@ -70,6 +70,13 @@ public class RequestBookDetails {
 		this.isActive = isActive;
 	}
 
+	@Override
+	public String toString() {
+		return "RequestBookDetails [requestBookId=" + requestBookId + ", authorName=" + authorName + ", bookName="
+				+ bookName + ", userDetail=" + userDetail + ", isActive=" + isActive + "]";
+	}
+
+	
 	
 	
 	
