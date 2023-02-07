@@ -53,12 +53,6 @@ public class BookDetailsController {
 
 	}
 
-	@PostMapping("/lend/{user_id}/{book_id}")
-	public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid) {
-		String status = bookDetailsService.lend_book(uid, bid);
-		return status;
-	}
-
 	@GetMapping("/getbookdetailsbyid/{id}")
 	public BookDetails getbookdetailsbyid(@PathVariable("id") long id) {
 		return bookDetailsService.getbookdetailsbyid(id);
