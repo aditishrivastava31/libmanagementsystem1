@@ -1,0 +1,38 @@
+package lms.controller;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import lms.dto.RequestEnddatedto;
+import lms.services.RequestEndDateService;
+
+@RestController
+public class RequestEnddateController {
+
+	private RequestEndDateService requestEndDateService;
+
+	@Autowired
+	public RequestEnddateController(RequestEndDateService requestEndDateService) {
+
+		this.requestEndDateService = requestEndDateService;
+	}
+
+	public RequestEnddateController(){
+
+	}
+
+	@GetMapping("/getenddateextensions")
+	public List<RequestEnddatedto> getbookextensions() {
+		return requestEndDateService.getbookextensions();
+	}
+
+	@PostMapping("/accandrejectextension/{id}")
+	public String acceptandreject(@RequestParam("value") int value, @PathVariable("id") long id) {
+		return requestEndDateService.acceptandreject(id, value);
+	}
+
+}
