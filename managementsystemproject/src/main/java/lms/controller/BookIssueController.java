@@ -49,4 +49,9 @@ public class BookIssueController {
 		return bookIssueServiceImpl.getIssuedBookDetails("pending", uid);
 	}
 	
+	@GetMapping("/getAllIssues")
+	public List<BookIssueDetailsDto> getAllIssues(){
+		return bookIssueServiceImpl.getAllIssuesToAdmin();
+	}
+	
 }

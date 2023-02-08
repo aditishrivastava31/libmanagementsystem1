@@ -82,6 +82,8 @@ public class BookIssueServiceImpl implements BookIssueService {
 		BookDetails book = bookIssueDetails.getBookDetails();
 		user.setLendCount(user.getLendCount() + 1);
 		book.setQuantity(book.getQuantity() + 1);
+		userDetailsRepository.save(user);
+		bookRepository.save(book);
 		try {
 			LocalDateTime localDateTime = LocalDateTime.now();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -218,5 +220,26 @@ public class BookIssueServiceImpl implements BookIssueService {
 
 		return filteredData;
 	}
+
+	@Override
+	public List<BookIssueDetailsDto> getAllIssuesToAdmin() {
+		List<BookIssueDetailsDto> bookIssueDetailsDtos=new ArrayList<>();
+		bookIssueRepository.findAll().forEach(n->{
+			BookIssueDetailsDto bookIssueDetailsDto=new BookIssueDetailsDto();
+			bookIssueDetailsDto.setBookTitle(n.getBookDetails().getBookName());
+			bookIssueDetailsDto.setUserName(n.getUserDetail().getUserName());
+			bookIssueDetailsDto.setReturnDate(n.getReturnDate());
+			bookIssueDetailsDto.setIssue_id(n.getId());
+			List<String> authorslist=new ArrayList<>();
+			n.getBookDetails().getAuthors().forEach(a->{
+				authorslist.add(a.getAuthorName());
+			});
+			bookIssueDetailsDto.setAuthors(authorslist);
+			bookIssueDetailsDtos.add(bookIssueDetailsDto);
+		});
+		return bookIssueDetailsDtos;
+	}
+
+
 
 }

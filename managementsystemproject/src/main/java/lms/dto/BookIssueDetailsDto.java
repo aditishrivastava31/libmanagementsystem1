@@ -21,6 +21,16 @@ public class BookIssueDetailsDto {
 	private String bookTitle;
 
 	private List<String> authors;
+	
+	private String userName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public long getIssue_id() {
 		return issue_id;
@@ -69,5 +79,7 @@ public class BookIssueDetailsDto {
 	public void setAuthors(List<String> authors) {
 		this.authors = authors;
 	}
+	
+	
 
 }
