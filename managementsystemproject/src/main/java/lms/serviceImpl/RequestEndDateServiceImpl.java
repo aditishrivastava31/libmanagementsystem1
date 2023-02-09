@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import jakarta.mail.MessagingException;
 import lms.dto.RequestEnddatedto;
 import lms.entities.BookIssueDetails;
 import lms.repositories.BookIssueRepository;
@@ -20,6 +21,8 @@ import lms.services.RequestEndDateService;
 public class RequestEndDateServiceImpl implements RequestEndDateService {
 
 	private BookIssueRepository bookIssueRepository;
+	
+	private EmailServiceImpl emailServiceImpl;
 
 	public RequestEndDateServiceImpl() {
 
@@ -49,19 +52,20 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 			requestEnddatedto.setIssueId(n.getId());
 			requestEnddatedtos.add(requestEnddatedto);
 		});
-		System.out.println(bookIssueRepository.findAll());
-
+		
 		return requestEnddatedtos;
 	}
 
 	@Override
-	public String acceptandreject(long id, int value) {
+	public String acceptandreject(long id, int value) throws MessagingException {
+		BookIssueDetails bookIssueDetails=bookIssueRepository.findById(id).orElse(null);
+		emailServiceImpl.setBookIssueDetails(bookIssueDetails);
 		if(value==1) {
+			emailServiceImpl.rejectEndDateEmailSender();
 			return "rejection";
 		}
 		
 		else {
-			BookIssueDetails bookIssueDetails=bookIssueRepository.findById(id).orElse(null);
 			Date issueenddate=bookIssueDetails.getIssueEndDate();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -69,6 +73,7 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 			c.add(Calendar.DATE, 10);
 			bookIssueDetails.setIssueEndDate(c.getTime());
 			bookIssueRepository.save(bookIssueDetails);
+			emailServiceImpl.acceptEndDateEmailSender();
 			return "success";
 		}
 		
