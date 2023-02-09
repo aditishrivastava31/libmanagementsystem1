@@ -30,6 +30,10 @@ public class BookIssueServiceImpl implements BookIssueService {
 
 	@Autowired
 	BookIssueRepository bookIssueRepository;
+	
+	@Autowired
+	EmailServiceImpl emailServiceImpl;
+	
 
 	@Override
 	public String lend_book(long uid, long bid) {
@@ -37,7 +41,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 		BookDetails book = bookRepository.findById(bid).orElse(null);
 
 		if (book == null || user == null) {
-			return "sorry you can't!!!";
+			return "sorry you can't!!! ";
 		}
 
 		else {
@@ -51,7 +55,6 @@ public class BookIssueServiceImpl implements BookIssueService {
 				bookIssueDetails.setUserDetail(user);
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 				LocalDateTime localDateTime = LocalDateTime.now();
-				// System.out.println(formatter.format(now));
 
 				try {
 					bookIssueDetails.setIssueDate(formatter.parse(localDateTime.toString()));
@@ -60,10 +63,11 @@ public class BookIssueServiceImpl implements BookIssueService {
 					e.printStackTrace();
 				}
 
-				// bookIssueDetails.setIssueEndDate(null);
 				bookIssueDetails.setReturnDate(null);
 				bookIssueRepository.save(bookIssueDetails);
-				System.out.println(bookIssueDetails);
+				
+				emailServiceImpl.setBookIssueDetails(bookIssueDetails);
+				
 				return "success";
 			} else if (user.getLendCount() == 0) {
 				return "sorry limit exceeded!!!";
@@ -92,6 +96,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		emailServiceImpl.setBookIssueDetails(bookIssueDetails);
 		return "success";
 
 //		if (book == null || user == null) {
@@ -140,13 +145,13 @@ public class BookIssueServiceImpl implements BookIssueService {
 	}
 
 	@Override
-	public int issued_book_count(long uid) {
+	public int issued_book_count(long uid){
 		List<BookIssueDetailsDto> bookIssueDetails = this.getIssuedBookDetails("issued", uid);
 		return bookIssueDetails.size();
 	}
 
 	@Override
-	public int total_book_count(long uid) {
+	public int total_book_count(long uid){
 		List<BookIssueDetailsDto> bookIssueDetails = this.getIssuedBookDetails("total", uid);
 		return bookIssueDetails.size();
 	}
@@ -236,6 +241,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 			});
 			bookIssueDetailsDto.setAuthors(authorslist);
 			bookIssueDetailsDtos.add(bookIssueDetailsDto);
+			
 		});
 		return bookIssueDetailsDtos;
 	}
