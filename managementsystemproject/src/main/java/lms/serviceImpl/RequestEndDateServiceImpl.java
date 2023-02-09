@@ -22,6 +22,7 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 
 	private BookIssueRepository bookIssueRepository;
 	
+	
 	private EmailServiceImpl emailServiceImpl;
 
 	public RequestEndDateServiceImpl() {
@@ -29,8 +30,8 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 	}
 
 	@Autowired
-	public RequestEndDateServiceImpl(BookIssueRepository bookIssueRepository) {
-
+	public RequestEndDateServiceImpl(BookIssueRepository bookIssueRepository,EmailServiceImpl emailServiceImpl) {
+		this.emailServiceImpl=emailServiceImpl;
 		this.bookIssueRepository = bookIssueRepository;
 	}
 
@@ -60,14 +61,13 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 	public String acceptandreject(long id, int value) throws MessagingException {
 		BookIssueDetails bookIssueDetails=bookIssueRepository.findById(id).orElse(null);
 		emailServiceImpl.setBookIssueDetails(bookIssueDetails);
-		if(value==1) {
+		if(value==0){
 			emailServiceImpl.rejectEndDateEmailSender();
 			return "rejection";
 		}
 		
 		else {
 			Date issueenddate=bookIssueDetails.getIssueEndDate();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
 			c.setTime(issueenddate);
 			c.add(Calendar.DATE, 10);
