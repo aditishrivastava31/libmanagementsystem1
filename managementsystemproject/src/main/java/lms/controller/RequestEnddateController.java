@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.mail.MessagingException;
 import lms.dto.RequestEnddatedto;
 import lms.services.RequestEndDateService;
 
@@ -31,7 +33,7 @@ public class RequestEnddateController {
 	}
 
 	@PostMapping("/accandrejectextension/{id}")
-	public String acceptandreject(@RequestParam("value") int value, @PathVariable("id") long id) {
+	public String acceptandreject(@RequestParam("value") int value, @PathVariable("id") long id) throws MessagingException {
 		return requestEndDateService.acceptandreject(id, value);
 	}
 
