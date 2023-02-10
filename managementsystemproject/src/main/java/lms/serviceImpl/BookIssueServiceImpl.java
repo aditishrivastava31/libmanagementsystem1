@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.mail.MessagingException;
 import lms.dto.BookIssueDetailsDto;
 import lms.entities.BookDetails;
 import lms.entities.BookIssueDetails;
@@ -36,7 +37,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 	
 
 	@Override
-	public String lend_book(long uid, long bid) {
+	public String lend_book(long uid, long bid) throws MessagingException {
 		UserDetails user = userDetailsRepository.findById(uid).orElse(null);
 		BookDetails book = bookRepository.findById(bid).orElse(null);
 
@@ -67,6 +68,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 				bookIssueRepository.save(bookIssueDetails);
 				
 				emailServiceImpl.setBookIssueDetails(bookIssueDetails);
+				emailServiceImpl.issueBookEmailSender();
 				
 				return "success";
 			} else if (user.getLendCount() == 0) {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.mail.MessagingException;
 import lms.dto.BookIssueDetailsDto;
 import lms.serviceImpl.BookIssueServiceImpl;
 
@@ -18,7 +19,7 @@ public class BookIssueController {
 	BookIssueServiceImpl bookIssueServiceImpl;
 
 	@PostMapping("/lend/{user_id}/{book_id}")
-	public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid) {
+	public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid) throws MessagingException {
 		String status = bookIssueServiceImpl.lend_book(uid, bid);
 		return status;
 	}
