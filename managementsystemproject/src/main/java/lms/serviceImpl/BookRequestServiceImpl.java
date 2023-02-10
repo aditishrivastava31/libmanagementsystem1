@@ -38,15 +38,21 @@ public class BookRequestServiceImpl implements BookRequestService {
 	public String addrequestBookDetails(RequestBookDetails requestBookDetails, long id) {
 		List<RequestBookDetails> requestBookDetailsList = requestBookDetailsRepository.findAll();
 		String messageString = null;
-		for (RequestBookDetails requestBookDetails2 : requestBookDetailsList) {
-			if ((requestBookDetails.getBookName().toLowerCase()).equals(requestBookDetails2.getBookName().toLowerCase())) {
-				messageString="Book is already requested..";
-			} else {
-				requestBookDetails.setIsActive(IsActive.Pending);
-				requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
-				requestBookDetailsRepository.save(requestBookDetails);
-				messageString= "Your request has been submitted..";
-			} 
+		if(requestBookDetailsList.size()==0) {
+			requestBookDetailsRepository.save(requestBookDetails);
+			messageString= "Your request has been submitted..";
+		}
+		else {
+			for (RequestBookDetails requestBookDetails2 : requestBookDetailsList) {
+				if ((requestBookDetails.getBookName().toLowerCase()).equals(requestBookDetails2.getBookName().toLowerCase())) {
+					messageString="Book is already requested..";
+				} else {
+					requestBookDetails.setIsActive(IsActive.Pending);
+					requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
+					requestBookDetailsRepository.save(requestBookDetails);
+					messageString= "Your request has been submitted..";
+				} 
+			}
 		}
 		return messageString;
 
