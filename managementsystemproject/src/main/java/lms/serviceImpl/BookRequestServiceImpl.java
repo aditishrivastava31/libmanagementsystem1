@@ -37,21 +37,18 @@ public class BookRequestServiceImpl implements BookRequestService {
 	@Override
 	public String addrequestBookDetails(RequestBookDetails requestBookDetails, long id) {
 		List<RequestBookDetails> requestBookDetailsList = requestBookDetailsRepository.findAll();
-		if(requestBookDetailsList.size()==0) {
-			requestBookDetailsRepository.save(requestBookDetails);
-		}else {
+		String messageString = null;
 		for (RequestBookDetails requestBookDetails2 : requestBookDetailsList) {
 			if ((requestBookDetails.getBookName().toLowerCase()).equals(requestBookDetails2.getBookName().toLowerCase())) {
-				return "Book is already requested..";
+				messageString="Book is already requested..";
 			} else {
 				requestBookDetails.setIsActive(IsActive.Pending);
 				requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
 				requestBookDetailsRepository.save(requestBookDetails);
-				return "Your request has been submitted..";
+				messageString= "Your request has been submitted..";
 			} 
 		}
-		}
-		return null;
+		return messageString;
 
 	}
 	@Override

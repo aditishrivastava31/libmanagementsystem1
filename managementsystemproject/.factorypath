@@ -30,11 +30,15 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-devtools/3.0.1/spring-boot-devtools-3.0.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot/3.0.1/spring-boot-3.0.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-autoconfigure/3.0.1/spring-boot-autoconfigure-3.0.1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-starter-mail/3.0.1/spring-boot-starter-mail-3.0.1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-context-support/6.0.3/spring-context-support-6.0.3.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/angus/jakarta.mail/1.0.0/jakarta.mail-1.0.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/angus/angus-activation/1.0.0/angus-activation-1.0.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/mysql/mysql-connector-j/8.0.31/mysql-connector-j-8.0.31.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/xml/bind/jakarta.xml.bind-api/4.0.0/jakarta.xml.bind-api-4.0.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/net/bytebuddy/byte-buddy/1.12.20/byte-buddy-1.12.20.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-core/6.0.3/spring-core-6.0.3.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-jcl/6.0.3/spring-jcl-6.0.3.jar" enabled="true" runInBatchMode="false"/>
@@ -70,7 +74,6 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/com/sun/xml/messaging/saaj/saaj-impl/3.0.0/saaj-impl-3.0.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/xml/soap/jakarta.xml.soap-api/3.0.0/jakarta.xml.soap-api-3.0.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jvnet/staxex/stax-ex/2.1.0/stax-ex-2.1.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/angus/angus-activation/1.0.0/angus-activation-1.0.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/xml/ws/jakarta.xml.ws-api/4.0.0/jakarta.xml.ws-api-4.0.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-oxm/6.0.3/spring-oxm-6.0.3.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/ws/spring-ws-core/4.0.0/spring-ws-core-4.0.0.jar" enabled="true" runInBatchMode="false"/>
@@ -101,5 +104,4 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-webflux/6.0.3/spring-webflux-6.0.3.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/io/projectreactor/reactor-core/3.5.1/reactor-core-3.5.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="false" runInBatchMode="false"/>
 </factorypath>

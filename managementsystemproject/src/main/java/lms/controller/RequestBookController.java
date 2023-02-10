@@ -62,7 +62,7 @@ public class RequestBookController {
 		return bookRequestDtos;
 	}
 	
-	@PutMapping("/requestBookstatus/admin/{userId}")
+	@PutMapping("/isAccepted/admin/{userId}")
 	public List<BookRequestDto> getAllStatus(@PathVariable("userId") long id,@RequestBody RequestBookDetails statusIsActive){
 		List<BookRequestDto> bookRequestDtos1 = bookRequestService.updatestatus(id, statusIsActive);
 		 return bookRequestDtos1;
