@@ -53,11 +53,16 @@ public class EmailServiceImpl implements EmailService {
     	sendEmail(message);
     }
     
-    public void issueBookEmailSender() throws MessagingException{
+    public void issueBookEmailSender() {
     	String message = "Dear "+bookIssueDetails.getUserDetail().getUserName()+" your request for issuing "+bookIssueDetails.getBookDetails().getBookName()+
     			" has been completed . Enjoy Reading! And kindly return the book before "+bookIssueDetails.getIssueEndDate()+" . ThankYou!";
     	subject = "Book Issue";
-    	sendEmail(message);
+    	try {
+			sendEmail(message);
+		} catch (MessagingException e) {
+
+			e.printStackTrace();
+		}
     }
 
 	public void setBookIssueDetails(BookIssueDetails bookIssueDetails) {

@@ -37,7 +37,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 	
 
 	@Override
-	public String lend_book(long uid, long bid) throws MessagingException {
+	public String lend_book(long uid, long bid)  {
 		UserDetails user = userDetailsRepository.findById(uid).orElse(null);
 		BookDetails book = bookRepository.findById(bid).orElse(null);
 
