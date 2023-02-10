@@ -2,6 +2,7 @@ package lms.services;
 
 import java.util.List;
 
+import jakarta.mail.MessagingException;
 import lms.dto.BookIssueDetailsDto;
 import lms.entities.BookIssueDetails;
 
@@ -9,7 +10,7 @@ public interface BookIssueService {
 
 	List<BookIssueDetails> getAllIssuedBook();
 
-	String lend_book(long uid, long bid);
+	String lend_book(long uid, long bid) throws MessagingException;
 
 	String return_book(long issue_id);
 
