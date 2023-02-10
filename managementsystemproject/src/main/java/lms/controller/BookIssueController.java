@@ -19,8 +19,9 @@ public class BookIssueController {
 	BookIssueServiceImpl bookIssueServiceImpl;
 
 	@PostMapping("/lend/{user_id}/{book_id}")
-	public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid) throws MessagingException {
-		String status = bookIssueServiceImpl.lend_book(uid, bid);
+	public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid){
+		String status = null;
+		status = bookIssueServiceImpl.lend_book(uid, bid);
 		return status;
 	}
 
