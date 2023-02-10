@@ -36,5 +36,12 @@ public class RequestEnddateController {
 	public String acceptandreject(@RequestParam("value") int value, @PathVariable("id") long id) throws MessagingException {
 		return requestEndDateService.acceptandreject(id, value);
 	}
+	
+
+	@PostMapping("/addextension/{issueId}")
+	public String acceptandreject(@PathVariable("issueId") long issueId){
+		return requestEndDateService.addRequestEndExtension(issueId);
+	}
+	
 
 }
