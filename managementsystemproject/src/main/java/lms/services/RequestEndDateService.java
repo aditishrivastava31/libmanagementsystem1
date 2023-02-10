@@ -14,5 +14,7 @@ public interface RequestEndDateService {
 
 	String acceptandreject(long id, int value) throws MessagingException;
 
+	String addRequestEndExtension(long issueId);
+
 	
 }
