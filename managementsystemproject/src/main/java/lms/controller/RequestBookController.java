@@ -3,7 +3,6 @@ package lms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lms.dto.BookRequestDto;
 import lms.entities.RequestBookDetails;
-import lms.entities.UserDetails;
 import lms.entities.RequestBookDetails.IsActive;
 import lms.services.BookRequestService;
 
@@ -56,16 +54,16 @@ public class RequestBookController {
 		bookRequestService.deleteBookRequest(id, requestBookId);
 	}
 
-	@GetMapping("/requestBookdto/{userId}")
-	public List<BookRequestDto> getAllData(@PathVariable("userId") long id){
-		List<BookRequestDto> bookRequestDtos=bookRequestService.getAllRequestBook(id);
+	@GetMapping("/requestBookdto")
+	public List<BookRequestDto> getAllData(){
+		List<BookRequestDto> bookRequestDtos=bookRequestService.getAllRequestBook();
 		return bookRequestDtos;
 	}
 	
-	@PutMapping("/isAccepted/admin/{userId}")
-	public List<BookRequestDto> getAllStatus(@PathVariable("userId") long id,@RequestBody RequestBookDetails statusIsActive){
-		List<BookRequestDto> bookRequestDtos1 = bookRequestService.updatestatus(id, statusIsActive);
-		 return bookRequestDtos1;
+	@PutMapping("/isAccepted/admin/{requestId}")
+	public BookRequestDto getStatus(@PathVariable("requestId") long requestId ,@RequestParam(name = "isActive") IsActive isActive){
+		BookRequestDto bookRequestDto= bookRequestService.updatestatus(requestId, isActive);
+		return bookRequestDto;
 	}
 
 }
