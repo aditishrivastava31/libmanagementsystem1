@@ -3,6 +3,7 @@ package lms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +41,7 @@ public class RequestBookController {
 	}
 	
 	@GetMapping("/requestbook")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public List<RequestBookDetails> getBookRequestDetails(){
 		return bookRequestService.getallbookRequest();
 	}
@@ -50,6 +52,7 @@ public class RequestBookController {
 	}
 	
 	@DeleteMapping("/deleterequestbook/{requestbookid}/{userid}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public void deleteBookRequest(@PathVariable("userid") long id , @PathVariable("requestbookid") long requestBookId){
 		bookRequestService.deleteBookRequest(id, requestBookId);
 	}
@@ -61,6 +64,7 @@ public class RequestBookController {
 	}
 	
 	@PutMapping("/isAccepted/admin/{requestId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public BookRequestDto getStatus(@PathVariable("requestId") long requestId ,@RequestParam(name = "isActive") IsActive isActive){
 		BookRequestDto bookRequestDto= bookRequestService.updatestatus(requestId, isActive);
 		return bookRequestDto;

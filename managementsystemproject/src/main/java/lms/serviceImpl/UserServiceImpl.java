@@ -2,10 +2,10 @@ package lms.serviceImpl;
 
 import java.util.List;
 
+import lms.entities.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lms.entities.UserDetails;
 import lms.repositories.AddressRepository;
 import lms.repositories.CountryRepository;
 import lms.repositories.StateAndCityRepository;
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 				.findStateCityId(countryRepository
 						.findByCountryName(coutnryName).getId(), stateName, cityName));
 
-		userDetails.setAdmin(false);
+		userDetails.setRole("USER");
 		userDetails.setLendCount(5);
 
 		return userDetailsRepository.save(userDetails);
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 				.findStateCityId(countryRepository
 						.findByCountryName(coutnryName).getId(), stateName, cityName));
 
-		userDetails.setAdmin(true);
+		userDetails.setRole("ADMIN");
 		userDetails.setLendCount(5);
 
 		return userDetailsRepository.save(userDetails);

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import lms.entities.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lms.dto.BookRequestDto;
 import lms.entities.RequestBookDetails;
 import lms.entities.RequestBookDetails.IsActive;
-import lms.entities.UserDetails;
 import lms.repositories.RequestBookDetailsRepository;
 import lms.repositories.UserDetailsRepository;
 import lms.services.BookRequestService;
@@ -69,7 +69,7 @@ public class BookRequestServiceImpl implements BookRequestService {
 	public void deleteBookRequest(long userId, long requestBookId) {
 
 		Optional<UserDetails> userDetails = userDetailsRepository.findById(userId);
-		if (userDetails.get().isAdmin() == true) {
+		if (userDetails.get().getRole().equals("ADMIN")) {
 			requestBookDetailsRepository.deleteById(requestBookId);
 		}
 	}
