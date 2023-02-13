@@ -20,26 +20,15 @@ import lms.services.RequestEndDateService;
 @Service
 public class RequestEndDateServiceImpl implements RequestEndDateService {
 
+	@Autowired
 	private BookIssueRepository bookIssueRepository;
 	
-	
+	@Autowired
 	private EmailServiceImpl emailServiceImpl;
 	
+	@Autowired
 	private RequestExtensionRepository requestExtensionRepository;
 	
-
-	public RequestEndDateServiceImpl() {
-
-	}
-
-	@Autowired
-	public RequestEndDateServiceImpl(BookIssueRepository bookIssueRepository,EmailServiceImpl emailServiceImpl,RequestExtensionRepository requestExtensionRepository) {
-		this.emailServiceImpl=emailServiceImpl;
-		this.bookIssueRepository = bookIssueRepository;
-		this.requestExtensionRepository=requestExtensionRepository;
-		
-	}
-
 	@Override
 	public List<RequestEnddatedto> getbookextensions() {
 
@@ -48,15 +37,11 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 
 			requestExtensionRepository.findAll().forEach(requestextension -> {
 			BookIssueDetails bookIssueDetails=requestextension.getIssueId();	
-			RequestEnddatedto requestEnddatedto = new RequestEnddatedto();
-			requestEnddatedto.setUsername(bookIssueDetails.getUserDetail().getUserName());
-			requestEnddatedto.setBooktitle(bookIssueDetails.getBookDetails().getBookName());
-			requestEnddatedto.setIssueReturnDate(formatter.format(bookIssueDetails.getIssueEndDate()));
-			Calendar c = Calendar.getInstance();
-			c.setTime(bookIssueDetails.getIssueEndDate());
-			c.add(Calendar.DATE, 10);
-			requestEnddatedto.setRequestExtension(formatter.format(c.getTime()));
-			requestEnddatedto.setIssueId(bookIssueDetails.getId());
+			RequestEnddatedto requestEnddatedto = new RequestEnddatedto(bookIssueDetails.getUserDetail().getUserName(),
+					bookIssueDetails.getBookDetails().getBookName(),
+					formatter.format(convertDate(bookIssueDetails.getIssueEndDate()).getTime()),
+					formatter.format(bookIssueDetails.getIssueEndDate()) ,
+					bookIssueDetails.getId());
 			requestEnddatedtos.add(requestEnddatedto);
 		});
 		
@@ -75,10 +60,7 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 		
 		else {
 			Date issueenddate=bookIssueDetails.getIssueEndDate();
-			Calendar c = Calendar.getInstance();
-			c.setTime(issueenddate);
-			c.add(Calendar.DATE, 10);
-			bookIssueDetails.setIssueEndDate(c.getTime());
+			bookIssueDetails.setIssueEndDate(convertDate(issueenddate).getTime());
 			bookIssueRepository.save(bookIssueDetails);
 			emailServiceImpl.acceptEndDateEmailSender();
 			deletetheExtension(bookIssueDetails);
@@ -118,26 +100,11 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 		});
 		
 	}
-
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+	public Calendar convertDate(Date date) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.DATE, 10);
+		return c;
+	}
 }

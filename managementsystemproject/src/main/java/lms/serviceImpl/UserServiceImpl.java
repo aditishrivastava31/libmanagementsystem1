@@ -41,31 +41,23 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDetails signUp(UserDetails userDetails, String coutnryName, String stateName, String cityName) {
-
-		addressRepository.save(userDetails.getUserAddress());
-
-		userDetails.getUserAddress().setStateAndCity(stateAndCityRepository
-				.findStateCityId(countryRepository
-						.findByCountryName(coutnryName).getId(), stateName, cityName));
-
 		userDetails.setRole("USER");
-		userDetails.setLendCount(5);
-
-		return userDetailsRepository.save(userDetails);
+		return saveUserDetails(userDetails, coutnryName, stateName, cityName);
 	}
 
 	@Override
 	public UserDetails adminsignUp(UserDetails userDetails, String coutnryName, String stateName, String cityName) {
-
+		userDetails.setRole("ADMIN");
+		return saveUserDetails(userDetails, coutnryName, stateName, cityName);
+	}
+	
+	public UserDetails saveUserDetails(UserDetails userDetails, String coutnryName, String stateName, String cityName) {
 		addressRepository.save(userDetails.getUserAddress());
 
 		userDetails.getUserAddress().setStateAndCity(stateAndCityRepository
 				.findStateCityId(countryRepository
 						.findByCountryName(coutnryName).getId(), stateName, cityName));
-
-		userDetails.setRole("ADMIN");
 		userDetails.setLendCount(5);
-
 		return userDetailsRepository.save(userDetails);
 	}
 

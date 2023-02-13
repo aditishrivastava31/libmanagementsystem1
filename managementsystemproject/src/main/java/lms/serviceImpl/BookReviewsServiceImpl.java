@@ -25,30 +25,15 @@ import lms.services.Bookreviewservices;
 @Service
 public class BookReviewsServiceImpl  implements Bookreviewservices{
 	
-	
-	
+	@Autowired
 	public BookReviewRepository bookReviewRepository;
 	
+	@Autowired
 	public BookRepository bookRepository;
 	
+	@Autowired
 	public UserDetailsRepository userDetailsRepository;
 	
-
-	public BookReviewsServiceImpl() {
-
-			
-	}
-
-	
-	@Autowired
-	public BookReviewsServiceImpl(BookReviewRepository bookReviewRepository, BookRepository bookRepository,
-			UserDetailsRepository userDetailsRepository) {
-		this.bookReviewRepository = bookReviewRepository;
-		this.bookRepository = bookRepository;
-		this.userDetailsRepository = userDetailsRepository;
-	}
-
-
 
 	@Override
 	public BookReview addreviewdetails(BookReview book_Review) {
@@ -69,17 +54,10 @@ public class BookReviewsServiceImpl  implements Bookreviewservices{
 	
 		List<BookReviewdto> Reviewdtoslist=new ArrayList<>();
 		
-		BookDetails bookDetails=bookRepository.findById(id).orElse(new BookDetails());
-	      
-		bookReviewRepository.findByBookdetails(bookDetails);
-				
-		System.out.println(bookReviewRepository.findByBookdetails(bookDetails));
-		
-		bookReviewRepository.findByBookdetails(bookDetails).forEach(n->{
-				BookReviewdto bookReviewdto=new BookReviewdto();
-				bookReviewdto.setComments(n.getComments());
-				bookReviewdto.setStarRating(n.getStarRating());
-				bookReviewdto.setUsername(n.getUserdetails().getUserName());
+		bookReviewRepository.findByBookdetails(bookRepository.findById(id).orElse(new BookDetails())).forEach(bookDetail->{
+				BookReviewdto bookReviewdto=new BookReviewdto(bookDetail.getUserdetails().getUserName(), 
+						bookDetail.getComments(),
+						bookDetail.getStarRating());
 				Reviewdtoslist.add(bookReviewdto);
 		});
 		

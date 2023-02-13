@@ -43,12 +43,13 @@ public class RequestEnddatedto {
 	public void setIssueReturnDate(String issueReturnDate) {
 		this.issueReturnDate = issueReturnDate;
 	}
-	public RequestEnddatedto(String username, String booktitle, String requestExtension, String issueReturnDate) {
+	public RequestEnddatedto(String username, String booktitle, String requestExtension, String issueReturnDate , Long issueId) {
 		
 		this.username = username;
 		this.booktitle = booktitle;
 		this.requestExtension = requestExtension;
 		this.issueReturnDate = issueReturnDate;
+		this.issueId = issueId;
 	}
 
 	

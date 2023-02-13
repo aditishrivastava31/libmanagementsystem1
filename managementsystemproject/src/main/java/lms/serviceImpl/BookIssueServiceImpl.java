@@ -99,44 +99,6 @@ public class BookIssueServiceImpl implements BookIssueService {
 		}
 		emailServiceImpl.setBookIssueDetails(bookIssueDetails);
 		return "success";
-
-//		if (book == null || user == null) {
-//			return "sorry you can't!!!";
-//		}
-//
-//		else {
-//			if (user.getLendCount() != 0 && book.getQuantity() != 0) {
-//				user.setLendCount(user.getLendCount() - 1);
-//				book.setQuantity(book.getQuantity() - 1);
-//				userDetailsRepository.save(user);
-//				bookRepository.save(book);
-//				BookIssueDetails bookIssueDetails = new BookIssueDetails();
-//				bookIssueDetails.setBookDetails(book);
-//				bookIssueDetails.setUserDetail(user);
-//				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//				LocalDateTime localDateTime = LocalDateTime.now();
-//				// System.out.println(formatter.format(now));
-//
-//				try {
-//					bookIssueDetails.setIssueDate(formatter.parse(localDateTime.toString()));
-//					bookIssueDetails.setIssueEndDate(formatter.parse(localDateTime.plusDays(7).toString()));
-//				} catch (ParseException e) {
-//					e.printStackTrace();
-//				}
-//
-//				// bookIssueDetails.setIssueEndDate(null);
-//				bookIssueDetails.setReturnDate(null);
-//				bookIssueRepository.save(bookIssueDetails);
-//				System.out.println(bookIssueDetails);
-//				return "success";
-//			} else if (user.getLendCount() == 0) {
-//				return "sorry limit exceeded!!!";
-//			} else if (book.getQuantity() == 0) {
-//				return "sorry Book is not available!!!";
-//			} else {
-//				return null;
-//			}
-//		}
 	}
 
 	@Override
@@ -246,7 +208,4 @@ public class BookIssueServiceImpl implements BookIssueService {
 		});
 		return bookIssueDetailsDtos;
 	}
-
-
-
 }
