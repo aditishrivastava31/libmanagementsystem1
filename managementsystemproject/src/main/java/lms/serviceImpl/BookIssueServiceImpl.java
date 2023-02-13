@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lms.entities.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.mail.MessagingException;
 import lms.dto.BookIssueDetailsDto;
 import lms.entities.BookDetails;
 import lms.entities.BookIssueDetails;
-import lms.entities.UserDetails;
 import lms.repositories.BookIssueRepository;
 import lms.repositories.BookRepository;
 import lms.repositories.UserDetailsRepository;

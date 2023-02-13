@@ -2,11 +2,8 @@ package lms.services;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
 import lms.dto.BookRequestDto;
 import lms.entities.RequestBookDetails;
-import lms.entities.UserDetails;
 import lms.entities.RequestBookDetails.IsActive;
 
 /**
