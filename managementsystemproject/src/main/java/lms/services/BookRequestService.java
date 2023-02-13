@@ -25,9 +25,9 @@ public interface BookRequestService {
 	
 	public List<RequestBookDetails> getAllRequestDetails(long id);
 	
-	public List<BookRequestDto> getAllRequestBook(long id);
+	public List<BookRequestDto> getAllRequestBook();
 	
-	public  List<BookRequestDto> updatestatus(long id ,RequestBookDetails statusIsActive);
+	public BookRequestDto updatestatus(long requestId,IsActive isActive);
 	
 
 }
