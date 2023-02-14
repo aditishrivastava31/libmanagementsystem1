@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @PostMapping("admin/signUp")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDetails> adminSignUp(@RequestBody UserDetails userDetails,
                                                    @RequestParam(name = "countryname") String countryName,
                                                    @RequestParam(name = "statename") String stateName,
