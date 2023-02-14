@@ -31,10 +31,24 @@ public class RequestBookController {
     @Autowired
     private BookRequestService bookRequestService;
 
+
     @PostMapping("/requestbook/{userId}")
     public String addRequestBookDetails(@RequestBody RequestBookDetails requestBookDetails, @PathVariable("userId") int id) {
         return bookRequestService.addrequestBookDetails(requestBookDetails, id);
     }
+    
+	@GetMapping("/requestBookdto")
+	public List<BookRequestDto> getAllData(){
+		List<BookRequestDto> bookRequestDtos=bookRequestService.getAllRequestBook();
+		return bookRequestDtos;
+	}
+	
+	@PutMapping("/isAccepted/admin/{requestId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public BookRequestDto getStatus(@PathVariable("requestId") long requestId ,@RequestParam(name = "isActive") int isActive){
+		BookRequestDto bookRequestDto= bookRequestService.updatestatus(requestId, isActive);
+		return bookRequestDto;
+	}
 
     @GetMapping("/requestbook")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -51,19 +65,6 @@ public class RequestBookController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteBookRequest(@PathVariable("userid") long id, @PathVariable("requestbookid") long requestBookId) {
         bookRequestService.deleteBookRequest(id, requestBookId);
-    }
-
-    @GetMapping("/requestBookdto")
-    public List<BookRequestDto> getAllData() {
-        List<BookRequestDto> bookRequestDtos = bookRequestService.getAllRequestBook();
-        return bookRequestDtos;
-    }
-
-    @PutMapping("/isAccepted/admin/{requestId}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public BookRequestDto getStatus(@PathVariable("requestId") long requestId, @RequestParam(name = "isActive") IsActive isActive) {
-        BookRequestDto bookRequestDto = bookRequestService.updatestatus(requestId, isActive);
-        return bookRequestDto;
     }
 
 }
