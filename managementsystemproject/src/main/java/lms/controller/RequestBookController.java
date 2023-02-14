@@ -33,7 +33,8 @@ public class RequestBookController {
 
 
     @PostMapping("/requestbook/{userId}")
-    public String addRequestBookDetails(@RequestBody RequestBookDetails requestBookDetails, @PathVariable("userId") int id) {
+    public String addRequestBookDetails(@RequestBody RequestBookDetails requestBookDetails, @PathVariable("userId") int id) 
+    {
         return bookRequestService.addrequestBookDetails(requestBookDetails, id);
     }
     
@@ -43,9 +44,10 @@ public class RequestBookController {
 		return bookRequestDtos;
 	}
 	
-	@PutMapping("/isAccepted/admin/{requestId}")
+	@PutMapping("/isAccepted/admin/{requestId}/{isActive}")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public BookRequestDto getStatus(@PathVariable("requestId") long requestId ,@RequestParam(name = "isActive") int isActive){
+	
+	public BookRequestDto getStatus(@PathVariable("requestId") long requestId ,@PathVariable(name = "isActive") int isActive){
 		BookRequestDto bookRequestDto= bookRequestService.updatestatus(requestId, isActive);
 		return bookRequestDto;
 	}

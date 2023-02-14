@@ -4,6 +4,7 @@ import java.util.List;
 
 import lms.entities.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lms.repositories.AddressRepository;
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService {
 		return saveUserDetails(userDetails, coutnryName, stateName, cityName);
 	}
 
+
 	@Override
 	public UserDetails adminsignUp(UserDetails userDetails, String coutnryName, String stateName, String cityName) {
 		userDetails.setRole("ADMIN");
@@ -58,12 +60,32 @@ public class UserServiceImpl implements UserService {
 	
 	public UserDetails saveUserDetails(UserDetails userDetails, String coutnryName, String stateName, String cityName) {
 		addressRepository.save(userDetails.getUserAddress());
-
 		userDetails.getUserAddress().setStateAndCity(stateAndCityRepository
 				.findStateCityId(countryRepository
 						.findByCountryName(coutnryName).getId(), stateName, cityName));
 		userDetails.setLendCount(5);
 		return userDetailsRepository.save(userDetails);
+	}
+
+
+	@Override
+	public UserDetails updated(long id) {
+		UserDetails userDetails=null;
+		
+		if(id==1l) {
+			 userDetails=userDetailsRepository.findById(id).orElse(null);
+			userDetails.setRole("ADMIN");
+			userDetailsRepository.save(userDetails);
+			
+			
+		}
+		else {
+			 userDetails=userDetailsRepository.findById(id).orElse(null);
+			userDetails.setRole("USER");
+			userDetailsRepository.save(userDetails);
+
+		}
+		return userDetails;
 	}
 
 }

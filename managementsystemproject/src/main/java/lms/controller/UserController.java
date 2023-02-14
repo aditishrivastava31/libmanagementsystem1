@@ -14,7 +14,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +44,7 @@ public class UserController {
 
     @GetMapping("/user/all")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<UserDetails> getAllUser() {
+    public List<UserDetails> getAllUser(){
         return this.userService.getAllUser();
     }
 
@@ -62,7 +64,7 @@ public class UserController {
     }
 
     @PostMapping("admin/signUp")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDetails> adminSignUp(@RequestBody UserDetails userDetails,
                                                    @RequestParam(name = "countryname") String countryName,
                                                    @RequestParam(name = "statename") String stateName,
@@ -87,4 +89,20 @@ public class UserController {
             throw new UsernameNotFoundException("invalid user request !");
         }
     }
+    
+    @PutMapping("/update/{id}")
+    public UserDetails updated(@PathVariable("id") long id)
+    {
+    	return userService.updated(id);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
