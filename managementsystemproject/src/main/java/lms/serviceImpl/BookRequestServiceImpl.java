@@ -83,13 +83,14 @@ public class BookRequestServiceImpl implements BookRequestService {
         return bookRequestDtos;
     }
 
-    public BookRequestDto updatestatus(long requestId, IsActive isActive) {
-        RequestBookDetails requestBookDetails = requestBookDetailsRepository.findById(requestId).get();
-        requestBookDetails.setIsActive(isActive);
-        requestBookDetailsRepository.save(requestBookDetails);
-        BookRequestDto bookRequestDto = setBookRequestDto(requestBookDetailsRepository.findById(requestId).get());
-        return bookRequestDto;
-    }
+
+	public BookRequestDto updatestatus(long requestId,int isActive) {
+		RequestBookDetails requestBookDetails = requestBookDetailsRepository.findById(requestId).get();
+		requestBookDetails.setIsActive(IsActive.values()[isActive]);
+		requestBookDetailsRepository.save(requestBookDetails);
+		BookRequestDto bookRequestDto = setBookRequestDto(requestBookDetailsRepository.findById(requestId).get());
+		return bookRequestDto;
+	}
 
     public BookRequestDto setBookRequestDto(RequestBookDetails requestBookDetail) {
 
@@ -100,6 +101,5 @@ public class BookRequestServiceImpl implements BookRequestService {
         bookRequestDto.setIsActive(requestBookDetail.getIsActive());
 
         return bookRequestDto;
-
     }
 }
