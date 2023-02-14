@@ -37,7 +37,7 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 
 	public BookIssueRepository bookIssueRepository;
 
-	@Autowired
+	
 	public BookDetailsServiceImpl() {
 
 	}
