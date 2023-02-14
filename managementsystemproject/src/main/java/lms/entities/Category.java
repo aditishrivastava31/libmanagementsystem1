@@ -8,35 +8,35 @@ import jakarta.persistence.Id;
 @Entity
 public class Category {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long cid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long cid;
 
-	private String categoryName;
+    private String categoryName;
 
-	public long getCid() {
-		return cid;
-	}
+    public long getCid() {
+        return cid;
+    }
 
-	public void setCid(long cid) {
-		this.cid = cid;
-	}
+    public void setCid(long cid) {
+        this.cid = cid;
+    }
 
-	public String getCategoryName() {
-		return categoryName;
-	}
+    public String getCategoryName() {
+        return categoryName;
+    }
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
-	public Category(long cid, String categoryName) {
-		this.cid = cid;
-		this.categoryName = categoryName;
-	}
+    public Category(long cid, String categoryName) {
+        this.cid = cid;
+        this.categoryName = categoryName;
+    }
 
-	public Category() {
+    public Category() {
 
-	}
+    }
 
 }

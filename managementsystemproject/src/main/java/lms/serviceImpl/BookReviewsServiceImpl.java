@@ -17,51 +17,50 @@ import lms.services.Bookreviewservices;
 
 
 /*
- * this class is used to implement book review 
+ * this class is used to implement book review
  */
 
 
-
 @Service
-public class BookReviewsServiceImpl  implements Bookreviewservices{
-	
-	@Autowired
-	public BookReviewRepository bookReviewRepository;
-	
-	@Autowired
-	public BookRepository bookRepository;
-	
-	@Autowired
-	public UserDetailsRepository userDetailsRepository;
-	
+public class BookReviewsServiceImpl implements Bookreviewservices {
 
-	@Override
-	public BookReview addreviewdetails(BookReview book_Review) {
-		return null;
-	}
+    @Autowired
+    public BookReviewRepository bookReviewRepository;
 
-	@Override
-	public BookReview addreviewbyids(BookReview bookReview, long uid, long bid) {
-	bookReview.setBookdetails(bookRepository.findById(bid).orElse(null));
-	bookReview.setUserdetails(userDetailsRepository.findById(uid).orElse(null));
-	return bookReviewRepository.save(bookReview);
-		
-	}
+    @Autowired
+    public BookRepository bookRepository;
+
+    @Autowired
+    public UserDetailsRepository userDetailsRepository;
 
 
-	@Override
-	public List<BookReviewdto> getreviewbybookid(long id) {
-	
-		List<BookReviewdto> Reviewdtoslist=new ArrayList<>();
-		
-		bookReviewRepository.findByBookdetails(bookRepository.findById(id).orElse(new BookDetails())).forEach(bookDetail->{
-				BookReviewdto bookReviewdto=new BookReviewdto(bookDetail.getUserdetails().getUserName(), 
-						bookDetail.getComments(),
-						bookDetail.getStarRating());
-				Reviewdtoslist.add(bookReviewdto);
-		});
-		
-		return Reviewdtoslist;
-	}
+    @Override
+    public BookReview addreviewdetails(BookReview book_Review) {
+        return null;
+    }
+
+    @Override
+    public BookReview addreviewbyids(BookReview bookReview, long uid, long bid) {
+        bookReview.setBookdetails(bookRepository.findById(bid).orElse(null));
+        bookReview.setUserdetails(userDetailsRepository.findById(uid).orElse(null));
+        return bookReviewRepository.save(bookReview);
+
+    }
+
+
+    @Override
+    public List<BookReviewdto> getreviewbybookid(long id) {
+
+        List<BookReviewdto> Reviewdtoslist = new ArrayList<>();
+
+        bookReviewRepository.findByBookdetails(bookRepository.findById(id).orElse(new BookDetails())).forEach(bookDetail -> {
+            BookReviewdto bookReviewdto = new BookReviewdto(bookDetail.getUserdetails().getUserName(),
+                    bookDetail.getComments(),
+                    bookDetail.getStarRating());
+            Reviewdtoslist.add(bookReviewdto);
+        });
+
+        return Reviewdtoslist;
+    }
 
 }

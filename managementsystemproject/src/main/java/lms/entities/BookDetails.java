@@ -22,7 +22,6 @@ public class BookDetails {
 
 	private String bookName;
 
-	
 	@ManyToOne(targetEntity = Category.class)
 	@JoinColumn(name="category_id",referencedColumnName = "cid")
 	private Category category;
@@ -95,6 +94,5 @@ public class BookDetails {
 	public BookDetails(){
 	
 	}
-	
 
 }

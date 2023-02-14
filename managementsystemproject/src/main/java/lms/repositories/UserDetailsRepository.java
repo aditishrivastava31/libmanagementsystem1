@@ -8,8 +8,8 @@ import java.util.Optional;
 
 /**
  * this interface will be used to connect {@link UserDetails} from database
- * @author ashutosh.baranwal
  *
+ * @author ashutosh.baranwal
  */
 
 @EnableJpaRepositories

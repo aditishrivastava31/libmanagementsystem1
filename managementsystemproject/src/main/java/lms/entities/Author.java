@@ -14,12 +14,7 @@ public class Author{
 	private long authorId;
 
 	private String authorName;
-	
-	
-
-
 	public Author() {
-	
 		
 	}
 
@@ -49,8 +44,5 @@ public class Author{
 	public String toString() {
 		return "Author [authorId=" + authorId + ", authorName=" + authorName + "]";
 	}
-
-	
-	
 
 }

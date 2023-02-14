@@ -9,7 +9,7 @@ import lms.entities.BookIssueDetails;
 import lms.entities.RequestExtension;
 
 @Repository
-public interface RequestExtensionRepository extends JpaRepository<RequestExtension,Long>{
+public interface RequestExtensionRepository extends JpaRepository<RequestExtension, Long> {
 
-	public List<RequestExtension> findByissueId(BookIssueDetails bookIssueDetails);
+    public List<RequestExtension> findByissueId(BookIssueDetails bookIssueDetails);
 }

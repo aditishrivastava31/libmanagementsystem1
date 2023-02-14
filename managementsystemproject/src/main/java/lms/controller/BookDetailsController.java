@@ -25,40 +25,40 @@ import lms.services.BookDetailsService;
 @RestController
 public class BookDetailsController {
 
-	public BookDetailsService bookDetailsService;
+    public BookDetailsService bookDetailsService;
 
-	@Autowired
-	public BookDetailsController(BookDetailsService bookDetailsService) {
-		this.bookDetailsService = bookDetailsService;
-	}
+    @Autowired
+    public BookDetailsController(BookDetailsService bookDetailsService) {
+        this.bookDetailsService = bookDetailsService;
+    }
 
-	public BookDetailsController() {
+    public BookDetailsController() {
 
-	}
+    }
 
-	@PostMapping("/addbookDetails")
-	@PreAuthorize("hasAuthority('ADMIN')")
-	public ResponseEntity<BookDetails> addbookdetails(@RequestBody BookDetails bookDetails) {
+    @PostMapping("/addbookDetails")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<BookDetails> addbookdetails(@RequestBody BookDetails bookDetails) {
 
-		try {
-			return new ResponseEntity<>(bookDetailsService.addbookdetails(bookDetails), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
+        try {
+            return new ResponseEntity<>(bookDetailsService.addbookdetails(bookDetails), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
 
-	}
+    }
 
-	@GetMapping("/getbookdetails/{name}")
-	public List<BookDetailssenddto> getbookdetails(@PathVariable("name") String name) {
-		return bookDetailsService.getallbookdetails(name);
+    @GetMapping("/getbookdetails/{name}")
+    public List<BookDetailssenddto> getbookdetails(@PathVariable("name") String name) {
+        return bookDetailsService.getallbookdetails(name);
 
-	}
+    }
 
-	@GetMapping("/getbookdetailsbyid/{id}")
-	public BookDetails getbookdetailsbyid(@PathVariable("id") long id) {
-		return bookDetailsService.getbookdetailsbyid(id);
+    @GetMapping("/getbookdetailsbyid/{id}")
+    public BookDetails getbookdetailsbyid(@PathVariable("id") long id) {
+        return bookDetailsService.getbookdetailsbyid(id);
 
-	}
+    }
 
 }

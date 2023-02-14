@@ -16,13 +16,12 @@ OF THE BOOK
  */
 
 @Service
-public interface BookDetailsService
-{
+public interface BookDetailsService {
 
-	BookDetails addbookdetails(BookDetails bookDetails);
+    BookDetails addbookdetails(BookDetails bookDetails);
 
-	List<BookDetailssenddto> getallbookdetails(String name);
+    List<BookDetailssenddto> getallbookdetails(String name);
 
-	BookDetails getbookdetailsbyid(long id);
+    BookDetails getbookdetailsbyid(long id);
 
 }

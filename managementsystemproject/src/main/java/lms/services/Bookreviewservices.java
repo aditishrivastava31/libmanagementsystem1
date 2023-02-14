@@ -10,20 +10,19 @@ import lms.entities.BookReview;
 
 
 /*
- * this is an interface for book review 
+ * this is an interface for book review
  */
-@Service
+
 public interface Bookreviewservices {
-	
-	
 
-	public BookReview addreviewdetails(BookReview book_Review);
 
-	public BookReview addreviewbyids(BookReview bookReview, long uid, long bid);
+    public BookReview addreviewdetails(BookReview book_Review);
 
-	public List<BookReviewdto> getreviewbybookid(long id);
+    public BookReview addreviewbyids(BookReview bookReview, long uid, long bid);
 
-	
-	}
+    public List<BookReviewdto> getreviewbybookid(long id);
+
+
+}
 
 

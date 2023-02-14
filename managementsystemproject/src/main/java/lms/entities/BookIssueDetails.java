@@ -103,6 +103,5 @@ public class BookIssueDetails {
 		return "BookIssueDetails [id=" + id + ", issueDate=" + issueDate + ", issueEndDate=" + issueEndDate
 				+ ", returnDate=" + returnDate + ", bookDetails=" + bookDetails + ", userDetail=" + userDetail + "]";
 	}
-	
-	
+
 }

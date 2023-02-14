@@ -7,79 +7,77 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class BookIssueDetailsDto {
 
-	private long issue_id;
+    private long issue_id;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date issueDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date issueDate;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date issueEndDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date issueEndDate;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date returnDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date returnDate;
 
-	private String bookTitle;
+    private String bookTitle;
 
-	private List<String> authors;
-	
-	private String userName;
+    private List<String> authors;
 
-	public String getUserName() {
-		return userName;
-	}
+    private String userName;
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public long getIssue_id() {
-		return issue_id;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public void setIssue_id(long issue_id) {
-		this.issue_id = issue_id;
-	}
+    public long getIssue_id() {
+        return issue_id;
+    }
 
-	public Date getIssueDate() {
-		return issueDate;
-	}
+    public void setIssue_id(long issue_id) {
+        this.issue_id = issue_id;
+    }
 
-	public void setIssueDate(Date issueDate) {
-		this.issueDate = issueDate;
-	}
+    public Date getIssueDate() {
+        return issueDate;
+    }
 
-	public Date getIssueEndDate() {
-		return issueEndDate;
-	}
+    public void setIssueDate(Date issueDate) {
+        this.issueDate = issueDate;
+    }
 
-	public void setIssueEndDate(Date issueEndDate) {
-		this.issueEndDate = issueEndDate;
-	}
+    public Date getIssueEndDate() {
+        return issueEndDate;
+    }
 
-	public Date getReturnDate() {
-		return returnDate;
-	}
+    public void setIssueEndDate(Date issueEndDate) {
+        this.issueEndDate = issueEndDate;
+    }
 
-	public void setReturnDate(Date returnDate) {
-		this.returnDate = returnDate;
-	}
+    public Date getReturnDate() {
+        return returnDate;
+    }
 
-	public String getBookTitle() {
-		return bookTitle;
-	}
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
 
-	public void setBookTitle(String bookTitle) {
-		this.bookTitle = bookTitle;
-	}
+    public String getBookTitle() {
+        return bookTitle;
+    }
 
-	public List<String> getAuthors() {
-		return authors;
-	}
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
 
-	public void setAuthors(List<String> authors) {
-		this.authors = authors;
-	}
-	
-	
+    public List<String> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
+    }
 
 }
