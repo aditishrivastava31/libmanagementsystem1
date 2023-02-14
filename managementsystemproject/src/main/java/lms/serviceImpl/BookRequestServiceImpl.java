@@ -90,7 +90,12 @@ public class BookRequestServiceImpl implements BookRequestService {
 		return bookRequestDtos;
 	}
 
+<<<<<<< Updated upstream
 	public BookRequestDto updatestatus(long requestId,IsActive isActive) {
+=======
+	@Override
+	public BookRequestDto updatestatus(long requestId,int isActive) {
+>>>>>>> Stashed changes
 		RequestBookDetails requestBookDetails = requestBookDetailsRepository.findById(requestId).get();
 		requestBookDetails.setIsActive(isActive);
 		requestBookDetailsRepository.save(requestBookDetails);
@@ -107,6 +112,13 @@ public class BookRequestServiceImpl implements BookRequestService {
 		bookRequestDto.setIsActive(requestBookDetail.getIsActive());
 		
 		return bookRequestDto;
+<<<<<<< Updated upstream
 
 	}
+=======
+
+	}
+
+
+>>>>>>> Stashed changes
 }
