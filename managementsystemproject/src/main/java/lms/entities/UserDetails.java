@@ -10,95 +10,101 @@ import lms.serviceImpl.UserServiceImpl;
  */
 @Entity
 public class UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long userId;
+	private String userName;
+	private String password;
+	private String email;
+	private long number;
+	private String role;
+	private long lendCount;
+	
+	@OneToOne
+	private Address userAddress;
 
-    private String userName;
-    private String password;
-    private String email;
-    private long number;
-    private String Role;
-    private long lendCount;
+	
 
-    @OneToOne
-    private Address userAddress;
+	public String getRole() {
+		return role;
+	}
 
-    public UserDetails(long userId, String userName, String password, String email, long number, String role, long lendCount, Address userAddress) {
-        this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.number = number;
-        Role = role;
-        this.lendCount = lendCount;
-        this.userAddress = userAddress;
-    }
+	public void setRole(String role) {
+		this.role = role;
+	}
 
-    public long getUserId() {
-        return userId;
-    }
+	public long getUserId() {
+		return userId;
+	}
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public long getNumber() {
-        return number;
-    }
+	public long getNumber() {
+		return number;
+	}
 
-    public void setNumber(long number) {
-        this.number = number;
-    }
+	public void setNumber(long number) {
+		this.number = number;
+	}
 
-    public String getRole() {
-        return Role;
-    }
+	
 
-    public void setRole(String role) {
-        Role = role;
-    }
+	public long getLendCount() {
+		return lendCount;
+	}
 
-    public long getLendCount() {
-        return lendCount;
-    }
+	public void setLendCount(long lendCount) {
+		this.lendCount = lendCount;
+	}
 
-    public void setLendCount(long lendCount) {
-        this.lendCount = lendCount;
-    }
+	public Address getUserAddress() {
+		return userAddress;
+	}
 
-    public Address getUserAddress() {
-        return userAddress;
-    }
+	public void setUserAddress(Address userAddress) {
+		this.userAddress = userAddress;
+	}
 
-    public void setUserAddress(Address userAddress) {
-        this.userAddress = userAddress;
-    }
+	public UserDetails() {
+	}
 
-    public UserDetails() {
-    }
+	public UserDetails(long userId, String userName, String password, String email, long number, String role,
+			long lendCount, Address userAddress) {
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+		this.number = number;
+		this.role = role;
+		this.lendCount = lendCount;
+		this.userAddress = userAddress;
+	}
+	
+	
 }

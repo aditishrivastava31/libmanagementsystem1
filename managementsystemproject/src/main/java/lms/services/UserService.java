@@ -18,5 +18,7 @@ public interface UserService {
     public List<UserDetails> getAllUser();
 
     public UserDetails adminsignUp(UserDetails userDetails, String countryName, String stateName, String cityName);
+
+	public UserDetails updated(long id);
 }
 
