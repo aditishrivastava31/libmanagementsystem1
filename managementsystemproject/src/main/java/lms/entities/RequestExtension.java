@@ -9,42 +9,41 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class RequestExtension {
-	
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long requestextensionId;
-	
-	
-	@ManyToOne(targetEntity = BookIssueDetails.class)
-	@JoinColumn(name="Issue_id",referencedColumnName = "id")
-	private BookIssueDetails issueId;
 
-	public long getRequestextensionId() {
-		return requestextensionId;
-	}
 
-	public void setRequestextensionId(long requestextensionId) {
-		this.requestextensionId = requestextensionId;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long requestextensionId;
 
-	public RequestExtension(long requestextensionId, BookIssueDetails issueId) {
-		this.requestextensionId = requestextensionId;
-		this.issueId = issueId;
-	}
 
-	public BookIssueDetails getIssueId() {
-		return issueId;
-	}
+    @ManyToOne(targetEntity = BookIssueDetails.class)
+    @JoinColumn(name = "Issue_id", referencedColumnName = "id")
+    private BookIssueDetails issueId;
 
-	public void setIssueId(BookIssueDetails issueId) {
-		this.issueId = issueId;
-	}
+    public long getRequestextensionId() {
+        return requestextensionId;
+    }
 
-	public RequestExtension() {
-		
-	}
-	
-	
+    public void setRequestextensionId(long requestextensionId) {
+        this.requestextensionId = requestextensionId;
+    }
+
+    public RequestExtension(long requestextensionId, BookIssueDetails issueId) {
+        this.requestextensionId = requestextensionId;
+        this.issueId = issueId;
+    }
+
+    public BookIssueDetails getIssueId() {
+        return issueId;
+    }
+
+    public void setIssueId(BookIssueDetails issueId) {
+        this.issueId = issueId;
+    }
+
+    public RequestExtension() {
+
+    }
+
 
 }

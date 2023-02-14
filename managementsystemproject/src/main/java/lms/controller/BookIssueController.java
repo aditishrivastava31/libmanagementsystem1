@@ -16,46 +16,46 @@ import lms.serviceImpl.BookIssueServiceImpl;
 @RestController
 public class BookIssueController {
 
-	@Autowired
-	BookIssueServiceImpl bookIssueServiceImpl;
+    @Autowired
+    BookIssueServiceImpl bookIssueServiceImpl;
 
-	@PostMapping("/lend/{user_id}/{book_id}")
-	public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid){
-		String status = null;
-		status = bookIssueServiceImpl.lend_book(uid, bid);
-		return status;
-	}
+    @PostMapping("/lend/{user_id}/{book_id}")
+    public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid) {
+        String status = null;
+        status = bookIssueServiceImpl.lend_book(uid, bid);
+        return status;
+    }
 
-	@PostMapping("/return/{issue_id}")
-	public String return_book(@PathVariable("issue_id") long id) {
-		String status = bookIssueServiceImpl.return_book(id);
-		return status;
-	}
+    @PostMapping("/return/{issue_id}")
+    public String return_book(@PathVariable("issue_id") long id) {
+        String status = bookIssueServiceImpl.return_book(id);
+        return status;
+    }
 
-	@GetMapping("/totalBooks/{user_id}")
-	public List<BookIssueDetailsDto> getAllBooks(@PathVariable("user_id") long uid) {
-		return bookIssueServiceImpl.getIssuedBookDetails("total", uid);
-	}
+    @GetMapping("/totalBooks/{user_id}")
+    public List<BookIssueDetailsDto> getAllBooks(@PathVariable("user_id") long uid) {
+        return bookIssueServiceImpl.getIssuedBookDetails("total", uid);
+    }
 
-	@GetMapping("/issuedBooks/{user_id}")
-	public List<BookIssueDetailsDto> getIssuedBooks(@PathVariable("user_id") long uid) {
-		return bookIssueServiceImpl.getIssuedBookDetails("issued", uid);
-	}
+    @GetMapping("/issuedBooks/{user_id}")
+    public List<BookIssueDetailsDto> getIssuedBooks(@PathVariable("user_id") long uid) {
+        return bookIssueServiceImpl.getIssuedBookDetails("issued", uid);
+    }
 
-	@GetMapping("/readBooks/{user_id}")
-	public List<BookIssueDetailsDto> getReadBooks(@PathVariable("user_id") long uid) {
-		return bookIssueServiceImpl.getIssuedBookDetails("read", uid);
-	}
+    @GetMapping("/readBooks/{user_id}")
+    public List<BookIssueDetailsDto> getReadBooks(@PathVariable("user_id") long uid) {
+        return bookIssueServiceImpl.getIssuedBookDetails("read", uid);
+    }
 
-	@GetMapping("/pendingBooks/{user_id}")
-	public List<BookIssueDetailsDto> getPendingBooks(@PathVariable("user_id") long uid) {
-		return bookIssueServiceImpl.getIssuedBookDetails("pending", uid);
-	}
-	
-	@GetMapping("/getAllIssues")
-	@PreAuthorize("hasAuthority('ADMIN')")
-	public List<BookIssueDetailsDto> getAllIssues(){
-		return bookIssueServiceImpl.getAllIssuesToAdmin();
-	}
-	
+    @GetMapping("/pendingBooks/{user_id}")
+    public List<BookIssueDetailsDto> getPendingBooks(@PathVariable("user_id") long uid) {
+        return bookIssueServiceImpl.getIssuedBookDetails("pending", uid);
+    }
+
+    @GetMapping("/getAllIssues")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<BookIssueDetailsDto> getAllIssues() {
+        return bookIssueServiceImpl.getAllIssuesToAdmin();
+    }
+
 }

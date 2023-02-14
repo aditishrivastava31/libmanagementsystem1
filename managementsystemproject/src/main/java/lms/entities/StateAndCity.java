@@ -70,8 +70,6 @@ public class StateAndCity {
 	public StateAndCity() {
 		
 	}
-	
-	
-	
+
 }
 

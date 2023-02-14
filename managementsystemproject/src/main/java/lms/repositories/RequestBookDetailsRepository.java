@@ -11,16 +11,13 @@ import lms.entities.RequestBookDetails;
 
 /**
  * this interface will be used to connect {@link RequestBookDetails} from database
- * @author ashutosh.baranwal
  *
+ * @author ashutosh.baranwal
  */
-
 
 @EnableJpaRepositories
 public interface RequestBookDetailsRepository extends JpaRepository<RequestBookDetails, Long> {
 
-
-	List<RequestBookDetails> findByUserDetail(Optional<UserDetails> findById);
-	
+    List<RequestBookDetails> findByUserDetail(Optional<UserDetails> findById);
 
 }
