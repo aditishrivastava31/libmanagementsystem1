@@ -34,13 +34,14 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 	public AuthorRepository authorRepository;
 	
 	public CategoryRepository categoryRepository;
-	
+
 	public BookIssueRepository bookIssueRepository;
 
+	@Autowired
 	public BookDetailsServiceImpl() {
 
 	}
-
+	
 	@Autowired
 	public BookDetailsServiceImpl(BookRepository bookRepository, UserDetailsRepository userDetailsRepository,
 			AuthorRepository authorRepository, CategoryRepository categoryRepository,

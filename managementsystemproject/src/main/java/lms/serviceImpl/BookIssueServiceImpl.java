@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,18 +23,22 @@ import lms.services.BookIssueService;
 @Service
 public class BookIssueServiceImpl implements BookIssueService {
 
-	@Autowired
 	UserDetailsRepository userDetailsRepository;
 
-	@Autowired
 	BookRepository bookRepository;
 
-	@Autowired
 	BookIssueRepository bookIssueRepository;
 	
-	@Autowired
 	EmailServiceImpl emailServiceImpl;
 	
+	@Autowired
+	public BookIssueServiceImpl(UserDetailsRepository userDetailsRepository, BookRepository bookRepository,
+			BookIssueRepository bookIssueRepository, EmailServiceImpl emailServiceImpl) {
+		this.userDetailsRepository = userDetailsRepository;
+		this.bookRepository = bookRepository;
+		this.bookIssueRepository = bookIssueRepository;
+		this.emailServiceImpl = emailServiceImpl;
+	}
 
 	@Override
 	public String lend_book(long uid, long bid)  {
@@ -147,59 +152,37 @@ public class BookIssueServiceImpl implements BookIssueService {
 
 	@Override
 	public List<BookIssueDetailsDto> getIssuedBookDetails(String str, long uid) {
-		UserDetails user = userDetailsRepository.findById(uid).orElse(null);
 		List<BookIssueDetailsDto> filteredData = new ArrayList<>();
-		List<BookIssueDetails> bookIssueDetails = bookIssueRepository.findByUserDetail(user);
-		LocalDateTime localDateTime = LocalDateTime.now();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		try {
+		for (BookIssueDetails issueBookDetails : bookIssueRepository.findByUserDetail( userDetailsRepository.findById(uid).orElse(null))) {
 			if (str.toLowerCase().equals("issued")) {
-				for (BookIssueDetails issueBookDetails : bookIssueDetails) {
-					if (issueBookDetails.getIssueDate().compareTo(formatter.parse(localDateTime.toString())) <= 0) {
-						filteredData.add(this.toDto(issueBookDetails));
-
+						filteredData = compareDate(issueBookDetails, issueBookDetails.getIssueDate());
 					}
-				}
-			} else if (str.toLowerCase().equals("total")) {
-				for (BookIssueDetails issueBookDetails : bookIssueDetails) {
+			else if (str.toLowerCase().equals("total")) {
 					filteredData.add(this.toDto(issueBookDetails));
 				}
-
-			} else if (str.toLowerCase().equals("read")) {
-				for (BookIssueDetails issueBookDetails : bookIssueDetails) {
+			 else if (str.toLowerCase().equals("read")) {
 					if (issueBookDetails.getReturnDate() != null) {
-						if (issueBookDetails.getReturnDate()
-								.compareTo(formatter.parse(localDateTime.toString())) <= 0) {
-							filteredData.add(this.toDto(issueBookDetails));
-						}
+						filteredData = compareDate(issueBookDetails, issueBookDetails.getReturnDate());
 					}
 				}
-
-			} else if (str.toLowerCase().equals("pending")) {
-				for (BookIssueDetails issueBookDetails : bookIssueDetails) {
-					if (issueBookDetails.getIssueEndDate().compareTo(formatter.parse(localDateTime.toString())) <= 0) {
-						filteredData.add(this.toDto(issueBookDetails));
-					}
+			 else if (str.toLowerCase().equals("pending")) {
+					filteredData = compareDate(issueBookDetails, issueBookDetails.getIssueEndDate());
 				}
 			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
 		return filteredData;
 	}
 
 	@Override
 	public List<BookIssueDetailsDto> getAllIssuesToAdmin() {
 		List<BookIssueDetailsDto> bookIssueDetailsDtos=new ArrayList<>();
-		bookIssueRepository.findAll().forEach(n->{
+		bookIssueRepository.findAll().forEach(bookIssueDetails->{
 			BookIssueDetailsDto bookIssueDetailsDto=new BookIssueDetailsDto();
-			bookIssueDetailsDto.setBookTitle(n.getBookDetails().getBookName());
-			bookIssueDetailsDto.setUserName(n.getUserDetail().getUserName());
-			bookIssueDetailsDto.setReturnDate(n.getReturnDate());
-			bookIssueDetailsDto.setIssue_id(n.getId());
+			bookIssueDetailsDto.setBookTitle(bookIssueDetails.getBookDetails().getBookName());
+			bookIssueDetailsDto.setUserName(bookIssueDetails.getUserDetail().getUserName());
+			bookIssueDetailsDto.setReturnDate(bookIssueDetails.getReturnDate());
+			bookIssueDetailsDto.setIssue_id(bookIssueDetails.getId());
 			List<String> authorslist=new ArrayList<>();
-			n.getBookDetails().getAuthors().forEach(a->{
+			bookIssueDetails.getBookDetails().getAuthors().forEach(a->{
 				authorslist.add(a.getAuthorName());
 			});
 			bookIssueDetailsDto.setAuthors(authorslist);
@@ -207,5 +190,19 @@ public class BookIssueServiceImpl implements BookIssueService {
 			
 		});
 		return bookIssueDetailsDtos;
+	}
+	
+	public List<BookIssueDetailsDto> compareDate(BookIssueDetails issuedBookDetails , Date date ){
+		LocalDateTime localDateTime = LocalDateTime.now();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		List<BookIssueDetailsDto> filteredData = new ArrayList<>();
+			try {
+				if (date.compareTo(formatter.parse(localDateTime.toString())) <= 0) {
+					filteredData.add(this.toDto(issuedBookDetails));
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		return filteredData;
 	}
 }

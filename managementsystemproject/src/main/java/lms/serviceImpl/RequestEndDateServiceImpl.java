@@ -20,15 +20,21 @@ import lms.services.RequestEndDateService;
 @Service
 public class RequestEndDateServiceImpl implements RequestEndDateService {
 
-	@Autowired
 	private BookIssueRepository bookIssueRepository;
 	
-	@Autowired
 	private EmailServiceImpl emailServiceImpl;
 	
-	@Autowired
 	private RequestExtensionRepository requestExtensionRepository;
 	
+	@Autowired
+	public RequestEndDateServiceImpl(BookIssueRepository bookIssueRepository, EmailServiceImpl emailServiceImpl,
+			RequestExtensionRepository requestExtensionRepository) {
+		super();
+		this.bookIssueRepository = bookIssueRepository;
+		this.emailServiceImpl = emailServiceImpl;
+		this.requestExtensionRepository = requestExtensionRepository;
+	}
+
 	@Override
 	public List<RequestEnddatedto> getbookextensions() {
 

@@ -25,11 +25,17 @@ import lms.services.BookRequestService;
 @Service
 public class BookRequestServiceImpl implements BookRequestService {
 
-	@Autowired
 	public RequestBookDetailsRepository requestBookDetailsRepository;
 
-	@Autowired
 	private UserDetailsRepository userDetailsRepository;
+	
+	@Autowired
+	public BookRequestServiceImpl(RequestBookDetailsRepository requestBookDetailsRepository,
+			UserDetailsRepository userDetailsRepository) {
+		super();
+		this.requestBookDetailsRepository = requestBookDetailsRepository;
+		this.userDetailsRepository = userDetailsRepository;
+	}
 
 	@Override
 	public String addrequestBookDetails(RequestBookDetails requestBookDetails, long id) {

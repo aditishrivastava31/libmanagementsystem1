@@ -22,17 +22,22 @@ import lms.services.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
 	private UserDetailsRepository userDetailsRepository;
 
-	@Autowired
 	private AddressRepository addressRepository;
 
-	@Autowired
 	private CountryRepository countryRepository;
 
-	@Autowired
 	private StateAndCityRepository stateAndCityRepository;
+
+	@Autowired
+	public UserServiceImpl(UserDetailsRepository userDetailsRepository, AddressRepository addressRepository,
+			CountryRepository countryRepository, StateAndCityRepository stateAndCityRepository) {
+		this.userDetailsRepository = userDetailsRepository;
+		this.addressRepository = addressRepository;
+		this.countryRepository = countryRepository;
+		this.stateAndCityRepository = stateAndCityRepository;
+	}
 
 	@Override
 	public List<UserDetails> getAllUser() {

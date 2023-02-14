@@ -14,26 +14,27 @@ import lms.repositories.BookReviewRepository;
 import lms.repositories.UserDetailsRepository;
 import lms.services.Bookreviewservices;
 
-
-
 /*
  * this class is used to implement book review 
  */
 
-
-
 @Service
 public class BookReviewsServiceImpl  implements Bookreviewservices{
 	
-	@Autowired
 	public BookReviewRepository bookReviewRepository;
 	
-	@Autowired
 	public BookRepository bookRepository;
 	
-	@Autowired
 	public UserDetailsRepository userDetailsRepository;
 	
+	@Autowired
+	public BookReviewsServiceImpl(BookReviewRepository bookReviewRepository, BookRepository bookRepository,
+			UserDetailsRepository userDetailsRepository) {
+		super();
+		this.bookReviewRepository = bookReviewRepository;
+		this.bookRepository = bookRepository;
+		this.userDetailsRepository = userDetailsRepository;
+	}
 
 	@Override
 	public BookReview addreviewdetails(BookReview book_Review) {
@@ -47,7 +48,6 @@ public class BookReviewsServiceImpl  implements Bookreviewservices{
 	return bookReviewRepository.save(bookReview);
 		
 	}
-
 
 	@Override
 	public List<BookReviewdto> getreviewbybookid(long id) {
@@ -63,5 +63,4 @@ public class BookReviewsServiceImpl  implements Bookreviewservices{
 		
 		return Reviewdtoslist;
 	}
-
 }
