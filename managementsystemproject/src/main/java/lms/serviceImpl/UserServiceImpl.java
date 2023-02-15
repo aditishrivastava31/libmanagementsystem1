@@ -5,6 +5,7 @@ import java.util.List;
 import lms.entities.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lms.repositories.AddressRepository;
@@ -31,13 +32,15 @@ public class UserServiceImpl implements UserService {
 
 	private StateAndCityRepository stateAndCityRepository;
 
+	private PasswordEncoder passwordEncoder;
+
 	@Autowired
-	public UserServiceImpl(UserDetailsRepository userDetailsRepository, AddressRepository addressRepository,
-			CountryRepository countryRepository, StateAndCityRepository stateAndCityRepository) {
+	public UserServiceImpl(UserDetailsRepository userDetailsRepository, AddressRepository addressRepository, CountryRepository countryRepository, StateAndCityRepository stateAndCityRepository,PasswordEncoder passwordEncoder) {
 		this.userDetailsRepository = userDetailsRepository;
 		this.addressRepository = addressRepository;
 		this.countryRepository = countryRepository;
 		this.stateAndCityRepository = stateAndCityRepository;
+		this.passwordEncoder=passwordEncoder;
 	}
 
 	@Override
@@ -55,6 +58,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails adminsignUp(UserDetails userDetails, String coutnryName, String stateName, String cityName) {
 		userDetails.setRole("ADMIN");
+		userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
 		return saveUserDetails(userDetails, coutnryName, stateName, cityName);
 	}
 	
@@ -64,6 +68,7 @@ public class UserServiceImpl implements UserService {
 				.findStateCityId(countryRepository
 						.findByCountryName(coutnryName).getId(), stateName, cityName));
 		userDetails.setLendCount(5);
+		userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
 		return userDetailsRepository.save(userDetails);
 	}
 
