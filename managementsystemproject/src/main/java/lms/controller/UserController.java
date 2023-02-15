@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import lms.dto.AuthenticateDto;
+import lms.dto.JwtResponseDao;
 import lms.serviceImpl.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,11 +81,14 @@ public class UserController {
     }
 
     @PostMapping("/authenticate")
-    public String authenticateAndGetToken(@RequestBody AuthenticateDto authRequest) {
+    public ResponseEntity<?> authenticateAndGetToken(@RequestBody AuthenticateDto authRequest) {
         System.out.println(authRequest.getEmail());
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getEmail());
+            String token= jwtService.generateToken(authRequest.getEmail());
+            System.out.println(token);
+            return ResponseEntity.ok(new JwtResponseDao(token));
+
         } else {
             throw new UsernameNotFoundException("invalid user request !");
         }
@@ -95,14 +99,4 @@ public class UserController {
     {
     	return userService.updated(id);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
