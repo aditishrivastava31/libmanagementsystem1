@@ -11,7 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BooksComponent } from './books/books.component';
 import { ReqBookComponent } from './req-book/req-book.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { AboutUsComponent } from './about-us/about-us.component'
+import { AboutUsComponent } from './about-us/about-us.component';
+import { LoginComponent } from './login/login.component'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { AboutUsComponent } from './about-us/about-us.component'
     BooksComponent,
     ReqBookComponent,
     ContactUsComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { AboutUsComponent } from './about-us/about-us.component'
     NgbModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
