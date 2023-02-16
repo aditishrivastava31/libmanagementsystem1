@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from 'src/services/auth.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: '', component:LoginComponent, pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent,  canActivate:[AuthGuard]},
   {path: 'books', component: BooksComponent,  canActivate:[AuthGuard]
 },
