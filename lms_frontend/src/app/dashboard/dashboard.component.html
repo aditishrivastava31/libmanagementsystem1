@@ -1,0 +1,102 @@
+<h1>Dashboard</h1>
+<hr>
+<div class="jumbotron">
+    <div class="row w-100">
+        <div class="col-md-3">
+            <!-- <a href=""> -->
+            <div class="card border-info mx-sm-1 p-3">
+                <!-- <div class="card border-info shadow text-info p-3 my-card"><span class="fa fa-car"
+                        aria-hidden="true"></span></div> -->
+                <div class="text-info text-center mt-3">
+                    <h4>All</h4>
+                </div>
+                <div class="text-info text-center mt-2">
+                    <h1>234</h1>
+                </div>
+                <a (click)=all_books() class="stretched-link"></a>
+            </div>
+            <!-- </a> -->
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-warning mx-sm-1 p-3">
+                <!-- <div class="card border-warning shadow text-warning p-3 my-card"><span class="fa fa-inbox"
+                        aria-hidden="true"></span></div> -->
+                <div class="text-warning text-center mt-3">
+                    <h4>Issued</h4>
+                </div>
+                <div class="text-warning text-center mt-2">
+                    <h1>346</h1>
+                </div>
+                <a (click)=issued_books() class="stretched-link"></a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-success mx-sm-1 p-3">
+                <!-- <div class="card border-success shadow text-success p-3 my-card"></div> -->
+                <div class="text-success text-center mt-3">
+                    <h4>Returned</h4>
+                </div>
+                <div class="text-success text-center mt-2">
+                    <h1>9332</h1>
+                </div>
+                <a (click)=returned_books() class="stretched-link"></a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-danger mx-sm-1 p-3">
+                <!-- <div class="card border-danger shadow text-danger p-3 my-card"><span class="fa fa-heart"
+                        aria-hidden="true"></span></div> -->
+                <div class="text-danger text-center mt-3">
+                    <h4>Pending</h4>
+                </div>
+                <div class="text-danger text-center mt-2">
+                    <h1>346</h1>
+                </div>
+                <a (click)=pending_books() class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-head">{{title}} Books</div>
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Authors</th>
+                    <th scope="col">Issued Date</th>
+                    <th scope="col">Returned Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>sks</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>sks</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>sks</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
