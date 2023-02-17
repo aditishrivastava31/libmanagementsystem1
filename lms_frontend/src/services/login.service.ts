@@ -26,7 +26,8 @@ export class LoginService {
     return true;
   }
   // to check user is login
-  isLoggedIn() {
+  isLoggedIn() 
+  {
     let token = localStorage.getItem("token");
     console.log(token)
     if (token == undefined || token === '' || token == null) {

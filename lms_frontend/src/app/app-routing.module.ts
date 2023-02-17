@@ -7,6 +7,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from 'src/services/auth.guard';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 const routes: Routes = [
   {path: '', component:LoginComponent, pathMatch: 'full'},
@@ -18,6 +19,10 @@ const routes: Routes = [
   {path: 'about-us', component: AboutUsComponent,  canActivate:[AuthGuard]
 },
   {path: 'contact-us', component: ContactUsComponent,  canActivate:[AuthGuard]
+
+},
+{
+  path:'sidenav',component:SidenavComponent
 },
   {path:"login",component:LoginComponent,pathMatch:"full"},
 ];
