@@ -13,6 +13,8 @@ import { ReqBookComponent } from './req-book/req-book.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { MatCardModule } from '@angular/material/card';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { MatCardModule } from '@angular/material/card';
     BooksComponent,
     ReqBookComponent,
     ContactUsComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { MatCardModule } from '@angular/material/card';
     MatCardModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
