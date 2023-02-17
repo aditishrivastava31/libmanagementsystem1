@@ -1,0 +1,97 @@
+<h1>Dashboard</h1>
+<hr>
+<div class="jumbotron">
+    <div class="row w-100">
+        <div class="col-md-3">
+            <div class="card border-info mx-sm-1 p-3">
+                <div class="text-info text-center mt-3">
+                    <h4>All</h4>
+                </div>
+                <div class="text-info text-center mt-2">
+                    <h1>234</h1>
+                </div>
+                <a (click)=all_books() class="stretched-link"></a>
+            </div>
+            <!-- </a> -->
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-warning mx-sm-1 p-3">
+                <div class="text-warning text-center mt-3">
+                    <h4>Issued</h4>
+                </div>
+                <div class="text-warning text-center mt-2">
+                    <h1>346</h1>
+                </div>
+                <a (click)=issued_books() class="stretched-link"></a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-success mx-sm-1 p-3">
+                <div class="text-success text-center mt-3">
+                    <h4>Returned</h4>
+                </div>
+                <div class="text-success text-center mt-2">
+                    <h1>9332</h1>
+                </div>
+                <a (click)=returned_books() class="stretched-link"></a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-danger mx-sm-1 p-3">
+                <div class="text-danger text-center mt-3">
+                    <h4>Pending</h4>
+                </div>
+                <div class="text-danger text-center mt-2">
+                    <h1>346</h1>
+                </div>
+                <a (click)=pending_books() class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{title}} Books</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <br>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Authors</th>
+                    <th scope="col">Issued Date</th>
+                    <th scope="col">Returned Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="color: #dc3545;">
+                    <th scope="row" >1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>sks</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>sks</td>
+                </tr>
+                <tr style="color: green;">
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>sks</td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
