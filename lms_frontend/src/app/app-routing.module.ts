@@ -8,6 +8,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from 'src/services/auth.guard';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {path: '', component:LoginComponent, pathMatch: 'full'},
@@ -25,6 +26,7 @@ const routes: Routes = [
   path:'sidenav',component:SidenavComponent
 },
   {path:"login",component:LoginComponent,pathMatch:"full"},
+  {path:"signup", component:SignupComponent,pathMatch:"full"}
 ];
 
 @NgModule({
