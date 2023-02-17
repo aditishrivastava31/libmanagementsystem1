@@ -55,6 +55,7 @@ public class BookDetailsController {
     }
 
     @GetMapping("/getbookdetails/{name}")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public List<BookDetailssenddto> getbookdetails(@PathVariable("name") String name) {
         return bookDetailsService.getallbookdetails(name);
 
