@@ -10,6 +10,7 @@ import { AuthGuard } from 'src/services/auth.guard';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { SignupComponent } from './signup/signup.component';
 
+
 const routes: Routes = [
   {path: '', component:LoginComponent, pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent,  canActivate:[AuthGuard]},
