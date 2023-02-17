@@ -11,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BooksComponent } from './books/books.component';
 import { ReqBookComponent } from './req-book/req-book.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { AboutUsComponent } from './about-us/about-us.component'
+import { AboutUsComponent } from './about-us/about-us.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AboutUsComponent } from './about-us/about-us.component'
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    MatCardModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule
