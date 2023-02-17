@@ -1,0 +1,45 @@
+<p>books works!</p>
+
+
+
+
+
+<form>
+
+    <div class="form-group" >
+        <input   required class="form-control" type="text" placeholder="search" name="search" [(ngModel)]="accordingto">
+    </div>
+
+<div>
+    <button  (click)="getdetails()" color ="primary">searchbutton</button>
+    </div>
+
+    </form>
+
+
+    <!--p>{{bookdetails$ | async | json}}</p>
+    <div>
+    </div>
+    <p>{{bookdetailscount$ | async | json}}</p-->
+    
+
+<table class="table">
+    <tr>
+        <th>S.No</th>
+        <th>book_title</th>
+        <th>category</th>
+        <th>quantity</th>
+        <th>authors</th>
+
+    </tr>
+
+    <tr *ngFor="let book of bookdetails$ | async;let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{book. book_title}}</td>
+            <td>{{book.category}}</td>
+            <td>{{book.quantity}}</td>
+            <td>{{book.authors}}</td>
+    </tr>
+</table>
+
+
