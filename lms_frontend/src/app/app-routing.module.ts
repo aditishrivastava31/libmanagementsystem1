@@ -7,6 +7,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from 'src/services/auth.guard';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {path: '', component:LoginComponent, pathMatch: 'full'},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'contact-us', component: ContactUsComponent,  canActivate:[AuthGuard]
 },
   {path:"login",component:LoginComponent,pathMatch:"full"},
+  {path:"signup", component:SignupComponent,pathMatch:"full"}
 ];
 
 @NgModule({

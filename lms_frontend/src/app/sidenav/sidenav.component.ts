@@ -2,6 +2,7 @@ import { animate, keyframes, style, transition, trigger } from '@angular/animati
 import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/core';
 import { LoginService } from 'src/services/login.service';
 import { navbarData } from './nav-data';
+import { SidenavService } from 'src/services/sidenav.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -55,7 +56,7 @@ export class SidenavComponent implements OnInit {
     }
   }
   public loggedIn=false;
-  constructor(private loginService:LoginService){
+  constructor(private loginService:LoginService , public sidenav: SidenavService){
 
   }
 

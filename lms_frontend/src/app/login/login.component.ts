@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/services/login.service';
+import { SidenavService } from 'src/services/sidenav.service';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,9 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService , public sidenav: SidenavService) { }
   ngOnInit(): void {
-
+    this.sidenav.hide();
   }
   onSubmit() {
     console.log("submit")
