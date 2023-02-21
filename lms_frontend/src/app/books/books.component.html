@@ -17,12 +17,11 @@
     </form>
 
 
-    <!--p>{{bookdetails$ | async | json}}</p>
-    <div>
-    </div>
-    <p>{{bookdetailscount$ | async | json}}</p-->
     
+    
+    <div *ngIf="(bookdetails$ | async)?.length==0">No records  were found.</div>
 
+    <div *ngIf="(bookdetails$ | async)?.length!=0">
 <table class="table">
     <tr>
         <th>S.No</th>
@@ -41,5 +40,5 @@
             <td>{{book.authors}}</td>
     </tr>
 </table>
-
+</div>
 

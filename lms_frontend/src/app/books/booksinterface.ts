@@ -24,3 +24,15 @@ export interface bookdto{
     authors: string[],
     category: string
 }
+
+
+export interface issuebookdetails{
+    issue_id:number,
+    issueDate: Date,
+    issueEndDate: Date,
+    returnDate: Date,
+    bookTitle:string,
+    authors:string[]
+    userName: string
+}
+
