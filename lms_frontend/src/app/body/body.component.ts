@@ -1,11 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { LoginService } from 'src/services/login.service';
 
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.scss']
 })
-export class BodyComponent {
+export class BodyComponent implements OnInit {
+
+  public loggedIn=false;
+
+  constructor(private loginService:LoginService){}
+
+  ngOnInit(): void {
+    this.screenWidth = window.innerWidth;
+    this.loggedIn=this.loginService.isLoggedIn();
+}
 
   @Input() collapsed = false;
   @Input() screenWidth = 0;
