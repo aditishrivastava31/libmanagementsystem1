@@ -8,3 +8,17 @@
         padding: 0.375rem 0.75rem;
         border-radius: 0.375rem;
     }
+    /* ::ng-deep .body{
+        overflow-x: hidden;
+        flex-direction: column;
+        display: flex;
+        flex-wrap: wrap;
+        height: 100vh;
+        z-index: 0;
+        position: relative;
+        top: 0;
+        transition: all .5s ease;
+        background: #165994;
+        padding: 3rem;
+    } */
+  
