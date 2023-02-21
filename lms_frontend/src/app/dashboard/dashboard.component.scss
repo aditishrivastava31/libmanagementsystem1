@@ -17,3 +17,7 @@
     content: "";
     background-color: rgba(0,0,0,0);
 }
+
+::ng-deep .body {
+    margin-left: 5rem;
+}
