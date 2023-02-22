@@ -41,7 +41,7 @@
         <div class="col-md-3">
             <div class="card p-hover border-danger mx-sm-1 p-3">
                 <div class="text-danger text-center mt-3">
-                    <h4>Pending</h4>
+                    <h4>Delayed</h4>
                 </div>
                 <div class="text-danger text-center mt-2">
                     <h1>{{this.pendingsbookcount$! | async| json}}</h1>
@@ -52,6 +52,7 @@
     </div>
 </div>
 
+<h2>{{title}} Books</h2>
 <table class="table table-hover">
     <thead>
         <tr>
