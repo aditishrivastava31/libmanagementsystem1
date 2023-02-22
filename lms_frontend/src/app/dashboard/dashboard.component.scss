@@ -18,6 +18,39 @@
     background-color: rgba(0,0,0,0);
 }
 
+.returned{
+    color: green;
+    background-color: lightgreen;
+}
+
+.returned:hover{
+    background: #e8feda;
+}
+
+.pending{
+    color: #dc3545;
+    background-color: #FF8A8A;
+}
+
+.pending:hover{
+    background: #fededb;
+}
+
+.all-hover:hover{
+    background-color: #dae8fe;
+}
+
+.i-hover:hover{
+    background-color: antiquewhite;
+}
+
+.r-hover:hover{
+    background-color: #e8feda;
+}
+
+.p-hover:hover{
+    background-color: #fededb;
+
 ::ng-deep .body {
     margin-left: 5rem;
 }

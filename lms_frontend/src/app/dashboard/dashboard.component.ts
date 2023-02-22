@@ -106,4 +106,7 @@ export class DashboardComponent implements OnInit {
     // );
   }
 
+  row_clicked(){
+    alert("dsjk");
+  }
 }
