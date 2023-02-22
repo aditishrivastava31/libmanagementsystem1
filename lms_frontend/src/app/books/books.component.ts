@@ -10,31 +10,28 @@ import { bookdto } from './booksinterface';
 })
 export class BooksComponent implements OnInit {
 
-  bookdetails$!:Observable<bookdto[]>;
-  accordingto!:string
+  bookdetails$!: Observable<bookdto[]>;
+  accordingto!: string
   bookdetailscount$!: Observable<number>;
-  count!:number
+  count!: number
 
 
-  ngOnInit()
-   {
-    
+  ngOnInit() {
+
   }
 
-  constructor(private getbookdetailsservice:BooksService){
-    
+  constructor(private getbookdetailsservice: BooksService) {
+
   }
 
-  getdetails(){
-   this. bookdetails$=this.getbookdetailsservice.getbookdetailssearch(this.accordingto);
-   this.bookdetailscount$=this.bookdetails$.pipe(
-    map((books)=>{
-      return books.length
-    }
+  getdetails() {
+    // alert("clicked");
+    this.bookdetails$ = this.getbookdetailsservice.getbookdetailssearch(this.accordingto);
+    this.bookdetailscount$ = this.bookdetails$.pipe(
+      map((books) => {
+        return books.length
+      }
       )
-     );
-
+    );
   }
-
-
 }
