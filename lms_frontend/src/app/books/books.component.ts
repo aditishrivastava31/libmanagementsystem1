@@ -15,23 +15,25 @@ export class BooksComponent implements OnInit {
   bookdetailscount$!: Observable<number>;
   count!: number
 
-
-  ngOnInit() {
-
-  }
-
-  constructor(private getbookdetailsservice: BooksService) {
+  ngOnInit()
+   {
+    
+    this.bookdetails$=this.getbookdetailsservice.geteverybookdetails();
 
   }
 
-  getdetails() {
-    // alert("clicked");
-    this.bookdetails$ = this.getbookdetailsservice.getbookdetailssearch(this.accordingto);
-    this.bookdetailscount$ = this.bookdetails$.pipe(
-      map((books) => {
-        return books.length
-      }
-      )
-    );
+  constructor(private getbookdetailsservice:BooksService){
+    //this.bookdetails$=this.getbookdetailsservice.geteverybookdetails();
+  }
+
+  getdetails(){
+   this. bookdetails$=this.getbookdetailsservice.getbookdetailssearch(this.accordingto);
+  //  this.bookdetailscount$=this.bookdetails$.pipe(
+  //   map((books)=>{
+  //     return books.length
+  //   }
+  //     )
+  //    );
+
   }
 }

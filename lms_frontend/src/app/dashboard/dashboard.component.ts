@@ -58,12 +58,6 @@ export class DashboardComponent implements OnInit {
 
 
 
-
-
-
-
-
-
     this.all_books()
   }
 

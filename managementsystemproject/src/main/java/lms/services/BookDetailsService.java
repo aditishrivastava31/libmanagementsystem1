@@ -24,4 +24,6 @@ public interface BookDetailsService {
 
     BookDetails getbookdetailsbyid(long id);
 
+	List<BookDetailssenddto> geteverybookdetails();
+
 }
