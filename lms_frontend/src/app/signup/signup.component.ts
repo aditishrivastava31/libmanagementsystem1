@@ -51,6 +51,7 @@ export class SignupComponent{
       (data)=>{
         console.log(data);
         alert('success');
+        window.location.href="/login"
       },
     (error)=>{
       console.log(error);
