@@ -1,28 +1,25 @@
-<p>books works!</p>
-
-
-
-
-
-<form>
-
-    <div class="form-group" >
-        <input   required class="form-control" type="text" placeholder="search" name="search" [(ngModel)]="accordingto">
+<div style="display: inline; width: 100%; padding:4px; margin-bottom: 2px;">
+    <h1 style="float: left;justify-content: center;text-align: center; padding: 4px;">Search Books</h1>
+    <div class="search-bar">
+        <input class="search-textfield" type="search" placeholder="Title or Category or Author Name" aria-label="Search"
+            [(ngModel)]="accordingto">
+        <button class="search-btn" (click)="getdetails()"><i class="fa fa-search"></i></button>
     </div>
-
-<div>
-    <button  (click)="getdetails()" color ="primary">searchbutton</button>
-    </div>
-
-    </form>
-
-
+</div>
     
     
     <div *ngIf="(bookdetails$ | async)?.length==0">No records  were found.</div>
 
     <div *ngIf="(bookdetails$ | async)?.length!=0">
 <table class="table">
+<!--p>{{bookdetails$ | async | json}}</p>
+    <div>
+    </div>
+    <p>{{bookdetailscount$ | async | json}}</p-->
+
+
+<!-- <table class="table">
+>>>>>>> Stashed changes
     <tr>
         <th>S.No</th>
         <th>book_title</th>
@@ -35,10 +32,29 @@
     <tr *ngFor="let book of bookdetails$ | async;let i = index">
         <td>{{i + 1}}</td>
         <td>{{book. book_title}}</td>
+        <td>{{book.category}}</td>
+        <td>{{book.quantity}}</td>
+        <td>{{book.authors}}</td>
+    </tr>
+</table> -->
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th>Book Title</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Authors</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let book of bookdetails$ | async;let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{book. book_title}}</td>
             <td>{{book.category}}</td>
             <td>{{book.quantity}}</td>
             <td>{{book.authors}}</td>
-    </tr>
+        </tr>
+    </tbody>
 </table>
-</div>
-

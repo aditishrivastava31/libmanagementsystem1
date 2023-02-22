@@ -58,12 +58,6 @@ export class DashboardComponent implements OnInit {
 
 
 
-
-
-
-
-
-
     this.all_books()
   }
 
@@ -106,4 +100,7 @@ export class DashboardComponent implements OnInit {
     // );
   }
 
+  row_clicked(){
+    alert("dsjk");
+  }
 }

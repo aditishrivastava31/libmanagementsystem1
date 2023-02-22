@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import lms.dto.BookDetailssenddto;
@@ -54,7 +56,7 @@ public class BookDetailsController {
 
     }
 
-    @GetMapping("/getbookdetails/{name}")
+    @RequestMapping(value="/getbookdetails/{name}",method = RequestMethod.GET)
     //@PreAuthorize("hasAuthority('ADMIN')")
     public List<BookDetailssenddto> getbookdetails(@PathVariable("name") String name) {
         return bookDetailsService.getallbookdetails(name);
@@ -66,5 +68,17 @@ public class BookDetailsController {
         return bookDetailsService.getbookdetailsbyid(id);
 
     }
+    
+    
+    @RequestMapping(value="/getevrybooks",method = RequestMethod.GET)
+    public List<BookDetailssenddto> geteverybookdetails() {
+        return bookDetailsService.geteverybookdetails();
+
+    }
+    
+    
+    
+    
+    
 
 }

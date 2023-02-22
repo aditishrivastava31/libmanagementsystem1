@@ -3,7 +3,7 @@
 <div class="jumbotron">
     <div class="row w-100">
         <div class="col-md-3">
-            <div class="card border-info mx-sm-1 p-3">
+            <div class="card all-hover border-info mx-sm-1 p-3">
                 <div class="text-info text-center mt-3">
                     <h4>All</h4>
                 </div>
@@ -12,11 +12,10 @@
                 </div>
                 <a (click)=all_books() class="stretched-link"></a>
             </div>
-            <!-- </a> -->
         </div>
 
         <div class="col-md-3">
-            <div class="card border-warning mx-sm-1 p-3">
+            <div class="card i-hover border-warning mx-sm-1 p-3">
                 <div class="text-warning text-center mt-3">
                     <h4>Issued</h4>
                 </div>
@@ -28,7 +27,7 @@
         </div>
 
         <div class="col-md-3">
-            <div class="card border-success mx-sm-1 p-3">
+            <div class="card r-hover border-success mx-sm-1 p-3">
                 <div class="text-success text-center mt-3">
                     <h4>Returned</h4>
                 </div>
@@ -40,11 +39,12 @@
         </div>
 
         <div class="col-md-3">
-            <div class="card border-danger mx-sm-1 p-3">
+            <div class="card p-hover border-danger mx-sm-1 p-3">
                 <div class="text-danger text-center mt-3">
-                    <h4>Pending</h4>
+                    <h4>Delayed</h4>
                 </div>
                 <div class="text-danger text-center mt-2">
+
                     <h1>{{this.pendingsbookcount$! | async| json}}</h1>
                 </div>
                 <a (click)=pending_books() class="stretched-link"></a>
@@ -53,31 +53,59 @@
     </div>
 </div>
 
+<h2>{{title}} Books</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Authors</th>
+            <th scope="col">Issued Date</th>
+            <th scope="col">Issued End Date</th>
+            <th scope="col">Returned Date</th>
+        </tr>
+    </thead>
+
+    <tbody *ngFor="let issuebook of issuebookdetails$ | async;let i = index">
+        <tr> 
+            <th scope="row" >{{i+1}}</th> 
+            <td>{{issuebook. bookTitle}}</td>
+            <td>{{issuebook.authors}}</td>
+            <td>{{issuebook.issueDate}}</td>
+            <td>{{issuebook.issueEndDate}}</td>
+            <td>{{issuebook.returnDate}}</td>
+    </tr>
+    </tbody>
+</table>
+<!-- 
 <mat-card>
     <mat-card-header>
         <mat-card-title>{{title}} Books</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <br>
-        <table class="table">
+        <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">S.No</th>
+                    <th scope="col">#</th>
                     <th scope="col">Book Name</th>
                     <th scope="col">Authors</th>
                     <th scope="col">Issued Date</th>
+                    <th scope="col">Issued End Date</th>
                     <th scope="col">Returned Date</th>
                 </tr>
             </thead>
+
             <tbody *ngFor="let issuebook of issuebookdetails$ | async;let i = index">
-                <tr style="color: #dc3545;"> 
+                <tr> 
                     <th scope="row" >{{i+1}}</th> 
                     <td>{{issuebook. bookTitle}}</td>
                     <td>{{issuebook.authors}}</td>
                     <td>{{issuebook.issueDate}}</td>
+                    <td>{{issuebook.issueEndDate}}</td>
                     <td>{{issuebook.returnDate}}</td>
             </tr>
             </tbody>
         </table>
     </mat-card-content>
-</mat-card>
+</mat-card> -->
