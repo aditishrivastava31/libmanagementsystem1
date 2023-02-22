@@ -39,7 +39,7 @@ public class BookDetailsController {
     }
 
     @PostMapping("/addbookDetails")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<BookDetails> addbookdetails(@RequestBody BookDetails bookDetails) {
 
         try {
