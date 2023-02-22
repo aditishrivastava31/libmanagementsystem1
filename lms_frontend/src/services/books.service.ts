@@ -12,13 +12,19 @@ export class BooksService {
    }
 
    getbookdetailssearch(according:string){
+    console.log(according.length);
+    if(according.length==0){
+      console.log("if block is executed");
+        return this.geteverybookdetails();
+    }
+    else{
+      console.log("else block is executed ")
     console.log(localStorage.getItem("token"));
    const headers = new HttpHeaders()
     .set('Authorization',"Bearer "+localStorage.getItem("token"))
-
       console.log(headers.get("Authorization"));
-
     return  this.httpclient.get<bookdto[]>("http://localhost:8080/getbookdetails/"+according,{headers})
+    }
 }
 
 addbookdetails(bookdetails:book){
@@ -30,6 +36,21 @@ addbookdetails(bookdetails:book){
     console.log(headers.get("Authorization"));
  return  this.httpclient.post("http://localhost:8080/addbookDetails",bookdetails,{headers,responseType:'text' as 'json'})
 
+}
+ geteverybookdetails(){
+
+  console.log(localStorage.getItem("token"));
+   const headers = new HttpHeaders()
+    .set('Authorization',"Bearer "+localStorage.getItem("token"))
+
+      console.log(headers.get("Authorization"));
+
+    return  this.httpclient.get<bookdto[]>("http://localhost:8080/getevrybooks",{headers})
+
+
+
+ }
+
 
 
 
@@ -38,4 +59,4 @@ addbookdetails(bookdetails:book){
 
 
 
-}
+

@@ -110,4 +110,21 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 		return bookRepository.findById(id).orElse(null);
 	}
 
+	@Override
+	public List<BookDetailssenddto> geteverybookdetails() {
+		List<BookDetailssenddto> bookDetailssenddtoList = new ArrayList<>();
+		bookRepository.findAll().forEach(n -> {
+			BookDetailssenddto bookDetailssenddto = new BookDetailssenddto();
+			bookDetailssenddto.setBook_id(n.getBookId());
+			bookDetailssenddto.setQuantity(n.getQuantity());
+			bookDetailssenddto.setBook_title(n.getBookName());
+			bookDetailssenddto.setCategory(n.getCategory().getCategoryName());
+			List<String> authorsList = n.getAuthors().stream().map(m -> m.getAuthorName()).collect(Collectors.toList());
+			bookDetailssenddto.setAuthors(authorsList);
+			bookDetailssenddtoList.add(bookDetailssenddto);
+		});
+		return bookDetailssenddtoList;
+		
+	}
+
 }
