@@ -47,7 +47,7 @@ public class SecurityConfig{
         return http.csrf().disable().cors().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/user/signUp", "/authenticate", "/admin/signUp/**","/update/**","/isAccepted/admin/**","/requestbook/**","/country","/state**"
-                		,"/city**","/addbookDetails").permitAll()
+                		,"/city**").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/**")
