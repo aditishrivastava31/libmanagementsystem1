@@ -51,6 +51,7 @@ export class SignupComponent{
       (data)=>{
         console.log(data);
         alert('success');
+        window.location.href="/login"
       },
     (error)=>{
       console.log(error);
@@ -58,17 +59,6 @@ export class SignupComponent{
     }
     )
   }
-  // getState(country:any){
-  //   this.userService.getstate(country).subscribe(
-  //     data =>{
-  //       if(data){
-  //         this.states = data;
-  //         console.log(this.states);
-  //         this.isLoaded = true;
-  //       }
-  //     }
-  //   )
-  // }
   onChangeCountry(country: String) {
     if (country) {
       console.log(this.states);
