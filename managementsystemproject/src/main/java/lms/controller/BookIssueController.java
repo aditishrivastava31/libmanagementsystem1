@@ -10,58 +10,57 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.mail.MessagingException;
 import lms.dto.BookIssueDetailsDto;
 import lms.serviceImpl.BookIssueServiceImpl;
 
 @RestController
 public class BookIssueController {
 
-    @Autowired
-    BookIssueServiceImpl bookIssueServiceImpl;
+	@Autowired
+	BookIssueServiceImpl bookIssueServiceImpl;
 
-    @PostMapping("/lend/{user_id}/{book_id}")
-    public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid) {
-        String status = null;
-        status = bookIssueServiceImpl.lend_book(uid, bid);
-        return status;
-    }
+	@PostMapping("/lend/{user_id}/{book_id}")
+	public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid) {
+		String status = null;
+		status = bookIssueServiceImpl.lend_book(uid, bid);
+		return status;
+	}
 
-    @PostMapping("/return/{issue_id}")
-    public String return_book(@PathVariable("issue_id") long id) {
-        String status = bookIssueServiceImpl.return_book(id);
-        return status;
-    }
+	@PostMapping("/return/{issue_id}")
+	public String return_book(@PathVariable("issue_id") long id) {
+		String status = bookIssueServiceImpl.return_book(id);
+		return status;
+	}
 
-    @CrossOrigin(origins="http://localhost:4200/dashboard")
-    @GetMapping("/totalBooks/{user_id}")
-    public List<BookIssueDetailsDto> getAllBooks(@PathVariable("user_id") long uid) {
-        return bookIssueServiceImpl.getIssuedBookDetails("total", uid);
-    }
+	@CrossOrigin(origins = "http://localhost:4200/dashboard")
+	@GetMapping("/totalBooks/{user_id}")
+	public List<BookIssueDetailsDto> getAllBooks(@PathVariable("user_id") long uid) {
+		return bookIssueServiceImpl.getIssuedBookDetails("total", uid);
+	}
 
-    @CrossOrigin(origins="http://localhost:4200/dashboard")
-    @GetMapping("/issuedBooks/{user_id}")
-    public List<BookIssueDetailsDto> getIssuedBooks(@PathVariable("user_id") long uid) {
-        return bookIssueServiceImpl.getIssuedBookDetails("issued", uid);
-    }
+	@CrossOrigin(origins = "http://localhost:4200/dashboard")
+	@GetMapping("/issuedBooks/{user_id}")
+	public List<BookIssueDetailsDto> getIssuedBooks(@PathVariable("user_id") long uid) {
+		return bookIssueServiceImpl.getIssuedBookDetails("issued", uid);
+	}
 
-    @CrossOrigin(origins="http://localhost:4200/dashboard")
-    @GetMapping("/readBooks/{user_id}")
-    public List<BookIssueDetailsDto> getReadBooks(@PathVariable("user_id") long uid) {
-        return bookIssueServiceImpl.getIssuedBookDetails("read", uid);
-    }
+	@CrossOrigin(origins = "http://localhost:4200/dashboard")
+	@GetMapping("/readBooks/{user_id}")
+	public List<BookIssueDetailsDto> getReadBooks(@PathVariable("user_id") long uid) {
+		return bookIssueServiceImpl.getIssuedBookDetails("read", uid);
+	}
 
-    @CrossOrigin(origins="http://localhost:4200/dashboard")
-    @GetMapping("/pendingBooks/{user_id}")
-    public List<BookIssueDetailsDto> getPendingBooks(@PathVariable("user_id") long uid) {
-        return bookIssueServiceImpl.getIssuedBookDetails("pending", uid);
-    }
+	@CrossOrigin(origins = "http://localhost:4200/dashboard")
+	@GetMapping("/pendingBooks/{user_id}")
+	public List<BookIssueDetailsDto> getPendingBooks(@PathVariable("user_id") long uid) {
+		return bookIssueServiceImpl.getIssuedBookDetails("pending", uid);
+	}
 
-    @CrossOrigin(origins="http://localhost:4200/dashboard")
-    @GetMapping("/getAllIssues")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public List<BookIssueDetailsDto> getAllIssues() {
-        return bookIssueServiceImpl.getAllIssuesToAdmin();
-    }
+	@CrossOrigin(origins = "http://localhost:4200/dashboard")
+	@GetMapping("/getAllIssues")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public List<BookIssueDetailsDto> getAllIssues() {
+		return bookIssueServiceImpl.getAllIssuesToAdmin();
+	}
 
 }

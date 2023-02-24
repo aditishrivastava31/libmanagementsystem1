@@ -19,14 +19,14 @@ import lms.services.Bookreviewservices;
  */
 
 @Service
-public class BookReviewsServiceImpl  implements Bookreviewservices{
-	
+public class BookReviewsServiceImpl implements Bookreviewservices {
+
 	public BookReviewRepository bookReviewRepository;
-	
+
 	public BookRepository bookRepository;
-	
+
 	public UserDetailsRepository userDetailsRepository;
-	
+
 	@Autowired
 	public BookReviewsServiceImpl(BookReviewRepository bookReviewRepository, BookRepository bookRepository,
 			UserDetailsRepository userDetailsRepository) {
@@ -43,24 +43,24 @@ public class BookReviewsServiceImpl  implements Bookreviewservices{
 
 	@Override
 	public BookReview addreviewbyids(BookReview bookReview, long uid, long bid) {
-	bookReview.setBookdetails(bookRepository.findById(bid).orElse(null));
-	bookReview.setUserdetails(userDetailsRepository.findById(uid).orElse(null));
-	return bookReviewRepository.save(bookReview);
-		
+		bookReview.setBookdetails(bookRepository.findById(bid).orElse(null));
+		bookReview.setUserdetails(userDetailsRepository.findById(uid).orElse(null));
+		return bookReviewRepository.save(bookReview);
+
 	}
 
 	@Override
 	public List<BookReviewdto> getreviewbybookid(long id) {
-	
-		List<BookReviewdto> Reviewdtoslist=new ArrayList<>();
-		
-		bookReviewRepository.findByBookdetails(bookRepository.findById(id).orElse(new BookDetails())).forEach(bookDetail->{
-				BookReviewdto bookReviewdto=new BookReviewdto(bookDetail.getUserdetails().getUserName(), 
-						bookDetail.getComments(),
-						bookDetail.getStarRating());
-				Reviewdtoslist.add(bookReviewdto);
-		});
-		
+
+		List<BookReviewdto> Reviewdtoslist = new ArrayList<>();
+
+		bookReviewRepository.findByBookdetails(bookRepository.findById(id).orElse(new BookDetails()))
+				.forEach(bookDetail -> {
+					BookReviewdto bookReviewdto = new BookReviewdto(bookDetail.getUserdetails().getUserName(),
+							bookDetail.getComments(), bookDetail.getStarRating());
+					Reviewdtoslist.add(bookReviewdto);
+				});
+
 		return Reviewdtoslist;
 	}
 }

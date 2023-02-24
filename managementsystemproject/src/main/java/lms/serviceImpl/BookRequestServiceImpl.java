@@ -28,7 +28,7 @@ public class BookRequestServiceImpl implements BookRequestService {
 	public RequestBookDetailsRepository requestBookDetailsRepository;
 
 	private UserDetailsRepository userDetailsRepository;
-	
+
 	@Autowired
 	public BookRequestServiceImpl(RequestBookDetailsRepository requestBookDetailsRepository,
 			UserDetailsRepository userDetailsRepository) {
@@ -37,31 +37,29 @@ public class BookRequestServiceImpl implements BookRequestService {
 		this.userDetailsRepository = userDetailsRepository;
 	}
 
-
-    @Override
-    public String addrequestBookDetails(RequestBookDetails requestBookDetails, long id) {
-        List<RequestBookDetails> requestBookDetailsList = requestBookDetailsRepository.findAll();
-        String messageString = null;
-        if (requestBookDetailsList.size() == 0) {
-        	 requestBookDetails.setIsActive(IsActive.Pending);
-             requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
-            requestBookDetailsRepository.save(requestBookDetails);
-            messageString = "Your request has been submitted..";
-        } else {
-            for (RequestBookDetails requestBookDetails2 : requestBookDetailsList) {
-                if ((requestBookDetails.getBookName().toLowerCase())
-                        .equals(requestBookDetails2.getBookName().toLowerCase())) {
-                    messageString = "Book is already requested..";
-                } else {
-                    requestBookDetails.setIsActive(IsActive.Pending);
-                    requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
-                    requestBookDetailsRepository.save(requestBookDetails);
-                    messageString = "Your request has been submitted..";
-                }
-            }
-        }
-        return messageString;
-
+	@Override
+	public String addrequestBookDetails(RequestBookDetails requestBookDetails, long id) {
+		List<RequestBookDetails> requestBookDetailsList = requestBookDetailsRepository.findAll();
+		String messageString = null;
+		if (requestBookDetailsList.size() == 0) {
+			requestBookDetails.setIsActive(IsActive.Pending);
+			requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
+			requestBookDetailsRepository.save(requestBookDetails);
+			messageString = "Your request has been submitted..";
+		} else {
+			for (RequestBookDetails requestBookDetails2 : requestBookDetailsList) {
+				if ((requestBookDetails.getBookName().toLowerCase())
+						.equals(requestBookDetails2.getBookName().toLowerCase())) {
+					messageString = "Book is already requested..";
+				} else {
+					requestBookDetails.setIsActive(IsActive.Pending);
+					requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
+					requestBookDetailsRepository.save(requestBookDetails);
+					messageString = "Your request has been submitted..";
+				}
+			}
+		}
+		return messageString;
 
 	}
 
@@ -95,7 +93,7 @@ public class BookRequestServiceImpl implements BookRequestService {
 	}
 
 	@Override
-	public BookRequestDto updatestatus(long requestId,int isActive) {
+	public BookRequestDto updatestatus(long requestId, int isActive) {
 		RequestBookDetails requestBookDetails = requestBookDetailsRepository.findById(requestId).get();
 		requestBookDetails.setIsActive(IsActive.values()[isActive]);
 		requestBookDetailsRepository.save(requestBookDetails);
@@ -104,16 +102,15 @@ public class BookRequestServiceImpl implements BookRequestService {
 	}
 
 	public BookRequestDto setBookRequestDto(RequestBookDetails requestBookDetail) {
-		
+
 		BookRequestDto bookRequestDto = new BookRequestDto();
 		bookRequestDto.setRequestId(requestBookDetail.getRequestBookId());
 		bookRequestDto.setBookName(requestBookDetail.getBookName());
 		bookRequestDto.setAuthorName(requestBookDetail.getAuthorName());
 		bookRequestDto.setIsActive(requestBookDetail.getIsActive());
-		
+
 		return bookRequestDto;
 
 	}
-
 
 }

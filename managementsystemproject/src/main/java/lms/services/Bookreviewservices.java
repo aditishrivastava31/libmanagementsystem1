@@ -2,8 +2,6 @@ package lms.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import lms.dto.BookReviewdto;
 import lms.entities.BookReview;
 
