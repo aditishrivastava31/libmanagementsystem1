@@ -25,6 +25,14 @@ export class LoginService {
     console.log(token)
     return true;
   }
+
+loginUserObject(User:any){
+localStorage.setItem("user",JSON.stringify(User));
+console.log(User);
+  return true;
+}
+
+
   // to check user is login
   isLoggedIn() 
   {
@@ -39,6 +47,7 @@ export class LoginService {
   // get logout
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return true;
   }
   // get token
