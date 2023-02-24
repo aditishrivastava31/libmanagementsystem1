@@ -11,20 +11,21 @@ import java.util.List;
 @RestController
 public class AddressController {
 
-    @Autowired
-    private AddressServiceImpl addressService;
-    @GetMapping("/country")
-    public List<String> getAllCountry(){
-        return addressService.getAllCountryName();
-    }
+	@Autowired
+	private AddressServiceImpl addressService;
 
-    @GetMapping("/state")
-    public List<String> getAllState(@RequestParam(name = "countryname") String countryName ){
-        return addressService.getAllStateName(countryName);
-    }
+	@GetMapping("/country")
+	public List<String> getAllCountry() {
+		return addressService.getAllCountryName();
+	}
 
-    @GetMapping("/city")
-    public List<String> getAllCity(@RequestParam(name = "statename") String stateName){
-        return addressService.getAllCityName(stateName);
-    }
+	@GetMapping("/state")
+	public List<String> getAllState(@RequestParam(name = "countryname") String countryName) {
+		return addressService.getAllStateName(countryName);
+	}
+
+	@GetMapping("/city")
+	public List<String> getAllCity(@RequestParam(name = "statename") String stateName) {
+		return addressService.getAllCityName(stateName);
+	}
 }

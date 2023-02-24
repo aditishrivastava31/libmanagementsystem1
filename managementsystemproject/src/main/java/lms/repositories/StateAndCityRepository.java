@@ -3,7 +3,6 @@ package lms.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import lms.entities.RequestBookDetails;
 import lms.entities.StateAndCity;
 
 import java.util.List;

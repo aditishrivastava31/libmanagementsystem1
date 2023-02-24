@@ -1,8 +1,13 @@
 package lms.entities;
 
-import jakarta.persistence.*;
-import lms.serviceImpl.UserServiceImpl;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import jakarta.persistence.*;
 /*
  * This class is used to refer user table in database and defines
  * all the fields and their data types.
@@ -17,20 +22,34 @@ public class UserDetails {
 	private String password;
 	private String email;
 	private long number;
-	private String role;
 	private long lendCount;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_ROLE",
+            joinColumns = {
+                    @JoinColumn(name = "USER_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ROLE_ID")
+            }
+    )
+    private Set<Role> role;
 	
 	@OneToOne
 	private Address userAddress;
 
 	
 
-	public String getRole() {
+	public Set<Role> getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Set<Role> role) {
 		this.role = role;
+	}
+	
+
+	public String getPassword() {
+		return password;
 	}
 
 	public long getUserId() {
@@ -47,10 +66,6 @@ public class UserDetails {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	public void setPassword(String password) {
@@ -94,17 +109,17 @@ public class UserDetails {
 	public UserDetails() {
 	}
 
-	public UserDetails(long userId, String userName, String password, String email, long number, String role,
-			long lendCount, Address userAddress) {
+	public UserDetails(long userId, String userName, String password, String email, long number, long lendCount,
+			Set<lms.entities.Role> role, Address userAddress) {
+		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
 		this.number = number;
-		this.role = role;
 		this.lendCount = lendCount;
+		this.role = role;
 		this.userAddress = userAddress;
 	}
-	
-	
+
 }

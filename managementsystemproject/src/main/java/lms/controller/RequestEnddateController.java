@@ -16,24 +16,25 @@ import lms.services.RequestEndDateService;
 @RestController
 public class RequestEnddateController {
 
-    @Autowired
-    private RequestEndDateService requestEndDateService;
+	@Autowired
+	private RequestEndDateService requestEndDateService;
 
-    @GetMapping("/getenddateextensions")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public List<RequestEnddatedto> getbookextensions() {
-        return requestEndDateService.getbookextensions();
-    }
+	@GetMapping("/getenddateextensions")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public List<RequestEnddatedto> getbookextensions() {
+		return requestEndDateService.getbookextensions();
+	}
 
-    @PostMapping("/accandrejectextension/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public String acceptandreject(@RequestParam("value") int value, @PathVariable("id") long id) throws MessagingException {
-        return requestEndDateService.acceptandreject(id, value);
-    }
+	@PostMapping("/accandrejectextension/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String acceptandreject(@RequestParam("value") int value, @PathVariable("id") long id)
+			throws MessagingException {
+		return requestEndDateService.acceptandreject(id, value);
+	}
 
-    @PostMapping("/addextension/{issueId}")
-    public String acceptandreject(@PathVariable("issueId") long issueId) {
-        return requestEndDateService.addRequestEndExtension(issueId);
-    }
+	@PostMapping("/addextension/{issueId}")
+	public String acceptandreject(@PathVariable("issueId") long issueId) {
+		return requestEndDateService.addRequestEndExtension(issueId);
+	}
 
 }
