@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       this.loginService.generateToken(this.credentials).subscribe((res:any) => {
         console.log(res.token);
         this.loginService.loginUser(res.token)
+        this.loginService.loginUserObject(res.userDetails)
         window.location.href= "/dashboard"
       },
         error => {

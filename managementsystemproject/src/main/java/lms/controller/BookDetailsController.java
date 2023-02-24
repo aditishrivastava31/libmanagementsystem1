@@ -1,6 +1,7 @@
 package lms.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import lms.dto.BookDetailssenddto;
 import lms.entities.BookDetails;
 import lms.services.BookDetailsService;
@@ -28,50 +28,56 @@ import lms.services.BookDetailsService;
 @CrossOrigin(origins = "http://localhost:4200")
 public class BookDetailsController {
 
-	public BookDetailsService bookDetailsService;
+    public BookDetailsService bookDetailsService;
 
-	@Autowired
-	public BookDetailsController(BookDetailsService bookDetailsService) {
-		this.bookDetailsService = bookDetailsService;
-	}
+    @Autowired
+    public BookDetailsController(BookDetailsService bookDetailsService) {
+        this.bookDetailsService = bookDetailsService;
+    }
 
-	public BookDetailsController() {
+    public BookDetailsController() {
 
-	}
+    }
 
-	@PostMapping("/addbookDetails")
-	@PreAuthorize("hasAuthority('ADMIN')")
-	public ResponseEntity<BookDetails> addbookdetails(@RequestBody BookDetails bookDetails) {
+    @PostMapping("/addbookDetails")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<BookDetails> addbookdetails(@RequestBody BookDetails bookDetails) {
 
-		try {
-			System.out.println(bookDetails);
-			// return "success";
-			return new ResponseEntity<>(bookDetailsService.addbookdetails(bookDetails), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// return "failed";
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
+        try {
+        	//System.out.println(bookDetails);
+        	//return "success";
+           return new ResponseEntity<>(bookDetailsService.addbookdetails(bookDetails), HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            //return "failed";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
 
-	}
+    }
 
-	@RequestMapping(value = "/getbookdetails/{name}", method = RequestMethod.GET)
-	// @PreAuthorize("hasAuthority('ADMIN')")
-	public List<BookDetailssenddto> getbookdetails(@PathVariable("name") String name) {
-		return bookDetailsService.getallbookdetails(name);
+    @RequestMapping(value="/getbookdetails/{name}",method = RequestMethod.GET)
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    public List<BookDetailssenddto> getbookdetails(@PathVariable("name") String name) {
+        return bookDetailsService.getallbookdetails(name);
 
-	}
+    }
 
-	@GetMapping("/getbookdetailsbyid/{id}")
-	public BookDetails getbookdetailsbyid(@PathVariable("id") long id) {
-		return bookDetailsService.getbookdetailsbyid(id);
+    @GetMapping("/getbookdetailsbyid/{id}")
+    public BookDetails getbookdetailsbyid(@PathVariable("id") long id) {
+        return bookDetailsService.getbookdetailsbyid(id);
 
-	}
+    }
+    
+    
+    @RequestMapping(value="/getevrybooks",method = RequestMethod.GET)
+    public List<BookDetailssenddto> geteverybookdetails() {
+        return bookDetailsService.geteverybookdetails();
 
-	@RequestMapping(value = "/getevrybooks", method = RequestMethod.GET)
-	public List<BookDetailssenddto> geteverybookdetails() {
-		return bookDetailsService.geteverybookdetails();
-
-	}
+    }
+    
+    
+    
+    
+    
 
 }

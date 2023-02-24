@@ -23,7 +23,7 @@ public class UserDetails {
 	private String email;
 	private long number;
 	private long lendCount;
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLE",
             joinColumns = {
                     @JoinColumn(name = "USER_ID")

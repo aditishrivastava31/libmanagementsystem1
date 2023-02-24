@@ -55,6 +55,7 @@
             <td>{{book.category}}</td>
             <td>{{book.quantity}}</td>
             <td>{{book.authors}}</td>
+            <td><button (click)="lendbook(book.book_id)" >Lend</button></td>
         </tr>
     </tbody>
 </table>
