@@ -19,14 +19,14 @@ public class BookIssueController {
 	@Autowired
 	BookIssueServiceImpl bookIssueServiceImpl;
 
-	@PostMapping("/lend/{user_id}/{book_id}")
+	@GetMapping("/lend/{user_id}/{book_id}")
 	public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid) {
 		String status = null;
 		status = bookIssueServiceImpl.lend_book(uid, bid);
 		return status;
 	}
 
-	@PostMapping("/return/{issue_id}")
+	@GetMapping("/return/{issue_id}")
 	public String return_book(@PathVariable("issue_id") long id) {
 		String status = bookIssueServiceImpl.return_book(id);
 		return status;

@@ -17,7 +17,10 @@ export class IssuebookservicesService {
    const headers = new HttpHeaders()
     .set('Authorization',"Bearer "+localStorage.getItem("token"))
       console.log(headers.get("Authorization"));
-      const usersUrl ='http://localhost:8080/totalBooks/'+2
+      //console.log("user details"+localStorage.getItem("user"))
+      let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
+      console.log("user Id:"+savedPerson.userId);
+      const usersUrl ='http://localhost:8080/totalBooks/'+savedPerson.userId
     return  this.httpclient.get<any>(usersUrl,{headers});
   }
 
@@ -28,7 +31,9 @@ export class IssuebookservicesService {
    const headers = new HttpHeaders()
     .set('Authorization',"Bearer "+localStorage.getItem("token"))
       console.log(headers.get("Authorization"));
-      const usersUrl ='http://localhost:8080/readBooks/'+2
+      let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
+      console.log("user Id:"+savedPerson.userId);
+      const usersUrl ='http://localhost:8080/readBooks/'+savedPerson.userId
     return  this.httpclient.get<any>(usersUrl,{headers});
   }
 
@@ -38,7 +43,9 @@ export class IssuebookservicesService {
    const headers = new HttpHeaders()
     .set('Authorization',"Bearer "+localStorage.getItem("token"))
       console.log(headers.get("Authorization"));
-      const usersUrl ='http://localhost:8080/issuedBooks/'+2
+      let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
+      console.log("user Id:"+savedPerson.userId);
+      const usersUrl ='http://localhost:8080/issuedBooks/'+savedPerson.userId
     return  this.httpclient.get<any>(usersUrl,{headers});
   }
 
@@ -49,14 +56,11 @@ export class IssuebookservicesService {
    const headers = new HttpHeaders()
     .set('Authorization',"Bearer "+localStorage.getItem("token"))
       console.log(headers.get("Authorization"));
-      const usersUrl ='http://localhost:8080/pendingBooks/'+2
+      let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
+      console.log("user Id:"+savedPerson.userId);
+      const usersUrl ='http://localhost:8080/pendingBooks/'+savedPerson.userId
     return  this.httpclient.get<any>(usersUrl,{headers});
   }
-
-
-
-
-
 
 
 
