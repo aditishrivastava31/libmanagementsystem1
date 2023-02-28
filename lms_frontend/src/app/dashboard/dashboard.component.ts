@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { map, Observable } from 'rxjs';
 import { IssuebookservicesService } from 'src/services/issuebookservices.service';
+import { LoginService } from 'src/services/login.service';
 import { issuebookdetails } from '../books/booksinterface';
 
 @Component({
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit {
   returnedbookcount$!: Observable<number>;
   count: number = 0
 
-  constructor(private issuebookservice: IssuebookservicesService) {
+  constructor(private issuebookservice: IssuebookservicesService ,private loginService:LoginService) {
 
 
 
@@ -56,8 +57,10 @@ export class DashboardComponent implements OnInit {
       }
       )
     );
-
-
+    if(this.loginService.tokenExpired(this.loginService.getToken())){
+      this.loginService.logout();
+      window.location.href="/login"
+    }
 
     this.all_books()
   }

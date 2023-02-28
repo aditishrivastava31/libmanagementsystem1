@@ -44,12 +44,9 @@ public class BookDetailsController {
     public ResponseEntity<BookDetails> addbookdetails(@RequestBody BookDetails bookDetails) {
 
         try {
-        	//System.out.println(bookDetails);
-        	//return "success";
            return new ResponseEntity<>(bookDetailsService.addbookdetails(bookDetails), HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
-            //return "failed";
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
@@ -59,7 +56,6 @@ public class BookDetailsController {
     //@PreAuthorize("hasAuthority('ADMIN')")
     public List<BookDetailssenddto> getbookdetails(@PathVariable("name") String name) {
         return bookDetailsService.getallbookdetails(name);
-
     }
 
     @GetMapping("/getbookdetailsbyid/{id}")

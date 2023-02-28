@@ -19,6 +19,9 @@ import { SignupComponent } from './signup/signup.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,10 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     MatButtonModule,
     MatTableModule
+    MatInputModule,
+    MatFormFieldModule,
+  
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]
