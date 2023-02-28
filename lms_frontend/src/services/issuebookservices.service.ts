@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { issuebookdetails } from 'src/app/books/booksinterface';
@@ -6,6 +7,26 @@ import { issuebookdetails } from 'src/app/books/booksinterface';
   providedIn: 'root'
 })
 export class IssuebookservicesService {
+  extenddatebook(issueId: number) {
+    console.log(issueId);
+    console.log(localStorage.getItem("token"));
+    const headers = new HttpHeaders()
+     .set('Authorization',"Bearer "+localStorage.getItem("token"))
+       console.log(headers.get("Authorization"));
+       const usersUrl ="http://localhost:8080/addextension/"+issueId;
+       return  this.httpclient.get<any>(usersUrl,{headers,responseType: 'text' as 'json' });
+    
+  }
+  returnbook(issueId: number) {
+    console.log(issueId);
+    console.log(localStorage.getItem("token"));
+    const headers = new HttpHeaders()
+     .set('Authorization',"Bearer "+localStorage.getItem("token"))
+       console.log(headers.get("Authorization"));
+       const usersUrl ="http://localhost:8080/return/"+issueId
+       return  this.httpclient.get<any>(usersUrl,{headers,responseType: 'text' as 'json' });
+
+  }
 
   constructor(private httpclient: HttpClient) {
 
@@ -44,7 +65,9 @@ export class IssuebookservicesService {
     .set('Authorization',"Bearer "+localStorage.getItem("token"))
       console.log(headers.get("Authorization"));
       let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
-      console.log("user Id:"+savedPerson.userId);
+      let roles=JSON.parse(localStorage.getItem("role") || '{}')
+      //console.log(localStorage.getItem(localStorage.key(2)||""))
+      console.log(roles);
       const usersUrl ='http://localhost:8080/issuedBooks/'+savedPerson.userId
     return  this.httpclient.get<any>(usersUrl,{headers});
   }
@@ -60,6 +83,7 @@ export class IssuebookservicesService {
       console.log("user Id:"+savedPerson.userId);
       const usersUrl ='http://localhost:8080/pendingBooks/'+savedPerson.userId
     return  this.httpclient.get<any>(usersUrl,{headers});
+  
   }
 
 

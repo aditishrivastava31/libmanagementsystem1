@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         console.log(res.token);
         this.loginService.loginUser(res.token)
         this.loginService.loginUserObject(res.userDetails)
+      
         window.location.href= "/dashboard"
       },
         error => {
