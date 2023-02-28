@@ -29,6 +29,8 @@ export class LoginService {
 loginUserObject(User:any){
 localStorage.setItem("user",JSON.stringify(User));
 console.log(User);
+localStorage.setItem("role",JSON.stringify(User.role))
+
   return true;
 }
 
@@ -46,12 +48,35 @@ console.log(User);
   }
   // get logout
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.clear();
     return true;
   }
   // get token
   getToken() {
     return localStorage.getItem("token");
   }
+  public setRoles(roles: []) {
+    localStorage.setItem('roles', JSON.stringify(roles));
+  }
+
+  public getRoles(): [] {
+    return JSON.parse(localStorage.getItem('roles') || '{}');
+  }
+  public roleMatch(allowedRoles:any): boolean {
+    let isMatch = false;
+    const userRoles: any = this.getRoles();
+    console.log(userRoles);
+  
+    if (userRoles != null && userRoles) {
+      for (let i = 0; i < userRoles.length; i++) {
+        for (let j = 0; j < allowedRoles.length; j++) {
+          if (userRoles[i].roleName === allowedRoles[j]) {
+            isMatch = true;
+          } 
+        }
+      }
+    }
+    return isMatch;
+  }
+  
 }

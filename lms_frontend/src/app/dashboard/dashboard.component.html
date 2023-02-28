@@ -63,6 +63,7 @@
             <th scope="col">Issued Date</th>
             <th scope="col">Issued End Date</th>
             <th scope="col">Returned Date</th>
+            <th  *ngIf="show==1" scope="col">operations</th>
         </tr>
     </thead>
 
@@ -74,6 +75,8 @@
             <td>{{issuebook.issueDate}}</td>
             <td>{{issuebook.issueEndDate}}</td>
             <td>{{issuebook.returnDate}}</td>
+            <td *ngIf="show==1"><button (click)="returnbook(issuebook.issue_id)">Return</button>
+            <button  (click)="extenddatebook(issuebook.issue_id)" >extend</button></td>
     </tr>
     </tbody>
 </table>
