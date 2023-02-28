@@ -13,7 +13,7 @@ import lms.entities.RequestBookDetails;
 
 public interface BookRequestService {
 
-	String addrequestBookDetails(RequestBookDetails requestBookDetails , long id);
+	RequestBookDetails addrequestBookDetails(RequestBookDetails requestBookDetails , long id);
 	
 	List<RequestBookDetails> getallbookRequest();
 	
