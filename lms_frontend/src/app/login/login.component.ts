@@ -28,7 +28,17 @@ export class LoginComponent implements OnInit {
         console.log(res.token);
         this.loginService.loginUser(res.token)
         this.loginService.loginUserObject(res.userDetails)
-        window.location.href= "/dashboard"
+        this.loginService.setRoles(res.userDetails.role)
+        console.log(res.userDetails.role)
+        const role = res.userDetails.role[0].roleName;
+        if (role === 'USER') {
+          window.location.href="/dashboard"
+
+        } else if (role==="ADMIN") {
+          
+        //url for Admin signUp
+          window.location.href="/signup"
+        }
       },
         error => {
           console.log("hifbd")
