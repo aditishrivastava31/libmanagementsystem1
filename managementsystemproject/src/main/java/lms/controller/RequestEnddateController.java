@@ -32,7 +32,7 @@ public class RequestEnddateController {
 		return requestEndDateService.acceptandreject(id, value);
 	}
 
-	@PostMapping("/addextension/{issueId}")
+	@GetMapping("/addextension/{issueId}")
 	public String acceptandreject(@PathVariable("issueId") long issueId) {
 		return requestEndDateService.addRequestEndExtension(issueId);
 	}

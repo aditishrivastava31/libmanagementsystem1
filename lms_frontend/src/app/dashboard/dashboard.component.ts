@@ -12,6 +12,7 @@ import { issuebookdetails } from '../books/booksinterface';
 export class DashboardComponent implements OnInit {
 
   title = "";
+  show:number=0
 
   issuebookdetails$!: Observable<any>;
   allbookscount$!: Observable<number>;
@@ -64,6 +65,7 @@ export class DashboardComponent implements OnInit {
   all_books() {
 
     this.title = "All";
+    this.show=1
     this.issuebookdetails$ = this.issuebookservice.getallIssuebookdetails();
     //console.log("check")
 
@@ -72,6 +74,7 @@ export class DashboardComponent implements OnInit {
   }
   issued_books() {
     this.title = "Issued";
+    this.show=0
     this.issuebookservice.getIssuedbookdetalis().subscribe((n) => {
       console.log(n);
     })
@@ -80,6 +83,7 @@ export class DashboardComponent implements OnInit {
 
   returned_books() {
     this.title = "Returned";
+    this.show=0
     this.issuebookservice.getreadIssuebookdetails().subscribe((n) => {
       console.log(n);
     })
@@ -88,7 +92,7 @@ export class DashboardComponent implements OnInit {
 
   pending_books() {
     this.title = "Pending";
-
+    this.show=0
     this.issuebookdetails$ = this.issuebookservice.getallpendingbookdetalis();
     // this.pendingsbookcount$ = this.issuebookservice.getallpendingbookdetalis().pipe(
     //   map((books) => {
@@ -100,7 +104,23 @@ export class DashboardComponent implements OnInit {
     // );
   }
 
-  row_clicked(){
+
+returnbook(issueId:number){
+      this.issuebookservice.returnbook(issueId).subscribe((n)=>{
+        console.log(n);
+      });
+}
+
+extenddatebook(issueId:number){
+  this.issuebookservice.extenddatebook(issueId).subscribe((n)=>{
+    console.log(n);
+  });
+}
+
+
+  row_clicked()
+  {
     alert("dsjk");
   }
+
 }
