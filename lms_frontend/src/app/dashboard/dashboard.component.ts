@@ -88,6 +88,7 @@ export class DashboardComponent implements OnInit {
       console.log(n);
     })
     this.issuebookdetails$ = this.issuebookservice.getreadIssuebookdetails();
+    console.log("asjdkfdaskjhajksafh",this.issuebookdetails$);
   }
 
   pending_books() {
@@ -102,6 +103,7 @@ export class DashboardComponent implements OnInit {
     //   }
     //   )
     // );
+    console.log("asjdkfdaskjhajksafh",this.issuebookdetails$);
   }
 
 

@@ -10,25 +10,20 @@ import { AuthGuard } from 'src/services/auth.guard';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { SignupComponent } from './signup/signup.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 
 
 const routes: Routes = [
-  {path: '', component:LoginComponent, pathMatch: 'full'},
-  {path: 'dashboard', component: DashboardComponent,  canActivate:[AuthGuard]},
-  {path: 'books', component: BooksComponent,  canActivate:[AuthGuard]
-},
-  {path: 'req-book', component: ReqBookComponent,  canActivate:[AuthGuard]
-},
-  {path: 'about-us', component: AboutUsComponent,  canActivate:[AuthGuard]
-},
-  {path: 'contact-us', component: ContactUsComponent,  canActivate:[AuthGuard]
-
-},
-{
-  path:'sidenav',component:SidenavComponent
-},
-  {path:"login",component:LoginComponent,pathMatch:"full"},
-  {path:"signup", component:SignupComponent,pathMatch:"full"}
+  { path: '', component: LoginComponent, pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'books', component: BooksComponent, canActivate: [AuthGuard] },
+  { path: 'req-book', component: ReqBookComponent, canActivate: [AuthGuard] },
+  { path: 'book-details/:book_id', component: BookDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'about-us', component: AboutUsComponent, canActivate: [AuthGuard] },
+  { path: 'contact-us', component: ContactUsComponent, canActivate: [AuthGuard] },
+  { path: 'sidenav', component: SidenavComponent },
+  { path: "login", component: LoginComponent, pathMatch: "full" },
+  { path: "signup", component: SignupComponent, pathMatch: "full" }
 ];
 
 @NgModule({
