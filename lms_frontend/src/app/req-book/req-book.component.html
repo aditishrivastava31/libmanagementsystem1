@@ -1,1 +1,48 @@
-<p>req-book works!</p>
+<div class="text-center" style="margin-top: 20px;">
+    <h1>Request Book</h1>
+
+    <form (ngSubmit)="formSubmit()">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Author Name</mat-label>
+            <input [(ngModel)]="requestBook.authorName"
+            name="authorName"
+            matInput placeholder="Enter Author Name">
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Book Name</mat-label>
+            <input [(ngModel)]="requestBook.bookName"
+            name="bookName"
+            matInput placeholder="Enter Book Name">
+          </mat-form-field>
+        <br>
+
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+
+    </form>
+</div>
+
+<br>
+
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">RequestId</th>
+            <th scope="col">Author Name</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let requestbook of requestBookdtos$ | async;let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{requestbook.authorName}}</td>
+            <td>{{requestbook.bookName}}</td>
+            <td>{{requestbook.isActive}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
