@@ -66,7 +66,6 @@ export class SignupComponent{
       this.userService.getstate(country).subscribe(
         data => {
           this.states = data;
-          // this.country = country;
           this.cities = null;
         }
       );
