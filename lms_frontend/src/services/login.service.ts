@@ -29,6 +29,8 @@ export class LoginService {
 loginUserObject(User:any){
 localStorage.setItem("user",JSON.stringify(User));
 console.log(User);
+localStorage.setItem("role",JSON.stringify(User.role))
+
   return true;
 }
 

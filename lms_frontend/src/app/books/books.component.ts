@@ -37,9 +37,10 @@ export class BooksComponent implements OnInit {
   }
 
 
-  lendbook(book_id: number) { console.log(book_id); 
+  lendbook(book_id: number) { 
+    console.log(book_id); 
     this.getbookdetailsservice.lendbook(book_id).subscribe((n) => 
     { console.log(n); 
-      
+
     }) }
 }

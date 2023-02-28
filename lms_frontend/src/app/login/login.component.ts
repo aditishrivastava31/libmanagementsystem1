@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           
         //url for Admin signUp
           window.location.href="/signup"
-        }
+       }
       },
         error => {
           console.log("hifbd")

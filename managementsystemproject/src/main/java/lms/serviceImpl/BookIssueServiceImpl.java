@@ -154,19 +154,33 @@ public class BookIssueServiceImpl implements BookIssueService {
 	public List<BookIssueDetailsDto> getIssuedBookDetails(String str, long uid) {
 		List<BookIssueDetailsDto> filteredData = new ArrayList<>();
 		for (BookIssueDetails issueBookDetails : bookIssueRepository.findByUserDetail( userDetailsRepository.findById(uid).orElse(null))) {
+			BookIssueDetailsDto bookIssueDetailsDto=new BookIssueDetailsDto();
 			if (str.toLowerCase().equals("issued")) {
-						filteredData = compareDate(issueBookDetails, issueBookDetails.getIssueDate());
+					if(issueBookDetails.getReturnDate() == null)
+					{
+						bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueDate());
+					if(bookIssueDetailsDto!=null){
+						 filteredData.add(bookIssueDetailsDto); 
+					 }
+					}
 					}
 			else if (str.toLowerCase().equals("total")) {
 					filteredData.add(this.toDto(issueBookDetails));
 				}
 			 else if (str.toLowerCase().equals("read")) {
 					if (issueBookDetails.getReturnDate() != null) {
-						filteredData = compareDate(issueBookDetails, issueBookDetails.getReturnDate());
+						bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueDate());
+						//System.out.println(filteredData);
+						filteredData.add(bookIssueDetailsDto);
 					}
 				}
 			 else if (str.toLowerCase().equals("pending")) {
-					filteredData = compareDate(issueBookDetails, issueBookDetails.getIssueEndDate());
+				 bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueEndDate());
+					//System.out.println(filteredData);
+				 if(bookIssueDetailsDto!=null){
+					 filteredData.add(bookIssueDetailsDto); 
+				 }
+					
 				}
 			}
 		return filteredData;
@@ -192,17 +206,19 @@ public class BookIssueServiceImpl implements BookIssueService {
 		return bookIssueDetailsDtos;
 	}
 	
-	public List<BookIssueDetailsDto> compareDate(BookIssueDetails issuedBookDetails , Date date ){
+	public BookIssueDetailsDto compareDate(BookIssueDetails issuedBookDetails , Date date ){
 		LocalDateTime localDateTime = LocalDateTime.now();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		List<BookIssueDetailsDto> filteredData = new ArrayList<>();
+		//List<BookIssueDetailsDto> filteredData = new ArrayList<>();
+		BookIssueDetailsDto bookIssueDetailsDto=null;
 			try {
 				if (date.compareTo(formatter.parse(localDateTime.toString())) <= 0) {
-					filteredData.add(this.toDto(issuedBookDetails));
+					
+					bookIssueDetailsDto=this.toDto(issuedBookDetails);
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		return filteredData;
+		return bookIssueDetailsDto;
 	}
 }
