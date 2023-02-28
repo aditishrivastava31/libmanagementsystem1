@@ -78,5 +78,10 @@ localStorage.setItem("role",JSON.stringify(User.role))
     }
     return isMatch;
   }
+  public tokenExpired(token: any) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    console.log(expiry);
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+   }
   
 }
