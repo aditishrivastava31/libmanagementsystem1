@@ -4,6 +4,8 @@ import { map, Observable } from 'rxjs';
 import { IssuebookservicesService } from 'src/services/issuebookservices.service';
 import { LoginService } from 'src/services/login.service';
 import { issuebookdetails } from '../books/booksinterface';
+import { DialogmodalComponent } from '../dialogmodal/dialogmodal.component';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +24,7 @@ export class DashboardComponent implements OnInit {
   returnedbookcount$!: Observable<number>;
   count: number = 0
 
-  constructor(private issuebookservice: IssuebookservicesService ,private loginService:LoginService) {
+  constructor(private issuebookservice: IssuebookservicesService ,private loginService:LoginService,public dialog:MatDialog) {
 
 
 
@@ -117,15 +119,33 @@ returnbook(issueId:number){
 }
 
 extenddatebook(issueId:number){
-  this.issuebookservice.extenddatebook(issueId).subscribe((n)=>{
+  this.issuebookservice.extenddatebook(issueId).subscribe((n)=>
+  { 
     console.log(n);
-  });
-}
-
-
-  row_clicked()
-  {
-    alert("dsjk");
+    this.dialog.open(DialogmodalComponent,{
+      data:{
+        name:n
+      }
+    });
+  },
+  error => {
+    this.dialog.open(DialogmodalComponent,{
+      data:{
+        name:"you can't lend the book"
+      }
+    });
   }
+  )
+ }
+ row_clicked()
+ {
+   alert("dsjk");
+ }
 
+  
 }
+
+
+
+ 
+

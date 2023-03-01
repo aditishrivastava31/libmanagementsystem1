@@ -21,7 +21,7 @@ public class BookIssueController {
 
 	@GetMapping("/lend/{user_id}/{book_id}")
 	public String lend_book(@PathVariable("user_id") long uid, @PathVariable("book_id") long bid) {
-		String status = null;
+		String status = "done";
 		status = bookIssueServiceImpl.lend_book(uid, bid);
 		return status;
 	}

@@ -34,13 +34,13 @@ public class RequestBookController {
 	private BookRequestService bookRequestService;
 
 	@PostMapping("/requestbook/{userId}")
-	public ResponseEntity<RequestBookDetails> addRequestBookDetails(@RequestBody RequestBookDetails requestBookDetails,
+	public String addRequestBookDetails(@RequestBody RequestBookDetails requestBookDetails,
 			@PathVariable("userId") int id) {
 		try {
-			return ResponseEntity.of(Optional.of(bookRequestService.addrequestBookDetails(requestBookDetails, id)));
+			return (bookRequestService.addrequestBookDetails(requestBookDetails, id));
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			return "sorry you can able to made the request";
 		}
 	}
 
