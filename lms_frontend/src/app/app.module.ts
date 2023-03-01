@@ -16,9 +16,12 @@ import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
+import { BookDetailsComponent } from './book-details/book-details.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import {MatButtonModule} from '@angular/material/button';
     ContactUsComponent,
     AboutUsComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,11 +46,12 @@ import {MatButtonModule} from '@angular/material/button';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatButtonModule,
+    MatTableModule
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule,
   
-    
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

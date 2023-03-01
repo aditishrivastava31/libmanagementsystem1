@@ -54,32 +54,59 @@
 </div>
 
 <h2>{{title}} Books</h2>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Book Name</th>
-            <th scope="col">Authors</th>
-            <th scope="col">Issued Date</th>
-            <th scope="col">Issued End Date</th>
-            <th scope="col">Returned Date</th>
-            <th  *ngIf="show==1" scope="col">operations</th>
-        </tr>
-    </thead>
+<div *ngIf="(this.issuebookdetails$ | async).length===0;else elseBlock">
+    <h4>No data to display...</h4>
+</div>
+<ng-template #elseBlock>
+    <table class="datatable">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Book Name</th>
+                <th scope="col">Authors</th>
+                <th scope="col">Issued Date</th>
+                <th scope="col">Issued End Date</th>
+                <th scope="col">Returned Date</th>
+                <th *ngIf="show==1" scope="col">Operations</th>
+            </tr>
+        </thead>
+        <!-- {{issuebookdetails$}} -->
+        <tbody>
 
-    <tbody *ngFor="let issuebook of issuebookdetails$ | async;let i = index">
-        <tr> 
-            <th scope="row" >{{i+1}}</th> 
-            <td>{{issuebook. bookTitle}}</td>
-            <td>{{issuebook.authors}}</td>
-            <td>{{issuebook.issueDate}}</td>
-            <td>{{issuebook.issueEndDate}}</td>
-            <td>{{issuebook.returnDate}}</td>
-            <td *ngIf="show==1"><button (click)="returnbook(issuebook.issue_id)">Return</button>
-            <button  (click)="extenddatebook(issuebook.issue_id)" >extend</button></td>
-    </tr>
-    </tbody>
-</table>
+
+
+            <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index">
+                <td>{{i+1}}</td>
+                <td>{{issuebook. bookTitle}}</td>
+                <td>{{issuebook.authors}}</td>
+                <td>{{issuebook.issueDate}}</td>
+                <td>{{issuebook.issueEndDate}}</td>
+                <td>{{issuebook.returnDate}}</td>
+                <td *ngIf="show===1">
+                    <div *ngIf="issuebook.returnDate===null">
+                        <button class="btn btn-light btn-sm"
+                            (click)="returnbook(issuebook.issue_id)">Return</button>&nbsp;
+                        <button class="btn btn-light btn-sm"
+                            (click)="extenddatebook(issuebook.issue_id)">extend</button>
+                    </div>
+                </td>
+            </tr>
+            <!-- <tr>
+            <td>12</td>
+            <td>djk</td>
+            <td>asdf</td>
+            <td>dasfkn</td>
+            <td>asdfnk</td>
+            <td>afk</td>
+            <td *ngIf="show==1"><button class="btn btn-light btn-sm">Return</button>&nbsp;
+                <button class="btn btn-light btn-sm">extend</button>
+            </td>
+        </tr> -->
+
+        </tbody>
+
+    </table>
+</ng-template>
 <!-- 
 <mat-card>
     <mat-card-header>
