@@ -13,18 +13,25 @@ export class RequestbookService {
     this.listData=[];
   }
 
-  addRequestBookDetails(requestBook: any){
-    console.log(localStorage.getItem("token"));
+  addRequestBookDetails(requestBook: any , resdata : any){
+    // console.log(localStorage.getItem("token"));
     const headers = new HttpHeaders().set('Authorization',"Bearer "+localStorage.getItem("token"))
-    console.log(headers.get("Authorization"));
+    // console.log(headers.get("Authorization"));
     let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
-    console.log("user Id:"+savedPerson.userId);
+    // console.log("user Id:"+savedPerson.userId);
+    for(var v in resdata){
+      console.log(resdata[v]);
+      if(resdata[v].bookName===requestBook.bookName){
+        alert("This book is already requested!!")
+        return requestBook;
+      }
+    }
+    console.log("postmapping works!")
     const usersUrl ='http://localhost:8080/requestbook/'+savedPerson.userId;
     return this.http.post(usersUrl , requestBook,{ headers, responseType: 'text' as 'json' });
   }
 
   getRequest(){
-    console.log
     console.log(localStorage.getItem("token"));
     const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"))
     console.log(headers.get("Authorization"));
@@ -32,8 +39,9 @@ export class RequestbookService {
     console.log("user Id:"+savedPerson.userId);
     const usersUrl ='http://localhost:8080/requestBookdto/'+savedPerson.userId;
      return this.http.get<requestbookdto[]>(usersUrl,{headers});
-
-     
-
   }
+getAllRequest(){
+  const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"))
+  return this.http.get<requestbookdto[]>('http://localhost:8080/requestBookdto',{headers});
+}
 }
