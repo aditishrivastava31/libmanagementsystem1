@@ -72,9 +72,6 @@
         </thead>
         <!-- {{issuebookdetails$}} -->
         <tbody>
-
-
-
             <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index">
                 <td>{{i+1}}</td>
                 <td>{{issuebook. bookTitle}}</td>
@@ -107,6 +104,7 @@
 
     </table>
 </ng-template>
+
 <!-- 
 <mat-card>
     <mat-card-header>

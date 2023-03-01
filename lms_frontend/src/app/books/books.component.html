@@ -47,7 +47,6 @@
             </tr>
         </thead>
         <tbody >
-        <!-- *ngFor="let item of [].constructor(3);let i = index" -->
             <tr *ngFor="let book of bookdetails$ | async;let i = index">
                 <td>{{i + 1}}</td>
                 <td [routerLink]="['/book-details', book.book_id]">{{book.book_title}}</td>
@@ -61,86 +60,5 @@
                 <td>
                     <button class="btn btn-light btn-sm" (click)="lendbook(book.book_id)">Lend</button>
                 </td>
-            </tr>
-            <tr  >
-            <!-- [ngClass]="(hov===true) ? 'tr-hover' : ''" id="tr{{i}}" -->
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.id}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.title}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.category}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.quantity}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.authors}}</td>
-                <td>
-                    <span *ngFor="let item of [].constructor(demo_book.review)" class="fa fa-star checked"></span>
-                    <span *ngFor="let item of [].constructor(5-demo_book.review)" class="fa fa-star"></span>
-                </td>
-                <td>
-                    <button class="btn btn-light btn-sm" (click)="fun()">Lend</button>
-                </td>
-            </tr>
-            <tr >
-            <!-- [ngClass]="(hov===true) ? 'tr-hover' : ''" -->
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.id}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.title}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.category}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.quantity}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.authors}}</td>
-                <td>
-                    <span *ngFor="let item of [].constructor(demo_book.review)" class="fa fa-star checked"></span>
-                    <span *ngFor="let item of [].constructor(5-demo_book.review)" class="fa fa-star"></span>
-                </td>
-                <td>
-                    <button class="btn btn-light btn-sm" (click)="fun()">Lend</button>
-                </td>
-            </tr>
-            <tr >
-            <!-- [ngClass]="(hov===true) ? 'tr-hover' : ''" -->
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.id}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.title}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.category}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.quantity}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.authors}}</td>
-                <td>
-                    <span *ngFor="let item of [].constructor(demo_book.review)" class="fa fa-star checked"></span>
-                    <span *ngFor="let item of [].constructor(5-demo_book.review)" class="fa fa-star"></span>
-                </td>
-                <td>
-                    <button class="btn btn-light btn-sm" (click)="fun()">Lend</button>
-                </td>
-            </tr>
-            <tr >
-            <!-- [ngClass]="(hov===true) ? 'tr-hover' : ''" -->
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.id}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.title}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.category}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.quantity}}</td>
-                <td [routerLink]="['/book-details', demo_id]" >
-                    {{demo_book.authors}}</td>
-                <td>
-                    <span *ngFor="let item of [].constructor(demo_book.review)" class="fa fa-star checked"></span>
-                    <span *ngFor="let item of [].constructor(5-demo_book.review)" class="fa fa-star"></span>
-                </td>
-                <td>
-                    <button class="btn btn-light btn-sm" (click)="fun()">Lend</button>
-                </td>
-            </tr>
         </tbody>
     </table>

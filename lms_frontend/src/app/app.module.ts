@@ -21,7 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
+import { DialogmodalComponent } from './dialogmodal/dialogmodal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatButtonModule } from '@angular/material/button';
     AboutUsComponent,
     LoginComponent,
     SignupComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    DialogmodalComponent
   ],
   imports: [
     BrowserModule,
@@ -47,11 +49,10 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     FormsModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
     MatInputModule,
     MatFormFieldModule,
-  
- 
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

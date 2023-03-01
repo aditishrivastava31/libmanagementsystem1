@@ -20,7 +20,7 @@ export class RequestbookService {
     let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
     console.log("user Id:"+savedPerson.userId);
     const usersUrl ='http://localhost:8080/requestbook/'+savedPerson.userId;
-    return this.http.post(usersUrl , requestBook);
+    return this.http.post(usersUrl , requestBook,{ headers, responseType: 'text' as 'json' });
   }
 
   getRequest(){
