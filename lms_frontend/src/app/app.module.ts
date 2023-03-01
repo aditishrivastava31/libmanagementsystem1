@@ -17,12 +17,13 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
-import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DialogmodalComponent } from './dialogmodal/dialogmodal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     SignupComponent,
     BookDetailsComponent,
-    DialogmodalComponent
+    DialogmodalComponent,
+    ForgetpasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule
-  ],
+   ],
   providers: [],
   bootstrap: [AppComponent]
 })

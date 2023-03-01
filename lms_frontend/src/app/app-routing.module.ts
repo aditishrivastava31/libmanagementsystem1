@@ -11,6 +11,7 @@ import { AuthGuard } from 'src/services/auth.guard';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent, canActivate: [AuthGuard] },
   { path: 'sidenav', component: SidenavComponent },
   { path: "login", component: LoginComponent, pathMatch: "full" },
-  { path: "signup", component: SignupComponent, pathMatch: "full" }
+  { path: "signup", component: SignupComponent, pathMatch: "full" },
+  { path: "forgetpassword", component: ForgetpasswordComponent, pathMatch: "full" }
 ];
 
 @NgModule({
