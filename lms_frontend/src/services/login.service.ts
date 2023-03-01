@@ -26,18 +26,17 @@ export class LoginService {
     return true;
   }
 
-loginUserObject(User:any){
-localStorage.setItem("user",JSON.stringify(User));
-console.log(User);
-localStorage.setItem("role",JSON.stringify(User.role))
+  loginUserObject(User: any) {
+    localStorage.setItem("user", JSON.stringify(User));
+    console.log(User);
+    localStorage.setItem("role", JSON.stringify(User.role))
 
-  return true;
-}
+    return true;
+  }
 
 
   // to check user is login
-  isLoggedIn() 
-  {
+  isLoggedIn() {
     let token = localStorage.getItem("token");
     console.log(token)
     if (token == undefined || token === '' || token == null) {
@@ -62,17 +61,17 @@ localStorage.setItem("role",JSON.stringify(User.role))
   public getRoles(): [] {
     return JSON.parse(localStorage.getItem('roles') || '{}');
   }
-  public roleMatch(allowedRoles:any): boolean {
+  public roleMatch(allowedRoles: any): boolean {
     let isMatch = false;
     const userRoles: any = this.getRoles();
     console.log(userRoles);
-  
+
     if (userRoles != null && userRoles) {
       for (let i = 0; i < userRoles.length; i++) {
         for (let j = 0; j < allowedRoles.length; j++) {
           if (userRoles[i].roleName === allowedRoles[j]) {
             isMatch = true;
-          } 
+          }
         }
       }
     }
@@ -82,6 +81,6 @@ localStorage.setItem("role",JSON.stringify(User.role))
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
     console.log(expiry);
     return (Math.floor((new Date).getTime() / 1000)) >= expiry;
-   }
-  
+  }
+
 }

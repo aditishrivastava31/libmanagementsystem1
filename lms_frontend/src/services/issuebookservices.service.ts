@@ -67,7 +67,8 @@ export class IssuebookservicesService {
       let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
       let roles=JSON.parse(localStorage.getItem("role") || '{}')
       //console.log(localStorage.getItem(localStorage.key(2)||""))
-      console.log(roles);
+
+      console.log("zfcvbnm",roles[0].roleName);
       const usersUrl ='http://localhost:8080/issuedBooks/'+savedPerson.userId
     return  this.httpclient.get<any>(usersUrl,{headers});
   }
