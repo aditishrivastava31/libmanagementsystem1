@@ -4,6 +4,9 @@ import { BooksService } from 'src/services/books.service';
 import { bookdto } from './booksinterface';
 import { Router } from '@angular/router';
 import { BookDetailsComponent } from '../book-details/book-details.component';
+import { DialogmodalComponent } from '../dialogmodal/dialogmodal.component';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-books',
@@ -32,7 +35,7 @@ export class BooksComponent implements OnInit {
 
   }
 
-  constructor(private getbookdetailsservice: BooksService) {
+  constructor(private getbookdetailsservice: BooksService,public dialog:MatDialog) {
     //this.bookdetails$=this.getbookdetailsservice.geteverybookdetails();
   }
 
@@ -48,14 +51,6 @@ export class BooksComponent implements OnInit {
   }
 
 
-  lendbook(book_id: number) {
-    console.log(book_id);
-    this.getbookdetailsservice.lendbook(book_id).subscribe((n) => {
-      console.log(n);
-
-    })
-  }
-
   getBookDetails() {
     console.log("clicked");
 
@@ -67,4 +62,24 @@ export class BooksComponent implements OnInit {
     alert("ashg");
   }
 
+  lendbook(book_id: number) { 
+    console.log(book_id); 
+    this.getbookdetailsservice.lendbook(book_id).subscribe((n) => 
+    { 
+      console.log(n);
+      this.dialog.open(DialogmodalComponent,{
+        data:{
+          name:n
+        }
+      });
+    },
+    error => {
+      this.dialog.open(DialogmodalComponent,{
+        data:{
+          name:"you can't lend the book"
+        }
+      });
+    }
+    )
+   }
 }

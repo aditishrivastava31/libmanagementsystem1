@@ -38,9 +38,9 @@ public class BookRequestServiceImpl implements BookRequestService {
 	}
 
 	@Override
-	public RequestBookDetails addrequestBookDetails(RequestBookDetails requestBookDetails, long id) {
+	public String addrequestBookDetails(RequestBookDetails requestBookDetails, long id) {
 		List<RequestBookDetails> requestBookDetailsList = requestBookDetailsRepository.findAll();
-		String messageString = null;
+		String messageString = "sorry your request has not made";
 		boolean flag=true;
 		if (requestBookDetailsList.size() == 0) {
 			requestBookDetails.setIsActive(IsActive.Pending);
@@ -61,7 +61,7 @@ public class BookRequestServiceImpl implements BookRequestService {
 				}
 			}
 		}
-		return requestBookDetails;
+		return messageString;
 
 	}
 

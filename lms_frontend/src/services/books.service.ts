@@ -61,6 +61,10 @@ export class BooksService {
     return this.httpclient.get<any>(url + "/" + book_id, { headers ,responseType: 'text' as 'json' })
   }
 
+  getbookbyid(){
+    
+  }
+
 
 
 }

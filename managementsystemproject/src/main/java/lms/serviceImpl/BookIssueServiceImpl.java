@@ -74,11 +74,11 @@ public class BookIssueServiceImpl implements BookIssueService {
 				emailServiceImpl.setBookIssueDetails(bookIssueDetails);
 				emailServiceImpl.issueBookEmailSender();
 				
-				return "success";
+				return "Book was issued successfully...";
 			} else if (user.getLendCount() == 0) {
-				return "sorry limit exceeded!!!";
+				return "Sorry limit exceeded!!!";
 			} else if (book.getQuantity() == 0) {
-				return "sorry Book is not available!!!";
+				return "Sorry book is not available!!!";
 			} else {
 				return null;
 			}
