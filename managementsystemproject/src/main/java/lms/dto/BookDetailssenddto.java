@@ -18,6 +18,8 @@ public class BookDetailssenddto {
     public List<String> authors;
 
     public String category;
+    
+    public int avg_rating;
 
     public BookDetailssenddto() {
 
