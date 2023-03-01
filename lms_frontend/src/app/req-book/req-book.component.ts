@@ -17,7 +17,8 @@ export class ReqBookComponent {
   bookdetailscount$!: Observable<number>;
   count!: number
   requestbookdto?:requestbookdto[];
-
+  resdata:any;
+  dataset: any;
   authorName: any;
   bookName: any;
   requestBookdtos$! : Observable<requestbookdto[]>;
@@ -32,34 +33,40 @@ export class ReqBookComponent {
   ngOnInit() {
     
   this.requestBookdtos$=this.requestBookService.getRequest();
+  this.requestBookService.getAllRequest().subscribe((res)=>{
+    console.log("okokokokoko")
+    this.resdata=res;
+    
+    }
+  )
     
   }
 
 
   formSubmit(){
-    console.log(this.requestBook);
+
+    
+    // alert("Request Submitted");
+    // console.log(this.requestBook);
+  
+    console.log("okhai");
+    console.log(this.resdata);
+  
     //adding request
-    this.requestBookService.addRequestBookDetails(this.requestBook).subscribe
-    ((n) => 
-    { 
-      console.log(n);
-      this.dialog.open(DialogmodalComponent,{
-        data:{
-          name:n
-        }
-      });
-    },
-    error => {
-      this.dialog.open(DialogmodalComponent,{
-        data:{
-          name:"request was not made"
-        }
-      });
-    }
-    )
-   }
-      
+    this.requestBookService.addRequestBookDetails(this.requestBook , this.resdata).subscribe(
+      (data:any)=>{
+        console.log(data);
+        alert("Success");
+        window.location.href="/req-book"
+      },
+      (error: any)=>{
+        console.log(error);
+        alert("Something Went Wrong");
+      }
+      )
   }
+}
+  
 
  
 
