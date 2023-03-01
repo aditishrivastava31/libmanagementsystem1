@@ -45,16 +45,14 @@ public class BookRequestServiceImpl implements BookRequestService {
 			requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
 			requestBookDetailsRepository.save(requestBookDetails);
 			return requestBookDetails;
-
-		}else{
-				requestBookDetails.setIsActive(IsActive.Pending);
-				requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
-				requestBookDetailsRepository.save(requestBookDetails);
-				return requestBookDetails;
-			}
+		} else {
+			requestBookDetails.setIsActive(IsActive.Pending);
+			requestBookDetails.setUserDetail(userDetailsRepository.findById(id).get());
+			requestBookDetailsRepository.save(requestBookDetails);
+			return requestBookDetails;
 		}
 
-	
+	}
 
 	@Override
 	public List<RequestBookDetails> getallbookRequest() {
