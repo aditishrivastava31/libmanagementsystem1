@@ -1,7 +1,7 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/core';
 import { LoginService } from 'src/services/login.service';
-import { navbarData } from './nav-data';
+import { adminNavbarData, userNavbarData } from './nav-data';
 import { SidenavService } from 'src/services/sidenav.service';
 
 interface SideNavToggle {
@@ -43,9 +43,10 @@ interface SideNavToggle {
 export class SidenavComponent implements OnInit {
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
+  userRole!:String;
   collapsed = false;
   screenWidth = 0;
-  navData = navbarData;
+  navData=userNavbarData;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -62,7 +63,16 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {
       this.screenWidth = window.innerWidth;
-      this.loggedIn=this.loginService.isLoggedIn();
+      this.loggedIn = this.loginService.isLoggedIn();
+      let savedPerson = JSON.parse(localStorage.getItem("user") || '{}');
+      let roles=JSON.parse(localStorage.getItem("role") || '{}');
+      this.userRole = roles[0].roleName;
+      console.log(this.userRole);
+      if (this.userRole==="ADMIN") {
+        console.warn("ADMIN  sddfjs");
+        
+        this.navData=adminNavbarData;
+      }
   }
 
   toggleCollapse(): void {
