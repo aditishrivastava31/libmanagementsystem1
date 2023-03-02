@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
 import { map, Observable } from 'rxjs';
 import { IssuebookservicesService } from 'src/services/issuebookservices.service';
 import { LoginService } from 'src/services/login.service';
 import { issuebookdetails } from '../books/booksinterface';
 import { DialogmodalComponent } from '../dialogmodal/dialogmodal.component';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +15,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
 export class DashboardComponent implements OnInit {
 
   title = "";
-  show:number=0
+  show: number = 0
 
   issuebookdetails$!: Observable<any>;
   allbookscount$!: Observable<number>;
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   returnedbookcount$!: Observable<number>;
   count: number = 0
 
-  constructor(private issuebookservice: IssuebookservicesService ,private loginService:LoginService,public dialog:MatDialog) {
+  constructor(private issuebookservice: IssuebookservicesService, private loginService: LoginService, public dialog: MatDialog) {
 
 
 
@@ -52,16 +52,16 @@ export class DashboardComponent implements OnInit {
       )
     );
 
-      
+
     this.returnedbookcount$ = this.issuebookservice.getreadIssuebookdetails().pipe(
       map((books) => {
         return books.length
       }
       )
     );
-    if(this.loginService.tokenExpired(this.loginService.getToken())){
+    if (this.loginService.tokenExpired(this.loginService.getToken())) {
       this.loginService.logout();
-      window.location.href="/login"
+      window.location.href = "/login"
     }
 
     this.all_books()
@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
   all_books() {
 
     this.title = "All";
-    this.show=1
+    this.show = 1
     this.issuebookdetails$ = this.issuebookservice.getallIssuebookdetails();
     //console.log("check")
 
@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit {
   }
   issued_books() {
     this.title = "Issued";
-    this.show=0
+    this.show = 0
     this.issuebookservice.getIssuedbookdetalis().subscribe((n) => {
       console.log(n);
     })
@@ -88,64 +88,54 @@ export class DashboardComponent implements OnInit {
 
   returned_books() {
     this.title = "Returned";
-    this.show=0
+    this.show = 0
     this.issuebookservice.getreadIssuebookdetails().subscribe((n) => {
       console.log(n);
     })
     this.issuebookdetails$ = this.issuebookservice.getreadIssuebookdetails();
-    console.log("asjdkfdaskjhajksafh",this.issuebookdetails$);
+    console.log("asjdkfdaskjhajksafh", this.issuebookdetails$);
   }
 
   pending_books() {
     this.title = "Pending";
-    this.show=0
+    this.show = 0
     this.issuebookdetails$ = this.issuebookservice.getallpendingbookdetalis();
-    // this.pendingsbookcount$ = this.issuebookservice.getallpendingbookdetalis().pipe(
-    //   map((books) => {
-    //     //this.count=books.length
-    //     //console.log(this.count);
-    //     return books.length
-    //   }
-    //   )
-    // );
-    console.log("asjdkfdaskjhajksafh",this.issuebookdetails$);
+    console.log("asjdkfdaskjhajksafh", this.issuebookdetails$);
   }
 
 
-returnbook(issueId:number){
-      this.issuebookservice.returnbook(issueId).subscribe((n)=>{
-        console.log(n);
+  returnbook(issueId: number) {
+    this.issuebookservice.returnbook(issueId).subscribe((n) => {
+      console.log(n);
+    });
+  }
+
+  extenddatebook(issueId: number) {
+    this.issuebookservice.extenddatebook(issueId).subscribe((n) => {
+      console.log(n);
+      this.dialog.open(DialogmodalComponent, {
+        data: {
+          name: n
+        }
       });
-}
-
-extenddatebook(issueId:number){
-  this.issuebookservice.extenddatebook(issueId).subscribe((n)=>
-  { 
-    console.log(n);
-    this.dialog.open(DialogmodalComponent,{
-      data:{
-        name:n
+    },
+      error => {
+        this.dialog.open(DialogmodalComponent, {
+          data: {
+            name: "you can't lend the book"
+          }
+        });
       }
-    });
-  },
-  error => {
-    this.dialog.open(DialogmodalComponent,{
-      data:{
-        name:"you can't lend the book"
-      }
-    });
+    )
   }
-  )
- }
- row_clicked()
- {
-   alert("dsjk");
- }
+  row_clicked() {
+    alert("dsjk");
+  }
 
-  
+
 }
 
 
 
- 
+
 

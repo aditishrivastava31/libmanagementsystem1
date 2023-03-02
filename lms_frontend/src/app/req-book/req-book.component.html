@@ -19,30 +19,35 @@
           </mat-form-field>
         <br>
 
-        <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button type="submit" mat-raised-button color="primary">Submit</button>
 
-    </form>
+  </form>
 </div>
 
 <br>
 
 <div class="container">
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">RequestId</th>
-            <th scope="col">Author Name</th>
-            <th scope="col">Book Name</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let requestbook of requestBookdtos$ | async;let i = index">
-            <th scope="row">{{i + 1}}</th>
-            <td>{{requestbook.authorName}}</td>
-            <td>{{requestbook.bookName}}</td>
-            <td>{{requestbook.isActive}}</td>
-          </tr>
-        </tbody>
-      </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">RequestId</th>
+        <th scope="col">Author Name</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <div *ngIf="(this.requestBookdtos$ | async)?.length===0;else elseBlock">
+      <h4>No data to display...</h4>
+    </div>
+    <ng-template #elseBlock>
+      <tbody>
+        <tr *ngFor="let requestbook of requestBookdtos$ | async;let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{requestbook.authorName}}</td>
+          <td>{{requestbook.bookName}}</td>
+          <td>{{requestbook.isActive}}</td>
+        </tr>
+      </tbody>
+    </ng-template>
+  </table>
 </div>

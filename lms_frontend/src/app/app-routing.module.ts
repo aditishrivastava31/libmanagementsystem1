@@ -12,6 +12,10 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
+import { IssueBookDetailsComponent } from './issue-book-details/issue-book-details.component';
+import { BookRequestsComponent } from './book-requests/book-requests.component';
+import { AddBookDetailsComponent } from './add-book-details/add-book-details.component';
+import { ReqForExtComponent } from './req-for-ext/req-for-ext.component';
 
 
 const routes: Routes = [
@@ -25,7 +29,11 @@ const routes: Routes = [
   { path: 'sidenav', component: SidenavComponent },
   { path: "login", component: LoginComponent, pathMatch: "full" },
   { path: "signup", component: SignupComponent, pathMatch: "full" },
-  { path: "forgetpassword", component: ForgetpasswordComponent, pathMatch: "full" }
+  { path: "forgetpassword", component: ForgetpasswordComponent, pathMatch: "full" },
+  { path: "issue-book-details", component: IssueBookDetailsComponent, canActivate: [AuthGuard] },
+  { path: "add-book-details", component: AddBookDetailsComponent, canActivate: [AuthGuard] },
+  { path: "book-reqs", component: BookRequestsComponent, canActivate: [AuthGuard] },
+  { path: "reqs-for-ext", component: ReqForExtComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
