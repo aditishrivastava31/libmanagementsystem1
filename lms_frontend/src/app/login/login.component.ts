@@ -35,9 +35,7 @@ export class LoginComponent implements OnInit {
           window.location.href="/dashboard"
 
         } else if (role==="ADMIN") {
-          
-        //url for Admin signUp
-          window.location.href="/signup"
+          window.location.href="/issue-book-details"
        }
       },
         error => {

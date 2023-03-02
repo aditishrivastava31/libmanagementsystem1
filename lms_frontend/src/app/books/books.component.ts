@@ -14,15 +14,6 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
   styleUrls: ['./books.component.scss']
 })
 export class BooksComponent implements OnInit {
-  demo_id = 11234;
-  demo_book = {
-    id: 101,
-    title: "demo title",
-    authors: ["auth1", "auth2"],
-    quantity: 2,
-    review: 3,
-    category: "education"
-  }
   bookdetails$!: Observable<bookdto[]>;
   accordingto!: string
   bookdetailscount$!: Observable<number>;

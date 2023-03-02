@@ -24,6 +24,11 @@ import { DialogmodalComponent } from './dialogmodal/dialogmodal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
+import { IssueBookDetailsComponent } from './issue-book-details/issue-book-details.component';
+import { AddBookDetailsComponent } from './add-book-details/add-book-details.component';
+import { BookRequestsComponent } from './book-requests/book-requests.component';
+import { ReqForExtComponent } from './req-for-ext/req-for-ext.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +44,11 @@ import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.compone
     SignupComponent,
     BookDetailsComponent,
     DialogmodalComponent,
-    ForgetpasswordComponent
+    ForgetpasswordComponent,
+    IssueBookDetailsComponent,
+    AddBookDetailsComponent,
+    BookRequestsComponent,
+    ReqForExtComponent
   ],
   imports: [
     BrowserModule,
@@ -59,4 +68,5 @@ import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.compone
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
