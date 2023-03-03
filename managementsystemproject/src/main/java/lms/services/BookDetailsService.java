@@ -22,7 +22,7 @@ public interface BookDetailsService {
 
     List<BookDetailssenddto> getallbookdetails(String name);
 
-    BookDetails getbookdetailsbyid(long id);
+    BookDetailssenddto getbookdetailsbyid(long id);
 
 	List<BookDetailssenddto> geteverybookdetails();
 

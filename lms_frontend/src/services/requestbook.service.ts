@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { requestbookdto } from 'src/app/req-book/reqbook';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog'
 import baseUrl from './helper';
+import { DialogmodalComponent } from 'src/app/dialogmodal/dialogmodal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ import baseUrl from './helper';
 export class RequestbookService {
   
   listData:any;
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,public dialog:MatDialog) { 
     this.listData=[];
   }
 
@@ -21,8 +23,12 @@ export class RequestbookService {
     // console.log("user Id:"+savedPerson.userId);
     for(var v in resdata){
       console.log(resdata[v]);
-      if(resdata[v].bookName===requestBook.bookName){
-        alert("This book is already requested!!")
+      if(resdata[v].bookName===requestBook.bookName){                
+        this.dialog.open(DialogmodalComponent,{
+          data:{
+            name:"This book is already requested!!"
+          }
+        });
         return requestBook;
       }
     }

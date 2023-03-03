@@ -28,9 +28,9 @@ public class BookIssueServiceImpl implements BookIssueService {
 	BookRepository bookRepository;
 
 	BookIssueRepository bookIssueRepository;
-	
+
 	EmailServiceImpl emailServiceImpl;
-	
+
 	@Autowired
 	public BookIssueServiceImpl(UserDetailsRepository userDetailsRepository, BookRepository bookRepository,
 			BookIssueRepository bookIssueRepository, EmailServiceImpl emailServiceImpl) {
@@ -41,7 +41,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 	}
 
 	@Override
-	public String lend_book(long uid, long bid)  {
+	public String lend_book(long uid, long bid) {
 		UserDetails user = userDetailsRepository.findById(uid).orElse(null);
 		BookDetails book = bookRepository.findById(bid).orElse(null);
 
@@ -50,31 +50,26 @@ public class BookIssueServiceImpl implements BookIssueService {
 		}
 
 		else {
-			if (user.getLendCount() != 0 && book.getQuantity() != 0) {
-				user.setLendCount(user.getLendCount() - 1);
-				book.setQuantity(book.getQuantity() - 1);
-				userDetailsRepository.save(user);
-				bookRepository.save(book);
-				BookIssueDetails bookIssueDetails = new BookIssueDetails();
-				bookIssueDetails.setBookDetails(book);
-				bookIssueDetails.setUserDetail(user);
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-				LocalDateTime localDateTime = LocalDateTime.now();
 
-				try {
-					bookIssueDetails.setIssueDate(formatter.parse(localDateTime.toString()));
-					bookIssueDetails.setIssueEndDate(formatter.parse(localDateTime.plusDays(7).toString()));
-				} catch (ParseException e) {
-					e.printStackTrace();
+			if (user.getLendCount() != 0 && book.getQuantity() != 0) {
+				List<BookIssueDetails> bookIssueDetailslist = bookIssueRepository.findByBookDetailsAndUserDetail(book,
+						user);
+				
+				if (bookIssueDetailslist.size() == 0) {
+					BookIssueDetails bookIssueDetails = new BookIssueDetails();
+					
+					return issuebook(user, book, bookIssueDetails);
+				}
+				else if(bookIssueDetailslist.get(0).getReturnDate() != null) {
+					BookIssueDetails bookIssueDetails = bookIssueRepository
+							.findById(bookIssueDetailslist.get(0).getId()).orElse(new BookIssueDetails());
+					
+					return issuebook(user, book, bookIssueDetails);
+				}
+				else{
+					return "You already taken the book....";
 				}
 
-				bookIssueDetails.setReturnDate(null);
-				bookIssueRepository.save(bookIssueDetails);
-				
-				emailServiceImpl.setBookIssueDetails(bookIssueDetails);
-				emailServiceImpl.issueBookEmailSender();
-				
-				return "Book was issued successfully...";
 			} else if (user.getLendCount() == 0) {
 				return "Sorry limit exceeded!!!";
 			} else if (book.getQuantity() == 0) {
@@ -113,13 +108,13 @@ public class BookIssueServiceImpl implements BookIssueService {
 	}
 
 	@Override
-	public int issued_book_count(long uid){
+	public int issued_book_count(long uid) {
 		List<BookIssueDetailsDto> bookIssueDetails = this.getIssuedBookDetails("issued", uid);
 		return bookIssueDetails.size();
 	}
 
 	@Override
-	public int total_book_count(long uid){
+	public int total_book_count(long uid) {
 		List<BookIssueDetailsDto> bookIssueDetails = this.getIssuedBookDetails("total", uid);
 		return bookIssueDetails.size();
 	}
@@ -153,72 +148,100 @@ public class BookIssueServiceImpl implements BookIssueService {
 	@Override
 	public List<BookIssueDetailsDto> getIssuedBookDetails(String str, long uid) {
 		List<BookIssueDetailsDto> filteredData = new ArrayList<>();
-		for (BookIssueDetails issueBookDetails : bookIssueRepository.findByUserDetail( userDetailsRepository.findById(uid).orElse(null))) {
-			BookIssueDetailsDto bookIssueDetailsDto=new BookIssueDetailsDto();
+		for (BookIssueDetails issueBookDetails : bookIssueRepository
+				.findByUserDetail(userDetailsRepository.findById(uid).orElse(null))) {
+			BookIssueDetailsDto bookIssueDetailsDto = new BookIssueDetailsDto();
 			if (str.toLowerCase().equals("issued")) {
-					if(issueBookDetails.getReturnDate() == null)
-					{
-						bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueDate());
-					if(bookIssueDetailsDto!=null){
-						 filteredData.add(bookIssueDetailsDto); 
-					 }
-					}
-					}
-			else if (str.toLowerCase().equals("total")) {
-					filteredData.add(this.toDto(issueBookDetails));
-				}
-			 else if (str.toLowerCase().equals("read")) {
-					if (issueBookDetails.getReturnDate() != null) {
-						bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueDate());
-						//System.out.println(filteredData);
+				if (issueBookDetails.getReturnDate() == null) {
+					bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueDate());
+					if (bookIssueDetailsDto != null) {
 						filteredData.add(bookIssueDetailsDto);
 					}
 				}
-			 else if (str.toLowerCase().equals("pending")) {
-				 bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueEndDate());
-					//System.out.println(filteredData);
-				 if(bookIssueDetailsDto!=null){
-					 filteredData.add(bookIssueDetailsDto); 
-				 }
-					
+			} else if (str.toLowerCase().equals("total")) {
+				filteredData.add(this.toDto(issueBookDetails));
+			} else if (str.toLowerCase().equals("read")) {
+				if (issueBookDetails.getReturnDate() != null) {
+					bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueDate());
+					// System.out.println(filteredData);
+					filteredData.add(bookIssueDetailsDto);
 				}
+			} else if (str.toLowerCase().equals("pending")) {
+				bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueEndDate());
+				// System.out.println(filteredData);
+				if (bookIssueDetailsDto != null) {
+					filteredData.add(bookIssueDetailsDto);
+				}
+
 			}
+		}
 		return filteredData;
 	}
 
 	@Override
 	public List<BookIssueDetailsDto> getAllIssuesToAdmin() {
-		List<BookIssueDetailsDto> bookIssueDetailsDtos=new ArrayList<>();
-		bookIssueRepository.findAll().forEach(bookIssueDetails->{
-			BookIssueDetailsDto bookIssueDetailsDto=new BookIssueDetailsDto();
+		List<BookIssueDetailsDto> bookIssueDetailsDtos = new ArrayList<>();
+		bookIssueRepository.findAll().forEach(bookIssueDetails -> {
+			BookIssueDetailsDto bookIssueDetailsDto = new BookIssueDetailsDto();
 			bookIssueDetailsDto.setBookTitle(bookIssueDetails.getBookDetails().getBookName());
 			bookIssueDetailsDto.setUserName(bookIssueDetails.getUserDetail().getUserName());
 			bookIssueDetailsDto.setReturnDate(bookIssueDetails.getReturnDate());
 			bookIssueDetailsDto.setIssue_id(bookIssueDetails.getId());
-			List<String> authorslist=new ArrayList<>();
-			bookIssueDetails.getBookDetails().getAuthors().forEach(a->{
+			List<String> authorslist = new ArrayList<>();
+			bookIssueDetails.getBookDetails().getAuthors().forEach(a -> {
 				authorslist.add(a.getAuthorName());
 			});
 			bookIssueDetailsDto.setAuthors(authorslist);
 			bookIssueDetailsDtos.add(bookIssueDetailsDto);
-			
+
 		});
 		return bookIssueDetailsDtos;
 	}
-	
-	public BookIssueDetailsDto compareDate(BookIssueDetails issuedBookDetails , Date date ){
+
+	public BookIssueDetailsDto compareDate(BookIssueDetails issuedBookDetails, Date date) {
 		LocalDateTime localDateTime = LocalDateTime.now();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		//List<BookIssueDetailsDto> filteredData = new ArrayList<>();
-		BookIssueDetailsDto bookIssueDetailsDto=null;
-			try {
-				if (date.compareTo(formatter.parse(localDateTime.toString())) <= 0) {
-					
-					bookIssueDetailsDto=this.toDto(issuedBookDetails);
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
+		// List<BookIssueDetailsDto> filteredData = new ArrayList<>();
+		BookIssueDetailsDto bookIssueDetailsDto = null;
+		try {
+			if (date.compareTo(formatter.parse(localDateTime.toString())) <= 0) {
+
+				bookIssueDetailsDto = this.toDto(issuedBookDetails);
 			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return bookIssueDetailsDto;
 	}
+
+
+
+
+
+
+public String issuebook(UserDetails user,BookDetails book,BookIssueDetails bookIssueDetails)
+{
+	user.setLendCount(user.getLendCount() - 1);
+	book.setQuantity(book.getQuantity() - 1);
+	userDetailsRepository.save(user);
+	bookRepository.save(book);
+	bookIssueDetails.setBookDetails(book);
+	bookIssueDetails.setUserDetail(user);
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	LocalDateTime localDateTime = LocalDateTime.now();
+	try {
+		bookIssueDetails.setIssueDate(formatter.parse(localDateTime.toString()));
+		bookIssueDetails.setIssueEndDate(formatter.parse(localDateTime.plusDays(7).toString()));
+	} catch (ParseException e) {
+		e.printStackTrace();
+	}
+	bookIssueDetails.setReturnDate(null);
+	bookIssueRepository.save(bookIssueDetails);
+	emailServiceImpl.setBookIssueDetails(bookIssueDetails);
+	emailServiceImpl.issueBookEmailSender();
+
+	return "Book was issued successfully...";
+	
+}
+
 }

@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
         if (role === 'USER') {
           window.location.href="/dashboard"
 
-        } else if (role==="ADMIN") {
+        } 
+        else if (role==="ADMIN") {
           window.location.href="/issue-book-details"
        }
       },

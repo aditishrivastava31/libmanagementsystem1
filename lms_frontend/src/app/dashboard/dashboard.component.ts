@@ -107,6 +107,7 @@ export class DashboardComponent implements OnInit {
   returnbook(issueId: number) {
     this.issuebookservice.returnbook(issueId).subscribe((n) => {
       console.log(n);
+      window.location.href = "/dashboard"
     });
   }
 
@@ -125,15 +126,22 @@ export class DashboardComponent implements OnInit {
             name: "you can't lend the book"
           }
         });
-      }
+    }
     )
   }
+       
+      
+
+    
+
+
   row_clicked() {
-    alert("dsjk");
-  }
+      alert("dsjk");
+    }
 
 
 }
+
 
 
 
