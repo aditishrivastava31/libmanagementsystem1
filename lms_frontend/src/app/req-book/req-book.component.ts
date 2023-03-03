@@ -56,12 +56,20 @@ export class ReqBookComponent {
     this.requestBookService.addRequestBookDetails(this.requestBook , this.resdata).subscribe(
       (data:any)=>{
         console.log(data);
-        alert("Success");
+        this.dialog.open(DialogmodalComponent,{
+          data:{
+            name:"sucess"
+          }
+        });
         window.location.href="/req-book"
       },
       (error: any)=>{
         console.log(error);
-        alert("Something Went Wrong");
+        this.dialog.open(DialogmodalComponent,{
+          data:{
+            name:"something went wrong"
+          }
+        });
       }
       )
   }

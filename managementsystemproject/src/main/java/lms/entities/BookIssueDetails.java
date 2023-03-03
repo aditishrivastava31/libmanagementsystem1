@@ -35,7 +35,7 @@ public class BookIssueDetails {
 	private UserDetails userDetail;
 	
 
-	public BookIssueDetails() {
+	public BookIssueDetails(){
 
 	}
 

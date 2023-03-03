@@ -57,12 +57,18 @@ export class BooksService {
     const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"))
     let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
       console.log("user Id:"+savedPerson.userId);
-    console.log(headers.get("Authorization")); const url = "http://localhost:8080/lend/" + savedPerson.userId
+    console.log(headers.get("Authorization")); 
+    const url = "http://localhost:8080/lend/" + savedPerson.userId
     return this.httpclient.get<any>(url + "/" + book_id, { headers ,responseType: 'text' as 'json' })
   }
 
-  getbookbyid(){
-    
+  getbookbyid(book_id: number){
+    console.log(localStorage.getItem("token"));
+    console.log("Bearer " + localStorage.getItem("token"));
+    const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"))
+    const url = "http://localhost:8080/getbookdetailsbyid/" +book_id
+    return this.httpclient.get<bookdto>(url,{ headers })
+
   }
 
 

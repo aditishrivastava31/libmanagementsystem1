@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BooksService } from 'src/services/books.service';
+import { bookdto } from '../books/booksinterface';
 
 @Component({
   selector: 'app-book-details',
@@ -14,6 +16,10 @@ export class BookDetailsComponent {
     desc:"aasdfghjasfdghjasfdghjasfghja"
   };
 
+  bookdetails!:bookdto
+
+  
+
   book_review!: [
     {
       username: "demouser1",
@@ -27,13 +33,17 @@ export class BookDetailsComponent {
     }
   ];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,private bookservice:BooksService) {
   }
 
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     const bookIdFromRoute = Number(routeParams.get('book_id'));
     console.log("book_id",bookIdFromRoute);
+    this.bookservice.getbookbyid(bookIdFromRoute).subscribe((n)=>{
+      this.bookdetails=n
+      console.log(n.avg_rating/10);
+    })
   }
 
 
