@@ -59,7 +59,7 @@ public class BookDetailsController {
     }
 
     @GetMapping("/getbookdetailsbyid/{id}")
-    public BookDetails getbookdetailsbyid(@PathVariable("id") long id) {
+    public BookDetailssenddto getbookdetailsbyid(@PathVariable("id") long id) {
         return bookDetailsService.getbookdetailsbyid(id);
 
     }
