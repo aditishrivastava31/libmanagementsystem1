@@ -2,11 +2,16 @@ package lms.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import lms.dto.AuthenticateDto;
+import lms.dto.ForgetPasswordDto;
+import lms.dto.ForgetPasswordPasswordDto;
 import lms.dto.JwtResponseDao;
+import lms.dto.ResetPasswordDao;
 import lms.serviceImpl.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.mail.MessagingException;
 import lms.entities.UserDetails;
 import lms.serviceImpl.UserServiceImpl;
+import lms.services.EmailService;
 import lms.services.UserService;
 
 /**
@@ -34,12 +41,11 @@ import lms.services.UserService;
 public class UserController {
 
 	@Autowired
-	private UserServiceImpl impl;
-
-	@Autowired
 	private UserService userService;
 	@Autowired
 	private JwtService jwtService;
+	@Autowired
+	private EmailService emailService;
 
 //    @PostConstruct
 //    public void initRoleAndUser() {
@@ -88,5 +94,52 @@ public class UserController {
 	@PutMapping("/update/{id}")
 	public UserDetails updated(@PathVariable("id") long id) {
 		return userService.updated(id);
+	}
+	@PostMapping("/resetpassword/{user_id}")
+	public String resetpassword(@RequestBody ResetPasswordDao resetPasswordDao, @PathVariable("user_id") long id) {
+		return userService.forgetpassword(resetPasswordDao, id);	}
+
+	@PostMapping("/forgetPassword")
+	public String processForgetPassword(@RequestBody ForgetPasswordDto forgetPasswordDto){
+		Random random = new Random();
+		String token = random.ints(48, 123)
+				.filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+				.limit(50)
+				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+				.toString();
+		try {
+			userService.updateResetPasswordToken(token,forgetPasswordDto.getEmail());
+			String resetpasswordURL="/localhost:4200/resetpassword?token="+token;
+			System.out.println(resetpasswordURL);
+			emailService.forgetPasswordSendEMail(forgetPasswordDto.getEmail(),resetpasswordURL);
+		} 
+		catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+		System.out.println(token);
+		return  token;
+	}
+	@GetMapping("/forgetReset_password")
+	public String showResetPassword(@Param(value="token") String token){
+		UserDetails userDetails=userService.getDetailByToken(token);
+		if(userDetails==null){
+			return "Invalid Token";
+		}
+		return "Correct";
+	}
+	@PostMapping("/forgetReset_password")
+	public String SetResetPassword(@Param(value="token") String token,@RequestBody ForgetPasswordPasswordDto forgetPasswordPasswordDto){
+		UserDetails userDetails=userService.getDetailByToken(token);
+		if(userDetails==null){
+			return "Invalid Token";
+		}else{
+			if(forgetPasswordPasswordDto.getNewPassword().equals(forgetPasswordPasswordDto.getConfirmPassword())){
+				userService.updatePassword(userDetails,forgetPasswordPasswordDto.getNewPassword());
+				return "success Your password is reset successfully";
+			}
+			else{
+				return "Enter Same password";
+			}
+		}
 	}
 }
