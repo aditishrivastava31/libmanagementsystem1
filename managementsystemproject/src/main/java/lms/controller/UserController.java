@@ -109,7 +109,7 @@ public class UserController {
 				.toString();
 		try {
 			userService.updateResetPasswordToken(token,forgetPasswordDto.getEmail());
-			String resetpasswordURL="/localhost:4200/resetpassword?token="+token;
+			String resetpasswordURL="http://localhost:4200/resetpassword?token="+token;
 			System.out.println(resetpasswordURL);
 			emailService.forgetPasswordSendEMail(forgetPasswordDto.getEmail(),resetpasswordURL);
 		} 

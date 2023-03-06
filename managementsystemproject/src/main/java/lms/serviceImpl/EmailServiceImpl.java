@@ -3,8 +3,10 @@ package lms.serviceImpl;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lms.entities.BookIssueDetails;
+import lms.repositories.UserDetailsRepository;
 import lms.services.EmailService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -22,16 +24,17 @@ public class EmailServiceImpl implements EmailService {
 	private JavaMailSender mailSender;
 
 	private BookIssueDetails bookIssueDetails;
+	@Autowired
+	private UserDetailsRepository userDetailsRepository;
 
 	public EmailServiceImpl(JavaMailSender mailSender1) {
 		this.mailSender = mailSender1;
 	}
 
-	String subject = "Regarding End Date Request";
+	StringBuilder message;
 
 	@Override
-	public void sendEmail(String message) throws MessagingException {
-		String to = bookIssueDetails.getUserDetail().getEmail();
+	public void sendEmail(String message, String subject, String to) throws MessagingException {
 		MimeMessage emailmMessage = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(emailmMessage, true);
 		helper.setTo(to);
@@ -41,27 +44,40 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	public void acceptEndDateEmailSender() throws MessagingException {
-		String message = "Dear " + bookIssueDetails.getUserDetail().getUserName()
-				+ " your request for extending end date of " + bookIssueDetails.getBookDetails().getBookName()
-				+ " is accepted!";
-		sendEmail(message);
+		String subject = "Regarding End Date Request";
+		String to = bookIssueDetails.getUserDetail().getEmail();
+		message=new StringBuilder();
+		message.append("Dear ");
+		message.append(bookIssueDetails.getUserDetail().getUserName());
+		message.append(" your request for extending end date of ");
+		message.append(bookIssueDetails.getBookDetails().getBookName());
+		message.append(" is accepted!");
+		sendEmail(message.toString(), subject, to);
 	}
 
 	public void rejectEndDateEmailSender() throws MessagingException {
-		String message = "Dear " + bookIssueDetails.getUserDetail().getUserName()
-				+ " your request for extending end date of " + bookIssueDetails.getBookDetails().getBookName()
-				+ " is rejected!";
-		sendEmail(message);
+		String subject = "Regarding End Date Request";
+		String to = bookIssueDetails.getUserDetail().getEmail();
+		message=new StringBuilder();
+		message.append("Dear ");
+		message.append(bookIssueDetails.getUserDetail().getUserName());
+		message.append(" your request for extending end date of ");
+		message.append(bookIssueDetails.getBookDetails().getBookName());
+		message.append(" is rejected!");
+		sendEmail(message.toString(), subject, to);
 	}
 
 	public void issueBookEmailSender() {
-		String message = "Dear " + bookIssueDetails.getUserDetail().getUserName() + " your request for issuing "
-				+ bookIssueDetails.getBookDetails().getBookName()
-				+ " has been completed . Enjoy Reading! And kindly return the book before "
-				+ bookIssueDetails.getIssueEndDate() + " . ThankYou!";
-		subject = "Book Issue";
+		String subject = "Regarding Book Issue Request";
+		String to = bookIssueDetails.getUserDetail().getEmail();
+		message=new StringBuilder();
+		message.append("Dear ");
+		message.append(bookIssueDetails.getUserDetail().getUserName());
+		message.append(" your request for issuing ");
+		message.append(" has been completed . Enjoy Reading! And kindly return the book before ");
+		message.append(bookIssueDetails.getIssueEndDate() + " . ThankYou!");
 		try {
-			sendEmail(message);
+			sendEmail(message.toString(), subject, to);
 		} catch (MessagingException e) {
 
 			e.printStackTrace();
@@ -74,18 +90,17 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	public void forgetPasswordSendEMail(String email, String resetPasswordLink) throws MessagingException {
-		MimeMessage mimeMailMessage=mailSender.createMimeMessage();
-		MimeMessageHelper helper=new MimeMessageHelper(mimeMailMessage);
-		helper.setTo(email);
-		String subject="Here is your Reset Password Link";
-		String content="<p>Hello,</p>"
-				+"<p>You have requested to reset your password.</p>"
-				+"<p>Click the link below to change your password:</p>"
-				+"<p><a href=\""+resetPasswordLink+"\">Change my password</a></p>"
-				+"<p>Ignore this email if you do remember your password, or you have not made the request </p>";
-		helper.setSubject(subject);
-		helper.setText(content,true);
-		mailSender.send(mimeMailMessage);		
+
+		String subject = "Here is your Reset Password Link";
+		message=new StringBuilder();
+		message.append("Dear ");
+		message.append("You have requested to reset your password. ");
+		message.append("Click the link below to change your password: ");
+		message.append(resetPasswordLink);
+		message.append(" Change my password ");
+		message.append(" Ignore this email if you do remember your password, or you have not made the request.");
+
+		sendEmail(message.toString(), subject, email);
 	}
-	
+
 }
