@@ -7,6 +7,8 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 /*
  * This class is used to refer user table in database and defines
@@ -37,7 +39,9 @@ public class UserDetails {
 	@OneToOne
 	private Address userAddress;
 
-	
+	@JsonIgnore
+	private String resetpasswordtoken;
+
 
 	public Set<Role> getRole() {
 		return role;
@@ -104,6 +108,15 @@ public class UserDetails {
 
 	public void setUserAddress(Address userAddress) {
 		this.userAddress = userAddress;
+	}
+	
+
+	public String getResetpasswordtoken() {
+		return resetpasswordtoken;
+	}
+
+	public void setResetpasswordtoken(String resetpasswordtoken) {
+		this.resetpasswordtoken = resetpasswordtoken;
 	}
 
 	public UserDetails() {

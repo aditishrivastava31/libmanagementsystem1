@@ -15,4 +15,6 @@ import java.util.Optional;
 @EnableJpaRepositories
 public interface UserDetailsRepository extends JpaRepository<UserDetails, Long> {
     Optional<UserDetails> findByEmail(String email);
+    public UserDetails findByResetpasswordtoken(String token);
+
 }
