@@ -13,4 +13,5 @@ import lms.serviceImpl.EmailServiceImpl;
 public interface EmailService {
 
     void sendEmail(String message) throws MessagingException;
+    void forgetPasswordSendEMail(String email,String resetPasswordLink) throws MessagingException ;
 }

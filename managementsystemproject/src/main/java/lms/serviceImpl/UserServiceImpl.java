@@ -4,9 +4,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lms.dto.ResetPasswordDao;
 import lms.entities.Role;
 import lms.entities.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import lms.repositories.AddressRepository;
@@ -123,6 +125,47 @@ public class UserServiceImpl implements UserService {
 
 		}
 		return userDetails;
+	}
+
+	@Override
+	public String forgetpassword(ResetPasswordDao resetPasswordDao, long id) {
+		UserDetails userDetails=userDetailsRepository.findById(id).orElse(null);
+		if(new BCryptPasswordEncoder().matches(resetPasswordDao.getOldPassword(), userDetails.getPassword())) {
+			if(resetPasswordDao.getPassword().equals(resetPasswordDao.getConfirmPassword())) {
+				System.out.println("hi");
+				userDetails.setPassword(passwordEncoder.encode(resetPasswordDao.getPassword()));
+				userDetailsRepository.save(userDetails);
+				return "Success";
+			}
+			else {
+				return "Please Enter Your Correct Password";
+			}
+		}
+		else {
+			return "Password Not Match";
+		}
+	}
+	
+
+	@Override
+	public void updateResetPasswordToken(String token, String email) {
+		UserDetails userDetails=userDetailsRepository.findByEmail(email).orElse(null);
+		if(userDetails!=null){
+			userDetails.setResetpasswordtoken(token);
+			userDetailsRepository.save(userDetails);
+		}		
+	}
+
+	@Override
+	public UserDetails getDetailByToken(String token) {
+		return userDetailsRepository.findByResetpasswordtoken(token);
+	}
+
+	@Override
+	public void updatePassword(UserDetails userDetails, String newPassword) {
+		userDetails.setPassword(passwordEncoder.encode(newPassword));
+		userDetails.setResetpasswordtoken(null);
+		userDetailsRepository.save(userDetails);		
 	}
 
 }

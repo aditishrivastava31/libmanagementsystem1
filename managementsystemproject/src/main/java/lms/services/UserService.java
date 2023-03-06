@@ -1,9 +1,9 @@
 package lms.services;
 
+import lms.dto.ResetPasswordDao;
 import lms.entities.UserDetails;
 
 import java.util.List;
-
 
 /**
  * this interface will be used to define service methods for {@link UserDetails}
@@ -13,12 +13,19 @@ import java.util.List;
 
 public interface UserService {
 
-    public UserDetails signUp(UserDetails userDetails, String countryName, String stateName, String cityName);
+	public UserDetails signUp(UserDetails userDetails, String countryName, String stateName, String cityName);
 
-    public List<UserDetails> getAllUser();
+	public List<UserDetails> getAllUser();
 
-    public UserDetails adminsignUp(UserDetails userDetails, String countryName, String stateName, String cityName);
+	public UserDetails adminsignUp(UserDetails userDetails, String countryName, String stateName, String cityName);
 
 	public UserDetails updated(long id);
-}
 
+	public String forgetpassword(ResetPasswordDao resetPasswordDao, long id);
+
+	public void updateResetPasswordToken(String token, String email);
+
+	public UserDetails getDetailByToken(String token);
+
+	public void updatePassword(UserDetails userDetails, String newPassword);
+}
