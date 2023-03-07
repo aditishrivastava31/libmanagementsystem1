@@ -32,10 +32,11 @@ export class LoginComponent implements OnInit {
         console.log(res.userDetails.role)
         const role = res.userDetails.role[0].roleName;
         if (role === 'USER') {
+          this.loginService.isadmin();
           window.location.href="/dashboard"
-
         } 
-        else if (role==="ADMIN") {
+        else if (role==="ADMIN"){
+          this.loginService.isadmin();
           window.location.href="/issue-book-details"
        }
       },

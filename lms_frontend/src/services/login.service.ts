@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class LoginService {
 
   url = "http://localhost:8080/authenticate"
+  
   constructor(private http: HttpClient) { }
 
   // caling the server to generate token
@@ -37,13 +38,18 @@ export class LoginService {
 
   // to check user is login
   isLoggedIn() {
+
     let token = localStorage.getItem("token");
     console.log(token)
     if (token == undefined || token === '' || token == null) {
       return false;
-    } else {
+
+    } 
+    else {
       return true;
     }
+
+
   }
   // get logout
   logout() {
@@ -81,6 +87,39 @@ export class LoginService {
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
     console.log(expiry);
     return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
+
+  isadmin():boolean{
+  //   if (role === 'USER') {
+  //        this.isadmin=false;  
+  //   } 
+  //   else if (role==="ADMIN")
+  //   {
+  //   this.isadmin=true;
+  //   console.log(this.isadmin);
+  //  }
+  //  else{
+  //   this.isadmin=false;
+  //  }
+
+  let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
+  let roles=JSON.parse(localStorage.getItem("role") || '{}')
+  //console.log(localStorage.getItem(localStorage.key(2)||""))
+
+  console.log("zfcvbnm",roles[0].roleName);
+  let role=roles[0].roleName
+  if (role === 'USER') {
+           return false;  
+      } 
+      else if (role==="ADMIN")
+      {
+      return true
+    
+     }
+     else{
+      return false;
+     }
+
   }
 
 }
