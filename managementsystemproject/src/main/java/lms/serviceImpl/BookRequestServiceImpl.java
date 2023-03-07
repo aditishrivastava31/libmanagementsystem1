@@ -66,7 +66,6 @@ public class BookRequestServiceImpl implements BookRequestService {
 
 	@Override
 	public void deleteBookRequest(long userId, long requestBookId) {
-
 		Optional<UserDetails> userDetails = userDetailsRepository.findById(userId);
 		if (userDetails.get().getRole().equals("ADMIN")) {
 			requestBookDetailsRepository.deleteById(requestBookId);
@@ -93,13 +92,11 @@ public class BookRequestServiceImpl implements BookRequestService {
 	}
 
 	public BookRequestDto setBookRequestDto(RequestBookDetails requestBookDetail) {
-
 		BookRequestDto bookRequestDto = new BookRequestDto();
 		bookRequestDto.setRequestId(requestBookDetail.getRequestBookId());
 		bookRequestDto.setBookName(requestBookDetail.getBookName());
 		bookRequestDto.setAuthorName(requestBookDetail.getAuthorName());
 		bookRequestDto.setIsActive(requestBookDetail.getIsActive());
-
 		return bookRequestDto;
 
 	}
