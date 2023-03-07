@@ -40,11 +40,13 @@ export class BookDetailsComponent {
     const routeParams = this.route.snapshot.paramMap;
     const bookIdFromRoute = Number(routeParams.get('book_id'));
     console.log("book_id",bookIdFromRoute);
-    this.bookservice.getbookbyid(bookIdFromRoute).subscribe((n)=>{
+    this.bookservice.getbookbyid(bookIdFromRoute).subscribe((n)=>
+    {
       this.bookdetails=n
       console.log(n.avg_rating/10);
     })
   }
+
 
 
 }

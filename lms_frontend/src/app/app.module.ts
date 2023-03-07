@@ -28,6 +28,8 @@ import { IssueBookDetailsComponent } from './issue-book-details/issue-book-detai
 import { AddBookDetailsComponent } from './add-book-details/add-book-details.component';
 import { BookRequestsComponent } from './book-requests/book-requests.component';
 import { ReqForExtComponent } from './req-for-ext/req-for-ext.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -63,7 +65,10 @@ import { ReqForExtComponent } from './req-for-ext/req-for-ext.component';
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatExpansionModule
    ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,39 @@
 <p>req-for-ext works!</p>
+
+<div>
+    <h1>Book Requests extension</h1>
+    <table class="datatable">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">username</th>
+                <th scope="col">booktitle</th>
+                <th scope="col">requestExtension</th>
+                <th scope="col">issueReturnDate</th>
+                <th scope="col">Operations</th>
+            </tr>
+        </thead>
+
+        <div *ngIf="(this.requestextension$ | async)?.length===0;else elseBlock">
+            <h4>No data to display...</h4>
+        </div>
+
+        <ng-template #elseBlock>
+            <tbody>
+                <!-- *ngFor="let item of [].constructor(3);let i = index" -->
+                <tr *ngFor="let extend of requestextension$ | async;let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>{{extend.username}}</td>
+                    <td>{{extend.booktitle}}</td>
+                    <td>{{extend.requestExtension}}</td>
+                    <td>{{extend.issueReturnDate}}</td>
+                    <td>
+                        <button class="btn btn-outline-success btn-sm">Accept</button>&nbsp;
+                        <button class="btn btn-outline-danger btn-sm">Reject</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </ng-template>
+    </table>
+</div>

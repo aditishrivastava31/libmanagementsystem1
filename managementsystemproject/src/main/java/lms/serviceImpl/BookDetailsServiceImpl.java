@@ -141,7 +141,6 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 	@Override
 	public List<BookDetailssenddto> geteverybookdetails() {
 		List<BookDetailssenddto> bookDetailssenddtoList = new ArrayList<>();
-		
 		bookRepository.findAll().forEach(n -> {
 			BookDetailssenddto bookDetailssenddto = new BookDetailssenddto();
 			bookDetailssenddto.setBook_id(n.getBookId());

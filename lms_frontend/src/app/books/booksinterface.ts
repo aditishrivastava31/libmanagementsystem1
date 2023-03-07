@@ -38,3 +38,14 @@ export interface issuebookdetails{
     
 }
 
+
+export interface extension{
+    
+        issueId: number
+        username: string,
+        booktitle: string,
+        requestExtension: Date,
+        issueReturnDate: Date
+    
+}
+

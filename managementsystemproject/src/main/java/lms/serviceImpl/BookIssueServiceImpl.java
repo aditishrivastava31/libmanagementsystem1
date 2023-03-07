@@ -167,9 +167,10 @@ public class BookIssueServiceImpl implements BookIssueService {
 					filteredData.add(bookIssueDetailsDto);
 				}
 			} else if (str.toLowerCase().equals("pending")) {
+				
 				bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueEndDate());
 				// System.out.println(filteredData);
-				if (bookIssueDetailsDto != null) {
+				if (bookIssueDetailsDto != null&issueBookDetails.getReturnDate()==null){
 					filteredData.add(bookIssueDetailsDto);
 				}
 
