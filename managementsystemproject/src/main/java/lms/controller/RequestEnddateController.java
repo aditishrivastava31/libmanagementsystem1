@@ -25,11 +25,12 @@ public class RequestEnddateController {
 		return requestEndDateService.getbookextensions();
 	}
 
-	@PostMapping("/accandrejectextension/{id}")
+	@GetMapping("/accandrejectextension/{value}/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String acceptandreject(@RequestParam("value") int value, @PathVariable("id") long id)
+	public String acceptandreject(@PathVariable("value") int value, @PathVariable("id") long id)
 			throws MessagingException {
 		return requestEndDateService.acceptandreject(id, value);
+		
 	}
 
 	@GetMapping("/addextension/{issueId}")

@@ -84,9 +84,14 @@ export class IssuebookservicesService {
       console.log("user Id:"+savedPerson.userId);
       const usersUrl ='http://localhost:8080/pendingBooks/'+savedPerson.userId
     return  this.httpclient.get<any>(usersUrl,{headers});
-  
   }
 
-
-
+  getallusersissuedbookdetails(){
+    console.log(localStorage.getItem("token"));
+    console.log("read issued book details is called")
+   const headers = new HttpHeaders()
+    .set('Authorization',"Bearer "+localStorage.getItem("token"))
+    const usersUrl="http://localhost:8080/getAllIssues"
+    return  this.httpclient.get<any>(usersUrl,{headers});
+  }
 }

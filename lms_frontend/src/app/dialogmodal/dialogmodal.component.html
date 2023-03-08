@@ -3,5 +3,5 @@
     <p>{{data.name}}</p>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="refresh()">Ok</button>
   </mat-dialog-actions>
