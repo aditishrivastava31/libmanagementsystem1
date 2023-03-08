@@ -29,8 +29,9 @@ import { AddBookDetailsComponent } from './add-book-details/add-book-details.com
 import { BookRequestsComponent } from './book-requests/book-requests.component';
 import { ReqForExtComponent } from './req-for-ext/req-for-ext.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatExpansionModule} from '@angular/material/expansion';
 import { ReviewcomponentComponent } from './reviewcomponent/reviewcomponent.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { ReviewcomponentComponent } from './reviewcomponent/reviewcomponent.comp
     AppRoutingModule,
     NgbModule,
     MatCardModule,
+    MatIconModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -71,7 +73,7 @@ import { ReviewcomponentComponent } from './reviewcomponent/reviewcomponent.comp
     ReactiveFormsModule,
     MatFormFieldModule,
     MatExpansionModule
-   ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

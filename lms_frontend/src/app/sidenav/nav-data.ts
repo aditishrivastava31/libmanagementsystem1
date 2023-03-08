@@ -47,14 +47,4 @@ export const adminNavbarData = [
         icon: 'fal fa-calendar-plus-o',
         label: 'Requests For Extension'
     },
-    {
-        routeLink: 'contact-us',
-        icon: 'fal fa-phone',
-        label: 'Contact Us'
-    },
-    {
-        routeLink: 'about-us',
-        icon: 'fal fa-info-circle',
-        label: 'About Us'
-    },
 ];

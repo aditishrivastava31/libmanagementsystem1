@@ -24,9 +24,10 @@ export class BodyComponent implements OnInit {
     let styleClass = '';
     if(this.collapsed && this.screenWidth > 768) {
       styleClass = 'body-trimmed';
-    } else if(this.collapsed && this.screenWidth <= 768 && this.screenWidth > 0) {
+    } else{
       styleClass = 'body-md-screen'
     }
+    // if(this.collapsed && this.screenWidth <= 768 && this.screenWidth > 0) 
     return styleClass;
   }
 }
