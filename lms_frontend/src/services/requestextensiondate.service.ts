@@ -24,5 +24,20 @@ export class RequestextensiondateService {
       const usersUrl ='http://localhost:8080/getenddateextensions'
     return  this.httpclient.get<extension[]>(usersUrl,{headers});
   }
-  
+
+  acceptandrejectextension(value:number,issueid:number){
+    console.log(issueid);
+    console.log(localStorage.getItem("token"));
+    console.log("read issued book details is called")
+   const headers = new HttpHeaders()
+    .set('Authorization',"Bearer "+localStorage.getItem("token"))
+      console.log(headers.get("Authorization"));
+      const usersUrl ='http://localhost:8080/accandrejectextension/'+value+'/'+issueid
+      console.log(usersUrl);
+      return  this.httpclient.get<any>(usersUrl,{headers,responseType: 'text' as 'json' });  
+
+    
+  }
+
+
 }

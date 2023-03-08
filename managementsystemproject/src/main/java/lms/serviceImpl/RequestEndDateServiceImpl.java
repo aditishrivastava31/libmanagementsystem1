@@ -60,16 +60,16 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 		if (value == 0) {
 			emailServiceImpl.rejectEndDateEmailSender();
 			deletetheExtension(bookIssueDetails);
-			return "rejection";
+			return "You have Rejected the Request";
 		}
-
+		
 		else {
 			Date issueenddate = bookIssueDetails.getIssueEndDate();
 			bookIssueDetails.setIssueEndDate(convertDate(issueenddate).getTime());
 			bookIssueRepository.save(bookIssueDetails);
 			emailServiceImpl.acceptEndDateEmailSender();
 			deletetheExtension(bookIssueDetails);
-			return "success";
+			return "You have Accept the Request";
 		}
 
 	}

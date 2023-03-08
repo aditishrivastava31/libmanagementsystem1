@@ -30,6 +30,7 @@ import { BookRequestsComponent } from './book-requests/book-requests.component';
 import { ReqForExtComponent } from './req-for-ext/req-for-ext.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ReviewcomponentComponent } from './reviewcomponent/reviewcomponent.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     IssueBookDetailsComponent,
     AddBookDetailsComponent,
     BookRequestsComponent,
-    ReqForExtComponent
+    ReqForExtComponent,
+    ReviewcomponentComponent
   ],
   imports: [
     BrowserModule,

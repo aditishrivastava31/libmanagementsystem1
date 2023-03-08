@@ -58,10 +58,10 @@ export class ReqBookComponent {
         console.log(data);
         this.dialog.open(DialogmodalComponent,{
           data:{
-            name:"sucess"
+            name:"sucess",
+            url: "/req-book"
           }
         });
-        window.location.href="/req-book"
       },
       (error: any)=>{
         console.log(error);

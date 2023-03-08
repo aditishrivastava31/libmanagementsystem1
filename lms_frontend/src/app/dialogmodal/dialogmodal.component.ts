@@ -6,10 +6,21 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
   styleUrls: ['./dialogmodal.component.scss']
 })
 
-export class DialogmodalComponent {
+export class DialogmodalComponent  {
 
   constructor( @Inject(MAT_DIALOG_DATA) public data:any){
 
+  }
+
+  refresh(){
+    console.log(this.data.url);
+    if(this.data.url===undefined||this.data.url===null){
+        console.log("if to load page");
+    }
+    else{
+      console.log("else block is executed");
+      window.location.href = this.data.url;
+    }
   }
 
 }
