@@ -1,5 +1,4 @@
 <div [hidden]="false">
-    <router-outlet></router-outlet>
     <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
     <app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>
 </div>

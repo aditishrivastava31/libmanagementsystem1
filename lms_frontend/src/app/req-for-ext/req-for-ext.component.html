@@ -28,8 +28,8 @@
                     <td>{{extend.requestExtension}}</td>
                     <td>{{extend.issueReturnDate}}</td>
                     <td>
-                        <button class="btn btn-outline-success btn-sm">Accept</button>&nbsp;
-                        <button class="btn btn-outline-danger btn-sm">Reject</button>
+                        <button class="btn btn-outline-success btn-sm" (click)="extensionrequest(1,extend.issueId)">Accept</button>&nbsp;
+                        <button class="btn btn-outline-danger btn-sm" (click)="extensionrequest(0,extend.issueId)">Reject</button>
                     </td>
                 </tr>
 

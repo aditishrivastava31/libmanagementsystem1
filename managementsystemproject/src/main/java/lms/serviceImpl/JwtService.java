@@ -48,6 +48,7 @@ public class JwtService implements UserDetailsService {
 		lms.entities.UserDetails user = userDao.findByEmail(email).get();
 
 		if (user != null) {
+			
 			return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
 					getAuthority(user));
 		} else {
