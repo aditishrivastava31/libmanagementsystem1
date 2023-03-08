@@ -1,87 +1,85 @@
 <h1>Add Books</h1>
 
-<form class="exampl-form" [formGroup]="addbookform" (ngSubmit)=" addtobase()" ngNativeValidate >
+<form [formGroup]="addbookform" (ngSubmit)=" addtobase()" ngNativeValidate>
+    <!-- <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div> -->
     <div>
-        <p>book name</p>
-    <mat-form-field class="f1">
-        <mat-label>book name</mat-label>
-        <input type="text" matInput formControlName="bookName"
-               placeholder="enter the bookName">
-               <mat-error *ngIf="addbookform.get('bookName')?.hasError('required')">
-                    book name is mandatory           
-                 </mat-error>
-    </mat-form-field>   
-</div>
-<div>
-    <p>book quantity</p>
-<mat-form-field class="f1">
-    <mat-label>quantity</mat-label>
-    <input type="number" matInput formControlName="quantity"
-           placeholder="enter the quantity">
-
-           <mat-error *ngIf="addbookform.get('quantity')?.hasError('min')">
-            enter greater than 0
-        </mat-error>
-
-        <mat-error *ngIf="addbookform.get('quantity')?.hasError('required')">
-            quantity is mandatory           
-         </mat-error>
-        
-</mat-form-field>
-</div>
-
-<div formGroupName="category">
-<mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          category data
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <mat-form-field appearance="fill">
-        <mat-label>category</mat-label>
-        <input matInput type="text" formControlName="categoryName" placeholder="enter the categoryname">
-        <mat-error *ngIf="addbookform.get('categoryName')?.hasError('required')">
-            Category  is required          
-         </mat-error>
-      </mat-form-field>
-    </mat-expansion-panel>
-</mat-accordion>
-</div>
-
-<div>
-<button color="primary" type="button" (click)="addauthors()">Add authors</button>
-</div>
-
-<div formArrayName="authors">
-
-<div *ngFor="let author of  authorsArray.controls; let i=index">
-<div [formGroupName]="i">
-
-    <mat-form-field class="example-full-width">
-        <mat-label>authorname</mat-label>
-        <input type="text" matInput formControlName="authorName"
-               placeholder="enter the authorname">
-
-               <mat-error *ngIf="addbookform.get('authorName')?.hasError('required')">
-                author name  is required          
-             </mat-error>   
-
-            </mat-form-field>
-            
-          <button type="button" (click)="removeperson(i)">Remove author</button>
-</div>
-</div>
-</div>
-
-<div>
-<button   color ="primary">addbook</button>
-</div>
-
-<div>
-    <button  type="button" (click)="reset()" color ="primary">reset</button>
+        <!-- <p>Book Name</p> -->
+        <mat-form-field class="f1">
+            <mat-label>Book Name</mat-label>
+            <input type="text" matInput formControlName="bookName" placeholder="Enter the book name...">
+            <mat-error *ngIf="addbookform.get('bookName')?.hasError('required')">
+                Please enter book name.
+            </mat-error>
+        </mat-form-field>
     </div>
-    </form>
+    <br>
+    <div>
+        <!-- <p>book quantity</p> -->
+        <mat-form-field class="f1">
+            <mat-label>Quantity</mat-label>
+            <input type="number" matInput formControlName="quantity" placeholder="Enter the quantity...">
+
+            <mat-error *ngIf="addbookform.get('quantity')?.hasError('min')">
+                Quantity must be greater than <b>0</b>
+            </mat-error>
+
+            <mat-error *ngIf="addbookform.get('quantity')?.hasError('required')">
+                Quantity is mandatory
+            </mat-error>
+
+        </mat-form-field>
+    </div>
+    <br>
+    <div formGroupName="category">
+        <mat-form-field class="f1">
+            <mat-label>Category</mat-label>
+            <input type="text" matInput formControlName="categoryName" placeholder="Enter the category...">
+
+            <mat-error *ngIf="addbookform.controls['category'].get('categoryName')?.hasError('required')">
+                Category is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <br>
+    
+    <div>
+        <h4>Author Details</h4>
+
+
+        <div formArrayName="authors">
+
+            <div *ngFor="let author of  authorsArray.controls; let i=index" [formGroupName]="i">
+
+                <mat-form-field class="example-full-width">
+
+                    <mat-label>Author Name</mat-label>
+                    <input type="text" matInput formControlName="authorName" placeholder="enter the authorname">
+
+                    <mat-error *ngIf="author.get('authorName')?.hasError('required')">
+                        Author name is required
+                    </mat-error>
+
+                    <button mat-icon-button matSuffix *ngIf="i<1" (click)="addauthors()">
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+
+                    <button mat-icon-button matSuffix *ngIf="i>=1" (click)="removeperson(i)">
+                        <mat-icon>highlight_off</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="text-right">
+        <button class="btn btn-outline-secondary">Add Book</button>
+        <button type="button" class="btn btn-outline-secondary ml-2" (click)="reset()" color="primary">Reset</button>
+    </div>
+</form>
 
 <p>{{this.addbookform.value|json}}</p>
