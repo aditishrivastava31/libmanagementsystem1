@@ -48,4 +48,9 @@ export interface extension{
         issueReturnDate: Date
     
 }
+export interface reviewadd
+{
+    star:number, 
+    comments:string
+}
 

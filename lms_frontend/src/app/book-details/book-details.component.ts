@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from 'src/services/books.service';
+import { ReviewservicesService } from 'src/services/reviewservices.service';
 import { bookdto } from '../books/booksinterface';
+import { ReviewcomponentComponent } from '../reviewcomponent/reviewcomponent.component';
 
 @Component({
   selector: 'app-book-details',
@@ -10,16 +14,8 @@ import { bookdto } from '../books/booksinterface';
 })
 export class BookDetailsComponent {
 
-  book = {
-    title:"JAVA",
-    authors:["author1","author2"],
-    desc:"aasdfghjasfdghjasfdghjasfghja"
-  };
-
-  bookdetails!:bookdto
-
-  
-
+  bookdetails!: bookdto;
+  bookreviewform!: FormGroup;
   book_review!: [
     {
       username: "demouser1",
@@ -32,21 +28,32 @@ export class BookDetailsComponent {
       star_rating: 3
     }
   ];
-
-  constructor(private route: ActivatedRoute,private bookservice:BooksService) {
+  bookidroute!: number;
+  
+  constructor(
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private bookservice: BooksService,
+    private bookreviewservice: ReviewservicesService,
+    private fb: FormBuilder
+  ) {}
+  
+  openDialog(): void {
+    this.dialog.open(ReviewcomponentComponent, {
+      data: {
+        bookid: this.bookidroute
+      }
+    });
   }
-
+  
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     const bookIdFromRoute = Number(routeParams.get('book_id'));
-    console.log("book_id",bookIdFromRoute);
-    this.bookservice.getbookbyid(bookIdFromRoute).subscribe((n)=>
-    {
-      this.bookdetails=n
-      console.log(n.avg_rating/10);
+    console.log("book_id", bookIdFromRoute);
+    this.bookidroute = bookIdFromRoute;
+    this.bookservice.getbookbyid(bookIdFromRoute).subscribe((n) => {
+      this.bookdetails = n;
+      console.log(n.avg_rating / 10);
     })
   }
-
-
-
 }
