@@ -1,1 +1,38 @@
 <p>reviewcomponent works!</p>
+<h1 mat-dialog-title>ADD REVIEW</h1>
+<div mat-dialog-content>
+  <form class="exampl-form" [formGroup]="bookreviewform" (ngSubmit)="addreview()" ngNativeValidate>
+    <div>
+      <p>star</p>
+      <mat-form-field class="f1">
+        <mat-label>star</mat-label>
+        <input type="number" matInput formControlName="star" placeholder="do the rating">
+        <mat-error *ngIf="bookreviewform.get('star')?.hasError('required')">
+          Rating is manadatory
+        </mat-error>
+        <mat-error *ngIf="bookreviewform.get('star')?.hasError('min')">
+          Give rating between <b>0</b> and <b>5</b>
+        </mat-error>
+        <mat-error *ngIf="bookreviewform.get('star')?.hasError('max')">
+          Give rating between <b>0</b> and <b>5</b>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+        <p>comments</p>
+        <mat-form-field class="f1">
+            <mat-label>comments</mat-label>
+            <textarea matInput formControlName="comments" placeholder="enter the review comments"></textarea>
+            <mat-error *ngIf="bookreviewform.get('comments')?.hasError('required')">
+                comments is mandatory
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-button cdkFocusInitial mat-dialog-close color="primary" [disabled]="!bookreviewform.valid" (click)="addreview()">add review</button>
+        <button mat-button mat-dialog-close>No</button>
+    </div>
+    
+   
+</form>
+</div>
