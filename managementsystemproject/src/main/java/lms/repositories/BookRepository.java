@@ -20,6 +20,8 @@ public interface BookRepository extends JpaRepository<BookDetails, Long> {
     
     
     //public List<BookDetails> findByAuthorsAndBookName(List<Author> author,String name);
+    
+    
 
 
 }
