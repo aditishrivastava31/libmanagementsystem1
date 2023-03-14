@@ -85,7 +85,12 @@ export class SidenavComponent implements OnInit {
     this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
   }
   logoutUser(){
-    this.loginService.logout();
-    location.reload();
+    if(this.loginService.isadmin()){
+      this.loginService.logout();
+    window.location.href="/adminlogin"
+    }else{
+      this.loginService.logout();
+    window.location.href="/login"
+    }
   }
 }
