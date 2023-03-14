@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/services/login.service';
 import { SidenavService } from 'src/services/sidenav.service';
 
@@ -12,7 +13,9 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
-  constructor(private loginService: LoginService , public sidenav: SidenavService) { }
+  constructor(private loginService: LoginService , public sidenav: SidenavService,private router : Router){
+
+   }
   ngOnInit(): void {
     this.sidenav.hide();
   }
@@ -32,13 +35,28 @@ export class LoginComponent implements OnInit {
         this.loginService.setRoles(res.userDetails.role)
         console.log(res.userDetails.role)
         const role = res.userDetails.role[0].roleName;
+        console.log(role);
         if (role === 'USER') {
           this.loginService.isadmin();
-          window.location.href="/dashboard"
+          if(this.router.url==="/login"||this.router.url==="/"){
+            console.log("hahah");
+            
+            window.location.href="/dashboard"
+          }
+          else{
+            alert("Enter Your Correct email and password")
+          }
         } 
         else if (role==="ADMIN"){
           this.loginService.isadmin();
-          window.location.href="/issue-book-details"
+        
+          if(this.router.url==="/adminlogin"){
+            window.location.href="/issue-book-details"
+          }
+          else{
+            alert("Enter Your Correct email and password")
+          }
+         
        }
       },
         error => {

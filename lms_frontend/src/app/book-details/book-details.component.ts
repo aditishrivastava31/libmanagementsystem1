@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from 'src/services/books.service';
 import { ReviewservicesService } from 'src/services/reviewservices.service';
 import { bookdto } from '../books/booksinterface';
@@ -35,8 +35,11 @@ export class BookDetailsComponent {
     private route: ActivatedRoute,
     private bookservice: BooksService,
     private bookreviewservice: ReviewservicesService,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private router : Router
+  ) {
+
+  }
   
   openDialog(): void {
     this.dialog.open(ReviewcomponentComponent, {
@@ -55,5 +58,7 @@ export class BookDetailsComponent {
       this.bookdetails = n;
       console.log(n.avg_rating / 10);
     })
+    
+    
   }
 }
