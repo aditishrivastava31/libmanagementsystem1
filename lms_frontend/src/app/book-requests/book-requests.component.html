@@ -1,43 +1,27 @@
-<div >
-    <h1>Book Requests</h1>
-    <table class="datatable">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Book Title</th>
-                <th scope="col">Author Name</th>
-                <th scope="col">Operations</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- *ngFor="let item of [].constructor(3);let i = index" -->
-            <tr>
-                <td>101</td>
-                <td>Demo</td>
-                <td>Demo</td>
-                <td>
-                    <button class="btn btn-outline-success btn-sm">Accept</button>&nbsp;
-                    <button class="btn btn-outline-danger btn-sm">Reject</button>
-                </td>
-            </tr>
-            <tr>
-                <td>102</td>
-                <td>Demo</td>
-                <td>Demo</td>
-                <td>
-                    <button class="btn btn-outline-success btn-sm">Accept</button>&nbsp;
-                    <button class="btn btn-outline-danger btn-sm">Reject</button>
-                </td>
-            </tr>
-            <tr>
-                <td>103</td>
-                <td>Demo</td>
-                <td>Demo</td>
-                <td>
-                    <button class="btn btn-outline-success btn-sm">Accept</button>&nbsp;
-                    <button class="btn btn-outline-danger btn-sm">Reject</button>
-                </td>
-            </tr>
+<div class="text-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">RequestId</th>
+          <th scope="col">Author Name</th>
+          <th scope="col">Book Name</th>
+          <th scope="col">Status</th>
+          <th scope="col">Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+          <tr *ngFor="let requestbook of requestBookdtos$ | async;let i = index" ,*ngIf="1===1">            
+            <th scope="row">{{i + 1}}</th>
+            <td>{{requestbook.authorName}}</td>
+            <td>{{requestbook.bookName}}</td>
+            <td>{{requestbook.isActive}}</td>
+            <td>
+                <button class="btn btn-outline-success btn-sm" (click)="acceptRequest(requestbook.requestId,3)">Accept</button>&nbsp;
+                <button class="btn btn-outline-danger btn-sm" (click)="rejectRequest(requestbook.requestId,0)">Reject</button>
+                <button class="btn btn-outline-danger btn-sm" (click)="pendinpurchase(requestbook.requestId,2)">Pending Purchase</button>
+            </td>
+          </tr>
+
         </tbody>
     </table>
-</div>
+  </div>
