@@ -4,12 +4,13 @@ public class AuthenticateDto {
     private String email;
     private String password;
 
-    public AuthenticateDto(String email, String password) {
+    public AuthenticateDto(String email, String password){
         this.email = email;
         this.password = password;
     }
 
-    public AuthenticateDto() {
+    public AuthenticateDto(){
+    	
     }
 
     public String getEmail() {
