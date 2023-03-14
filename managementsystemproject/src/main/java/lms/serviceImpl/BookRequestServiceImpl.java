@@ -77,6 +77,8 @@ public class BookRequestServiceImpl implements BookRequestService {
 		List<BookRequestDto> bookRequestDtos = new ArrayList<>();
 		List<RequestBookDetails> requestBookDetails = requestBookDetailsRepository.findAll();
 		for (RequestBookDetails requestBookDetails2 : requestBookDetails) {
+			//if(requestBookDetails2.getIsActive().toString().equalsIgnoreCase("Pending"))
+			System.out.println(requestBookDetails2.getIsActive().toString());
 			bookRequestDtos.add(setBookRequestDto(requestBookDetails2));
 		}
 		return bookRequestDtos;

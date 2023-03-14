@@ -57,7 +57,7 @@ public class RequestBookController {
 		return bookRequestDtos;
 	}
 
-	@PutMapping("/isAccepted/admin/{requestId}/{isActive}")
+	@GetMapping("/isAccepted/admin/{requestId}/{isActive}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public BookRequestDto getStatus(@PathVariable("requestId") long requestId,
 			@PathVariable(name = "isActive") int isActive) {
