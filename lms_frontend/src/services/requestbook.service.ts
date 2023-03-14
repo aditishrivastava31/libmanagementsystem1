@@ -50,4 +50,13 @@ getAllRequest(){
   const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"))
   return this.http.get<requestbookdto[]>('http://localhost:8080/requestBookdto',{headers});
 }
+
+updateRequest(requestId:number,status:number){
+  console.log(status);
+  console.log(localStorage.getItem("token"));
+  const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"))
+  const requrl = 'http://localhost:8080/isAccepted/admin/'+requestId+"/"+status;
+  console.log(requrl);
+      return this.http.get<any>(requrl,{headers});
+}
 }
