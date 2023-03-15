@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { book, bookdto } from 'src/app/books/booksinterface';
+import { book, bookdto, reviewdto } from 'src/app/books/booksinterface';
 
 @Injectable({
   providedIn: 'root'
@@ -56,21 +56,28 @@ export class BooksService {
     console.log("Bearer " + localStorage.getItem("token"));
     const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"))
     let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
-      console.log("user Id:"+savedPerson.userId);
-    console.log(headers.get("Authorization")); 
+    console.log("user Id:" + savedPerson.userId);
+    console.log(headers.get("Authorization"));
     const url = "http://localhost:8080/lend/" + savedPerson.userId
-    return this.httpclient.get<any>(url + "/" + book_id, { headers ,responseType: 'text' as 'json' })
+    return this.httpclient.get<any>(url + "/" + book_id, { headers, responseType: 'text' as 'json' })
   }
 
-  getbookbyid(book_id: number){
+  getbookbyid(book_id: number) {
     console.log(localStorage.getItem("token"));
     console.log("Bearer " + localStorage.getItem("token"));
     const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"))
-    const url = "http://localhost:8080/getbookdetailsbyid/" +book_id
-    return this.httpclient.get<bookdto>(url,{ headers })
+    const url = "http://localhost:8080/getbookdetailsbyid/" + book_id
+    return this.httpclient.get<bookdto>(url, { headers })
 
   }
 
+  getreviewbybookid(book_id: number) {
+    console.log(localStorage.getItem("token"));
+    console.log("Bearer " + localStorage.getItem("token"));
+    const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"))
+    const url = "http://localhost:8080/getreviewbybookid/" + book_id
+    return this.httpclient.get<reviewdto[]>(url, { headers })
+  }
 
 
 }

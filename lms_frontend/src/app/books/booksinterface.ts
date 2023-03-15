@@ -17,13 +17,20 @@ export interface authors{
     
 }
 
+export interface reviewdto{
+    username:string,
+    comments:string,
+    starRating:number,
+}
+
 export interface bookdto{
     book_id: number,
     book_title:string,
     quantity: number,
     authors: string[],
     category: string,
-    avg_rating:number
+    avg_rating:number,
+    rating_count:number,
 }
 
 

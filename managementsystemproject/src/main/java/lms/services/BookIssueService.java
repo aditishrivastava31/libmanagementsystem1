@@ -26,6 +26,6 @@ public interface BookIssueService {
 
     List<BookIssueDetailsDto> getIssuedBookDetails(String str, long uid);
 
-    List<BookIssueDetailsDto> getAllIssuesToAdmin();
+    List<BookIssueDetailsDto> getAllIssuedToAdmin();
 
 }

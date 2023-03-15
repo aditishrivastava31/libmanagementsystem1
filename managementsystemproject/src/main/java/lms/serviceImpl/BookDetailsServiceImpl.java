@@ -118,7 +118,6 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 
 	@Override
 	public BookDetailssenddto getbookdetailsbyid(long id) {
-		//System.out.println(avergarating(id));
 		BookDetailssenddto bookDetailssenddto=new BookDetailssenddto();
 		BookDetails bookDetails=bookRepository.findById(id).orElse(null);
 		if(bookDetails==null) {
@@ -131,6 +130,7 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 			bookDetailssenddto.setCategory(bookDetails.getCategory().getCategoryName());
 			List<String> authorsList = bookDetails.getAuthors().stream().map(m -> m.getAuthorName()).collect(Collectors.toList());
 			bookDetailssenddto.setAuthors(authorsList);
+			bookDetailssenddto.setRating_count(ratingCount(id));
 			bookDetailssenddto.setAvg_rating(avergarating(id));
 			return bookDetailssenddto;
 		}
@@ -142,15 +142,16 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 	public List<BookDetailssenddto> geteverybookdetails() {
 		List<BookDetailssenddto> bookDetailssenddtoList = new ArrayList<>();
 		bookRepository.findAll().forEach(n -> {
+//			System.out.println("Rating count ---- "+n.getBookId()+" "+ratingCount(n.getBookId()));
 			BookDetailssenddto bookDetailssenddto = new BookDetailssenddto();
 			bookDetailssenddto.setBook_id(n.getBookId());
 			bookDetailssenddto.setQuantity(n.getQuantity());
 			bookDetailssenddto.setBook_title(n.getBookName());
 			bookDetailssenddto.setCategory(n.getCategory().getCategoryName());
 			List<String> authorsList = n.getAuthors().stream().map(m -> m.getAuthorName()).collect(Collectors.toList());
-			double avg=avergarating(n.getBookId());
-			bookDetailssenddto.setAvg_rating(avg);
+			bookDetailssenddto.setAvg_rating(avergarating(n.getBookId()));
 			bookDetailssenddto.setAuthors(authorsList);
+			bookDetailssenddto.setRating_count(ratingCount(n.getBookId()));
 			bookDetailssenddtoList.add(bookDetailssenddto);
 		});
 		return bookDetailssenddtoList;
@@ -158,20 +159,11 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 	}
 	
 	public Double avergarating(long id){
-		//System.out.println(bookReviewRepository.findByBookdetails(bookRepository.findById(id).orElse(null)));
-		OptionalDouble avg=bookReviewRepository.findByBookdetails(bookRepository.findById(id).orElse(null)).stream().mapToInt(n->n.getStarRating().getRating()).average();
-		if(avg.isPresent()) {  
-			DecimalFormat decimalFormat =  new DecimalFormat("#0.0"); 
-
-//			System.out.println(formatter.format(4.0));
-			return Double.parseDouble(decimalFormat.format((double)avg.getAsDouble()));
-		}
-		
-		else {
-			return 0.0;
-		}
-		
-		
+		return bookReviewRepository.getAvgRating(id);
+	}
+	
+	public int ratingCount(long id) {
+		return bookReviewRepository.getRateCount(id);
 	}
 
 }

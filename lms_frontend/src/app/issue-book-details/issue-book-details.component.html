@@ -7,11 +7,21 @@
             <th scope="col">Book Title</th>
             <th scope="col">Issued Date</th>
             <th scope="col">Issued End Date</th>
+            <th scope="col">Returned Date</th>
         </tr>
     </thead>
     <tbody>
-        <!-- *ngFor="let item of [].constructor(3);let i = index" -->
-        <tr>
+        <tr *ngFor="let book of bookissuedetails$ | async;let i = index">
+            <td>{{i+1}}</td>
+            <td>{{book.userName}}</td>
+            <td>{{book.bookTitle}}</td>
+            <td>{{book.issueDate}}</td>
+            <td>{{book.issueEndDate}}</td>
+            <td *ngIf="book.returnDate;else elseBlock">{{book.returnDate}}</td>
+
+            <ng-template #elseBlock>
+                <td>Book not returned.</td>
+            </ng-template>
         </tr>
     </tbody>
 </table>

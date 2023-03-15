@@ -58,10 +58,10 @@ public class BookIssueController {
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200/dashboard")
-	@GetMapping("/getAllIssues")
+	@GetMapping("/getAllIssued")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public List<BookIssueDetailsDto> getAllIssues() {
-		return bookIssueServiceImpl.getAllIssuesToAdmin();
+		return bookIssueServiceImpl.getAllIssuedToAdmin();
 	}
 
 }

@@ -64,7 +64,8 @@
 .datatable tr:nth-child(even) {
     background-color: #f2f2f2;
 }
-.datatable tr:hover{
+
+.datatable tr:hover {
     background-color: #ddd;
 }
 
@@ -86,4 +87,62 @@
 
 .checked {
     color: orange;
+    font-size: larger;
+}
+
+.unchecked {
+    color: orange;
+    font-size: larger;
+}
+
+.review_count {
+    color: #555;
+    margin-left: 9px;
+    font-size: larger;
+}
+
+.review_count::before {
+    margin-right: 3px;
+}
+
+.lend-btn {
+    height: 2rem;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    background-color: #555;
+    color: #ffffff;
+    font-weight: 520;
+
+}
+
+.lend-btn:hover {
+    background-color: #bbb;
+    color: #555;
+}
+
+.comic {
+    padding: 2px 4px;
+    border: 1px solid rgb(214, 214, 0);
+    border-radius: 5px;
+    color: rgb(214, 214, 0);
+}
+
+.author_icon {
+    font-size: larger;
+}
+
+.author_icon::before {
+    margin-right: 3px;
+}
+
+
+.card:hover {
+    box-shadow: 10px 10px 30px 15px grey;
+    transform: scale(1.06);
+}
+
+.book-card{
+    margin: 2px;
+    border-radius: 5px;
 }

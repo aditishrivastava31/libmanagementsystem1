@@ -6,12 +6,12 @@ public class BookReviewdto {
 
     private String username;
     private String comments;
-    private StarRating starRating;
+    private int starRating;
 
     public BookReviewdto(String username, String comments, StarRating starRating) {
         this.username = username;
         this.comments = comments;
-        this.starRating = starRating;
+        this.starRating = starRating.getRating();
     }
 
     public String getUsername() {
@@ -30,12 +30,12 @@ public class BookReviewdto {
         this.comments = comments;
     }
 
-    public StarRating getStarRating() {
+    public int getStarRating() {
         return starRating;
     }
 
     public void setStarRating(StarRating starRating) {
-        this.starRating = starRating;
+        this.starRating = starRating.getRating();
     }
 
     public BookReviewdto() {

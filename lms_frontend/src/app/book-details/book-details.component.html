@@ -1,10 +1,55 @@
-<p>book-details works!</p>
-<br>
+<div class="details">
+    <h1>{{bookdetails.book_title}}</h1>
+    <h1>{{bookdetails.authors}}</h1>
+    <h2>{{ bookdetails.avg_rating }}</h2>
 
-<h1>{{bookdetails.book_title}}</h1>
-<h1>{{bookdetails.authors}}</h1>
-<h2>{{ bookdetails.avg_rating }}</h2>
+    <h2>{{bookdetails.category}}</h2>
 
-<h2>{{bookdetails.category}}</h2>
+    <!-- <button mat-raised-button (click)="openDialog()">ADD REVIEW</button> -->
+</div>
+<div class="review">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>Review</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <span *ngFor="let item of [].constructor(dec_to_int(bookdetails.avg_rating))"
+                class="fa fa-star checked avg"></span>
+            <span *ngFor="let item of [].constructor(dec_part(bookdetails.avg_rating))"
+                class="fa fa-star-half-o checked avg"></span>
+            <span
+                *ngFor="let item of [].constructor(5-(dec_to_int(bookdetails.avg_rating)+dec_part(bookdetails.avg_rating)))"
+                class="fa fa-star-o unchecked avg"></span>
+            <span class="fa fa-user-o review_count">{{bookdetails.rating_count}}</span>
 
-<button mat-raised-button (click)="openDialog()">ADD REVIEW</button>
+            <div *ngFor="let review of bookreview$ | async;let i = index">
+                <p class="p-2"><span class="fa fa-user-circle-o user-icon mt-3">{{review.username}}</span>
+                    <br>
+                    <span *ngFor="let item of [].constructor(review.starRating)"
+                        class="fa fa-star checked user-rating"></span>
+                    <span *ngFor="let item of [].constructor(5-(review.starRating))"
+                        class="fa fa-star-o unchecked user-rating"></span>
+                    <br>
+                    <span class="m-2" *ngIf="review.comments==='';else commentelse">
+                        <textarea rows="" cols="" placeholder="No Comments..." disabled></textarea>
+                        <!-- <button mat-icon-button matSuffix (click)="edit_mode_on()" [hidden]="edit_mode"><mat-icon>create</mat-icon></button>
+                        <button mat-icon-button matSuffix (click)="edit_mode_off()" [hidden]="!edit_mode"><mat-icon>add</mat-icon></button> -->
+                    </span>
+                    <ng-template #commentelse>
+                        {{review.comments}}
+                    </ng-template>
+                </p>
+            </div>
+            <!-- <p><span class="fa fa-user-o review_count">{{review.username}}</span></p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam facere ab magni facilis, quos
+                suscipit
+                praesentium culpa cupiditate quasi dolores fugit necessitatibus error saepe placeat velit! Molestias
+                alias recusandae inventore.</p> -->
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="text-right" style="width: 100%;">
+                <button mat-icon-button matSuffix (click)="openDialog()"><mat-icon>add_circle</mat-icon></button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>
