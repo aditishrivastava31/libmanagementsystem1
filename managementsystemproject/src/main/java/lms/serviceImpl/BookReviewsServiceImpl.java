@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import lms.dto.BookReviewdto;
 import lms.entities.BookDetails;
 import lms.entities.BookReview;
+import lms.entities.UserDetails;
 import lms.repositories.BookRepository;
 import lms.repositories.BookReviewRepository;
 import lms.repositories.UserDetailsRepository;
@@ -43,10 +44,20 @@ public class BookReviewsServiceImpl implements Bookreviewservices {
 
 	@Override
 	public BookReview addreviewbyids(BookReview bookReview, long uid, long bid) {
-		bookReview.setBookdetails(bookRepository.findById(bid).orElse(null));
-		bookReview.setUserdetails(userDetailsRepository.findById(uid).orElse(null));
-		return bookReviewRepository.save(bookReview);
-
+		
+		BookDetails bookdetails=bookRepository.findById(bid).orElse(null);
+		UserDetails userdetails=userDetailsRepository.findById(uid).orElse(null);		
+		if(bookReviewRepository.findByBookdetailsAndUserdetails(bookdetails,userdetails).size()==0) {
+			bookReview.setBookdetails(bookRepository.findById(bid).orElse(null));
+			bookReview.setUserdetails(userDetailsRepository.findById(uid).orElse(null));
+			return bookReviewRepository.save(bookReview);
+		}
+		else {
+			BookReview bookreview2=bookReviewRepository.findByBookdetailsAndUserdetails(bookdetails,userdetails).get(0);
+			bookreview2.setComments(bookReview.getComments());
+			bookreview2.setStarRating(bookReview.getStarRating());
+			return bookReviewRepository.save(bookreview2);
+		}
 	}
 
 	@Override

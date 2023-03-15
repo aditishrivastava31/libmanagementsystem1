@@ -15,8 +15,8 @@ export class IssueBookDetailsComponent implements OnInit {
     this.bookissuedetails$=this.issuebookservice.getallusersissuedbookdetails();
   }
 
-  constructor(private issuebookservice:IssuebookservicesService){
-
+  constructor(private issuebookservice:IssuebookservicesService)
+  {
 
   }
 

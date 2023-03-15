@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import lms.entities.BookDetails;
+import lms.entities.BookIssueDetails;
 import lms.entities.BookReview;
+import lms.entities.UserDetails;
 
 public interface BookReviewRepository extends JpaRepository<BookReview, Long> {
 
@@ -17,5 +19,8 @@ public interface BookReviewRepository extends JpaRepository<BookReview, Long> {
     
     @Query(value="SELECT count(b) FROM BookReview b where b.bookdetails.bookId=?1")
     public int getRateCount(long book_id);
+    
+    List<BookReview> findByBookdetailsAndUserdetails(BookDetails bookDetails, UserDetails userDetails);
+
 
 }
