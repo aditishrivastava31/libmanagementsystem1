@@ -180,7 +180,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 	}
 
 	@Override
-	public List<BookIssueDetailsDto> getAllIssuesToAdmin() {
+	public List<BookIssueDetailsDto> getAllIssuedToAdmin() {
 		List<BookIssueDetailsDto> bookIssueDetailsDtos = new ArrayList<>();
 		bookIssueRepository.findAll().forEach(bookIssueDetails -> {
 			BookIssueDetailsDto bookIssueDetailsDto = new BookIssueDetailsDto();
@@ -188,6 +188,8 @@ public class BookIssueServiceImpl implements BookIssueService {
 			bookIssueDetailsDto.setUserName(bookIssueDetails.getUserDetail().getUserName());
 			bookIssueDetailsDto.setReturnDate(bookIssueDetails.getReturnDate());
 			bookIssueDetailsDto.setIssue_id(bookIssueDetails.getId());
+			bookIssueDetailsDto.setIssueDate(bookIssueDetails.getIssueDate());
+			bookIssueDetailsDto.setIssueEndDate(bookIssueDetails.getIssueEndDate());
 			List<String> authorslist = new ArrayList<>();
 			bookIssueDetails.getBookDetails().getAuthors().forEach(a -> {
 				authorslist.add(a.getAuthorName());

@@ -67,9 +67,11 @@ export class AddBookDetailsComponent implements OnInit {
       console.log(n);
       this.dialog.open(DialogmodalComponent, {
         data: {
-          name: "Book was Added Successfully"
+          name: "Book was Added Successfully",
+          url: "/add-book-details",
         }
       });
+      // this.reset();
     },
       (error) => {
         console.log(error);
@@ -84,14 +86,19 @@ export class AddBookDetailsComponent implements OnInit {
   }
 
   reset() {
-    this.addbookform.reset({
-      bookName: [''],
-      quantity: [''],
-      category: {
-        categoryName: [''],
-      },
-      authors: []
-    })
+    // this.addbookform.reset({
+    //   bookName: ['', [Validators.required]],
+    //   quantity: ['', [Validators.min(1), Validators.required]],
+    //   // categoryName:['',[Validators.required]],
+    //   category: this.fb.group({
+    //     categoryName: ['', [Validators.required]],
+    //   }),
+    //   authors: this.fb.array([this.fb.group({
+    //     authorName: ['', [Validators.required]],
+    //   })]
+    //   )
+    // })
+    window.location.reload();
 
   }
 
