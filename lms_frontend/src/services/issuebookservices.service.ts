@@ -91,7 +91,7 @@ export class IssuebookservicesService {
     console.log("read issued book details is called")
    const headers = new HttpHeaders()
     .set('Authorization',"Bearer "+localStorage.getItem("token"))
-    const usersUrl="http://localhost:8080/getAllIssues"
+    const usersUrl="http://localhost:8080/getAllIssued"
     return  this.httpclient.get<any>(usersUrl,{headers});
   }
 }

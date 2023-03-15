@@ -1,12 +1,11 @@
-<p>reviewcomponent works!</p>
 <h1 mat-dialog-title>ADD REVIEW</h1>
 <div mat-dialog-content>
   <form class="exampl-form" [formGroup]="bookreviewform" (ngSubmit)="addreview()" ngNativeValidate>
     <div>
-      <p>star</p>
+      <p>Rate</p>
       <mat-form-field class="f1">
         <mat-label>star</mat-label>
-        <input type="number" matInput formControlName="star" placeholder="do the rating">
+        <input type="number" matInput formControlName="star" placeholder="do the rating" hidden>
         <mat-error *ngIf="bookreviewform.get('star')?.hasError('required')">
           Rating is manadatory
         </mat-error>
@@ -19,10 +18,9 @@
       </mat-form-field>
     </div>
     <div>
-        <p>comments</p>
         <mat-form-field class="f1">
-            <mat-label>comments</mat-label>
-            <textarea matInput formControlName="comments" placeholder="enter the review comments"></textarea>
+            <mat-label>Comments</mat-label>
+            <textarea matInput formControlName="comments" placeholder="Enter your comments"></textarea>
             <mat-error *ngIf="bookreviewform.get('comments')?.hasError('required')">
                 comments is mandatory
             </mat-error>

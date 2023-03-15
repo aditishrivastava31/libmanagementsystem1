@@ -34,16 +34,44 @@
                 <td [routerLink]="['/book-details', book.book_id]">{{book.category}}</td>
                 <td [routerLink]="['/book-details', book.book_id]">{{book.quantity}}</td>
                 <td [routerLink]="['/book-details', book.book_id]">{{book.authors}}</td>
-                <td>
-                    <span *ngFor="let item of [].constructor(2)" class="fa fa-star checked"></span>
-                    <span *ngFor="let item of [].constructor(1)" class="fa fa-star-half-o checked"></span>
-                    <span *ngFor="let item of [].constructor(5-3)" class="fa fa-star"></span>
+                <td [routerLink]="['/book-details', book.book_id]">
+                    <span *ngFor="let item of [].constructor(dec_to_int(book.avg_rating))"
+                        class="fa fa-star checked"></span>
+                    <span *ngFor="let item of [].constructor(dec_part(book.avg_rating))"
+                        class="fa fa-star-half-o checked"></span>
+                    <span *ngFor="let item of [].constructor(5-(dec_to_int(book.avg_rating)+dec_part(book.avg_rating)))"
+                        class="fa fa-star-o unchecked"></span>
+                    <span class="fa fa-user review_count">{{book.rating_count}}</span>
+
                 </td>
                 <td>
-                    <button class="btn btn-light btn-sm" (click)="lendbook(book.book_id)">Lend</button>
+                    <button class="lend-btn" (click)="lendbook(book.book_id)">Lend</button>
                 </td>
 
             </tr>
         </tbody>
     </ng-template>
 </table>
+
+<!-- <div class="card-columns">
+    <div class="card" *ngFor="let book of bookdetails$ | async;let i = index">
+        <div class="card-body">
+            <div>{{book.book_title}}</div>
+            <div>
+                <span class="comic">{{book.category}}</span>
+                <div *ngFor="let author of book.authors"><span
+                        class="fa fa-address-book-o author_icon">{{author}}</span></div>
+                <span *ngFor="let item of [].constructor(dec_to_int(book.avg_rating))"
+                    class="fa fa-star checked"></span>
+                <span *ngFor="let item of [].constructor(dec_part(book.avg_rating))"
+                    class="fa fa-star-half-o checked"></span>
+                <span *ngFor="let item of [].constructor(5-(dec_to_int(book.avg_rating)+dec_part(book.avg_rating)))"
+                    class="fa fa-star-o unchecked"></span>
+                <span class="fa fa-user review_count">{{book.rating_count}}</span>
+            </div>
+            <div hidden> 
+                <button class="lend-btn" (click)="lendbook(book.book_id)">Lend</button>
+            </div>
+        </div>
+    </div>
+</div> -->
