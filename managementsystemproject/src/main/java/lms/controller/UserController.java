@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import lms.entities.UserDetails;
+import lms.repositories.UserDetailsRepository;
 import lms.serviceImpl.UserServiceImpl;
 import lms.services.EmailService;
 import lms.services.UserService;
@@ -46,6 +47,9 @@ public class UserController {
 	private JwtService jwtService;
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private UserDetailsRepository detailsRepository;
 
 //    @PostConstruct
 //    public void initRoleAndUser() {
@@ -101,6 +105,9 @@ public class UserController {
 
 	@PostMapping("/forgetPassword")
 	public String processForgetPassword(@RequestBody ForgetPasswordDto forgetPasswordDto){
+		UserDetails userDetails=detailsRepository.findByEmail(forgetPasswordDto.getEmail()).orElse(null);
+
+		if(userDetails!=null) {
 		Random random = new Random();
 		String token = random.ints(48, 123)
 				.filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
@@ -118,6 +125,10 @@ public class UserController {
 		}
 		System.out.println(token);
 		return  token;
+		}
+		else {
+			return "User Not Found";
+		}
 	}
 	@GetMapping("/forgetReset_password")
 	public String showResetPassword(@Param(value="token") String token){
