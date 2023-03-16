@@ -150,10 +150,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateResetPasswordToken(String token, String email) {
 		UserDetails userDetails=userDetailsRepository.findByEmail(email).orElse(null);
+		System.out.println(userDetails);
 		if(userDetails!=null){
 			userDetails.setResetpasswordtoken(token);
 			userDetailsRepository.save(userDetails);
-		}		
+		}	
+		
 	}
 
 	@Override

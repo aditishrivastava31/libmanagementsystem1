@@ -19,6 +19,16 @@ public class BookDetailssenddto {
 	public String category;
 
 	public double avg_rating;
+	
+	public int rating_count;
+
+	public int getRating_count() {
+		return rating_count;
+	}
+
+	public void setRating_count(int rating_count) {
+		this.rating_count = rating_count;
+	}
 
 	public BookDetailssenddto() {
 

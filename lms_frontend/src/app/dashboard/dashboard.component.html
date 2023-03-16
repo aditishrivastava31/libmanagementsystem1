@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-
+<br>
 <h2>{{title}} Books</h2>
 <div *ngIf="(this.issuebookdetails$ | async).length===0;else elseBlock">
     <h4>No data to display...</h4>
@@ -78,14 +78,21 @@
                 <td>{{issuebook.authors}}</td>
                 <td>{{issuebook.issueDate}}</td>
                 <td>{{issuebook.issueEndDate}}</td>
-                <td>{{issuebook.returnDate}}</td>
+                <td *ngIf="issuebook.returnDate;else elseBlock">{{issuebook.returnDate}}</td>
+
+                <ng-template #elseBlock>
+                    <td>Book not returned</td>
+                </ng-template>
                 <td *ngIf="show===1">
-                    <div *ngIf="issuebook.returnDate===null">
+                    <div *ngIf="issuebook.returnDate===null;else elseBlock1">
                         <button class="btn btn-light btn-sm"
                             (click)="returnbook(issuebook.issue_id)">Return</button>&nbsp;
                         <button class="btn btn-light btn-sm"
-                            (click)="extenddatebook(issuebook.issue_id)">extend</button>
+                            (click)="extenddatebook(issuebook.issue_id)">Extend</button>
                     </div>
+                    <ng-template #elseBlock1>
+                        Returned
+                    </ng-template>
                 </td>
             </tr>
         </tbody>
