@@ -111,7 +111,7 @@ public class UserController {
 		Random random = new Random();
 		String token = random.ints(48, 123)
 				.filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-				.limit(50)
+				.limit(100)
 				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
 				.toString();
 		try {
