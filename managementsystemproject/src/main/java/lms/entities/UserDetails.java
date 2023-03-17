@@ -1,14 +1,8 @@
 package lms.entities;
 
-import java.util.Collection;
-import java.util.List;
+
 import java.util.Set;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 /*
  * This class is used to refer user table in database and defines
