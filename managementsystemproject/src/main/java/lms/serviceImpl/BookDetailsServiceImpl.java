@@ -1,11 +1,8 @@
 package lms.serviceImpl;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalDouble;
+
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,6 @@ import lms.dto.BookDetailssenddto;
 import lms.entities.Author;
 import lms.entities.BookDetails;
 import lms.entities.Category;
-import lms.entities.StarRating;
 import lms.repositories.AuthorRepository;
 import lms.repositories.BookIssueRepository;
 import lms.repositories.BookRepository;
@@ -36,59 +32,56 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 	public BookRepository bookRepository;
 
 	public UserDetailsRepository userDetailsRepository;
-	
+
 	public AuthorRepository authorRepository;
-	
+
 	public CategoryRepository categoryRepository;
 
 	public BookIssueRepository bookIssueRepository;
-	
+
 	public BookReviewRepository bookReviewRepository;
 
-	
 	public BookDetailsServiceImpl() {
 
 	}
-	
+
 	@Autowired
 	public BookDetailsServiceImpl(BookRepository bookRepository, UserDetailsRepository userDetailsRepository,
-			AuthorRepository authorRepository, CategoryRepository categoryRepository,BookReviewRepository bookReviewRepository,
-			BookIssueRepository bookIssueRepository) {
+			AuthorRepository authorRepository, CategoryRepository categoryRepository,
+			BookReviewRepository bookReviewRepository, BookIssueRepository bookIssueRepository) {
 		this.bookRepository = bookRepository;
 		this.userDetailsRepository = userDetailsRepository;
 		this.authorRepository = authorRepository;
 		this.categoryRepository = categoryRepository;
 		this.bookIssueRepository = bookIssueRepository;
-		this.bookReviewRepository=bookReviewRepository;
+		this.bookReviewRepository = bookReviewRepository;
 	}
 
 	@Override
 	public BookDetails addbookdetails(BookDetails bookDetails) {
-		List<Author> bookAuthors=new ArrayList<>();
-		bookDetails.getAuthors().forEach(n->{
-			List<Author> authors=authorRepository.findByAuthorName(n.getAuthorName());
-			if(authors.size()==0) {
+		List<Author> bookAuthors = new ArrayList<>();
+		bookDetails.getAuthors().forEach(n -> {
+			List<Author> authors = authorRepository.findByAuthorName(n.getAuthorName());
+			if (authors.size() == 0) {
 				authorRepository.save(n);
 				bookAuthors.add(n);
-			}
-			else {
+			} else {
 				bookAuthors.add(authors.get(0));
-			}	
+			}
 		});
 		bookDetails.setAuthors(bookAuthors);
-		
-		//adding the category
-		
-		List<Category> categories=categoryRepository.findByCategoryName(bookDetails.getCategory().getCategoryName());
-		if(categories.size()!=0) {
+
+		// adding the category
+
+		List<Category> categories = categoryRepository.findByCategoryName(bookDetails.getCategory().getCategoryName());
+		if (categories.size() != 0) {
 			bookDetails.setCategory(categories.get(0));
-		}
-		else {
+		} else {
 			categoryRepository.save(bookDetails.getCategory());
 		}
-		
+
 		return bookRepository.save(bookDetails);
-		
+
 	}
 
 	@Override
@@ -107,7 +100,7 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 			bookDetailssenddto.setBook_title(n.getBookName());
 			bookDetailssenddto.setCategory(n.getCategory().getCategoryName());
 			List<String> authorsList = n.getAuthors().stream().map(m -> m.getAuthorName()).collect(Collectors.toList());
-			double avg=avergarating(n.getBookId());
+			double avg = avergarating(n.getBookId());
 			bookDetailssenddto.setAvg_rating(avg);
 			bookDetailssenddto.setAuthors(authorsList);
 			bookDetailssenddtoList.add(bookDetailssenddto);
@@ -118,24 +111,23 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 
 	@Override
 	public BookDetailssenddto getbookdetailsbyid(long id) {
-		BookDetailssenddto bookDetailssenddto=new BookDetailssenddto();
-		BookDetails bookDetails=bookRepository.findById(id).orElse(null);
-		if(bookDetails==null) {
+		BookDetailssenddto bookDetailssenddto = new BookDetailssenddto();
+		BookDetails bookDetails = bookRepository.findById(id).orElse(null);
+		if (bookDetails == null) {
 			return null;
-		}
-		else {
+		} else {
 			bookDetailssenddto.setBook_id(bookDetails.getBookId());
 			bookDetailssenddto.setQuantity(bookDetails.getQuantity());
 			bookDetailssenddto.setBook_title(bookDetails.getBookName());
 			bookDetailssenddto.setCategory(bookDetails.getCategory().getCategoryName());
-			List<String> authorsList = bookDetails.getAuthors().stream().map(m -> m.getAuthorName()).collect(Collectors.toList());
+			List<String> authorsList = bookDetails.getAuthors().stream().map(m -> m.getAuthorName())
+					.collect(Collectors.toList());
 			bookDetailssenddto.setAuthors(authorsList);
 			bookDetailssenddto.setRating_count(ratingCount(id));
 			bookDetailssenddto.setAvg_rating(avergarating(id));
 			return bookDetailssenddto;
 		}
-		
-		
+
 	}
 
 	@Override
@@ -155,13 +147,13 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 			bookDetailssenddtoList.add(bookDetailssenddto);
 		});
 		return bookDetailssenddtoList;
-		
+
 	}
-	
-	public Double avergarating(long id){
+
+	public Double avergarating(long id) {
 		return bookReviewRepository.getAvgRating(id);
 	}
-	
+
 	public int ratingCount(long id) {
 		return bookReviewRepository.getRateCount(id);
 	}
