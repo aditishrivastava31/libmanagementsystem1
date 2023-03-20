@@ -1,6 +1,7 @@
 package lms.entities;
 
 
+import java.util.Date;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -35,6 +36,17 @@ public class UserDetails {
 
 	@JsonIgnore
 	private String resetpasswordtoken;
+	
+	@JsonIgnore
+	private Date expireTime;
+
+	public Date getExpireTime() {
+		return expireTime;
+	}
+
+	public void setExpireTime(Date expireTime) {
+		this.expireTime = expireTime;
+	}
 
 
 	public Set<Role> getRole() {
