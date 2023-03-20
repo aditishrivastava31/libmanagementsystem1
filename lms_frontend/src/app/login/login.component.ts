@@ -13,13 +13,13 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
-  constructor(private loginService: LoginService , public sidenav: SidenavService,private router : Router){
+  constructor(private loginService: LoginService, public sidenav: SidenavService, private router: Router) {
 
-   }
+  }
   ngOnInit(): void {
     this.sidenav.hide();
   }
-  
+
   onSubmit() {
     console.log("submit")
     console.log(this.credentials)
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       && this.credentials.password !== '')
       && (this.credentials.password !== null
         && this.credentials.email !== null)) {
-      this.loginService.generateToken(this.credentials).subscribe((res:any) => {
+      this.loginService.generateToken(this.credentials).subscribe((res: any) => {
         console.log(res.token);
         this.loginService.loginUser(res.token)
         this.loginService.loginUserObject(res.userDetails)
@@ -38,31 +38,25 @@ export class LoginComponent implements OnInit {
         console.log(role);
         if (role === 'USER') {
           this.loginService.isadmin();
-          if(this.router.url==="/login"||this.router.url==="/"){
-            console.log("hahah");
-            
-            window.location.href="/dashboard"
-          }
-          else{
-            alert("Enter Your Correct email and password")
-          }
-        } 
-        else if (role==="ADMIN"){
+
+          console.log("hahah");
+
+          window.location.href = "/dashboard"
+        }
+
+
+
+        else if (role === "ADMIN") {
           this.loginService.isadmin();
-        
-          if(this.router.url==="/adminlogin"){
-            window.location.href="/issue-book-details"
-          }
-          else{
-            alert("Enter Your Correct email and password")
-          }
-         
-       }
+          window.location.href = "/issue-book-details"
+        }
+        else {
+          alert("Enter Your Correct email and password")
+        }
       },
         error => {
-          console.log("hifbd")
           alert("Enter Your Correct email and password")
-          console.log(error);
+          console.warn(error);
         }
       )
     }
