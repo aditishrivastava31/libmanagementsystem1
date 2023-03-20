@@ -11,6 +11,7 @@ import { ReviewservicesService } from 'src/services/reviewservices.service';
 export class ReviewcomponentComponent {
 
   bookreviewform!: FormGroup;
+  star=false;
 
 constructor(
   @Inject(MAT_DIALOG_DATA) public data: any,
@@ -28,6 +29,12 @@ addreview() {
   this.bookreviewservice.addreview(this.data.bookid, this.bookreviewform.getRawValue()).subscribe((n) => {
     console.log(n);
   });
+}
+
+star_change(){
+  console.log("asdn");
+  
+  this.star=true;
 }
 
 
