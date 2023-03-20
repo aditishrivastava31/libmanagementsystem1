@@ -1,5 +1,10 @@
 package lms.serviceImpl;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -150,9 +155,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateResetPasswordToken(String token, String email) {
 		UserDetails userDetails=userDetailsRepository.findByEmail(email).orElse(null);
+		LocalDateTime dateTime = LocalDateTime.now().plus(Duration.of(10, ChronoUnit.MINUTES));
+		Date tmfn = Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
+		System.out.println(tmfn);
 		System.out.println(userDetails);
 		if(userDetails!=null){
 			userDetails.setResetpasswordtoken(token);
+			userDetails.setExpireTime(tmfn);
 			userDetailsRepository.save(userDetails);
 		}	
 		
@@ -160,13 +169,21 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDetails getDetailByToken(String token) {
-		return userDetailsRepository.findByResetpasswordtoken(token);
+		Date date =new Date();
+		UserDetails  userDetails=userDetailsRepository.findByResetpasswordtoken(token);
+		if(userDetails.getExpireTime().compareTo(date)<0){
+			userDetails.setExpireTime(null);
+			userDetails.setResetpasswordtoken(null);
+			userDetailsRepository.save(userDetails);
+		}
+		return userDetails;
 	}
 
 	@Override
 	public void updatePassword(UserDetails userDetails, String newPassword) {
 		userDetails.setPassword(passwordEncoder.encode(newPassword));
 		userDetails.setResetpasswordtoken(null);
+		userDetails.setExpireTime(null);
 		userDetailsRepository.save(userDetails);		
 	}
 
