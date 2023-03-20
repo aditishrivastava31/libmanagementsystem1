@@ -32,6 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ReviewcomponentComponent } from './reviewcomponent/reviewcomponent.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { MatIconModule } from '@angular/material/icon';
     AddBookDetailsComponent,
     BookRequestsComponent,
     ReqForExtComponent,
-    ReviewcomponentComponent
+    ReviewcomponentComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule,

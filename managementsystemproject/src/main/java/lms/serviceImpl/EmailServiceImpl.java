@@ -3,10 +3,8 @@ package lms.serviceImpl;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lms.entities.BookIssueDetails;
-import lms.repositories.UserDetailsRepository;
 import lms.services.EmailService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -24,9 +22,7 @@ public class EmailServiceImpl implements EmailService {
 	private JavaMailSender mailSender;
 
 	private BookIssueDetails bookIssueDetails;
-	@Autowired
-	private UserDetailsRepository userDetailsRepository;
-
+	
 	public EmailServiceImpl(JavaMailSender mailSender1) {
 		this.mailSender = mailSender1;
 	}
@@ -47,7 +43,7 @@ public class EmailServiceImpl implements EmailService {
 		String subject = "Regarding End Date Request";
 		String to = bookIssueDetails.getUserDetail().getEmail();
 		message=new StringBuilder();
-		message.append("Dear ");
+		message.append("Dear, "+"<br />");
 		message.append(bookIssueDetails.getUserDetail().getUserName());
 		message.append(" your request for extending end date of ");
 		message.append(bookIssueDetails.getBookDetails().getBookName());
@@ -59,7 +55,7 @@ public class EmailServiceImpl implements EmailService {
 		String subject = "Regarding End Date Request";
 		String to = bookIssueDetails.getUserDetail().getEmail();
 		message=new StringBuilder();
-		message.append("Dear ");
+		message.append("Dear, "+"<br />");
 		message.append(bookIssueDetails.getUserDetail().getUserName());
 		message.append(" your request for extending end date of ");
 		message.append(bookIssueDetails.getBookDetails().getBookName());
@@ -71,7 +67,7 @@ public class EmailServiceImpl implements EmailService {
 		String subject = "Regarding Book Issue Request";
 		String to = bookIssueDetails.getUserDetail().getEmail();
 		message=new StringBuilder();
-		message.append("Dear ");
+		message.append("Dear, "+"<br />");
 		message.append(bookIssueDetails.getUserDetail().getUserName());
 		message.append(" your request for issuing ");
 		message.append(" has been completed . Enjoy Reading! And kindly return the book before ");
@@ -93,13 +89,12 @@ public class EmailServiceImpl implements EmailService {
 
 		String subject = "Here is your Reset Password Link";
 		message=new StringBuilder();
-		message.append("Dear ");
+		message.append("Dear, "+"<br />");
 		message.append("You have requested to reset your password. ");
-		message.append("Click the link below to change your password: ");
-		message.append(resetPasswordLink);
-		message.append(" Change my password ");
+		message.append("Click the link below to change your password: "+"<br />");
+		message.append(resetPasswordLink+"<br />");
+		message.append(" Change my password "+"<br />");
 		message.append(" Ignore this email if you do remember your password, or you have not made the request.");
-
 		sendEmail(message.toString(), subject, email);
 	}
 
