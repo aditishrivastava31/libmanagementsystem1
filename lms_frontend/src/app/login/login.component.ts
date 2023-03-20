@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { LoginService } from 'src/services/login.service';
 import { SidenavService } from 'src/services/sidenav.service';
 
@@ -18,6 +19,12 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void {
     this.sidenav.hide();
+    console.log("---------------",this.router.url);
+    if(this.router.url!=="/login")
+    {
+      window.location.href = "/login"
+      
+    }
   }
 
   onSubmit() {
@@ -43,9 +50,6 @@ export class LoginComponent implements OnInit {
 
           window.location.href = "/dashboard"
         }
-
-
-
         else if (role === "ADMIN") {
           this.loginService.isadmin();
           window.location.href = "/issue-book-details"

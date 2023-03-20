@@ -47,6 +47,7 @@ export class BookDetailsComponent extends BooksComponent implements OnInit {
   }
 
   openDialog(): void {
+    console.log("kill")
     this.dialog.open(ReviewcomponentComponent, {
       data: {
         bookid: this.bookidroute
