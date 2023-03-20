@@ -29,17 +29,28 @@ export class ResetpasswordComponent implements OnInit {
   }
   ngOnInit(): void {
     this.sidenav.hide();
-    this.resetservice.CheckToken(this.tokens).subscribe((res: any) => {
-      console.log(res);
-      if (res === 'Invalid Token') {
+    this.resetservice.CheckToken(this.tokens).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res === 'Invalid Token') {
+          this.dialog.open(DialogmodalComponent, {
+            data: {
+              name: 'Invalid Token.',
+              url: '/login',
+            },
+          });
+        }
+      },
+      (error) => {
         this.dialog.open(DialogmodalComponent, {
           data: {
-            name: 'Invalid Token',
-            url: '/login',
+            name: 'Invalid Token or Your token is expire.',
+            url: '/forgetpassword',
           },
         });
+        console.log(error);
       }
-    });
+    );
   }
 
   onSubmit() {
@@ -55,19 +66,25 @@ export class ResetpasswordComponent implements OnInit {
           if (res === 'success Your password is reset successfully') {
             this.dialog.open(DialogmodalComponent, {
               data: {
-                name: 'Your Password is Successfully Changed',
+                name: 'Your Password is Successfully Changed.',
                 url: '/login',
               },
             });
           } else if (res === 'Enter Same password') {
             this.dialog.open(DialogmodalComponent, {
               data: {
-                name: 'Enter Same Password',
+                name: 'Enter Same Password.',
               },
             });
           }
         },
         (error) => {
+          this.dialog.open(DialogmodalComponent, {
+            data: {
+              name: 'Your Token is Expired.',
+              url: '/forgetpassword',
+            },
+          });
           console.log(error);
         }
       );
