@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Spinkit } from 'ng-http-loader';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -12,6 +13,7 @@ interface SideNavToggle {
 })
 export class AppComponent {
   title = 'sidenav';
+  spinnerStyle = Spinkit;
 
   isSideNavCollapsed = false;
   screenWidth = 0;

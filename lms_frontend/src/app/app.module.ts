@@ -33,6 +33,7 @@ import { ReviewcomponentComponent } from './reviewcomponent/reviewcomponent.comp
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     MatDialogModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NgHttpLoaderModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
