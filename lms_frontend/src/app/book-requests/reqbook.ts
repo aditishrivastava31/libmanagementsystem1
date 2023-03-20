@@ -1,4 +1,4 @@
-enum isActive{
+export enum isActive{
     Cancelled,
     Pending,
     Pending_Purchase,
@@ -18,5 +18,5 @@ export interface requestbookdto{
     requestId:number;
     authorName: string;
     bookName: string;
-    isActive: isActive;
+    isActive: string;
 }

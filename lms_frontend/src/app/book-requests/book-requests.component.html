@@ -10,7 +10,8 @@
         </tr>
     </thead>
     <tbody>
-          <tr *ngFor="let requestbook of requestBookdtos$ | async;let i = index" ,*ngIf="1===1">            
+    <ng-container *ngFor="let requestbook of bookrequests;let i = index">
+          <tr *ngIf="check(requestbook.isActive)">            
             <th scope="row">{{i + 1}}</th>
             <td>{{requestbook.authorName}}</td>
             <td>{{requestbook.bookName}}</td>
@@ -21,7 +22,7 @@
                 <button class="btn btn-outline-danger btn-sm" (click)="pendinpurchase(requestbook.requestId,2)">Pending Purchase</button>
             </td>
           </tr>
-
+    </ng-container>
         </tbody>
     </table>
   </div>

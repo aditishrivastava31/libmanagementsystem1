@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, Subscribable } from 'rxjs';
 import { RequestbookService } from 'src/services/requestbook.service';
-import { requestbookdto } from '../req-book/reqbook';
+import { requestbookdto,isActive } from '../req-book/reqbook';
 
 @Component({
   selector: 'app-book-requests',
@@ -12,8 +12,11 @@ export class BookRequestsComponent {
   requestBookdtos$!: Observable<requestbookdto[]>;
   resdata:any;
   requestId : any;  
-  
-  constructor(private requestBookService:RequestbookService){}
+  bookrequests:requestbookdto[]=[]
+
+  constructor(private requestBookService:RequestbookService){
+
+  }
 
   public requestBook = {
     authorName: '',
@@ -22,11 +25,22 @@ export class BookRequestsComponent {
 
   ngOnInit(){
     console.log("hi")
-    this.requestBookdtos$=this.requestBookService.getAllRequest();
+    //this.requestBookdtos$=this.requestBookService.getAllRequest();
     
     this.requestBookService.getAllRequest().subscribe((res)=>{
       console.log(res);
-  })
+      for(let i=0;i<res.length ;i++){  //How to properly iterate here!!
+        console.log(res[i].isActive);
+        if(this.check(res[i].isActive))
+        {
+          console.log(res[i])
+          this.bookrequests=[...this.bookrequests,res[i]]
+          console.log(this.bookrequests);
+        }
+
+     }
+  }
+  )
 
   }
 
@@ -61,4 +75,20 @@ export class BookRequestsComponent {
     window.location.href="/book-reqs"
     
   }
+  check(status:string)
+  {
+         console.log();
+          if(status==="Pending")
+          {
+              console.log("aa")
+              return true;  
+            }
+            else{
+              console.log()             
+              console.log("sks")
+              return false;
+            }
+            
+  }
+
 }
