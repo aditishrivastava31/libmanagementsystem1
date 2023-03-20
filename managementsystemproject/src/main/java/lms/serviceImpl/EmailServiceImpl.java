@@ -93,7 +93,7 @@ public class EmailServiceImpl implements EmailService {
 		message.append("You have requested to reset your password. ");
 		message.append("Click the link below to change your password: "+"<br />");
 		message.append(resetPasswordLink+"<br />");
-		message.append(" Change my password "+"<br />");
+		message.append("<b> Note </b>" +":- This link is valid only for 10 minutes"+"<br/>");
 		message.append(" Ignore this email if you do remember your password, or you have not made the request.");
 		sendEmail(message.toString(), subject, email);
 	}
