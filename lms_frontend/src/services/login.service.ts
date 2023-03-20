@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class LoginService {
 
   url = "http://localhost:8080/authenticate"
-  
+
   constructor(private http: HttpClient) { }
 
   // caling the server to generate token
@@ -44,7 +44,7 @@ export class LoginService {
     if (token == undefined || token === '' || token == null) {
       return false;
 
-    } 
+    }
     else {
       return true;
     }
@@ -89,36 +89,35 @@ export class LoginService {
     return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   }
 
-  isadmin():boolean{
-  //   if (role === 'USER') {
-  //        this.isadmin=false;  
-  //   } 
-  //   else if (role==="ADMIN")
-  //   {
-  //   this.isadmin=true;
-  //   console.log(this.isadmin);
-  //  }
-  //  else{
-  //   this.isadmin=false;
-  //  }
+  isadmin(): boolean {
+    //   if (role === 'USER') {
+    //        this.isadmin=false;  
+    //   } 
+    //   else if (role==="ADMIN")
+    //   {
+    //   this.isadmin=true;
+    //   console.log(this.isadmin);
+    //  }
+    //  else{
+    //   this.isadmin=false;
+    //  }
 
-  let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
-  let roles=JSON.parse(localStorage.getItem("role") || '{}')
-  //console.log(localStorage.getItem(localStorage.key(2)||""))
+    let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
+    let roles = JSON.parse(localStorage.getItem("role") || '{}')
+    //console.log(localStorage.getItem(localStorage.key(2)||""))
 
-  console.log("zfcvbnm",roles[0].roleName);
-  let role=roles[0].roleName
-  if (role === 'USER'){
-           return false;  
-      } 
-      else if (role==="ADMIN")
-      {
-      return true
-    
-     }
-     else{
+    console.log("zfcvbnm", roles[0].roleName);
+    let role = roles[0].roleName
+    if (role === 'USER') {
       return false;
-     }
+    }
+    else if (role === "ADMIN") {
+      return true
+
+    }
+    else {
+      return false;
+    }
 
   }
 

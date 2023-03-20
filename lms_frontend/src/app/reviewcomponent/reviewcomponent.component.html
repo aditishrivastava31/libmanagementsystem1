@@ -1,11 +1,43 @@
 <h1 mat-dialog-title>ADD REVIEW</h1>
+<form class="rating">
+  <label>
+    <input type="radio" name="stars" value="1" />
+    <span class="icon fa fa-star checked"></span>
+  </label>
+  <label>
+    <input type="radio" name="stars" value="2" />
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>
+  </label>
+  <label>
+    <input type="radio" name="stars" value="3" />
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>   
+  </label>
+  <label>
+    <input type="radio" name="stars" value="4" />
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>
+  </label>
+  <label>
+    <input type="radio" name="stars" value="5" />
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>
+    <span class="icon fa fa-star checked"></span>
+  </label>
+</form>
 <div mat-dialog-content>
   <form class="exampl-form" [formGroup]="bookreviewform" (ngSubmit)="addreview()" ngNativeValidate>
     <div>
       <p>Rate</p>
       <mat-form-field class="f1">
         <mat-label>star</mat-label>
-        <input type="number" matInput formControlName="star" placeholder="do the rating" hidden>
+        <input type="number" matInput formControlName="star" placeholder="do the rating">
         <mat-error *ngIf="bookreviewform.get('star')?.hasError('required')">
           Rating is manadatory
         </mat-error>
