@@ -46,7 +46,7 @@ export class SidenavComponent implements OnInit {
   userRole!:String;
   collapsed = false;
   screenWidth = 0;
-  navData=userNavbarData;
+  navData=adminNavbarData;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -70,8 +70,13 @@ export class SidenavComponent implements OnInit {
       console.log(this.userRole);
       if (this.userRole==="ADMIN") {
         console.warn("ADMIN  sddfjs");
+        for (let i=0;i<userNavbarData.length;i++) {
+          this.navData=[...this.navData,userNavbarData[i]];
+        }
         
-        this.navData=adminNavbarData;
+      }
+      else{
+        this.navData=userNavbarData;
       }
   }
 
