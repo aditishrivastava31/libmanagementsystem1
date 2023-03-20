@@ -42,8 +42,8 @@ export class LoginService {
     let token = localStorage.getItem("token");
     console.log(token)
     if (token == undefined || token === '' || token == null) {
+      console.log("sss");
       return false;
-
     }
     else {
       return true;
@@ -102,18 +102,22 @@ export class LoginService {
     //   this.isadmin=false;
     //  }
 
+    if(this.isLoggedIn()===false){
+      return false;
+  }
+
     let savedPerson = JSON.parse(localStorage.getItem("user") || '{}')
     let roles = JSON.parse(localStorage.getItem("role") || '{}')
     //console.log(localStorage.getItem(localStorage.key(2)||""))
-
     console.log("zfcvbnm", roles[0].roleName);
     let role = roles[0].roleName
-    if (role === 'USER') {
+    if (role === 'USER') 
+    {
       return false;
     }
+
     else if (role === "ADMIN") {
       return true
-
     }
     else {
       return false;

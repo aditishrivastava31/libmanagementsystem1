@@ -37,6 +37,7 @@ const routes: Routes = [
   { path: "add-book-details", component: AddBookDetailsComponent, canActivate: [AdminguardGuard] },
   { path: "book-reqs", component: BookRequestsComponent, canActivate: [AdminguardGuard] },
   { path: "reqs-for-ext", component: ReqForExtComponent, canActivate: [AdminguardGuard] },
+  { path: "**", component:LoginComponent},
 ];
 
 @NgModule({

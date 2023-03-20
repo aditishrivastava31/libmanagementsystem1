@@ -6,7 +6,7 @@ public class BookRequestDto {
     private long requestId;
     private String bookName;
     private String authorName;
-    private IsActive isActive;
+    private String isActive;
 
     public BookRequestDto() {
 
@@ -17,7 +17,7 @@ public class BookRequestDto {
         this.requestId = requestId;
         this.bookName = bookName;
         this.authorName = authorName;
-        this.isActive = isActive;
+        this.isActive = isActive.toString();
     }
 
     public long getRequestId() {
@@ -44,12 +44,12 @@ public class BookRequestDto {
         this.authorName = authorName;
     }
 
-    public IsActive getIsActive() {
+    public String getIsActive() {
         return isActive;
     }
 
     public void setIsActive(IsActive isActive) {
-        this.isActive = isActive;
+        this.isActive = isActive.toString();
     }
 
 }
