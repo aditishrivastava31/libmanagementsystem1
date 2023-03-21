@@ -1,6 +1,3 @@
-<!-- {{userRole}} -->
-
-
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''" *ngIf="sidenav.visible">
     <div class="logo-container">
         <button class="logo" (click)="toggleCollapse()">
@@ -23,19 +20,8 @@
                 </a>
             </li>
 
-            <!-- <ul class="sidenav-nav"> -->
-                <!-- <li class="sidenav-nav-item" *ngFor="let data of navData">
-                    <a class="sidenav-nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                        [routerLink]="[data.routeLink]">
-                        <i class="sidenav-link-icon" [class]="data.icon"></i>
-                        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
-                            {{data.label}}
-                        </span>
-                    </a>
-                </li> -->
-    
-
             <li class="sidenav-nav-item" style="margin-top: 25px;">
+
                 <a *ngIf="loggedIn" (click)="logoutUser()" class="sidenav-nav-link">
                     <i class="sidenav-link-icon" class="fal fa-sign-out-alt" style="font-size: 22px;
                 width: 2rem;
@@ -80,6 +66,5 @@
 
     <router-outlet>
     </router-outlet>
-
 
 </div>
