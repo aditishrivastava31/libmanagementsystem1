@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     console.log("---------------",this.router.url);
     if(this.router.url!=="/login")
     {
+      this.loginService.logout();
       window.location.href = "/login"
       
     }
@@ -45,9 +46,6 @@ export class LoginComponent implements OnInit {
         console.log(role);
         if (role === 'USER') {
           this.loginService.isadmin();
-
-          console.log("hahah");
-
           window.location.href = "/dashboard"
         }
         else if (role === "ADMIN") {

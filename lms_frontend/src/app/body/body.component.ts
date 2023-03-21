@@ -15,6 +15,10 @@ export class BodyComponent implements OnInit {
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
     this.loggedIn=this.loginService.isLoggedIn();
+    if (this.loginService.tokenExpired(this.loginService.getToken())) {
+      this.loginService.logout();
+      window.location.href = "/login"
+    }
 }
 
   @Input() collapsed = false;
