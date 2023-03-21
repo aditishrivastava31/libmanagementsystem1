@@ -39,7 +39,7 @@ export class ReviewcomponentComponent {
       console.log(n);
       this.dialog.open(DialogmodalComponent, {
         data: {
-          name: n,
+          name: "Review Added Successfully. ",
           url: "/book-details/"+this.data.bookid,
         }
       });
@@ -47,7 +47,7 @@ export class ReviewcomponentComponent {
       error => {
         this.dialog.open(DialogmodalComponent, {
           data: {
-            name: "you can't lend the book"
+            name: "Review failed to add! "
           }
         })
       });
