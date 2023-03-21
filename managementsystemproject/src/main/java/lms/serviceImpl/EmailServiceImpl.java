@@ -5,6 +5,7 @@ import jakarta.mail.internet.MimeMessage;
 import lms.entities.BookIssueDetails;
 import lms.services.EmailService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImpl implements EmailService {
 
+	
 	private JavaMailSender mailSender;
 
 	private BookIssueDetails bookIssueDetails;

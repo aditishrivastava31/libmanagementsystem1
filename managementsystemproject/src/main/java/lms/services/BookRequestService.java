@@ -25,4 +25,6 @@ public interface BookRequestService {
 	
 	public BookRequestDto updatestatus(long requestId,int isActive);
 	
+	public List<BookRequestDto> getRequestByUserId(long uid);
+	
 }
