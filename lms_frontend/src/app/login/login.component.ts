@@ -46,9 +46,6 @@ export class LoginComponent implements OnInit {
         console.log(role);
         if (role === 'USER') {
           this.loginService.isadmin();
-
-          console.log("hahah");
-
           window.location.href = "/dashboard"
         }
         else if (role === "ADMIN") {
