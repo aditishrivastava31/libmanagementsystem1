@@ -8,52 +8,48 @@ import { DialogmodalComponent } from '../dialogmodal/dialogmodal.component';
 @Component({
   selector: 'app-req-for-ext',
   templateUrl: './req-for-ext.component.html',
-  styleUrls: ['./req-for-ext.component.scss']
+  styleUrls: ['./req-for-ext.component.scss'],
 })
 export class ReqForExtComponent implements OnInit {
-
   requestextension$!: Observable<extension[]>;
 
-
-constructor(private requestextensionservice:RequestextensiondateService,public dialog:MatDialog){
-  
-}
+  constructor(
+    private requestextensionservice: RequestextensiondateService,
+    public dialog: MatDialog
+  ) {}
   ngOnInit(): void {
-
     // this.requestextensionservice.getallextensionrequestiondates().subscribe((n)=>{
     //   console.log(n);
     // })
 
-    this.requestextension$=this.requestextensionservice.getallextensionrequestiondates();
-
-
+    this.requestextension$ =
+      this.requestextensionservice.getallextensionrequestiondates();
   }
 
-
-  extensionrequest(value:number,issueid:number){
-    console.log(value);
-    console.log(issueid);
-    this.requestextensionservice.acceptandrejectextension(value,issueid).subscribe((n)=>{
-      console.log(n);
-      this.dialog.open(DialogmodalComponent,{
-        data:{
-          name:n,
-          url: "/reqs-for-ext"
+  extensionrequest(value: number, issueid: number) {
+    // console.log(value);
+    // console.log(issueid);
+    this.requestextensionservice
+      .acceptandrejectextension(value, issueid)
+      .subscribe(
+        (n) => {
+          // console.log(n);
+          this.dialog.open(DialogmodalComponent, {
+            data: {
+              name: n,
+              url: '/reqs-for-ext',
+            },
+          });
+          // console.log("check");
+          //window.location.href = "/reqs-for-ext"
+        },
+        (error) => {
+          this.dialog.open(DialogmodalComponent, {
+            data: {
+              name: 'Error say to your Developer to solve ',
+            },
+          });
         }
-      });
-      console.log("check");
-      //window.location.href = "/reqs-for-ext"
-      
-    },
-    (error)=>{
-      this.dialog.open(DialogmodalComponent,{
-        data:{
-          name:"Error say to your Developer to solve "
-        }
-      });
-    });
-
+      );
   }
-
-
 }
