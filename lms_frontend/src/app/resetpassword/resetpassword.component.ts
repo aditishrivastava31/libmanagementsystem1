@@ -24,14 +24,14 @@ export class ResetpasswordComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe((param) => {
       this.tokens = param['token'];
-      console.log(this.tokens);
+      // console.log(this.tokens);
     });
   }
   ngOnInit(): void {
     this.sidenav.hide();
     this.resetservice.CheckToken(this.tokens).subscribe(
       (res: any) => {
-        console.log(res);
+        // console.log(res);
         if (res === 'Invalid Token') {
           this.dialog.open(DialogmodalComponent, {
             data: {
@@ -48,7 +48,7 @@ export class ResetpasswordComponent implements OnInit {
             url: '/forgetpassword',
           },
         });
-        console.log(error);
+        // console.log(error);
       }
     );
   }
@@ -62,7 +62,7 @@ export class ResetpasswordComponent implements OnInit {
     ) {
       this.resetservice.changePassword(this.passwords, this.tokens).subscribe(
         (res: any) => {
-          console.log(res);
+          // console.log(res);
           if (res === 'success Your password is reset successfully') {
             this.dialog.open(DialogmodalComponent, {
               data: {
@@ -85,7 +85,7 @@ export class ResetpasswordComponent implements OnInit {
               url: '/forgetpassword',
             },
           });
-          console.log(error);
+          // console.log(error);
         }
       );
     }

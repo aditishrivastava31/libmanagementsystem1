@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
-  styleUrls: ['./book-details.component.scss']
+  styleUrls: ['./book-details.component.scss'],
 })
 export class BookDetailsComponent extends BooksComponent implements OnInit {
   bookdetails!: bookdto;
@@ -35,23 +35,21 @@ export class BookDetailsComponent extends BooksComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.bookidroute = Number(routeParams.get('book_id'));
     this.bookservice.getbookbyid(this.bookidroute).subscribe((n) => {
-      this.bookdetails = n
-    })
+      this.bookdetails = n;
+    });
     // this.bookservice.getreviewbybookid(bookIdFromRoute).subscribe((n) => {
     //   console.log("asdfjkn",typeof n,n[0]);
     // })
-    this.bookreview$ = this.bookservice.getreviewbybookid(this.bookidroute)
-    console.log(this.bookreview$);
-
-
+    this.bookreview$ = this.bookservice.getreviewbybookid(this.bookidroute);
+    // console.log(this.bookreview$);
   }
 
   openDialog(): void {
-    console.log("kill")
+    // console.log("kill")
     this.dialog.open(ReviewcomponentComponent, {
       data: {
-        bookid: this.bookidroute
-      }
+        bookid: this.bookidroute,
+      },
     });
   }
 

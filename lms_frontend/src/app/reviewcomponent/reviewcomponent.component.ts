@@ -8,7 +8,7 @@ import { DialogmodalComponent } from '../dialogmodal/dialogmodal.component';
 @Component({
   selector: 'app-reviewcomponent',
   templateUrl: './reviewcomponent.component.html',
-  styleUrls: ['./reviewcomponent.component.scss']
+  styleUrls: ['./reviewcomponent.component.scss'],
 })
 export class ReviewcomponentComponent {
   review!: reviewadd;
@@ -23,45 +23,39 @@ export class ReviewcomponentComponent {
   ) {
     this.bookreviewform = this.fb.group({
       // star: ['', [Validators.min(1), Validators.required, Validators.max(5)]],
-      comments: ['']
+      comments: [''],
     });
   }
 
   addreview() {
-    console.log(this.bookreviewform.get("comments")?.value);
+    // console.log(this.bookreviewform.get("comments")?.value);
     this.review = {
-      "star": this.starCount,
-      "comments": this.bookreviewform.get("comments")?.value
-    }
-    console.log("------------------value : ", this.review);
-    console.log(this.bookreviewform.getRawValue());
-    this.bookreviewservice.addreview(this.data.bookid, this.review).subscribe((n) => {
-      console.log(n);
-      this.dialog.open(DialogmodalComponent, {
-        data: {
-          name: "Review Added Successfully. ",
-          url: "/book-details/"+this.data.bookid,
-        }
-      });
-    },
-      error => {
+      star: this.starCount,
+      comments: this.bookreviewform.get('comments')?.value,
+    };
+    // console.log("------------------value : ", this.review);
+    // console.log(this.bookreviewform.getRawValue());
+    this.bookreviewservice.addreview(this.data.bookid, this.review).subscribe(
+      (n) => {
+        // console.log(n);
         this.dialog.open(DialogmodalComponent, {
           data: {
-            name: "Review failed to add! "
-          }
-        })
-      });
-
-
-
-
+            name: 'Review Added Successfully. ',
+            url: '/book-details/' + this.data.bookid,
+          },
+        });
+      },
+      (error) => {
+        this.dialog.open(DialogmodalComponent, {
+          data: {
+            name: 'Review failed to add! ',
+          },
+        });
+      }
+    );
   }
   star_count(value: number) {
     this.starCount = value;
-    console.log("------------------value : ", value, this.review);
-
+    // console.log("------------------value : ", value, this.review);
   }
-
-
 }
-
