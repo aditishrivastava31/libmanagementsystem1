@@ -1,10 +1,12 @@
 <div class="details">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0YpqlGflv5QMxB0vQKiiP725VXsYoqzaWoKr9nUkB0fdfqj-175PXC_ASgNrt2FE19oY&usqp=CAU"
+        alt="">
     <h1>{{bookdetails.book_title}}</h1>
-    <h1>{{bookdetails.authors}}</h1>
-    <h2>{{ bookdetails.avg_rating }}</h2>
-
-    <h2>{{bookdetails.category}}</h2>
-
+    <!-- <h2>{{ bookdetails.avg_rating }}</h2> -->
+    <h4 style="color: #808080">Category: <b>{{bookdetails.category}}</b></h4>
+    <!-- <h2>{{bookdetails.category}}</h2> -->
+    <h4 style="color: #808080">Authors:</h4>
+    <span *ngFor="let author of bookdetails.authors" class="fa fa-user-o review_count">{{author}}</span>
     <!-- <button mat-raised-button (click)="openDialog()">ADD REVIEW</button> -->
 </div>
 <div class="review">
