@@ -35,7 +35,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +55,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     BookRequestsComponent,
     ReqForExtComponent,
     ReviewcomponentComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,7 +78,6 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     NgHttpLoaderModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

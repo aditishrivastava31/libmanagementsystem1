@@ -5,21 +5,15 @@ import { IssuebookservicesService } from 'src/services/issuebookservices.service
 @Component({
   selector: 'app-issue-book-details',
   templateUrl: './issue-book-details.component.html',
-  styleUrls: ['./issue-book-details.component.scss']
+  styleUrls: ['./issue-book-details.component.scss'],
 })
 export class IssueBookDetailsComponent implements OnInit {
-
   bookissuedetails$!: Observable<any>;
 
-  ngOnInit(){
-    this.bookissuedetails$=this.issuebookservice.getallusersissuedbookdetails();
+  ngOnInit() {
+    this.bookissuedetails$ =
+      this.issuebookservice.getallusersissuedbookdetails();
   }
 
-  constructor(private issuebookservice:IssuebookservicesService)
-  {
-
-  }
-
-
-
+  constructor(private issuebookservice: IssuebookservicesService) {}
 }

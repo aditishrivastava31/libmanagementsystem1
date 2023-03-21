@@ -19,29 +19,64 @@ import { ReqForExtComponent } from './req-for-ext/req-for-ext.component';
 import { AdminguardGuard } from 'src/services/adminguard.guard';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
-
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'books', component: BooksComponent, canActivate: [AuthGuard] },
   { path: 'req-book', component: ReqBookComponent, canActivate: [AuthGuard] },
-  { path: 'book-details/:book_id', component: BookDetailsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'book-details/:book_id',
+    component: BookDetailsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'about-us', component: AboutUsComponent, canActivate: [AuthGuard] },
-  { path: 'contact-us', component: ContactUsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'contact-us',
+    component: ContactUsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'sidenav', component: SidenavComponent },
-  { path: "login", component: LoginComponent, pathMatch: "full" },
-  { path: "signup", component: SignupComponent, pathMatch: "full" },
-  { path: "forgetpassword", component: ForgetpasswordComponent, pathMatch: "full" },
-  { path: "resetpassword", component:ResetpasswordComponent , pathMatch: "full" },
-  { path: "issue-book-details", component: IssueBookDetailsComponent, canActivate: [AdminguardGuard] },
-  { path: "add-book-details", component: AddBookDetailsComponent, canActivate: [AdminguardGuard] },
-  { path: "book-reqs", component: BookRequestsComponent, canActivate: [AdminguardGuard] },
-  { path: "reqs-for-ext", component: ReqForExtComponent, canActivate: [AdminguardGuard] },
-  { path: "**", component:LoginComponent},
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'signup', component: SignupComponent, pathMatch: 'full' },
+  {
+    path: 'forgetpassword',
+    component: ForgetpasswordComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'resetpassword',
+    component: ResetpasswordComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'issue-book-details',
+    component: IssueBookDetailsComponent,
+    canActivate: [AdminguardGuard],
+  },
+  {
+    path: 'add-book-details',
+    component: AddBookDetailsComponent,
+    canActivate: [AdminguardGuard],
+  },
+  {
+    path: 'book-reqs',
+    component: BookRequestsComponent,
+    canActivate: [AdminguardGuard],
+  },
+  {
+    path: 'reqs-for-ext',
+    component: ReqForExtComponent,
+    canActivate: [AdminguardGuard],
+  },
+  { path: '**', component: LoginComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

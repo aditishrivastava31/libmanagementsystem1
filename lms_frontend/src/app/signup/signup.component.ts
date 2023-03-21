@@ -3,72 +3,67 @@ import { SidenavService } from 'src/services/sidenav.service';
 import { UserService } from 'src/services/user.service';
 import { FormGroup, FormControl } from '@angular/forms';
 
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent{
-
-  countries : any;
-  states : any;
+export class SignupComponent {
+  countries: any;
+  states: any;
   cities: any;
 
+  constructor(
+    private userService: UserService,
+    public sidenav: SidenavService
+  ) {}
 
-  constructor(private userService:UserService , public sidenav: SidenavService){}
+  public userAddress = {
+    address: '',
+  };
+  public user = {
+    userName: '',
+    password: '',
+    email: '',
+    number: '',
+    userAddress: {
+      address: '',
+    },
+  };
 
-  public userAddress={
-    address:''
-  }
-  public user={
-    userName:'',
-    password:'',
-    email:'',
-    number:'',
-  userAddress : {
-    address:''
-  }
-  }
-
-  ngOnInit(){
+  ngOnInit() {
     this.sidenav.hide();
-    this.userService.getcountry().subscribe(
-      data => this.countries = data
-    );
+    this.userService.getcountry().subscribe((data) => (this.countries = data));
   }
 
-  formSubmit(country:any, state : any , city:any){
-    console.log(this.user);
+  formSubmit(country: any, state: any, city: any) {
+    // console.log(this.user);
 
-    if(this.user.email == null || this.user.userName == null){
+    if (this.user.email == null || this.user.userName == null) {
       alert('email and userName is required !!');
       return;
     }
 
-    this.userService.addUser(this.user ,country , state , city
-      ).subscribe(
-      (data)=>{
-        console.log(data);
+    this.userService.addUser(this.user, country, state, city).subscribe(
+      (data) => {
+        // console.log(data);
         alert('success');
-        window.location.href="/login"
+        window.location.href = '/login';
       },
-    (error)=>{
-      console.log(error);
-      alert('something went wrong!');
-    }
-    )
+      (error) => {
+        // console.log(error);
+        alert('something went wrong!');
+      }
+    );
   }
   onChangeCountry(country: String) {
     if (country) {
-      console.log(this.states);
-          console.log(this.countries);
-      this.userService.getstate(country).subscribe(
-        data => {
-          this.states = data;
-          this.cities = null;
-        }
-      );
+      // console.log(this.states);
+      // console.log(this.countries);
+      this.userService.getstate(country).subscribe((data) => {
+        this.states = data;
+        this.cities = null;
+      });
     } else {
       this.states = null;
       this.cities = null;
@@ -76,12 +71,9 @@ export class SignupComponent{
   }
   onChangeState(state: any) {
     if (state) {
-      this.userService.getcity(state).subscribe(
-        data => this.cities = data
-      );
+      this.userService.getcity(state).subscribe((data) => (this.cities = data));
     } else {
       this.cities = null;
     }
   }
-
 }
