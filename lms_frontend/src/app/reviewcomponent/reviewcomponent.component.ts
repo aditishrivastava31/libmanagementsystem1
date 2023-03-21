@@ -1,7 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ReviewservicesService } from 'src/services/reviewservices.service';
+import { reviewadd } from '../books/booksinterface';
+import { DialogmodalComponent } from '../dialogmodal/dialogmodal.component';
 
 @Component({
   selector: 'app-reviewcomponent',
@@ -9,34 +11,56 @@ import { ReviewservicesService } from 'src/services/reviewservices.service';
   styleUrls: ['./reviewcomponent.component.scss']
 })
 export class ReviewcomponentComponent {
-
+  review!: reviewadd;
+  starCount!: number;
   bookreviewform!: FormGroup;
-  star=false;
 
-constructor(
-  @Inject(MAT_DIALOG_DATA) public data: any,
-  private fb: FormBuilder,
-  private bookreviewservice: ReviewservicesService
-) {
-  this.bookreviewform = this.fb.group({
-    star: ['', [Validators.min(1), Validators.required, Validators.max(5)]],
-    comments: ['']
-  });
-}
+  constructor(
+    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
+    private bookreviewservice: ReviewservicesService
+  ) {
+    this.bookreviewform = this.fb.group({
+      // star: ['', [Validators.min(1), Validators.required, Validators.max(5)]],
+      comments: ['']
+    });
+  }
 
-addreview() {
-  console.log(this.bookreviewform.getRawValue());
-  this.bookreviewservice.addreview(this.data.bookid, this.bookreviewform.getRawValue()).subscribe((n) => {
-    console.log(n);
-  });
-}
+  addreview() {
+    console.log(this.bookreviewform.get("comments")?.value);
+    this.review = {
+      "star": this.starCount,
+      "comments": this.bookreviewform.get("comments")?.value
+    }
+    console.log("------------------value : ", this.review);
+    console.log(this.bookreviewform.getRawValue());
+    this.bookreviewservice.addreview(this.data.bookid, this.review).subscribe((n) => {
+      console.log(n);
+      this.dialog.open(DialogmodalComponent, {
+        data: {
+          name: n,
+          url: "/book-details/"+this.data.bookid,
+        }
+      });
+    },
+      error => {
+        this.dialog.open(DialogmodalComponent, {
+          data: {
+            name: "you can't lend the book"
+          }
+        })
+      });
 
-star_change(){
-  console.log("asdn");
-  
-  this.star=true;
-}
 
+
+
+  }
+  star_count(value: number) {
+    this.starCount = value;
+    console.log("------------------value : ", value, this.review);
+
+  }
 
 
 }
