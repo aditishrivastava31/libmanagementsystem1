@@ -33,14 +33,14 @@ export class BookDetailsComponent extends BooksComponent implements OnInit {
 
   override ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
-    const bookIdFromRoute = Number(routeParams.get('book_id'));
-    this.bookservice.getbookbyid(bookIdFromRoute).subscribe((n) => {
+    this.bookidroute = Number(routeParams.get('book_id'));
+    this.bookservice.getbookbyid(this.bookidroute).subscribe((n) => {
       this.bookdetails = n
     })
     // this.bookservice.getreviewbybookid(bookIdFromRoute).subscribe((n) => {
     //   console.log("asdfjkn",typeof n,n[0]);
     // })
-    this.bookreview$ = this.bookservice.getreviewbybookid(bookIdFromRoute)
+    this.bookreview$ = this.bookservice.getreviewbybookid(this.bookidroute)
     console.log(this.bookreview$);
 
 

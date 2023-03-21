@@ -13,7 +13,7 @@ export class ReviewservicesService {
 addreview(bookid: number, reviewdetails: reviewadd) {
   console.log(reviewdetails);
   console.log(bookid);
-  console.log(localStorage.getItem("token"));
+  console.log("fghjkgfhjk",localStorage.getItem("token"));
   console.log("Bearer " + localStorage.getItem("token"));
 
   const headers = new HttpHeaders().set('Authorization', "Bearer " + localStorage.getItem("token"));
