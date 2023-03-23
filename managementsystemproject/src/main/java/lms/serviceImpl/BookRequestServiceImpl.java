@@ -103,4 +103,16 @@ public class BookRequestServiceImpl implements BookRequestService {
 
 	}
 
+	@Override
+	public List<BookRequestDto> getRequestByUserId(long uid) {
+		
+		List<BookRequestDto> bookRequestDtos = new ArrayList<>();
+		List<RequestBookDetails> requestBookDetails = requestBookDetailsRepository.findByUserDetail(userDetailsRepository.findById(uid));
+		for (RequestBookDetails requestBookDetails2 : requestBookDetails){
+			bookRequestDtos.add(setBookRequestDto(requestBookDetails2));
+		}
+		return bookRequestDtos;
+		
+	}
+
 }

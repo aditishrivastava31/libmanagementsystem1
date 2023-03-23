@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,10 +42,13 @@ public class BookIssueServiceImpl implements BookIssueService {
 	}
 
 	@Override
-	public String lend_book(long uid, long bid) {
+	public  String lend_book(long uid, long bid) {
 		UserDetails user = userDetailsRepository.findById(uid).orElse(null);
+	
 		BookDetails book = bookRepository.findById(bid).orElse(null);
-
+		
+		synchronized (user) {	
+		synchronized (book) {
 		if (book == null || user == null) {
 			return "sorry you can't!!! ";
 		}
@@ -78,6 +82,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 				return null;
 			}
 		}
+		}}
 	}
 
 	@Override
@@ -85,6 +90,10 @@ public class BookIssueServiceImpl implements BookIssueService {
 		BookIssueDetails bookIssueDetails = bookIssueRepository.findById(issue_id).orElse(null);
 		UserDetails user = bookIssueDetails.getUserDetail();
 		BookDetails book = bookIssueDetails.getBookDetails();
+		
+		synchronized (user) {
+			synchronized (book) {
+				
 		user.setLendCount(user.getLendCount() + 1);
 		book.setQuantity(book.getQuantity() + 1);
 		userDetailsRepository.save(user);
@@ -99,6 +108,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 		}
 		emailServiceImpl.setBookIssueDetails(bookIssueDetails);
 		return "success";
+			}}
 	}
 
 	@Override
@@ -159,6 +169,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 					}
 				}
 			} else if (str.toLowerCase().equals("total")) {
+				
 				filteredData.add(this.toDto(issueBookDetails));
 			} else if (str.toLowerCase().equals("read")) {
 				if (issueBookDetails.getReturnDate() != null) {
@@ -176,7 +187,22 @@ public class BookIssueServiceImpl implements BookIssueService {
 
 			}
 		}
-		return filteredData;
+		return filteredData.stream().sorted(
+				new Comparator<BookIssueDetailsDto>() {
+					@Override
+					public int compare(BookIssueDetailsDto o1, BookIssueDetailsDto o2) {
+						if(o1.getReturnDate()==null) {
+							return -1;
+						}
+						
+						else {
+							return 0;
+						}
+						
+					}
+                }
+		).collect(Collectors.toList());
+		
 	}
 
 	@Override
@@ -224,7 +250,10 @@ public class BookIssueServiceImpl implements BookIssueService {
 
 public String issuebook(UserDetails user,BookDetails book,BookIssueDetails bookIssueDetails)
 {
-	user.setLendCount(user.getLendCount() - 1);
+	
+	synchronized (user) {
+		synchronized (book) {
+			user.setLendCount(user.getLendCount() - 1);
 	book.setQuantity(book.getQuantity() - 1);
 	userDetailsRepository.save(user);
 	bookRepository.save(book);
@@ -244,7 +273,7 @@ public String issuebook(UserDetails user,BookDetails book,BookIssueDetails bookI
 	emailServiceImpl.issueBookEmailSender();
 
 	return "Book was issued successfully...";
-	
-}
+	}
+}}
 
 }

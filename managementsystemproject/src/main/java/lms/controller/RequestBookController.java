@@ -50,7 +50,7 @@ public class RequestBookController {
 	
 	@GetMapping("/requestBookdto/{userId}")
 	public List<BookRequestDto> getRequestData(@PathVariable("userId") long id) {
-		List<BookRequestDto> bookRequestDtos = bookRequestService.getAllRequestBook();
+		List<BookRequestDto> bookRequestDtos = bookRequestService.getRequestByUserId(id);
 		return bookRequestDtos;
 	}
 
