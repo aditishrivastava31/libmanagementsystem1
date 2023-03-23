@@ -25,6 +25,7 @@ public class EmailServiceImpl implements EmailService {
 
 	private BookIssueDetails bookIssueDetails;
 	
+	
 	public EmailServiceImpl(JavaMailSender mailSender1) {
 		this.mailSender = mailSender1;
 	}
