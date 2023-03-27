@@ -31,6 +31,9 @@ public class BookIssueServiceImpl implements BookIssueService {
 	BookIssueRepository bookIssueRepository;
 
 	EmailServiceImpl emailServiceImpl;
+	
+	@Autowired
+	RequestEndDateServiceImpl requestEndDateServiceImpl;	
 
 	@Autowired
 	public BookIssueServiceImpl(UserDetailsRepository userDetailsRepository, BookRepository bookRepository,
@@ -103,6 +106,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			bookIssueDetails.setReturnDate(formatter.parse(localDateTime.toString()));
 			bookIssueRepository.save(bookIssueDetails);
+			requestEndDateServiceImpl.deletetheExtension(bookIssueDetails);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -152,6 +156,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 		bookIssueDetailsDto.setIssueDate(bookIssueDetails.getIssueDate());
 		bookIssueDetailsDto.setIssueEndDate(bookIssueDetails.getIssueEndDate());
 		bookIssueDetailsDto.setReturnDate(bookIssueDetails.getReturnDate());
+		bookIssueDetailsDto.setIsExtendable(bookIssueDetails.getIsExtendable());
 		return bookIssueDetailsDto;
 	}
 
@@ -259,6 +264,7 @@ public String issuebook(UserDetails user,BookDetails book,BookIssueDetails bookI
 	bookRepository.save(book);
 	bookIssueDetails.setBookDetails(book);
 	bookIssueDetails.setUserDetail(user);
+	bookIssueDetails.setIsExtendable(true);
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	LocalDateTime localDateTime = LocalDateTime.now();
 	try {
@@ -275,5 +281,21 @@ public String issuebook(UserDetails user,BookDetails book,BookIssueDetails bookI
 	return "Book was issued successfully...";
 	}
 }}
+
+@Override
+public BookIssueDetails findByIssuedId(Long issuedId){
+	return bookIssueRepository.findById(issuedId).get();
+}
+
+@Override
+public List<BookIssueDetails> findAllNotExtendable(Long userId) {
+	List<BookIssueDetails> nonExtendableBooks = new ArrayList<>();
+	for(BookIssueDetails bookIssueDetails : bookIssueRepository.findByUserDetail(userDetailsRepository.findById(userId).orElse(null))){
+		if(!bookIssueDetails.getIsExtendable()) {
+			nonExtendableBooks.add(bookIssueDetails);
+		}
+	}
+	return nonExtendableBooks;	
+}
 
 }

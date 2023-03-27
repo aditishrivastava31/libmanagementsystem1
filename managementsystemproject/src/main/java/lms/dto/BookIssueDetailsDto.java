@@ -23,6 +23,8 @@ public class BookIssueDetailsDto {
 	private List<String> authors;
 
 	private String userName;
+	
+	private Boolean isExtendable;
 
 	public long getIssue_id() {
 		return issue_id;
@@ -78,6 +80,14 @@ public class BookIssueDetailsDto {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Boolean getIsExtendable() {
+		return isExtendable;
+	}
+
+	public void setIsExtendable(Boolean isExtendable) {
+		this.isExtendable = isExtendable;
 	}
 
 }

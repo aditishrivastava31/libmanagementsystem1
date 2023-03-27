@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.mail.MessagingException;
 import lms.dto.RequestEnddatedto;
+import lms.entities.BookIssueDetails;
 
 @Service
 public interface RequestEndDateService {
@@ -15,6 +16,5 @@ public interface RequestEndDateService {
     String acceptandreject(long id, int value) throws MessagingException;
 
     String addRequestEndExtension(long issueId);
-
-
+    
 }

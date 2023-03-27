@@ -42,7 +42,7 @@ export interface issuebookdetails{
     bookTitle:string,
     authors:string[]
     userName: string
-    
+    isExtendable:Boolean
 }
 
 
