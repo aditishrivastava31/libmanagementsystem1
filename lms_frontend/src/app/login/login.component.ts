@@ -21,10 +21,9 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.sidenav.hide();
-    // console.log("---------------",this.router.url);
+
     if (this.router.url !== '/login') {
-      this.loginService.logout();
-      window.location.href = '/login';
+      window.location.href = '/dashboard';
     }
   }
 

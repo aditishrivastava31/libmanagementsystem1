@@ -27,5 +27,9 @@ public interface BookIssueService {
     List<BookIssueDetailsDto> getIssuedBookDetails(String str, long uid);
 
     List<BookIssueDetailsDto> getAllIssuedToAdmin();
+    
+    BookIssueDetails findByIssuedId(Long issuedId);
+    
+    List<BookIssueDetails> findAllNotExtendable(Long userId);
 
 }

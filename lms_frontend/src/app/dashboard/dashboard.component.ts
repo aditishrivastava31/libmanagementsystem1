@@ -20,7 +20,10 @@ export class DashboardComponent implements OnInit {
   title = '';
   show: number = 0;
 
+  btnState: boolean=false;
+
   issuebookdetails$!: Observable<any>;
+  nonExtendable$!:Observable<any>;
   allbookscount$!: Observable<number>;
   pendingsbookcount$!: Observable<number>;
   issuedbookcount$!: Observable<number>;
@@ -67,19 +70,18 @@ export class DashboardComponent implements OnInit {
     }
 
     this.all_books();
+    
   }
 
   all_books() {
     this.title = 'All';
     this.show = 1;
     this.issuebookdetails$ = this.issuebookservice.getallIssuebookdetails();
-    //console.log("check")
   }
   issued_books() {
     this.title = 'Issued';
     this.show = 0;
     this.issuebookservice.getIssuedbookdetalis().subscribe((n) => {
-      // console.log(n);
     });
     this.issuebookdetails$ = this.issuebookservice.getIssuedbookdetalis();
   }
@@ -88,30 +90,29 @@ export class DashboardComponent implements OnInit {
     this.title = 'Returned';
     this.show = 0;
     this.issuebookservice.getreadIssuebookdetails().subscribe((n) => {
-      // console.log(n);
     });
     this.issuebookdetails$ = this.issuebookservice.getreadIssuebookdetails();
-    // console.log('asjdkfdaskjhajksafh', this.issuebookdetails$);
   }
 
   pending_books() {
     this.title = 'Pending';
     this.show = 0;
     this.issuebookdetails$ = this.issuebookservice.getallpendingbookdetalis();
-    // console.log('asjdkfdaskjhajksafh', this.issuebookdetails$);
   }
 
   returnbook(issueId: number) {
     this.issuebookservice.returnbook(issueId).subscribe((n) => {
-      // console.log(n);
       window.location.href = '/dashboard';
     });
   }
 
+  
+
   extenddatebook(issueId: number) {
+    console.log("hiii")
+    // this.checkExtension(issueId);
     this.issuebookservice.extenddatebook(issueId).subscribe(
       (n) => {
-        // console.log(n);
         this.dialog.open(DialogmodalComponent, {
           data: {
             name: n,

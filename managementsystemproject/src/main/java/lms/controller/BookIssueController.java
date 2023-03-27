@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import lms.dto.BookIssueDetailsDto;
+import lms.entities.BookIssueDetails;
 import lms.serviceImpl.BookIssueServiceImpl;
 
 @RestController
@@ -61,6 +62,18 @@ public class BookIssueController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public List<BookIssueDetailsDto> getAllIssues() {
 		return bookIssueServiceImpl.getAllIssuedToAdmin();
+	}
+	
+	@CrossOrigin
+	@GetMapping("/findByIssueId/{issueId}")
+	public BookIssueDetails findExtensionByIssueId(@PathVariable("issueId") Long issuedId){
+		return bookIssueServiceImpl.findByIssuedId(issuedId);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/findNonExtendable/{userId}")
+	public List<BookIssueDetails> findNonExtendableBooks(@PathVariable("userId") Long userId){
+		return bookIssueServiceImpl.findAllNotExtendable(userId);
 	}
 
 }

@@ -2,6 +2,7 @@ package lms.entities;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,8 @@ public class BookIssueDetails {
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date returnDate;
+	
+	private Boolean isExtendable;
 	
 	@ManyToOne
 	@JoinColumn(name="bookId")
@@ -96,6 +99,14 @@ public class BookIssueDetails {
 
 	public void setUserDetail(UserDetails userDetail) {
 		this.userDetail = userDetail;
+	}
+
+	public Boolean getIsExtendable() {
+		return isExtendable;
+	}
+
+	public void setIsExtendable(Boolean isExtendable) {
+		this.isExtendable = isExtendable;
 	}
 
 	@Override

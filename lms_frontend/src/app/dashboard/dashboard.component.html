@@ -72,10 +72,11 @@
         </thead>
         <!-- {{issuebookdetails$}} -->
         <tbody>
-            <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index">
+            <!-- <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index"> -->
+                <tr *ngFor="let issuebook of issuebookdetails$  | async;let i = index">
                 <td>{{i+1}}</td>
                 <td>{{issuebook. bookTitle}}</td>
-                <td>{{issuebook.authors}}</td>
+                <td>{{issuebook.author}}</td>
                 <td>{{issuebook.issueDate}}</td>
                 <td>{{issuebook.issueEndDate}}</td>
                 <td *ngIf="issuebook.returnDate;else elseBlock">{{issuebook.returnDate}}</td>
@@ -87,8 +88,8 @@
                     <div *ngIf="issuebook.returnDate===null;else elseBlock1">
                         <button class="btn btn-light btn-sm"
                             (click)="returnbook(issuebook.issue_id)">Return</button>&nbsp;
-                        <button class="btn btn-light btn-sm"
-                            (click)="extenddatebook(issuebook.issue_id)">Extend</button>
+                        <button class="btn btn-light btn-sm" 
+                            (click)="extenddatebook(issuebook.issue_id) " [disabled]=!issuebook.isExtendable>Extend</button>
                     </div>
                     <ng-template #elseBlock1>
                         Returned
