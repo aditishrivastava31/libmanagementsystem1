@@ -7,7 +7,8 @@ import { issuebookdetails } from 'src/app/books/booksinterface';
   providedIn: 'root',
 })
 export class IssuebookservicesService {
-  extenddatebook(issueId: number) {
+  isExtendable:Boolean=true;
+    extenddatebook(issueId: number) {
     // console.log(issueId);
     // console.log(localStorage.getItem("token"));
     const headers = new HttpHeaders().set(
@@ -106,5 +107,9 @@ export class IssuebookservicesService {
     );
     const usersUrl = 'http://localhost:8080/getAllIssued';
     return this.httpclient.get<any>(usersUrl, { headers });
+  }
+
+  checkExtension(issuedId : any){
+    return this.httpclient.get<any>('http://localhost:8080/findByIssueId/'+issuedId);
   }
 }

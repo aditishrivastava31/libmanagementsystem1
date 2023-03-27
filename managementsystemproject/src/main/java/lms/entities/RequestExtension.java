@@ -45,5 +45,11 @@ public class RequestExtension {
 
     }
 
+	@Override
+	public String toString() {
+		return "RequestExtension [requestextensionId=" + requestextensionId + ", issueId=" + issueId + "]";
+	}
+    
+
 
 }
