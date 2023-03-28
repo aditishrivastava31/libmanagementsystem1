@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDetails updated(long id) {
+	public UserDetails updated(long id){
 		UserDetails userDetails = null;
 
 		if (id == 1l) {
