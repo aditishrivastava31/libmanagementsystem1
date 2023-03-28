@@ -43,7 +43,6 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 		System.out.println(requestExtensionRepository.findAll());
 		requestExtensionRepository.findAll().forEach(requestextension -> {
 			BookIssueDetails bookIssueDetails = requestextension.getIssueId();
-			System.out.println(bookIssueDetails);
 			RequestEnddatedto requestEnddatedto = new RequestEnddatedto(bookIssueDetails.getUserDetail().getUserName(),
 					bookIssueDetails.getBookDetails().getBookName(),
 					formatter.format(convertDate(bookIssueDetails.getIssueEndDate()).getTime()),
