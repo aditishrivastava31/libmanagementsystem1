@@ -11,13 +11,26 @@
     <div *ngIf="userRole==='ADMIN';else elseBlock">
         <ul class="sidenav-nav">
             <li class="sidenav-nav-item" *ngFor="let data of navData">
-                <a class="sidenav-nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                    [routerLink]="[data.routeLink]">
+                <a *ngIf="data.label!=='Add Books';else addBooks" class="sidenav-nav-link" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}" [routerLink]="[data.routeLink]">
                     <i class="sidenav-link-icon" [class]="data.icon"></i>
                     <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
                         {{data.label}}
                     </span>
                 </a>
+                <ng-template #addBooks>
+                    <a class="sidenav-nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        [routerLink]="[data.routeLink]">
+                        <span class="sidenav-link-icon fal  fa-2x">
+                            <i class="fal fa-solid fa-book"></i>
+                            <i class="fal fa-solid fa-plus text-right" style="font-size: 0.5em;"></i>
+                        </span>
+                        <!-- <i class="sidenav-link-icon" class="fa fa-home"></i> -->
+                        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+                            {{data.label}}
+                        </span>
+                    </a>
+                </ng-template>
             </li>
 
             <li class="sidenav-nav-item" style="margin-top: 25px;">

@@ -6,7 +6,7 @@ export const userNavbarData = [
     },
     {
         routeLink: 'books',
-        icon: 'fal fa-book',
+        icon: 'fal fa-search',
         label: 'Books'
     },
     {
@@ -34,7 +34,7 @@ export const adminNavbarData = [
     },
     {
         routeLink: 'add-book-details',
-        icon: 'fal fa-plus',
+        icon: 'fal fa-plus-square',
         label: 'Add Books'
     },
     {
