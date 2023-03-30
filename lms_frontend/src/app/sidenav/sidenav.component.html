@@ -1,9 +1,10 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''" *ngIf="sidenav.visible">
     <div class="logo-container">
         <button class="logo" (click)="toggleCollapse()">
-            <img style="height: 20px; width: 40px;" src="../../assets/innova-logo.png" alt="innova logo" />
+            <!-- <i class="fas fa-user-o fa-lg me-3 fa-fw"></i> -->
+            <i class="fa fa-user-o" aria-hidden="true"></i>
         </button>
-        <div class="logo-text" @fadeInOut *ngIf="collapsed">LMS</div>
+        <div class="logo-text" @fadeInOut *ngIf="collapsed">{{userName}}</div>
         <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
             <i class="fal fa-times close-icon"></i>
         </button>

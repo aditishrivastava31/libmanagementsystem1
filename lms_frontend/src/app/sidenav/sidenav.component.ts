@@ -54,6 +54,7 @@ export class SidenavComponent implements OnInit {
   userRole!: String;
   collapsed = false;
   screenWidth = 0;
+  userName!: String;
   navData = adminNavbarData;
 
   @HostListener('window:resize', ['$event'])
@@ -107,6 +108,7 @@ export class SidenavComponent implements OnInit {
     this.loggedIn = this.loginService.isLoggedIn();
     let savedPerson = JSON.parse(localStorage.getItem('user') || '{}');
     let roles = JSON.parse(localStorage.getItem('role') || '{}');
+    this.userName = savedPerson.userName;
     // console.log(roles);
     // console.log(this.loginService.isLoggedIn())
     this.userRole = roles[0].roleName;
