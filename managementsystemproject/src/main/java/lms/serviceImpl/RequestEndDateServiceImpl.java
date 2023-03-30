@@ -40,7 +40,7 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 
 		List<RequestEnddatedto> requestEnddatedtos = new ArrayList<>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
+		System.out.println(requestExtensionRepository.findAll());
 		requestExtensionRepository.findAll().forEach(requestextension -> {
 			BookIssueDetails bookIssueDetails = requestextension.getIssueId();
 			RequestEnddatedto requestEnddatedto = new RequestEnddatedto(bookIssueDetails.getUserDetail().getUserName(),
@@ -60,6 +60,8 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 		if (value == 0) {
 			emailServiceImpl.rejectEndDateEmailSender();
 			deletetheExtension(bookIssueDetails);
+			bookIssueDetails.setIsExtendable(false);
+			bookIssueRepository.save(bookIssueDetails);
 			return "You have Rejected the Request";
 		}
 		

@@ -36,4 +36,28 @@ export class UserService {
       },
     });
   }
+  getAllUser() {
+    return this.http.get(
+      'http://localhost:8080/users',
+    );
+  }
+
+  duplicateEmail(users : any , userEmail: any){
+    for (var v in users) {
+      if (users[v].email === userEmail) {
+        return true;
+      }
+    }
+    return false;
+
+  }
+  duplicatePhone(users : any , userPhone: any){
+    let val1d = parseInt(userPhone)
+    for (var v in users) {
+      if (val1d === users[v].number) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

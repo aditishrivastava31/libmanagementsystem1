@@ -12,6 +12,7 @@ export class SignupComponent {
   countries: any;
   states: any;
   cities: any;
+  users: any;
 
   constructor(
     private userService: UserService,
@@ -34,32 +35,37 @@ export class SignupComponent {
   ngOnInit() {
     this.sidenav.hide();
     this.userService.getcountry().subscribe((data) => (this.countries = data));
+    this.userService.getAllUser().subscribe((data) => {this.users = data});
   }
 
   formSubmit(country: any, state: any, city: any) {
-    // console.log(this.user);
 
-    if (this.user.email == null || this.user.userName == null) {
+    if(this.userService.duplicateEmail(this.users , this.user.email)){
+      alert('email is already registered! ')
+      return;
+    }
+    if(this.userService.duplicatePhone(this.users , this.user.number)){
+      alert('Number is already registered! ')
+      return;
+    }
+
+    if (this.user.email == null || this.user.userName == null ) {
       alert('email and userName is required !!');
       return;
     }
 
     this.userService.addUser(this.user, country, state, city).subscribe(
       (data) => {
-        // console.log(data);
         alert('success');
         window.location.href = '/login';
       },
       (error) => {
-        // console.log(error);
         alert('something went wrong!');
       }
     );
   }
   onChangeCountry(country: String) {
     if (country) {
-      // console.log(this.states);
-      // console.log(this.countries);
       this.userService.getstate(country).subscribe((data) => {
         this.states = data;
         this.cities = null;

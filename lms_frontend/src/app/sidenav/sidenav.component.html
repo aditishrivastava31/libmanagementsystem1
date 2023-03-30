@@ -1,9 +1,10 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''" *ngIf="sidenav.visible">
     <div class="logo-container">
         <button class="logo" (click)="toggleCollapse()">
-            <img style="height: 20px; width: 40px;" src="../../assets/innova-logo.png" alt="innova logo" />
+            <!-- <i class="fas fa-user-o fa-lg me-3 fa-fw"></i> -->
+            <i class="fa fa-user-o" aria-hidden="true"></i>
         </button>
-        <div class="logo-text" @fadeInOut *ngIf="collapsed">LMS</div>
+        <div class="logo-text" @fadeInOut *ngIf="collapsed">{{userName}}</div>
         <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
             <i class="fal fa-times close-icon"></i>
         </button>
@@ -11,13 +12,26 @@
     <div *ngIf="userRole==='ADMIN';else elseBlock">
         <ul class="sidenav-nav">
             <li class="sidenav-nav-item" *ngFor="let data of navData">
-                <a class="sidenav-nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                    [routerLink]="[data.routeLink]">
+                <a *ngIf="data.label!=='Add Books';else addBooks" class="sidenav-nav-link" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}" [routerLink]="[data.routeLink]">
                     <i class="sidenav-link-icon" [class]="data.icon"></i>
                     <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
                         {{data.label}}
                     </span>
                 </a>
+                <ng-template #addBooks>
+                    <a class="sidenav-nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        [routerLink]="[data.routeLink]">
+                        <span class="sidenav-link-icon fal  fa-2x">
+                            <i class="fal fa-solid fa-book"></i>
+                            <i class="fal fa-solid fa-plus text-right" style="font-size: 0.5em;"></i>
+                        </span>
+                        <!-- <i class="sidenav-link-icon" class="fa fa-home"></i> -->
+                        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+                            {{data.label}}
+                        </span>
+                    </a>
+                </ng-template>
             </li>
 
             <li class="sidenav-nav-item" style="margin-top: 25px;">
@@ -48,7 +62,7 @@
                 </a>
             </li>
 
-            <li class="sidenav-nav-item" style="margin-top: 180px;">
+            <li class="sidenav-nav-item" style="margin-top: 300px;">
                 <a *ngIf="loggedIn" (click)="logoutUser()" class="sidenav-nav-link">
                     <i class="sidenav-link-icon" class="fal fa-sign-out-alt" style="font-size: 22px;
                 width: 2rem;

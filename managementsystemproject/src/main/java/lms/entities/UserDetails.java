@@ -112,6 +112,13 @@ public class UserDetails {
 		return userAddress;
 	}
 
+	@Override
+	public String toString() {
+		return "UserDetails [userId=" + userId + ", userName=" + userName + ", password=" + password + ", email="
+				+ email + ", number=" + number + ", lendCount=" + lendCount + ", role=" + role + ", userAddress="
+				+ userAddress + ", resetpasswordtoken=" + resetpasswordtoken + ", expireTime=" + expireTime + "]";
+	}
+
 	public void setUserAddress(Address userAddress) {
 		this.userAddress = userAddress;
 	}
