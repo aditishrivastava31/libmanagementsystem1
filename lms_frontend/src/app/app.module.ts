@@ -10,8 +10,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BooksComponent } from './books/books.component';
 import { ReqBookComponent } from './req-book/req-book.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { AboutUsComponent } from './about-us/about-us.component';
 import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
@@ -34,7 +32,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { NgHttpLoaderModule } from 'ng-http-loader';
-
+import { FooterComponentComponent } from './footer-component/footer-component.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,8 +41,6 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     DashboardComponent,
     BooksComponent,
     ReqBookComponent,
-    ContactUsComponent,
-    AboutUsComponent,
     LoginComponent,
     SignupComponent,
     BookDetailsComponent,
@@ -56,6 +52,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     ReqForExtComponent,
     ReviewcomponentComponent,
     ResetpasswordComponent,
+    FooterComponentComponent,
   ],
   imports: [
     BrowserModule,
