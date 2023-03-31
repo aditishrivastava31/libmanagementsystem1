@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.annotation.PostConstruct;
 import lms.dto.BookDetailssenddto;
 import lms.entities.BookDetails;
+import lms.serviceImpl.BookDetailsServiceImpl;
 import lms.services.BookDetailsService;
 
 /*
@@ -28,11 +31,21 @@ import lms.services.BookDetailsService;
 public class BookDetailsController {
 
 	public BookDetailsService bookDetailsService;
+	
+	@Autowired
+	public BookDetailsServiceImpl bookDetailsServiceImpl;
 
 	@Autowired
 	public BookDetailsController(BookDetailsService bookDetailsService) {
 		this.bookDetailsService = bookDetailsService;
 	}
+	
+
+//  @PostConstruct
+//  public void updatebookdetails() {
+//      bookDetailsServiceImpl.updatebookdetails();
+//  }
+	
 
 	public BookDetailsController() {
 
