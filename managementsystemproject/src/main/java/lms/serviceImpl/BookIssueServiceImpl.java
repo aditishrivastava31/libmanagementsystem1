@@ -180,7 +180,11 @@ public class BookIssueServiceImpl implements BookIssueService {
 				if (issueBookDetails.getReturnDate() != null) {
 					bookIssueDetailsDto = compareDate(issueBookDetails, issueBookDetails.getIssueDate());
 					// System.out.println(filteredData);
-					filteredData.add(bookIssueDetailsDto);
+					//System.out.println(bookIssueDetailsDto);
+					if(bookIssueDetailsDto!=null) {
+						filteredData.add(bookIssueDetailsDto);
+					}
+					
 				}
 			} else if (str.toLowerCase().equals("pending")) {
 				
@@ -192,6 +196,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 
 			}
 		}
+		System.out.println(filteredData);
 		return filteredData.stream().sorted(
 				new Comparator<BookIssueDetailsDto>() {
 					@Override
@@ -238,7 +243,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 		// List<BookIssueDetailsDto> filteredData = new ArrayList<>();
 		BookIssueDetailsDto bookIssueDetailsDto = null;
 		try {
-			if (date.compareTo(formatter.parse(localDateTime.toString())) <= 0) {
+			if (date.compareTo(formatter.parse(localDateTime.plusDays(1).toString())) <= 0) {
 
 				bookIssueDetailsDto = this.toDto(issuedBookDetails);
 			}
@@ -268,8 +273,8 @@ public String issuebook(UserDetails user,BookDetails book,BookIssueDetails bookI
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	LocalDateTime localDateTime = LocalDateTime.now();
 	try {
-		bookIssueDetails.setIssueDate(formatter.parse(localDateTime.toString()));
-		bookIssueDetails.setIssueEndDate(formatter.parse(localDateTime.plusDays(7).toString()));
+		bookIssueDetails.setIssueDate(formatter.parse(localDateTime.plusDays(1).toString()));
+		bookIssueDetails.setIssueEndDate(formatter.parse(localDateTime.plusDays(8).toString()));
 	} catch (ParseException e) {
 		e.printStackTrace();
 	}

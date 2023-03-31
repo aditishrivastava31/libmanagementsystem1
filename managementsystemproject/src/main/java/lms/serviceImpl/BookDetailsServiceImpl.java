@@ -158,4 +158,14 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 		return bookReviewRepository.getRateCount(id);
 	}
 
+	public void updatebookdetails() {
+		System.out.println("book update is called");
+		BookDetails book=bookRepository.findById(10l).orElse(null);
+		List<Author> authors=new ArrayList<>();
+		authors.add(authorRepository.findById(1l).orElse(null));
+		book.setAuthors(authors);
+		bookRepository.save(book);
+		
+	}
+
 }
