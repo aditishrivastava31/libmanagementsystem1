@@ -90,4 +90,13 @@ public class BookIssueDetailsDto {
 		this.isExtendable = isExtendable;
 	}
 
+	@Override
+	public String toString() {
+		return "BookIssueDetailsDto [issue_id=" + issue_id + ", issueDate=" + issueDate + ", issueEndDate="
+				+ issueEndDate + ", returnDate=" + returnDate + ", bookTitle=" + bookTitle + ", authors=" + authors
+				+ ", userName=" + userName + ", isExtendable=" + isExtendable + "]";
+	}
+	
+	
+
 }

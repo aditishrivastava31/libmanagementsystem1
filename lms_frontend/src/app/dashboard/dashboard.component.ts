@@ -82,6 +82,7 @@ export class DashboardComponent implements OnInit {
     this.title = 'Issued';
     this.show = 0;
     this.issuebookservice.getIssuedbookdetalis().subscribe((n) => {
+      console.log(n)
     });
     this.issuebookdetails$ = this.issuebookservice.getIssuedbookdetalis();
   }
