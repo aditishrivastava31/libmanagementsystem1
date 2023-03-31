@@ -75,8 +75,8 @@
             <!-- <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index"> -->
                 <tr *ngFor="let issuebook of issuebookdetails$  | async;let i = index">
                 <td>{{i+1}}</td>
-                <td>{{issuebook. bookTitle}}</td>
-                <td>{{issuebook.author}}</td>
+                <td>{{issuebook.bookTitle}}</td>
+                <td>{{issuebook.authors}}</td>
                 <td>{{issuebook.issueDate}}</td>
                 <td>{{issuebook.issueEndDate}}</td>
                 <td *ngIf="issuebook.returnDate;else elseBlock">{{issuebook.returnDate}}</td>
