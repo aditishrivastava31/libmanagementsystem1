@@ -1,101 +1,55 @@
 <h1 mat-dialog-title>ADD REVIEW</h1>
-<!-- <form class="rating">
-  <label>
-    <input type="radio" name="stars" value="1" (change)="star_count(1)"/>
-    <span class="icon fa fa-star checked"></span>
-  </label>
-  <label>
-    <input type="radio" name="stars" value="2" (change)="star_count(2)"/>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>
-  </label>
-  <label>
-    <input type="radio" name="stars" value="3" (change)="star_count(3)"/>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>   
-  </label>
-  <label>
-    <input type="radio" name="stars" value="4" (change)="star_count(4)"/>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>
-  </label>
-  <label>
-    <input type="radio" name="stars" value="5" (change)="star_count(5)"/>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>
-    <span class="icon fa fa-star checked"></span>
-  </label>
-</form> -->
 <div mat-dialog-content>
   <form class="exampl-form" [formGroup]="bookreviewform" (ngSubmit)="addreview()" ngNativeValidate>
+    <h4>Rate</h4>
     <div>
       <div class="rating">
-      <label>
-        <input type="radio" name="stars" value="1" (change)="star_count(1)"/>
-        <span class="icon fa fa-star checked"></span>
-      </label>
-      <label>
-        <input type="radio" name="stars" value="2" (change)="star_count(2)"/>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>
-      </label>
-      <label>
-        <input type="radio" name="stars" value="3" (change)="star_count(3)"/>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>   
-      </label>
-      <label>
-        <input type="radio" name="stars" value="4" (change)="star_count(4)"/>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>
-      </label>
-      <label>
-        <input type="radio" name="stars" value="5" (change)="star_count(5)"/>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>
-        <span class="icon fa fa-star checked"></span>
-      </label>
-    </div>
-      <p>Rate</p>
-      <!-- <mat-form-field class="f1">
-        <mat-label>star</mat-label>
-        <input type="number" matInput formControlName="star" placeholder="do the rating">
-        <mat-error *ngIf="bookreviewform.get('star')?.hasError('required')">
-          Rating is manadatory
-        </mat-error>
-        <mat-error *ngIf="bookreviewform.get('star')?.hasError('min')">
-          Give rating between <b>0</b> and <b>5</b>
-        </mat-error>
-        <mat-error *ngIf="bookreviewform.get('star')?.hasError('max')">
-          Give rating between <b>0</b> and <b>5</b>
-        </mat-error>
-      </mat-form-field> -->
+        <label>
+          <input type="radio" name="stars" value="1" (change)="star_count(1)" />
+          <span class="icon fa fa-star checked"></span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="2" (change)="star_count(2)" />
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="3" (change)="star_count(3)" />
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="4" (change)="star_count(4)" />
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="5" (change)="star_count(5)" />
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+          <span class="icon fa fa-star checked"></span>
+        </label>
+      </div>
     </div>
     <div>
-        <mat-form-field class="f1">
-            <mat-label>Comments</mat-label>
-            <textarea matInput formControlName="comments" placeholder="Enter your comments"></textarea>
-            <mat-error *ngIf="bookreviewform.get('comments')?.hasError('required')">
-                comments is mandatory
-            </mat-error>
-        </mat-form-field>
+      <h4>Add comment</h4>
+      <mat-form-field class="f1">
+        <textarea matInput formControlName="comments" placeholder="Enter your comment..."></textarea>
+        <mat-error *ngIf="bookreviewform.get('comments')?.hasError('required')">
+          comments is mandatory
+        </mat-error>
+      </mat-form-field>
     </div>
-    <div>
-        <button mat-button cdkFocusInitial mat-dialog-close color="primary" [disabled]="!bookreviewform.valid" (click)="addreview()">add review</button>
-        <button mat-button mat-dialog-close>No</button>
-    </div>
-    
-   
+    <div class="p-1 text-right">
+      <button class="mr-2" mat-button cdkFocusInitial mat-dialog-close color="primary"
+        [disabled]="!bookreviewform.valid" (click)="addreview()">Submit</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </div>  
 </form>
 </div>
 <app-footer-component></app-footer-component>
