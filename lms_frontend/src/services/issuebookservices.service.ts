@@ -112,4 +112,13 @@ export class IssuebookservicesService {
   checkExtension(issuedId : any){
     return this.httpclient.get<any>('http://localhost:8080/findByIssueId/'+issuedId);
   }
+
+  islended(bookId : any){
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    let loggedUser = JSON.parse(localStorage.getItem('user') || '{}');
+    return this.httpclient.get<any>('http://localhost:8080/isBookLended/'+loggedUser.userId+"/"+bookId,{ headers });
+  }
 }
