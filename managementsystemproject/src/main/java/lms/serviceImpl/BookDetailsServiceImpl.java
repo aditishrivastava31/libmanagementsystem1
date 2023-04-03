@@ -72,13 +72,26 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 		bookDetails.setAuthors(bookAuthors);
 
 		// adding the category
+		List<Category> bookCategories=new ArrayList<>();
+		bookDetails.getCategory().forEach(n->{
+			List<Category> categories = categoryRepository.findByCategoryName(n.getCategoryName());
+			if (categories.size() == 0) {
+				categoryRepository.save(n);
+				bookCategories.add(n);
+				}
+				else {
+				bookCategories.add(categories.get(0));
+		}	
+		});
+		
+		bookDetails.setCategory(bookCategories);
 
-		List<Category> categories = categoryRepository.findByCategoryName(bookDetails.getCategory().getCategoryName());
-		if (categories.size() != 0) {
-			bookDetails.setCategory(categories.get(0));
-		} else {
-			categoryRepository.save(bookDetails.getCategory());
-		}
+//		List<Category> categories = categoryRepository.findByCategoryName(bookDetails.getCategory().getCategoryName());
+//		if (categories.size() != 0) {
+//			bookDetails.setCategory(categories.get(0));
+//		} else {
+//			categoryRepository.save(bookDetails.getCategory());
+//		}
 
 		return bookRepository.save(bookDetails);
 
@@ -98,7 +111,7 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 			bookDetailssenddto.setBook_id(n.getBookId());
 			bookDetailssenddto.setQuantity(n.getQuantity());
 			bookDetailssenddto.setBook_title(n.getBookName());
-			bookDetailssenddto.setCategory(n.getCategory().getCategoryName());
+			//bookDetailssenddto.setCategory(n.getCategory().getCategoryName());---
 			List<String> authorsList = n.getAuthors().stream().map(m -> m.getAuthorName()).collect(Collectors.toList());
 			double avg = avergarating(n.getBookId());
 			bookDetailssenddto.setAvg_rating(avg);
@@ -119,9 +132,11 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 			bookDetailssenddto.setBook_id(bookDetails.getBookId());
 			bookDetailssenddto.setQuantity(bookDetails.getQuantity());
 			bookDetailssenddto.setBook_title(bookDetails.getBookName());
-			bookDetailssenddto.setCategory(bookDetails.getCategory().getCategoryName());
+			//bookDetailssenddto.setCategory(bookDetails.getCategory().getCategoryName());---
 			List<String> authorsList = bookDetails.getAuthors().stream().map(m -> m.getAuthorName())
 					.collect(Collectors.toList());
+			List<String> categorieslist=bookDetails.getCategory().stream().map(m->m.getCategoryName()).collect(Collectors.toList());
+			bookDetailssenddto.setCategory(categorieslist);
 			bookDetailssenddto.setAuthors(authorsList);
 			bookDetailssenddto.setRating_count(ratingCount(id));
 			bookDetailssenddto.setAvg_rating(avergarating(id));
@@ -139,7 +154,8 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 			bookDetailssenddto.setBook_id(n.getBookId());
 			bookDetailssenddto.setQuantity(n.getQuantity());
 			bookDetailssenddto.setBook_title(n.getBookName());
-			bookDetailssenddto.setCategory(n.getCategory().getCategoryName());
+			List<String> categorieslist=n.getCategory().stream().map(m->m.getCategoryName()).collect(Collectors.toList());
+			bookDetailssenddto.setCategory(categorieslist);
 			List<String> authorsList = n.getAuthors().stream().map(m -> m.getAuthorName()).collect(Collectors.toList());
 			bookDetailssenddto.setAvg_rating(avergarating(n.getBookId()));
 			bookDetailssenddto.setAuthors(authorsList);
@@ -150,7 +166,7 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 
 	}
 
-	public Double avergarating(long id) {
+	public Double avergarating(long id){
 		return bookReviewRepository.getAvgRating(id);
 	}
 
@@ -160,12 +176,12 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 
 	public void updatebookdetails() {
 		System.out.println("book update is called");
-		BookDetails book=bookRepository.findById(10l).orElse(null);
-		List<Author> authors=new ArrayList<>();
-		authors.add(authorRepository.findById(1l).orElse(null));
-		book.setAuthors(authors);
+		BookDetails book=bookRepository.findById(18l).orElse(null);
+		List<Category> categories=new ArrayList<>();
+		categories.add(categoryRepository.findById(8l).orElse(null));
+		//categories.add(categoryRepository.findById(2l).orElse(null));
+		book.setCategory(categories);
 		bookRepository.save(book);
-		
 	}
 
 }

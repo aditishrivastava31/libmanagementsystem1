@@ -21,20 +21,21 @@ public class BookDetails {
 
 	private String bookName;
 
-	@ManyToOne(targetEntity = Category.class)
-	@JoinColumn(name="category_id",referencedColumnName = "cid")
-	private Category category;
+	@ManyToMany(targetEntity = Category.class)
+	//@JoinColumn(name="category_id",referencedColumnName = "cid")
+	@JoinTable(name = "Book_Category", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "cid"))
+	private List<Category> category;
 
 	
 	@ManyToMany(targetEntity = Author.class)
 	@JoinTable(name = "Book_Author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
 	private List<Author> authors;
 
-	public long getBookId() {
+	public long getBookId(){
 		return bookId;
 	}
 
-	public void setBookId(long bookId) {
+	public void setBookId(long bookId){
 		this.bookId = bookId;
 	}
 
@@ -73,21 +74,23 @@ public class BookDetails {
 				+ category + ", authors=" + authors + "]";
 	}
 
-	public BookDetails(long bookId, long quantity, String bookName, Category category, List<Author> authors) {
 	
+
+	public List<Category> getCategory() {
+		return category;
+	}
+
+	public void setCategory(List<Category> category) {
+		this.category = category;
+	}
+	
+
+	public BookDetails(long bookId, long quantity, String bookName, List<Category> category, List<Author> authors) {
 		this.bookId = bookId;
 		this.quantity = quantity;
 		this.bookName = bookName;
 		this.category = category;
 		this.authors = authors;
-	}
-
-	public Category getCategory(){
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 	public BookDetails(){
