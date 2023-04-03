@@ -16,7 +16,7 @@ public class BookDetailssenddto {
 
 	public List<String> authors;
 
-	public String category;
+	public List<String> category;
 
 	public double avg_rating;
 	
@@ -66,21 +66,25 @@ public class BookDetailssenddto {
 		this.quantity = quantity;
 	}
 
-	public String getCategory() {
+	public List<String> getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(List<String> category) {
 		this.category = category;
 	}
+	
 
-	public BookDetailssenddto(long book_id, String book_title, long quantity, List<String> authors, String category) {
+	public BookDetailssenddto(long book_id, String book_title, long quantity, List<String> authors,
+			List<String> category, double avg_rating, int rating_count) {
 		super();
 		this.book_id = book_id;
 		this.book_title = book_title;
 		this.quantity = quantity;
 		this.authors = authors;
 		this.category = category;
+		this.avg_rating = avg_rating;
+		this.rating_count = rating_count;
 	}
 
 	@Override
