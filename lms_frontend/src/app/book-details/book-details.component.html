@@ -56,7 +56,7 @@
                 *ngFor="let item of [].constructor(5-(dec_to_int(bookdetails.avg_rating)+dec_part(bookdetails.avg_rating)))"
                 class="fa fa-star-o unchecked avg"></span>
             <span class="fa fa-user-o review_count">{{bookdetails.rating_count}}</span>
-            <div class="mt-4" style="width: 100%;">
+            <div class="mt-4" style="width: 100%;" [hidden]="!islended">
                 <button class="btn btn-secondary" (click)="openDialog()"><i class="fa fa-plus"></i> Add Review</button>
                 <!-- <button mat-icon-button matSuffix (click)="openDialog()">Add Review<mat-icon>add_circle</mat-icon></button> -->
             </div>
@@ -125,4 +125,5 @@
         </mat-card-actions>
     </mat-card>
 </div> -->
+
 <app-footer-component></app-footer-component>

@@ -8,6 +8,7 @@ import { bookdto, reviewdto } from '../books/booksinterface';
 import { ReviewcomponentComponent } from '../reviewcomponent/reviewcomponent.component';
 import { BooksComponent } from '../books/books.component';
 import { Observable } from 'rxjs';
+import { IssuebookservicesService } from 'src/services/issuebookservices.service';
 
 @Component({
   selector: 'app-book-details',
@@ -19,12 +20,13 @@ export class BookDetailsComponent extends BooksComponent implements OnInit {
   bookreview$!: Observable<reviewdto[]>;
   bookreviewform!: FormGroup;
   bookidroute!: number;
-  // edit_mode = false;
+  islended!:any;
 
   constructor(
     public override dialog: MatDialog,
     private route: ActivatedRoute,
     private bookservice: BooksService,
+    private bookissueservice: IssuebookservicesService,
     private bookreviewservice: ReviewservicesService,
     private fb: FormBuilder
   ) {
@@ -37,26 +39,18 @@ export class BookDetailsComponent extends BooksComponent implements OnInit {
     this.bookservice.getbookbyid(this.bookidroute).subscribe((n) => {
       this.bookdetails = n;
     });
-    // this.bookservice.getreviewbybookid(bookIdFromRoute).subscribe((n) => {
-    //   console.log("asdfjkn",typeof n,n[0]);
-    // })
     this.bookreview$ = this.bookservice.getreviewbybookid(this.bookidroute);
-    // console.log(this.bookreview$);
+    this.bookissueservice.islended(this.bookidroute).subscribe(n=>{
+      // console.log(n);
+      this.islended = n;
+    });
   }
 
   openDialog(): void {
-    // console.log("kill")
     this.dialog.open(ReviewcomponentComponent, {
       data: {
         bookid: this.bookidroute,
       },
     });
   }
-
-  // edit_mode_on() {
-  //   this.edit_mode = true;
-  // }
-  // edit_mode_off() {
-  //   this.edit_mode = false;
-  // }
 }

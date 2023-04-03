@@ -89,6 +89,23 @@ public class BookIssueServiceImpl implements BookIssueService {
 	}
 
 	@Override
+	public boolean isBookLendedByUser(long uid, long bid) {
+		UserDetails user = userDetailsRepository.findById(uid).orElse(null);
+		BookDetails book = bookRepository.findById(bid).orElse(null);
+		if (book == null || user == null) {
+			return false;
+		}
+		else {
+			List<BookIssueDetails> bookIssueDetailslist = bookIssueRepository
+					.findByBookDetailsAndUserDetail(book, user);
+			if(bookIssueDetailslist.size()!=0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public String return_book(long issue_id) {
 		BookIssueDetails bookIssueDetails = bookIssueRepository.findById(issue_id).orElse(null);
 		UserDetails user = bookIssueDetails.getUserDetail();
