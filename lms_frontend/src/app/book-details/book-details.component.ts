@@ -41,7 +41,6 @@ export class BookDetailsComponent extends BooksComponent implements OnInit {
     });
     this.bookreview$ = this.bookservice.getreviewbybookid(this.bookidroute);
     this.bookissueservice.islended(this.bookidroute).subscribe(n=>{
-      // console.log(n);
       this.islended = n;
     });
   }
