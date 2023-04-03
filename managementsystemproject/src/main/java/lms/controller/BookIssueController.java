@@ -76,4 +76,9 @@ public class BookIssueController {
 		return bookIssueServiceImpl.findAllNotExtendable(userId);
 	}
 
+	@CrossOrigin
+	@GetMapping("/isBookLended/{userId}/{bookId}")
+	public boolean isBookLendedByUser(@PathVariable("userId") long uid,@PathVariable("bookId") long bid){
+		return bookIssueServiceImpl.isBookLendedByUser(uid,bid);
+	}
 }

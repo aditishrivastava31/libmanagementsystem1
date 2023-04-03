@@ -36,14 +36,6 @@
     </div>
 </div>
 
-<!-- <div class="card flex-row"><img class="card-img-sm-left example-card-img-responsive"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0YpqlGflv5QMxB0vQKiiP725VXsYoqzaWoKr9nUkB0fdfqj-175PXC_ASgNrt2FE19oY&usqp=CAU" />
-    <div class="card-body">
-        <h4 class="card-title h5 h4-sm">Left image</h4>
-        <p class="card-text">Example text</p>
-    </div>
-</div> -->
-
 <div class="mb-3">
     <div class="row">
         <div class="col-md-4 p-4">
@@ -56,9 +48,8 @@
                 *ngFor="let item of [].constructor(5-(dec_to_int(bookdetails.avg_rating)+dec_part(bookdetails.avg_rating)))"
                 class="fa fa-star-o unchecked avg"></span>
             <span class="fa fa-user-o review_count">{{bookdetails.rating_count}}</span>
-            <div class="mt-4" style="width: 100%;">
+            <div class="mt-4" style="width: 100%;" [hidden]="!islended">
                 <button class="btn btn-secondary" (click)="openDialog()"><i class="fa fa-plus"></i> Add Review</button>
-                <!-- <button mat-icon-button matSuffix (click)="openDialog()">Add Review<mat-icon>add_circle</mat-icon></button> -->
             </div>
         </div>
         <div class="col-md-8">

@@ -31,5 +31,7 @@ public interface BookIssueService {
     BookIssueDetails findByIssuedId(Long issuedId);
     
     List<BookIssueDetails> findAllNotExtendable(Long userId);
+    
+    boolean isBookLendedByUser(long uid, long bid);
 
 }
