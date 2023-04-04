@@ -7,11 +7,11 @@ export const userNavbarData = [
   {
     routeLink: 'books',
     icon: 'fal fa-search',
-    label: 'Books',
+    label: 'Search Books',
   },
   {
     routeLink: 'req-book',
-    icon: 'fal fa-plus',
+    icon: 'fal fa-plus-circle',
     label: 'Request Book',
   },
 ];

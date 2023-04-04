@@ -1,23 +1,53 @@
-<!-- <div class="jumbotron"></div> -->
-<div style="display: inline; width: 100%; padding:4px; margin-bottom: 2px;">
-    <h1 style="float: left;justify-content: center;text-align: center; padding: 4px;">Search Books</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between mb-2">
+    <a class="navbar-brand ml-2">Search Books</a>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+        <span class="mr-2">
+            <div ngbDropdown class="dropdown">
+                <button ngbDropdownToggle class="btn btn-light" type="button" id="dropdownMenuButton1"
+                    aria-expanded="false">
+                    <i class="fal fa-solid fa-user"></i>
+                </button>
+                <!-- <button type="button" ngbDropdownToggle mat-icon-button matSuffix aria-expanded="false">
+                    <mat-icon>add_circle</mat-icon>
+                </button> -->
+
+                <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1" class="dropdown-menu dropdown-menu-end">
+                    <li><a ngbDropdownItem href="#">{{loggedUser.userName}}</a></li>
+                    <div class="dropdown-divider"></div>
+                    <li><a ngbDropdownItem href="#" style="color: red;" (click)="logoutUser()">Logout <i
+                                class="fal fa-sign-out-alt"></i></a></li>
+                </ul>
+            </div>
+        </span>
+
+        <div class="search-bar">
+            <input class="search-textfield" type="search" ng-enter="getdetails()" placeholder="Title or Category or Author Name"
+                aria-label="Search" [(ngModel)]="accordingto">
+            <button class="search-btn" (click)="getdetails()"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+</nav>
+<!-- <div style="display: inline; width: 100%; padding:4px; margin-bottom: 2px;">
     <div class="search-bar">
         <input class="search-textfield" type="search" placeholder="Title or Category or Author Name" aria-label="Search"
             [(ngModel)]="accordingto">
-        <button class="search-btn"  (click)="getdetails()"><i class="fa fa-search"></i></button>
+        <button class="search-btn" (click)="getdetails()"><i class="fa fa-search"></i></button>
     </div>
-</div>
+</div> -->
 
 
 <table class="datatable">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Book Title</th>
-            <th scope="col">Category</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Authors</th>
-            <th scope="col">Rating</th>
+            <th class="head" scope="col" (click)="sortDataByTitle()">Book Title</th>
+            <th class="head" scope="col" (click)="sortDataByCategory()">Category</th>
+            <th class="head" scope="col" (click)="sortDataByQuantity()">Quantity</th>
+            <th class="head" scope="col" (click)="sortDataByAuthors()">Authors</th>
+            <th class="head" scope="col" (click)="sortDataByRating()">Rating</th>
             <th scope="col">Operations</th>
         </tr>
     </thead>

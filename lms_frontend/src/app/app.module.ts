@@ -34,6 +34,9 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { ValidateEqualModule } from 'ng-validate-equal';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { HeaderComponent } from './header/header.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +57,8 @@ import { ValidateEqualModule } from 'ng-validate-equal';
     ReviewcomponentComponent,
     ResetpasswordComponent,
     FooterComponentComponent,
+    UserprofileComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
