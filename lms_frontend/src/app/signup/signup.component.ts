@@ -27,6 +27,7 @@ export class SignupComponent {
     password: '',
     email: '',
     number: '',
+    confirmPassword: '',
     userAddress: {
       address: '',
     },
@@ -35,21 +36,22 @@ export class SignupComponent {
   ngOnInit() {
     this.sidenav.hide();
     this.userService.getcountry().subscribe((data) => (this.countries = data));
-    this.userService.getAllUser().subscribe((data) => {this.users = data});
+    this.userService.getAllUser().subscribe((data) => {
+      this.users = data;
+    });
   }
 
   formSubmit(country: any, state: any, city: any) {
-
-    if(this.userService.duplicateEmail(this.users , this.user.email)){
-      alert('email is already registered! ')
+    if (this.userService.duplicateEmail(this.users, this.user.email)) {
+      alert('email is already registered! ');
       return;
     }
-    if(this.userService.duplicatePhone(this.users , this.user.number)){
-      alert('Number is already registered! ')
+    if (this.userService.duplicatePhone(this.users, this.user.number)) {
+      alert('Number is already registered! ');
       return;
     }
 
-    if (this.user.email == null || this.user.userName == null ) {
+    if (this.user.email == null || this.user.userName == null) {
       alert('email and userName is required !!');
       return;
     }
