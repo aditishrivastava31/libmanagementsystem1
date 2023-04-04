@@ -46,7 +46,7 @@ export class ForgetpasswordComponent implements OnInit {
         (error) => {
           this.dialog.open(DialogmodalComponent, {
             data: {
-              name: 'Please Enter Your Email',
+              name: 'Something went wrong!!!',
               url: '/forgetpassword',
             },
           });
