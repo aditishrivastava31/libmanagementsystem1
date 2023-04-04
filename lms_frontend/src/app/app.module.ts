@@ -33,6 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { FooterComponentComponent } from './footer-component/footer-component.component';
+import { ValidateEqualModule } from 'ng-validate-equal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +74,7 @@ import { FooterComponentComponent } from './footer-component/footer-component.co
     MatFormFieldModule,
     MatExpansionModule,
     NgHttpLoaderModule.forRoot(),
+    ValidateEqualModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
