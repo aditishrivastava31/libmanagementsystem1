@@ -7,6 +7,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { LoginService } from 'src/services/login.service';
 
 @Component({
   selector: 'app-add-book-details',
@@ -17,14 +18,17 @@ export class AddBookDetailsComponent implements OnInit {
   addbookform!: FormGroup;
   category!: FormGroup;
   bookadded!: string;
+  loggedUser!: any;
 
   constructor(
     private fb: FormBuilder,
     private addbookservice: BooksService,
+    private loginService: LoginService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.loggedUser = JSON.parse(localStorage.getItem('user') || '{}');
     this.addbookform = this.fb.group({
       bookName: ['', [Validators.required]],
       quantity: ['', [Validators.min(1), Validators.required]],
@@ -38,6 +42,11 @@ export class AddBookDetailsComponent implements OnInit {
         }),
       ]),
     });
+  }
+
+  logoutUser() {
+    this.loginService.logout();
+    window.location.href = '/login';
   }
 
   get authorsArray() {
@@ -90,18 +99,6 @@ export class AddBookDetailsComponent implements OnInit {
   }
 
   reset() {
-    // this.addbookform.reset({
-    //   bookName: ['', [Validators.required]],
-    //   quantity: ['', [Validators.min(1), Validators.required]],
-    //   // categoryName:['',[Validators.required]],
-    //   category: this.fb.group({
-    //     categoryName: ['', [Validators.required]],
-    //   }),
-    //   authors: this.fb.array([this.fb.group({
-    //     authorName: ['', [Validators.required]],
-    //   })]
-    //   )
-    // })
     window.location.reload();
   }
 

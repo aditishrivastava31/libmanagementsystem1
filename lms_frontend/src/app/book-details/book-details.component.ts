@@ -9,6 +9,7 @@ import { ReviewcomponentComponent } from '../reviewcomponent/reviewcomponent.com
 import { BooksComponent } from '../books/books.component';
 import { Observable } from 'rxjs';
 import { IssuebookservicesService } from 'src/services/issuebookservices.service';
+import { LoginService } from 'src/services/login.service';
 
 @Component({
   selector: 'app-book-details',
@@ -21,19 +22,22 @@ export class BookDetailsComponent extends BooksComponent implements OnInit {
   bookreviewform!: FormGroup;
   bookidroute!: number;
   islended!:any;
+  override loggedUser!: any;
 
   constructor(
     public override dialog: MatDialog,
+    loginService:LoginService,
     private route: ActivatedRoute,
     private bookservice: BooksService,
     private bookissueservice: IssuebookservicesService,
     private bookreviewservice: ReviewservicesService,
     private fb: FormBuilder
   ) {
-    super(bookservice, dialog);
+    super(bookservice, loginService, dialog);
   }
 
   override ngOnInit(): void {
+    this.loggedUser = JSON.parse(localStorage.getItem('user') || '{}');
     const routeParams = this.route.snapshot.paramMap;
     this.bookidroute = Number(routeParams.get('book_id'));
     this.bookservice.getbookbyid(this.bookidroute).subscribe((n) => {

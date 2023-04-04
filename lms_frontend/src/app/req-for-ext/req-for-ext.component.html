@@ -1,3 +1,4 @@
+<app-header [heading]="'Extention Requests'"></app-header>
 <div>
     <h1>Book Requests extension</h1>
     <div *ngIf="(this.requestextension$ | async)?.length===0;else elseBlock">

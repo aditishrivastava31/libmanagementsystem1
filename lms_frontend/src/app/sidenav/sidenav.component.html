@@ -2,9 +2,10 @@
     <div class="logo-container">
         <button class="logo" (click)="toggleCollapse()">
             <!-- <i class="fas fa-user-o fa-lg me-3 fa-fw"></i> -->
-            <i class="fa fa-user-o" aria-hidden="true"></i>
+            <!-- <i class="fa fa-user-o" aria-hidden="true"></i> -->
+            <img src="assets\innova-logo.png" alt="">
         </button>
-        <div class="logo-text" @fadeInOut *ngIf="collapsed">{{userName}}</div>
+        <div class="logo-text" @fadeInOut *ngIf="collapsed">LMS</div>
         <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
             <i class="fal fa-times close-icon"></i>
         </button>
