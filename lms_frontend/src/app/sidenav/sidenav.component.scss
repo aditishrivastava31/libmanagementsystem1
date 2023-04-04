@@ -6,7 +6,7 @@
     top: 0;
     width: 5rem;
     height: 100vh;
-    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+    // box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
 
     .logo-container {
         display: flex;
@@ -16,6 +16,7 @@
 
         .logo {
             background: #fff;
+            // background: url('../../assets/innova-logo.png') no-repeat;
             text-align: center;
             width: 3rem;
             min-width: 3rem;
@@ -25,6 +26,11 @@
             font-weight: 900;
             cursor: pointer;
             border: none;
+            
+        }
+
+        .logo img{
+            width: 2.5rem;
         }
 
         .logo-text {
