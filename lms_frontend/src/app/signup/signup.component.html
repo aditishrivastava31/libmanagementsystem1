@@ -89,7 +89,7 @@
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input required minlength="6" maxlength="15" type="password" id="form3Example4c" class="form-control"
-                          placeholder="Password" name="password" #password="ngModel" [(ngModel)]="user.password" />
+                          placeholder="Password" name="Password" #password="ngModel" [(ngModel)]="user.password" />
                         <span class="help-block" *ngIf="password.touched && password.errors?.['required']">Password is Required</span>
                         <div class="help-block" *ngIf="password.errors?.['minlength'] || password.errors?.['maxlength']">
                           Password must be at least 6 characters long and not more than 15 characters long.
@@ -97,10 +97,15 @@
                       </div>
                     </div>
   
-                    <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="d-flex flex-row align-items-center mb-4" [class.has-error]="confirmpassword.invalid && confirmpassword.touched">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input required type="password" id="form3Example4cd" class="form-control" placeholder="Re-enter Password"/>
+                        <input required ngValidateEqual="Password" #confirmpassword="ngModel" type="password" name="confirmpassword" id="form3Example4cd" class="form-control" placeholder="Re-enter Password" [(ngModel)]="user.confirmPassword"/>
+                        <div *ngIf="(confirmpassword.dirty || confirmpassword.touched) && confirmpassword.invalid">
+                          <p class="help-block" *ngIf="confirmpassword.hasError('notEqual') && password.valid">
+                            Passwords Don't Match
+                          </p>
+                        </div>
                       </div>
                     </div>
   
