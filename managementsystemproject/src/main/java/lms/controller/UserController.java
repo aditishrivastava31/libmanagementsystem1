@@ -105,9 +105,9 @@ public class UserController {
 	public UserDetails updated(@PathVariable("id") long id) {
 		return userService.updated(id);
 	}
-	@PostMapping("/resetpassword/{user_id}")
+	@PostMapping("/changePassword/{user_id}")
 	public String resetpassword(@RequestBody ResetPasswordDao resetPasswordDao, @PathVariable("user_id") long id) {
-		return userService.forgetpassword(resetPasswordDao, id);	}
+		return userService.changePassword(resetPasswordDao, id);	}
 
 	@PostMapping("/forgetPassword")
 	public String processForgetPassword(@RequestBody ForgetPasswordDto forgetPasswordDto){

@@ -133,21 +133,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String forgetpassword(ResetPasswordDao resetPasswordDao, long id) {
+	public String changePassword(ResetPasswordDao resetPasswordDao, long id) {
 		UserDetails userDetails=userDetailsRepository.findById(id).orElse(null);
 		if(new BCryptPasswordEncoder().matches(resetPasswordDao.getOldPassword(), userDetails.getPassword())) {
-			if(resetPasswordDao.getPassword().equals(resetPasswordDao.getConfirmPassword())) {
+			if(resetPasswordDao.getNewPassword().equals(resetPasswordDao.getConfirmPassword())) {
 				System.out.println("hi");
-				userDetails.setPassword(passwordEncoder.encode(resetPasswordDao.getPassword()));
+				userDetails.setPassword(passwordEncoder.encode(resetPasswordDao.getNewPassword()));
 				userDetailsRepository.save(userDetails);
 				return "Success";
 			}
 			else {
-				return "Please Enter Your Correct Password";
+				return "Confirm Password Not Matched";
 			}
 		}
 		else {
-			return "Password Not Match";
+			return "Old Password Not Match";
 		}
 	}
 	
