@@ -35,16 +35,14 @@
                     <div class="d-flex flex-row align-items-center mb-4" [class.has-error]="number.invalid && number.touched">
                       <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input required tel minlength="7" maxlength="15" [valueAsNumber]="number" type="tel" id="form3Example3c"
+                        <input required tel  [valueAsNumber]="number" [pattern]="mobNumberPattern" type="tel" id="form3Example3c"
                           class="form-control" placeholder="Mobile.No" name="number" #number="ngModel" [(ngModel)]="user.number" />
                         <span class="help-block" *ngIf="number.errors?.['required']  && number.touched">
                           Phone Number is required
                         </span>
                         <span class="help-block" *ngIf=" number.errors?.['number'] && number.touched">
                           PhoneNumber is invalid</span>
-                        <div class="help-block" *ngIf="number.errors?.['minlength'] || number.errors?.['maxlength']">
-                          PhoneNumber is Not valid.
-                        </div>
+                        
                       </div>
                     </div>
               

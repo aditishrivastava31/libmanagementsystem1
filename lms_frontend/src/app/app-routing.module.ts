@@ -17,6 +17,7 @@ import { ReqForExtComponent } from './req-for-ext/req-for-ext.component';
 import { AdminguardGuard } from 'src/services/adminguard.guard';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
@@ -59,6 +60,11 @@ const routes: Routes = [
     path: 'add-book-details',
     component: AddBookDetailsComponent,
     canActivate: [AdminguardGuard],
+  },
+  {
+    path: 'changepassword/:user_id',
+    component: ChangepasswordComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'book-reqs',
