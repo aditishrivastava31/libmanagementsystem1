@@ -36,6 +36,7 @@ import { FooterComponentComponent } from './footer-component/footer-component.co
 import { ValidateEqualModule } from 'ng-validate-equal';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { HeaderComponent } from './header/header.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { HeaderComponent } from './header/header.component';
     FooterComponentComponent,
     UserprofileComponent,
     HeaderComponent,
+    ChangepasswordComponent,
   ],
   imports: [
     BrowserModule,

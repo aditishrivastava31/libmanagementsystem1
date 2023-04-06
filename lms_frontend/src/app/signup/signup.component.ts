@@ -22,6 +22,7 @@ export class SignupComponent {
   public userAddress = {
     address: '',
   };
+  mobNumberPattern = '^((\\+91-?)|0)?[0-9]{10}$';
   public user = {
     userName: '',
     password: '',

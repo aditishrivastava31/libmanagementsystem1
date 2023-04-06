@@ -21,7 +21,7 @@ public interface UserService {
 
 	public UserDetails updated(long id);
 
-	public String forgetpassword(ResetPasswordDao resetPasswordDao, long id);
+	public String changePassword(ResetPasswordDao resetPasswordDao, long id);
 
 	public void updateResetPasswordToken(String token, String email);
 
