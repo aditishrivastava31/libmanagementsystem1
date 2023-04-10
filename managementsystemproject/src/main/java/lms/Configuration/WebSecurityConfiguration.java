@@ -30,7 +30,7 @@ public class WebSecurityConfiguration {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable().cors().disable().authorizeHttpRequests()
-				.requestMatchers("/user/signUp", "/authenticate", "/admin/signUp/**", "/update/**",
+				.requestMatchers("/user/signUp", "/authenticate", "/admin/signUp/**", 
 						"/isAccepted/admin/**", "/requestbook/**", "/country", "/state**", "/city**","/forgetPassword","/forgetReset_password/**","/users","/findByIssueId/**","/findNonExtendable/**")
 				.permitAll().requestMatchers(HttpMethod.OPTIONS, "/**").permitAll().and().authorizeHttpRequests()
 				.requestMatchers("/**").authenticated().and().sessionManagement()

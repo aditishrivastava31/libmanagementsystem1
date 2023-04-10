@@ -19,7 +19,7 @@ public interface UserService {
 
 	public UserDetails adminsignUp(UserDetails userDetails, String countryName, String stateName, String cityName);
 
-	public UserDetails updated(long id);
+	
 
 	public String changePassword(ResetPasswordDao resetPasswordDao, long id);
 
@@ -28,4 +28,6 @@ public interface UserService {
 	public UserDetails getDetailByToken(String token);
 
 	public void updatePassword(UserDetails userDetails, String newPassword);
+
+	public UserDetails updated(long id, String countryName, String stateName, String cityName, String userName,String address);
 }

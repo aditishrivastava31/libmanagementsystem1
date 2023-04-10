@@ -102,8 +102,12 @@ public class UserController {
 	}
 
 	@PutMapping("/update/{id}")
-	public UserDetails updated(@PathVariable("id") long id) {
-		return userService.updated(id);
+	public UserDetails updated(@PathVariable("id") long id,
+			@RequestParam(name = "countryname") String countryName, @RequestParam(name = "statename") String stateName,
+			@RequestParam(name = "cityname") String cityName,
+			@RequestParam(name = "username") String userName,
+			@RequestParam(name = "address") String address) {
+		return userService.updated(id,countryName,stateName,cityName,userName,address);
 	}
 	@PostMapping("/changePassword/{user_id}")
 	public String resetpassword(@RequestBody ResetPasswordDao resetPasswordDao, @PathVariable("user_id") long id) {
