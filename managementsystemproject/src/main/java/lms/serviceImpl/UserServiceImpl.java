@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import lms.dto.ResetPasswordDao;
+import lms.entities.Address;
 import lms.entities.Role;
 import lms.entities.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,26 +112,28 @@ public class UserServiceImpl implements UserService {
 		userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
 		return userDetailsRepository.save(userDetails);
 	}
+	
+	
 
-	@Override
-	public UserDetails updated(long id){
-		UserDetails userDetails = null;
-
-		if (id == 1l) {
-			userDetails = userDetailsRepository.findById(id).orElse(null);
-			// userDetails.setRole("ADMIN");
-			userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
-			userDetailsRepository.save(userDetails);
-
-		} else {
-			userDetails = userDetailsRepository.findById(id).orElse(null);
-			// userDetails.setRole("USER");
-			userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
-			userDetailsRepository.save(userDetails);
-
-		}
-		return userDetails;
-	}
+//	@Override
+//	public UserDetails updated(long id){
+//		UserDetails userDetails = null;
+//
+//		if (id == 1l) {
+//			userDetails = userDetailsRepository.findById(id).orElse(null);
+//			// userDetails.setRole("ADMIN");
+//			userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
+//			userDetailsRepository.save(userDetails);
+//
+//		} else {
+//			userDetails = userDetailsRepository.findById(id).orElse(null);
+//			// userDetails.setRole("USER");
+//			userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
+//			userDetailsRepository.save(userDetails);
+//
+//		}
+//		return userDetails;
+//	}
 
 	@Override
 	public String changePassword(ResetPasswordDao resetPasswordDao, long id) {
@@ -185,6 +188,19 @@ public class UserServiceImpl implements UserService {
 		userDetails.setResetpasswordtoken(null);
 		userDetails.setExpireTime(null);
 		userDetailsRepository.save(userDetails);		
+	}
+
+	@Override
+	public UserDetails updated(long id, String countryName, String stateName, String cityName, String userName,String address) {
+		UserDetails userDetails=userDetailsRepository.findById(id).orElse(null);
+		userDetails.setUserName(userName);
+		Address addressObj= addressRepository.findById(userDetailsRepository.findAdressIdPerUser(id)).orElse(null);
+		addressObj.setAddress(address);
+		userDetails.getUserAddress().setStateAndCity(stateAndCityRepository
+				.findStateCityId(countryRepository.findByCountryName(countryName).getId(), stateName, cityName));
+		addressRepository.save(addressObj);
+		userDetailsRepository.save(userDetails);
+		return userDetails;
 	}
 
 }
