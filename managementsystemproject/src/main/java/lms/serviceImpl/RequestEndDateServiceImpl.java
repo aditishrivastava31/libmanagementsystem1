@@ -71,6 +71,7 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 			Date issueenddate = bookIssueDetails.getIssueEndDate();
 			bookIssueDetails.setIssueEndDate(convertDate(issueenddate).getTime());
 			bookIssueDetails.setIsWithDraw(false);
+			bookIssueDetails.setIsExtendable(true);
 			bookIssueRepository.save(bookIssueDetails);
 			//emailServiceImpl.acceptEndDateEmailSender();
 			deletetheExtension(bookIssueDetails);
@@ -91,6 +92,7 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 			} else {
 				RequestExtension requestExtension = new RequestExtension();
 				bookIssueDetails.setIsWithDraw(true);
+				bookIssueDetails.setIsExtendable(false);
 				bookIssueRepository.save(bookIssueDetails);
 				requestExtension.setIssueId(bookIssueDetails);
 				requestExtensionRepository.save(requestExtension);
