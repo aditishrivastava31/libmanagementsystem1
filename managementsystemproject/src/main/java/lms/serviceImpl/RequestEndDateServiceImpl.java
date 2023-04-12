@@ -59,9 +59,10 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 		BookIssueDetails bookIssueDetails = bookIssueRepository.findById(id).orElse(null);
 		emailServiceImpl.setBookIssueDetails(bookIssueDetails);
 		if (value == 0) {
-			emailServiceImpl.rejectEndDateEmailSender();
+			//emailServiceImpl.rejectEndDateEmailSender();
 			deletetheExtension(bookIssueDetails);
 			bookIssueDetails.setIsExtendable(false);
+			bookIssueDetails.setIsWithDraw(false);
 			bookIssueRepository.save(bookIssueDetails);
 			return "You have Rejected the Request";
 		}
@@ -69,8 +70,9 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 		else {
 			Date issueenddate = bookIssueDetails.getIssueEndDate();
 			bookIssueDetails.setIssueEndDate(convertDate(issueenddate).getTime());
+			bookIssueDetails.setIsWithDraw(false);
 			bookIssueRepository.save(bookIssueDetails);
-			emailServiceImpl.acceptEndDateEmailSender();
+			//emailServiceImpl.acceptEndDateEmailSender();
 			deletetheExtension(bookIssueDetails);
 			return "You have Accept the Request";
 		}
@@ -88,6 +90,8 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 				return "request was already submitted";
 			} else {
 				RequestExtension requestExtension = new RequestExtension();
+				bookIssueDetails.setIsWithDraw(true);
+				bookIssueRepository.save(bookIssueDetails);
 				requestExtension.setIssueId(bookIssueDetails);
 				requestExtensionRepository.save(requestExtension);
 				return "request was submitted for the extension of 10 days";
@@ -98,6 +102,7 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 	}
 
 	public void deletetheExtension(BookIssueDetails bookIssueDetails) {
+		
 		List<RequestExtension> requestExtensions = requestExtensionRepository.findByissueId(bookIssueDetails);
 		requestExtensions.forEach(reqeusteExtension -> {
 			requestExtensionRepository.deleteById(reqeusteExtension.getRequestextensionId());
@@ -111,4 +116,27 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 		c.add(Calendar.DATE, 10);
 		return c;
 	}
+
+	@Override
+	public String withdrawRequestExtension(long issueId) {
+		BookIssueDetails bookIssueDetails = bookIssueRepository.findById(issueId).orElse(null);
+		if (bookIssueDetails == null) {
+			return "bookIssue details was not";
+		}
+		else {
+			List<RequestExtension> requestExtensions = requestExtensionRepository.findByissueId(bookIssueDetails);
+			if (requestExtensions.size() != 0) {
+				bookIssueDetails.setIsWithDraw(false);
+				bookIssueDetails.setIsExtendable(false);
+				bookIssueRepository.save(bookIssueDetails);
+				deletetheExtension(bookIssueDetails);
+				return "with draw was done completely";
+			} else {
+				return "first take the book";
+			}
+		}
+		
+	}
+	
+	
 }

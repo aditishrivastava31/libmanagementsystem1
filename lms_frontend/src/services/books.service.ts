@@ -96,4 +96,18 @@ export class BooksService {
     const url = 'http://localhost:8080/getreviewbybookid/' + book_id;
     return this.httpclient.get<reviewdto[]>(url, { headers });
   }
+
+
+  getcategorynames(name:string) {
+    // console.log(localStorage.getItem("token"));
+    // console.log("Bearer " + localStorage.getItem("token"));
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    const url = 'http://localhost:8080/getcategories/'+name;
+    return this.httpclient.get<any>(url, { headers });
+  }
+
+  
 }

@@ -42,10 +42,10 @@ public class BookDetailsController {
 	}
 	
 
-//  @PostConstruct
-//  public void updatebookdetails() {
-//      bookDetailsServiceImpl.updatebookdetails();
-//  }
+  @PostConstruct
+  public void updatebookdetails() {
+      bookDetailsServiceImpl.updatebookdetails();
+  }
 	
 
 	public BookDetailsController() {
@@ -82,5 +82,13 @@ public class BookDetailsController {
 		return bookDetailsService.geteverybookdetails();
 
 	}
+	
+	@RequestMapping(value = "/getcategories/{name}", method = RequestMethod.GET)
+	public List<String> getcategories(@PathVariable("name") String name){
+		//System.out.println(name);
+		return bookDetailsService.getcategories(name);
+
+	}
+	
 
 }

@@ -10,6 +10,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { UserService } from 'src/services/user.service';
+import { RequestbookService } from 'src/services/requestbook.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,9 +20,9 @@ import { UserService } from 'src/services/user.service';
 export class DashboardComponent implements OnInit {
   title = '';
   show: number = 0;
-
+  requestbook:boolean=false;
   btnState: boolean=false;
-
+  requestbookcount$!:Observable<number>;
   issuebookdetails$!: Observable<any>;
   nonExtendable$!:Observable<any>;
   allbookscount$!: Observable<number>;
@@ -33,7 +34,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private issuebookservice: IssuebookservicesService,
     private loginService: LoginService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private requestBookService: RequestbookService,
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +59,12 @@ export class DashboardComponent implements OnInit {
       })
     );
 
+    this.requestbookcount$ = this.requestBookService.getRequest().pipe(
+      map((books) => {
+        return books.length;
+      })
+    );
+
     this.returnedbookcount$ = this.issuebookservice
       .getreadIssuebookdetails()
       .pipe(
@@ -74,12 +82,17 @@ export class DashboardComponent implements OnInit {
   }
 
   all_books() {
+    this.requestbook=false;
     this.title = 'All';
     this.show = 1;
     this.issuebookdetails$ = this.issuebookservice.getallIssuebookdetails();
+    this.issuebookservice.getallIssuebookdetails().subscribe((n)=>{
+      console.log(n)
+    })
   }
   issued_books() {
     this.title = 'Issued';
+    this.requestbook=false;
     this.show = 0;
     this.issuebookservice.getIssuedbookdetalis().subscribe((n) => {
       console.log(n)
@@ -89,6 +102,7 @@ export class DashboardComponent implements OnInit {
 
   returned_books() {
     this.title = 'Returned';
+    this.requestbook=false;
     this.show = 0;
     this.issuebookservice.getreadIssuebookdetails().subscribe((n) => {
     });
@@ -96,6 +110,7 @@ export class DashboardComponent implements OnInit {
   }
 
   pending_books() {
+    this.requestbook=false;
     this.title = 'Pending';
     this.show = 0;
     this.issuebookdetails$ = this.issuebookservice.getallpendingbookdetalis();
@@ -107,6 +122,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  requested_books() {
+    this.requestbook=true;
+    this.show=0;
+    this.issuebookdetails$= this.requestBookService.getRequest();
+    // this.requestBookService.getRequest().subscribe((n)=>{
+    //     console.log(n);
+    // });
+  }
   
 
   extenddatebook(issueId: number) {
@@ -117,6 +140,7 @@ export class DashboardComponent implements OnInit {
         this.dialog.open(DialogmodalComponent, {
           data: {
             name: n,
+            url: '/dashboard',
           },
         });
       },
@@ -128,6 +152,29 @@ export class DashboardComponent implements OnInit {
         });
       }
     );
+  }
+
+
+  withdrawbook(issueId:number){
+     this.issuebookservice.withdrawbook(issueId).subscribe((n)=>{
+     
+     this.dialog.open(DialogmodalComponent, {
+      data: {
+        name: n,
+        url: '/dashboard',
+      },
+    });
+  },
+  (error) => {
+    this.dialog.open(DialogmodalComponent, {
+      data: {
+        name: "you can't withdraw that book",
+      },
+    });
+     
+}
+     )
+                 
   }
 
   row_clicked() {

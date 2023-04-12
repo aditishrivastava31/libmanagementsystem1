@@ -37,6 +37,8 @@ public class BookIssueDetails {
 	@JoinColumn(name="userId")
 	private UserDetails userDetail;
 	
+	
+	private Boolean isWithDraw;
 
 	public BookIssueDetails(){
 
@@ -114,5 +116,16 @@ public class BookIssueDetails {
 		return "BookIssueDetails [id=" + id + ", issueDate=" + issueDate + ", issueEndDate=" + issueEndDate
 				+ ", returnDate=" + returnDate + ", bookDetails=" + bookDetails + ", userDetail=" + userDetail + "]";
 	}
+
+	public Boolean getIsWithDraw() {
+		return isWithDraw;
+	}
+
+	public void setIsWithDraw(Boolean isWithDraw) {
+		this.isWithDraw = isWithDraw;
+	}
+	
+	
+	
 
 }

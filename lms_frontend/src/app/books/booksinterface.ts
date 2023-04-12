@@ -28,7 +28,7 @@ export interface bookdto{
     book_title:string,
     quantity: number,
     authors: string[],
-    category: string,
+    category: string[],
     avg_rating:number,
     rating_count:number,
 }
