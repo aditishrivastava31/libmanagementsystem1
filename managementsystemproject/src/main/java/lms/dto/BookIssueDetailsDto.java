@@ -25,6 +25,16 @@ public class BookIssueDetailsDto {
 	private String userName;
 	
 	private Boolean isExtendable;
+	
+	private Boolean isWithDraw;
+
+	public Boolean getIsWithDraw() {
+		return isWithDraw;
+	}
+
+	public void setIsWithDraw(Boolean isWithDraw) {
+		this.isWithDraw = isWithDraw;
+	}
 
 	public long getIssue_id() {
 		return issue_id;

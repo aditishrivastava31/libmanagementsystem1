@@ -173,6 +173,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 		bookIssueDetailsDto.setIssueEndDate(bookIssueDetails.getIssueEndDate());
 		bookIssueDetailsDto.setReturnDate(bookIssueDetails.getReturnDate());
 		bookIssueDetailsDto.setIsExtendable(bookIssueDetails.getIsExtendable());
+		bookIssueDetailsDto.setIsWithDraw(bookIssueDetails.getIsWithDraw());
 		return bookIssueDetailsDto;
 	}
 
@@ -287,9 +288,10 @@ public class BookIssueServiceImpl implements BookIssueService {
 					e.printStackTrace();
 				}
 				bookIssueDetails.setReturnDate(null);
+				bookIssueDetails.setIsWithDraw(false);
 				bookIssueRepository.save(bookIssueDetails);
-				emailServiceImpl.setBookIssueDetails(bookIssueDetails);
-				emailServiceImpl.issueBookEmailSender();
+//				emailServiceImpl.setBookIssueDetails(bookIssueDetails);
+//				emailServiceImpl.issueBookEmailSender();
 
 				return "Book was issued successfully...";
 			}

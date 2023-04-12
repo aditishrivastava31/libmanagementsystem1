@@ -38,4 +38,9 @@ public class RequestEnddateController {
 	}
 
 	
+	@GetMapping("/withdrawextension/{issueId}")
+	public String withdraw(@PathVariable("issueId") long issueId) {
+		return requestEndDateService.withdrawRequestExtension(issueId);
+	}
+	
 }
