@@ -112,6 +112,8 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 			bookDetailssenddto.setQuantity(n.getQuantity());
 			bookDetailssenddto.setBook_title(n.getBookName());
 			//bookDetailssenddto.setCategory(n.getCategory().getCategoryName());---
+			List<String> categorieslist=n.getCategory().stream().map(m->m.getCategoryName()).collect(Collectors.toList());
+			bookDetailssenddto.setCategory(categorieslist);
 			List<String> authorsList = n.getAuthors().stream().map(m -> m.getAuthorName()).collect(Collectors.toList());
 			double avg = avergarating(n.getBookId());
 			bookDetailssenddto.setAvg_rating(avg);
@@ -175,13 +177,19 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 	}
 
 	public void updatebookdetails() {
-		System.out.println("book update is called");
-		BookDetails book=bookRepository.findById(18l).orElse(null);
-		List<Category> categories=new ArrayList<>();
-		categories.add(categoryRepository.findById(8l).orElse(null));
-		//categories.add(categoryRepository.findById(2l).orElse(null));
-		book.setCategory(categories);
-		bookRepository.save(book);
+//		System.out.println("book update is called");
+//		BookDetails book=bookRepository.findById(18l).orElse(null);
+//		List<Category> categories=new ArrayList<>();
+//		categories.add(categoryRepository.findById(8l).orElse(null));
+//		//categories.add(categoryRepository.findById(2l).orElse(null));
+//		book.setCategory(categories);
+//		bookRepository.save(book);
+		System.out.println(categoryRepository.getcategorynames("bhjj"));
+	}
+
+	@Override
+	public List<String> getcategories(String name) 	{
+		return categoryRepository.getcategorynames(name);
 	}
 
 }

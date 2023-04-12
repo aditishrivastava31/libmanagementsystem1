@@ -26,4 +26,6 @@ public interface BookDetailsService {
 
 	List<BookDetailssenddto> geteverybookdetails();
 
+	List<String> getcategories(String name);
+
 }

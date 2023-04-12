@@ -121,4 +121,29 @@ export class IssuebookservicesService {
     let loggedUser = JSON.parse(localStorage.getItem('user') || '{}');
     return this.httpclient.get<any>('http://localhost:8080/isBookLended/'+loggedUser.userId+"/"+bookId,{ headers });
   }
+
+  withdrawbook(issue_id: number) 
+  {
+    // console.log(localStorage.getItem("token"));
+    // console.log("Bearer " + localStorage.getItem("token"));
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    let savedPerson = JSON.parse(localStorage.getItem('user') || '{}');
+    // console.log("user Id:" + savedPerson.userId);
+    // console.log(headers.get("Authorization"));
+    const url = 'http://localhost:8080/withdrawextension/';
+    return this.httpclient.get<any>(url + issue_id, {
+      headers,
+      responseType: 'text' as 'json',
+    });
+  }
+
+
+
+
+
+
+
 }

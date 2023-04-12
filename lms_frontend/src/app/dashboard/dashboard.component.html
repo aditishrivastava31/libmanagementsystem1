@@ -81,24 +81,26 @@
         <div class="col-sm-2">
             <div class="card p-hover border-danger mx-sm-6 p-7">
                 <div class="text-danger text-center mt-3">
-                    <h4>Delayed</h4>
+                    <h4>Requested Books</h4>
                 </div>
                 <div class="text-danger text-center mt-2">
 
-                    <h1>{{this.pendingsbookcount$! | async| json}}</h1>
+                    <h1>{{this.requestbookcount$ | async|json}}</h1>
                 </div>
-                <a (click)=pending_books() class="stretched-link"></a>
+                <a (click)=requested_books() class="stretched-link"></a>
             </div>
         </div>
     </div>
 </div>
 <br>
+
 <h2>{{title}} Books</h2>
+<h1>{{requestbook}}</h1>
 <div *ngIf="(this.issuebookdetails$ | async).length===0;else elseBlock">
     <h4>No data to display...</h4>
 </div>
 <ng-template #elseBlock>
-    <table class="datatable">
+    <table class="datatable" *ngIf="!requestbook;else requestbookelse">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -111,6 +113,7 @@
             </tr>
         </thead>
         <!-- {{issuebookdetails$}} -->
+            
         <tbody>
             <!-- <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index"> -->
             <tr *ngFor="let issuebook of issuebookdetails$  | async;let i = index">
@@ -120,17 +123,18 @@
                 <td>{{issuebook.issueDate}}</td>
                 <td>{{issuebook.issueEndDate}}</td>
                 <td *ngIf="issuebook.returnDate;else elseBlock">{{issuebook.returnDate}}</td>
-
-
                 <ng-template #elseBlock>
                     <td>Book not returned</td>
                 </ng-template>
                 <td *ngIf="show===1">
                     <div *ngIf="issuebook.returnDate===null;else elseBlock1">
+                        {{!issuebook.isExtendable}}||{{!issuebook.isWithDraw}}--{{!issuebook.isExtendable&&issuebook.isWithDraw}}
                         <button class="btn btn-light btn-sm"
                             (click)="returnbook(issuebook.issue_id)">Return</button>&nbsp;
                         <button class="btn btn-light btn-sm" (click)="extenddatebook(issuebook.issue_id) "
                             [disabled]=!issuebook.isExtendable>Extend</button>
+                            <button class="btn btn-light btn-sm" (click)="withdrawbook(issuebook.issue_id) "
+                            [disabled]=!issuebook.isWithDraw>withdraw</button>
                     </div>
                     <ng-template #elseBlock1>
                         Returned
@@ -138,7 +142,43 @@
                 </td>
             </tr>
         </tbody>
-
     </table>
+    <ng-template #requestbookelse>
+        <table class="datatable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Authors</th>
+                    <th scope="col">status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index"> -->
+                <tr *ngFor="let issuebook of issuebookdetails$  | async;let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{issuebook.bookName}}</td>
+                    <td>{{issuebook.authorName}}</td>
+                    <td>{{issuebook.isActive}}</td>
+                    <!-- <td>{{issuebook.issueEndDate}}</td>
+                    <td *ngIf="issuebook.returnDate;else elseBlock">{{issuebook.returnDate}}</td>
+                    <ng-template #elseBlock>
+                        <td>Book not returned</td>
+                    </ng-template>
+                    <td *ngIf="show===1">
+                        <div *ngIf="issuebook.returnDate===null;else elseBlock1">
+                            <button class="btn btn-light btn-sm"
+                                (click)="returnbook(issuebook.issue_id)">Return</button>&nbsp;
+                            <button class="btn btn-light btn-sm" (click)="extenddatebook(issuebook.issue_id) "
+                                [disabled]=!issuebook.isExtendable>Extend</button>
+                        </div>
+                        <ng-template #elseBlock1>
+                            Returned
+                        </ng-template>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </ng-template>
 </ng-template>
 <app-footer-component></app-footer-component>
