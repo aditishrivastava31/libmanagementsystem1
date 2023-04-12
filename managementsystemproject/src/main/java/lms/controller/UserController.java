@@ -47,7 +47,7 @@ public class UserController {
 	private JwtService jwtService;
 	@Autowired
 	private EmailService emailService;
-	
+
 	@Autowired
 	private UserDetailsRepository detailsRepository;
 
@@ -61,10 +61,10 @@ public class UserController {
 	public List<UserDetails> getAllUser() {
 		return this.userService.getAllUser();
 	}
-	
+
 	@CrossOrigin
 	@GetMapping("/users")
-	public List<UserDetails> getAllUserDetails(){
+	public List<UserDetails> getAllUserDetails() {
 		return this.userService.getAllUser();
 	}
 
@@ -102,65 +102,61 @@ public class UserController {
 	}
 
 	@PutMapping("/update")
-	public UserDetails updated(@RequestBody UserDetails user,
-			@RequestParam(name = "countryname") String countryName, @RequestParam(name = "statename") String stateName,
-			@RequestParam(name = "cityname") String cityName,
-			@RequestParam(name = "username") String userName,
-			@RequestParam(name = "address") String address) {
+	public UserDetails updated(@RequestBody UserDetails user, @RequestParam(name = "countryname") String countryName,
+			@RequestParam(name = "statename") String stateName, @RequestParam(name = "cityname") String cityName,
+			@RequestParam(name = "username") String userName, @RequestParam(name = "address") String address) {
 		System.out.println(user);
-		return userService.updated(user.getUserId(),countryName,stateName,cityName,userName,address);
-//		return "success";
+		return userService.updated(user.getUserId(), countryName, stateName, cityName, userName, address);
 	}
+
 	@PostMapping("/changePassword/{user_id}")
 	public String resetpassword(@RequestBody ResetPasswordDao resetPasswordDao, @PathVariable("user_id") long id) {
-		return userService.changePassword(resetPasswordDao, id);	}
+		return userService.changePassword(resetPasswordDao, id);
+	}
 
 	@PostMapping("/forgetPassword")
-	public String processForgetPassword(@RequestBody ForgetPasswordDto forgetPasswordDto){
-		UserDetails userDetails=detailsRepository.findByEmail(forgetPasswordDto.getEmail()).orElse(null);
+	public String processForgetPassword(@RequestBody ForgetPasswordDto forgetPasswordDto) {
+		UserDetails userDetails = detailsRepository.findByEmail(forgetPasswordDto.getEmail()).orElse(null);
 
-		if(userDetails!=null) {
-		Random random = new Random();
-		String token = random.ints(48, 123)
-				.filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-				.limit(100)
-				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-				.toString();
-		try {
-			userService.updateResetPasswordToken(token,forgetPasswordDto.getEmail());
-			String resetpasswordURL="http://localhost:4200/resetpassword?token="+token;
-			System.out.println(resetpasswordURL);
-			emailService.forgetPasswordSendEMail(forgetPasswordDto.getEmail(),resetpasswordURL);
-		} 
-		catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
-		System.out.println(token);
-		return  token;
-		}
-		else {
+		if (userDetails != null) {
+			Random random = new Random();
+			String token = random.ints(48, 123).filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97)).limit(100)
+					.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+			try {
+				userService.updateResetPasswordToken(token, forgetPasswordDto.getEmail());
+				String resetpasswordURL = "http://localhost:4200/resetpassword?token=" + token;
+				System.out.println(resetpasswordURL);
+				emailService.forgetPasswordSendEMail(forgetPasswordDto.getEmail(), resetpasswordURL);
+			} catch (MessagingException e) {
+				throw new RuntimeException(e);
+			}
+			System.out.println(token);
+			return token;
+		} else {
 			return "User Not Found";
 		}
 	}
+
 	@GetMapping("/forgetReset_password")
-	public String showResetPassword(@Param(value="token") String token){
-		UserDetails userDetails=userService.getDetailByToken(token);
-		if(userDetails==null){
+	public String showResetPassword(@Param(value = "token") String token) {
+		UserDetails userDetails = userService.getDetailByToken(token);
+		if (userDetails == null) {
 			return "Invalid Token";
 		}
 		return "Correct";
 	}
+
 	@PostMapping("/forgetReset_password")
-	public String SetResetPassword(@Param(value="token") String token,@RequestBody ForgetPasswordPasswordDto forgetPasswordPasswordDto){
-		UserDetails userDetails=userService.getDetailByToken(token);
-		if(userDetails==null){
+	public String SetResetPassword(@Param(value = "token") String token,
+			@RequestBody ForgetPasswordPasswordDto forgetPasswordPasswordDto) {
+		UserDetails userDetails = userService.getDetailByToken(token);
+		if (userDetails == null) {
 			return "Invalid Token";
-		}else{
-			if(forgetPasswordPasswordDto.getNewPassword().equals(forgetPasswordPasswordDto.getConfirmPassword())){
-				userService.updatePassword(userDetails,forgetPasswordPasswordDto.getNewPassword());
+		} else {
+			if (forgetPasswordPasswordDto.getNewPassword().equals(forgetPasswordPasswordDto.getConfirmPassword())) {
+				userService.updatePassword(userDetails, forgetPasswordPasswordDto.getNewPassword());
 				return "success Your password is reset successfully";
-			}
-			else{
+			} else {
 				return "Enter Same password";
 			}
 		}

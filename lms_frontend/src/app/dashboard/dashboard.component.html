@@ -1,31 +1,3 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between mb-2">
-    <a class="navbar-brand ml-2">Dashboard</a>
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-
-        </ul>
-        <button class="btn btn-light" type="button" id="dropdownMenuButton1" aria-expanded="false">
-            <i class="fal fa-solid fa-bell"> 4</i>
-        </button>
-        <span class="mr-2">
-
-            <div ngbDropdown class="dropdown">
-                <button ngbDropdownToggle class="btn btn-light" type="button" id="dropdownMenuButton1"
-                    aria-expanded="false">
-                    <i class="fal fa-solid fa-user"></i>
-                </button>
-
-                <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1" class="dropdown-menu dropdown-menu-end">
-                    <li><a ngbDropdownItem href="#"
-                        [routerLink]="['/userprofile',loggedUser.userId]">{{this.loggedUser.userName}}</a></li>
-                    <div class="dropdown-divider"></div>
-                    <li><a ngbDropdownItem href="#" style="color: red;" (click)="logoutUser()">Logout <i
-                                class="fal fa-sign-out-alt"></i></a></li>
-                </ul>
-            </div>
-        </span>
-    </div>
-</nav> -->
 <app-header [heading]="'Dashboard'"></app-header>
 <!-- <h1>Dashboard</h1> -->
 <div class="jumbotron">
@@ -79,11 +51,11 @@
         </div>
 
         <div class="col-sm-2">
-            <div class="card p-hover border-danger mx-sm-6 p-7">
-                <div class="text-danger text-center mt-3">
+            <div class="card b-hover border-dark mx-sm-6 p-7">
+                <div class="text-center mt-3">
                     <h4>Requested Books</h4>
                 </div>
-                <div class="text-danger text-center mt-2">
+                <div class="text-center mt-2">
 
                     <h1>{{this.requestbookcount$ | async|json}}</h1>
                 </div>
@@ -95,7 +67,7 @@
 <br>
 
 <h2>{{title}} Books</h2>
-<h1>{{requestbook}}</h1>
+<!-- <h1>{{requestbook}}</h1> -->
 <div *ngIf="(this.issuebookdetails$ | async).length===0;else elseBlock">
     <h4>No data to display...</h4>
 </div>
@@ -113,7 +85,7 @@
             </tr>
         </thead>
         <!-- {{issuebookdetails$}} -->
-            
+
         <tbody>
             <!-- <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index"> -->
             <tr *ngFor="let issuebook of issuebookdetails$  | async;let i = index">
@@ -128,16 +100,17 @@
                 </ng-template>
                 <td *ngIf="show===1">
                     <div *ngIf="issuebook.returnDate===null;else elseBlock1">
-                        {{!issuebook.isExtendable}}||{{!issuebook.isWithDraw}}--{{!issuebook.isExtendable&&issuebook.isWithDraw}}
-                        <button class="btn btn-light btn-sm"
+                        <!-- {{!issuebook.isExtendable}} && {{!issuebook.isWithDraw}} -- {{!issuebook.isExtendable&&issuebook.isWithDraw}} -->
+                        <button class="btn  r-hover border-success btn-sm"
                             (click)="returnbook(issuebook.issue_id)">Return</button>&nbsp;
-                        <button class="btn btn-light btn-sm" (click)="extenddatebook(issuebook.issue_id) "
-                            [disabled]=!issuebook.isExtendable>Extend</button>
-                            <button class="btn btn-light btn-sm" (click)="withdrawbook(issuebook.issue_id) "
-                            [disabled]=!issuebook.isWithDraw>withdraw</button>
+                        <button class="btn  i-hover border-warning btn-sm" (click)="extenddatebook(issuebook.issue_id) "
+                            [hidden]="!issuebook.isExtendable">Extend</button>
+                        <button class="btn p-hover border-danger btn-sm" (click)="withdrawbook(issuebook.issue_id) "
+                            [hidden]="!issuebook.isWithDraw">Withdraw Ext.</button>
                     </div>
                     <ng-template #elseBlock1>
-                        Returned
+                        <button class="btn text-success border-success btn-sm" style="background-color: #e8feda;"
+                            (click)="returnbook(issuebook.issue_id)" disabled>Returned</button>
                     </ng-template>
                 </td>
             </tr>
