@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
 	private StateAndCityRepository stateAndCityRepository;
 
 	private PasswordEncoder passwordEncoder;
+
 	@Autowired
 	private RoleRepository roleRepository;
 
@@ -112,69 +113,44 @@ public class UserServiceImpl implements UserService {
 		userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
 		return userDetailsRepository.save(userDetails);
 	}
-	
-	
-
-//	@Override
-//	public UserDetails updated(long id){
-//		UserDetails userDetails = null;
-//
-//		if (id == 1l) {
-//			userDetails = userDetailsRepository.findById(id).orElse(null);
-//			// userDetails.setRole("ADMIN");
-//			userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
-//			userDetailsRepository.save(userDetails);
-//
-//		} else {
-//			userDetails = userDetailsRepository.findById(id).orElse(null);
-//			// userDetails.setRole("USER");
-//			userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
-//			userDetailsRepository.save(userDetails);
-//
-//		}
-//		return userDetails;
-//	}
 
 	@Override
 	public String changePassword(ResetPasswordDao resetPasswordDao, long id) {
-		UserDetails userDetails=userDetailsRepository.findById(id).orElse(null);
-		if(new BCryptPasswordEncoder().matches(resetPasswordDao.getOldPassword(), userDetails.getPassword())) {
-			if(resetPasswordDao.getNewPassword().equals(resetPasswordDao.getConfirmPassword())) {
+		UserDetails userDetails = userDetailsRepository.findById(id).orElse(null);
+		if (new BCryptPasswordEncoder().matches(resetPasswordDao.getOldPassword(), userDetails.getPassword())) {
+			if (resetPasswordDao.getNewPassword().equals(resetPasswordDao.getConfirmPassword())) {
 				System.out.println("hi");
 				userDetails.setPassword(passwordEncoder.encode(resetPasswordDao.getNewPassword()));
 				userDetailsRepository.save(userDetails);
 				return "Success";
-			}
-			else {
+			} else {
 				return "Confirm Password Not Matched";
 			}
-		}
-		else {
+		} else {
 			return "Old Password Not Match";
 		}
 	}
-	
 
 	@Override
 	public void updateResetPasswordToken(String token, String email) {
-		UserDetails userDetails=userDetailsRepository.findByEmail(email).orElse(null);
+		UserDetails userDetails = userDetailsRepository.findByEmail(email).orElse(null);
 		LocalDateTime dateTime = LocalDateTime.now().plus(Duration.of(10, ChronoUnit.MINUTES));
 		Date tmfn = Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
 		System.out.println(tmfn);
 		System.out.println(userDetails);
-		if(userDetails!=null){
+		if (userDetails != null) {
 			userDetails.setResetpasswordtoken(token);
 			userDetails.setExpireTime(tmfn);
 			userDetailsRepository.save(userDetails);
-		}	
-		
+		}
+
 	}
 
 	@Override
 	public UserDetails getDetailByToken(String token) {
-		Date date =new Date();
-		UserDetails  userDetails=userDetailsRepository.findByResetpasswordtoken(token);
-		if(userDetails.getExpireTime().compareTo(date)<0){
+		Date date = new Date();
+		UserDetails userDetails = userDetailsRepository.findByResetpasswordtoken(token);
+		if (userDetails.getExpireTime().compareTo(date) < 0) {
 			userDetails.setExpireTime(null);
 			userDetails.setResetpasswordtoken(null);
 			userDetailsRepository.save(userDetails);
@@ -187,14 +163,15 @@ public class UserServiceImpl implements UserService {
 		userDetails.setPassword(passwordEncoder.encode(newPassword));
 		userDetails.setResetpasswordtoken(null);
 		userDetails.setExpireTime(null);
-		userDetailsRepository.save(userDetails);		
+		userDetailsRepository.save(userDetails);
 	}
 
 	@Override
-	public UserDetails updated(long id, String countryName, String stateName, String cityName, String userName,String address) {
-		UserDetails userDetails=userDetailsRepository.findById(id).orElse(null);
+	public UserDetails updated(long id, String countryName, String stateName, String cityName, String userName,
+			String address) {
+		UserDetails userDetails = userDetailsRepository.findById(id).orElse(null);
 		userDetails.setUserName(userName);
-		Address addressObj= addressRepository.findById(userDetailsRepository.findAdressIdPerUser(id)).orElse(null);
+		Address addressObj = addressRepository.findById(userDetailsRepository.findAdressIdPerUser(id)).orElse(null);
 		addressObj.setAddress(address);
 		userDetails.getUserAddress().setStateAndCity(stateAndCityRepository
 				.findStateCityId(countryRepository.findByCountryName(countryName).getId(), stateName, cityName));

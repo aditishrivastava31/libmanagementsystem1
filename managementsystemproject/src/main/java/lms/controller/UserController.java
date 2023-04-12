@@ -101,13 +101,15 @@ public class UserController {
 		return jwtService.createJwtToken(authRequest);
 	}
 
-	@PutMapping("/update/{id}")
-	public UserDetails updated(@PathVariable("id") long id,
+	@PutMapping("/update")
+	public UserDetails updated(@RequestBody UserDetails user,
 			@RequestParam(name = "countryname") String countryName, @RequestParam(name = "statename") String stateName,
 			@RequestParam(name = "cityname") String cityName,
 			@RequestParam(name = "username") String userName,
 			@RequestParam(name = "address") String address) {
-		return userService.updated(id,countryName,stateName,cityName,userName,address);
+		System.out.println(user);
+		return userService.updated(user.getUserId(),countryName,stateName,cityName,userName,address);
+//		return "success";
 	}
 	@PostMapping("/changePassword/{user_id}")
 	public String resetpassword(@RequestBody ResetPasswordDao resetPasswordDao, @PathVariable("user_id") long id) {
