@@ -33,7 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { FooterComponentComponent } from './footer-component/footer-component.component';
-import { ValidateEqualModule } from 'ng-validate-equal';
+import { ValidateEqualModule } from 'ng-validate-equal'
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { HeaderComponent } from './header/header.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';

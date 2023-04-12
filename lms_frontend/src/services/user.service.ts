@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public addUser(user: any, country: any, state: any, city: any) {
     return this.http.post('http://localhost:8080/user/signUp', user, {
@@ -14,6 +14,25 @@ export class UserService {
         statename: state,
         cityname: city,
       },
+    });
+  }
+
+  public updateUser(uid: any, username: any, address: any, country: any, state: any, city: any) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    let savedPerson = JSON.parse(localStorage.getItem('user') || '{}');
+    return this.http.put<any>('http://localhost:8080/update', savedPerson, {
+      params: {
+        username: username,
+        address: address,
+        countryname: country,
+        statename: state,
+        cityname: city,
+      },
+      headers:headers,
+      responseType: 'text' as 'json',
     });
   }
 
@@ -42,7 +61,7 @@ export class UserService {
     );
   }
 
-  duplicateEmail(users : any , userEmail: any){
+  duplicateEmail(users: any, userEmail: any) {
     for (var v in users) {
       if (users[v].email === userEmail) {
         return true;
@@ -51,7 +70,7 @@ export class UserService {
     return false;
 
   }
-  duplicatePhone(users : any , userPhone: any){
+  duplicatePhone(users: any, userPhone: any) {
     let val1d = parseInt(userPhone)
     for (var v in users) {
       if (val1d === users[v].number) {
