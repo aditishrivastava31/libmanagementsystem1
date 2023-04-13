@@ -31,8 +31,8 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Author Name</th>
-        <th scope="col">Book Name</th>
+        <th scope="col" (click)="sort('authorName')">Author Name&nbsp;<i class="fa fa-sort"></i></th>
+        <th scope="col" (click)="sort('bookName')">Book Name&nbsp;<i class="fa fa-sort"></i></th>
         <th scope="col">Status</th>
       </tr>
     </thead>
@@ -41,7 +41,7 @@
     </div>
     <ng-template #elseBlock>
       <tbody>
-        <tr *ngFor="let requestbook of requestBookdtos$ | async;let i = index">
+        <tr *ngFor="let requestbook of requestBookdtos$ | async| orderBy:key:reverse;let i = index">
           <th scope="row">{{i + 1}}</th>
           <td>{{requestbook.authorName}}</td>
           <td>{{requestbook.bookName}}</td>
