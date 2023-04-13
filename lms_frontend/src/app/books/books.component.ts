@@ -18,7 +18,6 @@ import { LoginService } from 'src/services/login.service';
   styleUrls: ['./books.component.scss'],
 })
 export class BooksComponent implements OnInit {
-
   bookdetails$!: Observable<bookdto[]>;
   accordingto!: string;
   bookdetailscount$!: Observable<number>;
@@ -36,8 +35,7 @@ export class BooksComponent implements OnInit {
     private getbookdetailsservice: BooksService,
     private loginService: LoginService,
     public dialog: MatDialog
-  ) {
-  }
+  ) {}
 
   logoutUser() {
     this.loginService.logout();
@@ -91,42 +89,51 @@ export class BooksComponent implements OnInit {
 
   sortDataByTitle() {
     if (this.order) {
-      this.bookdetails$ = this.bookdetails$.pipe(map((bookdetails) => {
-        bookdetails.sort((a, b) => {
-          return a.book_title.toLowerCase() < b.book_title.toLowerCase() ? -1 : 1;
-        });
-        return bookdetails;
-      }))
+      this.bookdetails$ = this.bookdetails$.pipe(
+        map((bookdetails) => {
+          bookdetails.sort((a, b) => {
+            return a.book_title.toLowerCase() < b.book_title.toLowerCase()
+              ? -1
+              : 1;
+          });
+          return bookdetails;
+        })
+      );
+      this.order = !this.order;
+    } else {
+      this.bookdetails$ = this.bookdetails$.pipe(
+        map((bookdetails) => {
+          bookdetails.sort((a, b) => {
+            return a.book_title.toLowerCase() > b.book_title.toLowerCase()
+              ? -1
+              : 1;
+          });
+          return bookdetails;
+        })
+      );
       this.order = !this.order;
     }
-    else {
-      this.bookdetails$ = this.bookdetails$.pipe(map((bookdetails) => {
-        bookdetails.sort((a, b) => {
-          return a.book_title.toLowerCase() > b.book_title.toLowerCase() ? -1 : 1;
-        });
-        return bookdetails;
-      }))
-      this.order = !this.order;
-    }
-
   }
   sortDataByQuantity() {
     if (this.order) {
-      this.bookdetails$ = this.bookdetails$.pipe(map((bookdetails) => {
-        bookdetails.sort((a, b) => {
-          return a.quantity < b.quantity ? -1 : 1;
-        });
-        return bookdetails;
-      }))
+      this.bookdetails$ = this.bookdetails$.pipe(
+        map((bookdetails) => {
+          bookdetails.sort((a, b) => {
+            return a.quantity < b.quantity ? -1 : 1;
+          });
+          return bookdetails;
+        })
+      );
       this.order = !this.order;
-    }
-    else {
-      this.bookdetails$ = this.bookdetails$.pipe(map((bookdetails) => {
-        bookdetails.sort((a, b) => {
-          return a.quantity > b.quantity ? -1 : 1;
-        });
-        return bookdetails;
-      }))
+    } else {
+      this.bookdetails$ = this.bookdetails$.pipe(
+        map((bookdetails) => {
+          bookdetails.sort((a, b) => {
+            return a.quantity > b.quantity ? -1 : 1;
+          });
+          return bookdetails;
+        })
+      );
       this.order = !this.order;
     }
   }
@@ -175,7 +182,7 @@ export class BooksComponent implements OnInit {
     //     }))
     //     this.order = !this.order;
     //   }
-    alert("Need to be implemented!!!");
+    alert('Need to be implemented!!!');
   }
 
   sortDataByCategory() {
@@ -200,28 +207,37 @@ export class BooksComponent implements OnInit {
     //   }))
     //   this.order = !this.order;
     // }
-    alert("Need to be implemented!!!");
+    alert('Need to be implemented!!!');
   }
 
   sortDataByRating() {
     if (this.order) {
-      this.bookdetails$ = this.bookdetails$.pipe(map((bookdetails) => {
-        bookdetails.sort((a, b) => {
-          return a.avg_rating < b.avg_rating ? -1 : 1;
-        });
-        return bookdetails;
-      }))
+      this.bookdetails$ = this.bookdetails$.pipe(
+        map((bookdetails) => {
+          bookdetails.sort((a, b) => {
+            return a.avg_rating < b.avg_rating ? -1 : 1;
+          });
+          return bookdetails;
+        })
+      );
+      this.order = !this.order;
+    } else {
+      this.bookdetails$ = this.bookdetails$.pipe(
+        map((bookdetails) => {
+          bookdetails.sort((a, b) => {
+            console.log(a.book_title.toLowerCase(), b.book_title.toLowerCase());
+            return a.avg_rating > b.avg_rating ? -1 : 1;
+          });
+          return bookdetails;
+        })
+      );
       this.order = !this.order;
     }
-    else {
-      this.bookdetails$ = this.bookdetails$.pipe(map((bookdetails) => {
-        bookdetails.sort((a, b) => {
-          console.log(a.book_title.toLowerCase(), b.book_title.toLowerCase())
-          return a.avg_rating > b.avg_rating ? -1 : 1;
-        });
-        return bookdetails;
-      }))
-      this.order = !this.order;
-    }
+  }
+  key = 'book_title';
+  reverse: boolean = false;
+  sort(_key: any) {
+    this.key = _key;
+    this.reverse = !this.reverse;
   }
 }

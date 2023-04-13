@@ -4,14 +4,14 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Author Name</th>
-          <th scope="col">Book Name</th>
-          <th scope="col">Status</th>
+          <th scope="col" (click)="sort('authorName')">Author Name&nbsp;<i class="fa fa-sort"></i></th>
+          <th scope="col" (click)="sort('bookName')">Book Name&nbsp;<i class="fa fa-sort"></i></th>
+          <th scope="col" (click)="sort('isActive')">Status&nbsp;<i class="fa fa-sort"></i></th>
           <th scope="col">Operations</th>
         </tr>
     </thead>
     <tbody>
-    <ng-container *ngFor="let requestbook of bookrequests;let i = index">
+    <ng-container *ngFor="let requestbook of bookrequests | orderBy:key:reverse;let i = index">
           <tr *ngIf="check(requestbook.isActive)">            
             <th scope="row">{{i + 1}}</th>
             <td>{{requestbook.authorName}}</td>

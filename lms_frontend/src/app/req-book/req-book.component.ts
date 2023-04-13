@@ -74,4 +74,10 @@ export class ReqBookComponent {
         }
       );
   }
+  key = 'a';
+  reverse: boolean = false;
+  sort(_key: any) {
+    this.key = _key;
+    this.reverse = !this.reverse;
+  }
 }
