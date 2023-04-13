@@ -43,11 +43,11 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th class="head" scope="col" (click)="sortDataByTitle()">Book Title</th>
-            <th class="head" scope="col" (click)="sortDataByCategory()">Category</th>
-            <th class="head" scope="col" (click)="sortDataByQuantity()">Quantity</th>
-            <th class="head" scope="col" (click)="sortDataByAuthors()">Authors</th>
-            <th class="head" scope="col" (click)="sortDataByRating()">Rating</th>
+            <th class="head" scope="col" (click)="sort('book_title')">Book Title&nbsp;<i class="fa fa-sort"></i></th>
+            <th class="head" scope="col" (click)="sort('category')">Category&nbsp;<i class="fa fa-sort"></i></th>
+            <th class="head" scope="col" (click)="sort('quantity')">Quantity&nbsp;<i class="fa fa-sort"></i></th>
+            <th class="head" scope="col" (click)="sort('authors')">Authors&nbsp;<i class="fa fa-sort"></i></th>
+            <th class="head" scope="col" (click)="sort('avg_rating')">Rating&nbsp;<i class="fa fa-sort"></i></th>
             <th scope="col">Operations</th>
         </tr>
     </thead>
@@ -58,7 +58,7 @@
     <ng-template #elseBlock>
         <tbody>
             <!-- *ngFor="let item of [].constructor(3);let i = index" -->
-            <tr *ngFor="let book of bookdetails$ | async;let i = index">
+            <tr *ngFor="let book of bookdetails$ | async| orderBy:key:reverse;let i = index">
                 <td>{{i + 1}}</td>
                 <td [routerLink]="['/book-details', book.book_id]">{{book.book_title}}</td>
                 <td [routerLink]="['/book-details', book.book_id]">{{book.category}}</td>

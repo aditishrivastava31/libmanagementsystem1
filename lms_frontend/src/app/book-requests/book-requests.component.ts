@@ -76,4 +76,10 @@ export class BookRequestsComponent {
       return false;
     }
   }
+  key = 'authorName';
+  reverse: boolean = false;
+  sort(_key: any) {
+    this.key = _key;
+    this.reverse = !this.reverse;
+  }
 }

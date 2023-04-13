@@ -16,4 +16,10 @@ export class IssueBookDetailsComponent implements OnInit {
   }
 
   constructor(private issuebookservice: IssuebookservicesService) {}
+  key = 'book_title';
+  reverse: boolean = false;
+  sort(_key: any) {
+    this.key = _key;
+    this.reverse = !this.reverse;
+  }
 }
