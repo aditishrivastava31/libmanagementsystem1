@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { IssuebookservicesService } from 'src/services/issuebookservices.service';
 import { LoginService } from 'src/services/login.service';
-import { issuebookdetails } from '../books/booksinterface';
+import { bookdto, issuebookdetails } from '../books/booksinterface';
 import { DialogmodalComponent } from '../dialogmodal/dialogmodal.component';
 import {
   MatDialog,
@@ -11,6 +11,7 @@ import {
 } from '@angular/material/dialog';
 import { UserService } from 'src/services/user.service';
 import { RequestbookService } from 'src/services/requestbook.service';
+import { ReviewcomponentComponent } from '../reviewcomponent/reviewcomponent.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -116,9 +117,17 @@ export class DashboardComponent implements OnInit {
     this.issuebookdetails$ = this.issuebookservice.getallpendingbookdetalis();
   }
 
-  returnbook(issueId: number) {
-    this.issuebookservice.returnbook(issueId).subscribe((n) => {
-      window.location.href = '/dashboard';
+  returnbook(issuebookdetails: any) {
+    console.warn(issuebookdetails);
+    
+    this.dialog.open(ReviewcomponentComponent, {
+      data: {
+        bookTitle: issuebookdetails.bookTitle,
+        bookId: issuebookdetails.bookId,
+      },
+    });
+    this.issuebookservice.returnbook(issuebookdetails.issue_id).subscribe((n) => {
+      // window.location.href = '/dashboard';
     });
   }
 

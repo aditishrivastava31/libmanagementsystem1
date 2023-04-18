@@ -102,15 +102,14 @@
                     <div *ngIf="issuebook.returnDate===null;else elseBlock1">
                         <!-- {{!issuebook.isExtendable}} && {{!issuebook.isWithDraw}} -- {{!issuebook.isExtendable&&issuebook.isWithDraw}} -->
                         <button class="btn  r-hover border-success btn-sm"
-                            (click)="returnbook(issuebook.issue_id)">Return</button>&nbsp;
+                            (click)="returnbook(issuebook)">Return</button>&nbsp;
                         <button class="btn  i-hover border-warning btn-sm" (click)="extenddatebook(issuebook.issue_id) "
                             [hidden]="!issuebook.isExtendable">Extend</button>
                         <button class="btn p-hover border-danger btn-sm" (click)="withdrawbook(issuebook.issue_id) "
                             [hidden]="!issuebook.isWithDraw">Withdraw Ext.</button>
                     </div>
                     <ng-template #elseBlock1>
-                        <button class="btn text-success border-success btn-sm" style="background-color: #e8feda;"
-                            (click)="returnbook(issuebook.issue_id)" disabled>Returned</button>
+                        <button class="btn text-success border-success btn-sm" style="background-color: #e8feda;" disabled>Returned</button>
                     </ng-template>
                 </td>
             </tr>

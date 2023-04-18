@@ -169,7 +169,9 @@ public class BookIssueServiceImpl implements BookIssueService {
 				.collect(Collectors.toList());
 		bookIssueDetailsDto.setAuthors(authorsList);
 		bookIssueDetailsDto.setBookTitle(bookIssueDetails.getBookDetails().getBookName());
+		bookIssueDetailsDto.setBookId(bookIssueDetails.getBookDetails().getBookId());
 		bookIssueDetailsDto.setIssueDate(bookIssueDetails.getIssueDate());
+		bookIssueDetailsDto.setUserName(bookIssueDetails.getUserDetail().getUserName());
 		bookIssueDetailsDto.setIssueEndDate(bookIssueDetails.getIssueEndDate());
 		bookIssueDetailsDto.setReturnDate(bookIssueDetails.getReturnDate());
 		bookIssueDetailsDto.setIsExtendable(bookIssueDetails.getIsExtendable());
@@ -235,6 +237,7 @@ public class BookIssueServiceImpl implements BookIssueService {
 		List<BookIssueDetailsDto> bookIssueDetailsDtos = new ArrayList<>();
 		bookIssueRepository.findAll().forEach(bookIssueDetails -> {
 			BookIssueDetailsDto bookIssueDetailsDto = new BookIssueDetailsDto();
+			bookIssueDetailsDto.setBookId(bookIssueDetails.getBookDetails().getBookId());
 			bookIssueDetailsDto.setBookTitle(bookIssueDetails.getBookDetails().getBookName());
 			bookIssueDetailsDto.setUserName(bookIssueDetails.getUserDetail().getUserName());
 			bookIssueDetailsDto.setReturnDate(bookIssueDetails.getReturnDate());
