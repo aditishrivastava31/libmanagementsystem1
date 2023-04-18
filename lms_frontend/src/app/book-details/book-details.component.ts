@@ -52,7 +52,8 @@ export class BookDetailsComponent extends BooksComponent implements OnInit {
   openDialog(): void {
     this.dialog.open(ReviewcomponentComponent, {
       data: {
-        bookid: this.bookidroute,
+        bookTitle: this.bookdetails.book_title,
+        bookId: this.bookdetails.book_id,
       },
     });
   }

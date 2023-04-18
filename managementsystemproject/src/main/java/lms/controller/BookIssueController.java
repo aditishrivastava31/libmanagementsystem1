@@ -36,6 +36,7 @@ public class BookIssueController {
 	@CrossOrigin(origins = "http://localhost:4200/dashboard")
 	@GetMapping("/totalBooks/{user_id}")
 	public List<BookIssueDetailsDto> getAllBooks(@PathVariable("user_id") long uid) {
+		System.out.println(bookIssueServiceImpl.getIssuedBookDetails("total", uid));
 		return bookIssueServiceImpl.getIssuedBookDetails("total", uid);
 	}
 
