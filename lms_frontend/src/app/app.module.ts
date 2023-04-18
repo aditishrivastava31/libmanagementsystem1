@@ -38,6 +38,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { HeaderComponent } from './header/header.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+
 @NgModule({
   declarations: [
     AppComponent,

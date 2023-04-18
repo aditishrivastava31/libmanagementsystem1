@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lms.entities.BookDetails;
+
 public class BookIssueDetailsDto {
 
 	private long issue_id;
@@ -19,6 +21,8 @@ public class BookIssueDetailsDto {
 	private Date returnDate;
 
 	private String bookTitle;
+	
+	private long bookId;
 
 	private List<String> authors;
 
@@ -46,6 +50,14 @@ public class BookIssueDetailsDto {
 
 	public Date getIssueDate() {
 		return issueDate;
+	}
+
+	public long getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(long bookId) {
+		this.bookId = bookId;
 	}
 
 	public void setIssueDate(Date issueDate) {

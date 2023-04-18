@@ -33,15 +33,13 @@ export class ReviewcomponentComponent {
       star: this.starCount,
       comments: this.bookreviewform.get('comments')?.value,
     };
-    // console.log("------------------value : ", this.review);
-    // console.log(this.bookreviewform.getRawValue());
-    this.bookreviewservice.addreview(this.data.bookid, this.review).subscribe(
+    console.warn(this.data);
+    this.bookreviewservice.addreview(this.data.bookId, this.review).subscribe(
       (n) => {
-        // console.log(n);
         this.dialog.open(DialogmodalComponent, {
           data: {
             name: 'Review Added Successfully. ',
-            url: '/book-details/' + this.data.bookid,
+            url: '/book-details/' + this.data.bookId,
           },
         });
       },
