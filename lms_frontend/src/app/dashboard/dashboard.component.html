@@ -68,9 +68,13 @@
 
 <h2>{{title}} Books</h2>
 <!-- <h1>{{requestbook}}</h1> -->
-<div *ngIf="(this.issuebookdetails$ | async).length===0;else elseBlock">
+<!-- <div *ngIf="(this.issuebookdetails$ | async).length===0;else elseBlock">
+    <h4>No data to display...</h4>
+</div> -->
+<div *ngIf="this.issuebookarray.length===0;else elseBlock">
     <h4>No data to display...</h4>
 </div>
+
 <ng-template #elseBlock>
     <table class="datatable" *ngIf="!requestbook;else requestbookelse">
         <thead>
@@ -88,7 +92,7 @@
 
         <tbody>
             <!-- <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index"> -->
-            <tr *ngFor="let issuebook of issuebookdetails$  | async;let i = index">
+            <tr *ngFor="let issuebook of issuebookarray;let i = index">
                 <td>{{i+1}}</td>
                 <td>{{issuebook.bookTitle}}</td>
                 <td>{{issuebook.authors}}</td>
@@ -127,7 +131,7 @@
             </thead>
             <tbody>
                 <!-- <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index"> -->
-                <tr *ngFor="let issuebook of issuebookdetails$  | async;let i = index">
+                <tr *ngFor="let issuebook of issuebookarray;let i = index">
                     <td>{{i+1}}</td>
                     <td>{{issuebook.bookName}}</td>
                     <td>{{issuebook.authorName}}</td>

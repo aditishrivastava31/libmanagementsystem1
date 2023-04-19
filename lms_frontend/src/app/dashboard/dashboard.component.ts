@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   pendingsbookcount$!: Observable<number>;
   issuedbookcount$!: Observable<number>;
   returnedbookcount$!: Observable<number>;
+   issuebookarray:any[]=[]
   count: number = 0;
 
   constructor(
@@ -37,6 +38,7 @@ export class DashboardComponent implements OnInit {
     private loginService: LoginService,
     public dialog: MatDialog,
     private requestBookService: RequestbookService,
+   
   ) {}
 
   ngOnInit(): void {
@@ -88,6 +90,10 @@ export class DashboardComponent implements OnInit {
     this.show = 1;
     this.issuebookdetails$ = this.issuebookservice.getallIssuebookdetails();
     this.issuebookservice.getallIssuebookdetails().subscribe((n)=>{
+      this.issuebookarray=n;
+      console.log(this.issuebookarray);
+    })
+    this.issuebookservice.getallIssuebookdetails().subscribe((n)=>{
       console.log(n)
     })
   }
@@ -96,7 +102,9 @@ export class DashboardComponent implements OnInit {
     this.requestbook=false;
     this.show = 0;
     this.issuebookservice.getIssuedbookdetalis().subscribe((n) => {
-      console.log(n)
+      this.issuebookarray=n;
+      
+      console.log(this.issuebookarray);
     });
     this.issuebookdetails$ = this.issuebookservice.getIssuedbookdetalis();
   }
@@ -106,6 +114,8 @@ export class DashboardComponent implements OnInit {
     this.requestbook=false;
     this.show = 0;
     this.issuebookservice.getreadIssuebookdetails().subscribe((n) => {
+      this.issuebookarray=n
+      console.log(this.issuebookarray);
     });
     this.issuebookdetails$ = this.issuebookservice.getreadIssuebookdetails();
   }
@@ -115,6 +125,10 @@ export class DashboardComponent implements OnInit {
     this.title = 'Pending';
     this.show = 0;
     this.issuebookdetails$ = this.issuebookservice.getallpendingbookdetalis();
+    this.issuebookservice.getallpendingbookdetalis().subscribe((n)=>{
+      this.issuebookarray=n;
+      console.log(this.issuebookarray);
+    })
   }
 
   returnbook(issuebookdetails: any) {
@@ -135,9 +149,12 @@ export class DashboardComponent implements OnInit {
     this.requestbook=true;
     this.show=0;
     this.issuebookdetails$= this.requestBookService.getRequest();
-    // this.requestBookService.getRequest().subscribe((n)=>{
-    //     console.log(n);
-    // });
+    this.requestBookService.getRequest().subscribe((n)=>{
+      this.issuebookarray=n;
+      console.log(this.issuebookarray);
+    });
+    console.log(this.issuebookarray.length);
+    
   }
   
 
