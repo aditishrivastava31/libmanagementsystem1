@@ -42,10 +42,10 @@ public class BookDetailsController {
 	}
 	
 
-  @PostConstruct
-  public void updatebookdetails() {
-      bookDetailsServiceImpl.updatebookdetails();
-  }
+//  @PostConstruct
+//  public void updatebookdetails() {
+//      bookDetailsServiceImpl.updatebookdetails();
+//  }
 	
 
 	public BookDetailsController() {

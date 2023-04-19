@@ -38,6 +38,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { HeaderComponent } from './header/header.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     NgHttpLoaderModule.forRoot(),
     ValidateEqualModule,
     Ng2OrderModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
