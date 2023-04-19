@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import lms.LibraryManagementSystemProjectApplication;
 import lms.dto.AuthenticateDto;
 import lms.dto.ForgetPasswordDto;
 import lms.dto.ForgetPasswordPasswordDto;
 import lms.dto.JwtResponseDao;
 import lms.dto.ResetPasswordDao;
 import lms.serviceImpl.JwtService;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -50,6 +54,8 @@ public class UserController {
 
 	@Autowired
 	private UserDetailsRepository detailsRepository;
+	
+	static Logger logger=LogManager.getLogger(LibraryManagementSystemProjectApplication.class); 
 
 //    @PostConstruct
 //    public void initRoleAndUser() {
@@ -74,6 +80,7 @@ public class UserController {
 			@RequestParam(name = "cityname") String cityName) {
 		System.out.println(userDetails);
 		try {
+			logger.info("SignUp work");
 			return ResponseEntity.of(Optional.of(userService.signUp(userDetails, countryName, stateName, cityName)));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,6 +105,7 @@ public class UserController {
 
 	@PostMapping("/authenticate")
 	public JwtResponseDao authenticateAndGetToken(@RequestBody AuthenticateDto authRequest) throws Exception {
+		logger.info("login");
 		return jwtService.createJwtToken(authRequest);
 	}
 
