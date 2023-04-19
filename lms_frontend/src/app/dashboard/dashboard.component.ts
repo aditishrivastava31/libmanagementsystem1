@@ -20,25 +20,26 @@ import { ReviewcomponentComponent } from '../reviewcomponent/reviewcomponent.com
 })
 export class DashboardComponent implements OnInit {
   title = '';
+  page: number = 1;
+  perPage: number = 5;
   show: number = 0;
-  requestbook:boolean=false;
-  btnState: boolean=false;
-  requestbookcount$!:Observable<number>;
+  requestbook: boolean = false;
+  btnState: boolean = false;
+  requestbookcount$!: Observable<number>;
   issuebookdetails$!: Observable<any>;
-  nonExtendable$!:Observable<any>;
+  nonExtendable$!: Observable<any>;
   allbookscount$!: Observable<number>;
   pendingsbookcount$!: Observable<number>;
   issuedbookcount$!: Observable<number>;
   returnedbookcount$!: Observable<number>;
-   issuebookarray:any[]=[]
+  issuebookarray: any[] = [];
   count: number = 0;
 
   constructor(
     private issuebookservice: IssuebookservicesService,
     private loginService: LoginService,
     public dialog: MatDialog,
-    private requestBookService: RequestbookService,
-   
+    private requestBookService: RequestbookService
   ) {}
 
   ngOnInit(): void {
@@ -81,29 +82,28 @@ export class DashboardComponent implements OnInit {
     }
 
     this.all_books();
-    
   }
 
   all_books() {
-    this.requestbook=false;
+    this.requestbook = false;
     this.title = 'All';
     this.show = 1;
     this.issuebookdetails$ = this.issuebookservice.getallIssuebookdetails();
-    this.issuebookservice.getallIssuebookdetails().subscribe((n)=>{
-      this.issuebookarray=n;
+    this.issuebookservice.getallIssuebookdetails().subscribe((n) => {
+      this.issuebookarray = n;
       console.log(this.issuebookarray);
-    })
-    this.issuebookservice.getallIssuebookdetails().subscribe((n)=>{
-      console.log(n)
-    })
+    });
+    this.issuebookservice.getallIssuebookdetails().subscribe((n) => {
+      console.log(n);
+    });
   }
   issued_books() {
     this.title = 'Issued';
-    this.requestbook=false;
+    this.requestbook = false;
     this.show = 0;
     this.issuebookservice.getIssuedbookdetalis().subscribe((n) => {
-      this.issuebookarray=n;
-      
+      this.issuebookarray = n;
+
       console.log(this.issuebookarray);
     });
     this.issuebookdetails$ = this.issuebookservice.getIssuedbookdetalis();
@@ -111,55 +111,55 @@ export class DashboardComponent implements OnInit {
 
   returned_books() {
     this.title = 'Returned';
-    this.requestbook=false;
+    this.requestbook = false;
     this.show = 0;
     this.issuebookservice.getreadIssuebookdetails().subscribe((n) => {
-      this.issuebookarray=n
+      this.issuebookarray = n;
       console.log(this.issuebookarray);
     });
     this.issuebookdetails$ = this.issuebookservice.getreadIssuebookdetails();
   }
 
   pending_books() {
-    this.requestbook=false;
+    this.requestbook = false;
     this.title = 'Pending';
     this.show = 0;
     this.issuebookdetails$ = this.issuebookservice.getallpendingbookdetalis();
-    this.issuebookservice.getallpendingbookdetalis().subscribe((n)=>{
-      this.issuebookarray=n;
+    this.issuebookservice.getallpendingbookdetalis().subscribe((n) => {
+      this.issuebookarray = n;
       console.log(this.issuebookarray);
-    })
+    });
   }
 
   returnbook(issuebookdetails: any) {
     console.warn(issuebookdetails);
-    
+
     this.dialog.open(ReviewcomponentComponent, {
       data: {
         bookTitle: issuebookdetails.bookTitle,
         bookId: issuebookdetails.bookId,
       },
     });
-    this.issuebookservice.returnbook(issuebookdetails.issue_id).subscribe((n) => {
-      // window.location.href = '/dashboard';
-    });
+    this.issuebookservice
+      .returnbook(issuebookdetails.issue_id)
+      .subscribe((n) => {
+        // window.location.href = '/dashboard';
+      });
   }
 
   requested_books() {
-    this.requestbook=true;
-    this.show=0;
-    this.issuebookdetails$= this.requestBookService.getRequest();
-    this.requestBookService.getRequest().subscribe((n)=>{
-      this.issuebookarray=n;
+    this.requestbook = true;
+    this.show = 0;
+    this.issuebookdetails$ = this.requestBookService.getRequest();
+    this.requestBookService.getRequest().subscribe((n) => {
+      this.issuebookarray = n;
       console.log(this.issuebookarray);
     });
     console.log(this.issuebookarray.length);
-    
   }
-  
 
   extenddatebook(issueId: number) {
-    console.log("hiii")
+    console.log('hiii');
     // this.checkExtension(issueId);
     this.issuebookservice.extenddatebook(issueId).subscribe(
       (n) => {
@@ -180,27 +180,24 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-
-  withdrawbook(issueId:number){
-     this.issuebookservice.withdrawbook(issueId).subscribe((n)=>{
-     
-     this.dialog.open(DialogmodalComponent, {
-      data: {
-        name: n,
-        url: '/dashboard',
+  withdrawbook(issueId: number) {
+    this.issuebookservice.withdrawbook(issueId).subscribe(
+      (n) => {
+        this.dialog.open(DialogmodalComponent, {
+          data: {
+            name: n,
+            url: '/dashboard',
+          },
+        });
       },
-    });
-  },
-  (error) => {
-    this.dialog.open(DialogmodalComponent, {
-      data: {
-        name: "you can't withdraw that book",
-      },
-    });
-     
-}
-     )
-                 
+      (error) => {
+        this.dialog.open(DialogmodalComponent, {
+          data: {
+            name: "you can't withdraw that book",
+          },
+        });
+      }
+    );
   }
 
   row_clicked() {
