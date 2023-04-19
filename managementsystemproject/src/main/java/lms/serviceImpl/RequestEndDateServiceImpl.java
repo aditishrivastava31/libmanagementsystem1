@@ -83,9 +83,10 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 	@Override
 	public String addRequestEndExtension(long issueId) {
 		BookIssueDetails bookIssueDetails = bookIssueRepository.findById(issueId).orElse(null);
-		if (bookIssueDetails == null) {
+		if (bookIssueDetails == null){
 			return "bookIssue details was not";
-		} else {
+		}
+		else {
 			List<RequestExtension> requestExtensions = requestExtensionRepository.findByissueId(bookIssueDetails);
 			if (requestExtensions.size() != 0) {
 				return "request was already submitted";
@@ -129,7 +130,7 @@ public class RequestEndDateServiceImpl implements RequestEndDateService {
 			List<RequestExtension> requestExtensions = requestExtensionRepository.findByissueId(bookIssueDetails);
 			if (requestExtensions.size() != 0) {
 				bookIssueDetails.setIsWithDraw(false);
-				bookIssueDetails.setIsExtendable(false);
+				bookIssueDetails.setIsExtendable(true);
 				bookIssueRepository.save(bookIssueDetails);
 				deletetheExtension(bookIssueDetails);
 				return "with draw was done completely";

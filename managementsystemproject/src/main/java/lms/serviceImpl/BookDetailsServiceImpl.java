@@ -177,14 +177,17 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 	}
 
 	public void updatebookdetails() {
-//		System.out.println("book update is called");
-//		BookDetails book=bookRepository.findById(18l).orElse(null);
-//		List<Category> categories=new ArrayList<>();
-//		categories.add(categoryRepository.findById(8l).orElse(null));
-//		//categories.add(categoryRepository.findById(2l).orElse(null));
-//		book.setCategory(categories);
-//		bookRepository.save(book);
-		System.out.println(categoryRepository.getcategorynames("bhjj"));
+		System.out.println("book update is called");
+		BookDetails book=bookRepository.findById(25l).orElse(null);
+		List<Category> categories=new ArrayList<>();
+		categories.add(categoryRepository.findById(3l).orElse(null));
+		List<Author> authors=new ArrayList<>();
+		authors.add(authorRepository.findById(6l).orElse(null));
+		//categories.add(categoryRepository.findById(2l).orElse(null));
+		book.setCategory(categories);
+		book.setAuthors(authors);
+		bookRepository.save(book);
+
 	}
 
 	@Override
