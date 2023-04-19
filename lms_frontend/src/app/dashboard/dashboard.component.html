@@ -76,6 +76,7 @@
 </div>
 
 <ng-template #elseBlock>
+    <div>
     <table class="datatable" *ngIf="!requestbook;else requestbookelse">
         <thead>
             <tr>
@@ -92,7 +93,7 @@
 
         <tbody>
             <!-- <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index"> -->
-            <tr *ngFor="let issuebook of issuebookarray;let i = index">
+            <tr *ngFor="let issuebook of issuebookarray|  paginate:{itemsPerPage:perPage,currentPage:page};let i = index">
                 <td>{{i+1}}</td>
                 <td>{{issuebook.bookTitle}}</td>
                 <td>{{issuebook.authors}}</td>
@@ -118,7 +119,11 @@
                 </td>
             </tr>
         </tbody>
+
     </table>
+                    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                    </div>
+
     <ng-template #requestbookelse>
         <table class="datatable">
             <thead>
@@ -131,7 +136,7 @@
             </thead>
             <tbody>
                 <!-- <tr *ngFor="let issuebook of issuebookdetails$ | async;let i = index"> -->
-                <tr *ngFor="let issuebook of issuebookarray;let i = index">
+                <tr *ngFor="let issuebook of issuebookarray | paginate:{itemsPerPage:perPage,currentPage:page};let i = index">
                     <td>{{i+1}}</td>
                     <td>{{issuebook.bookName}}</td>
                     <td>{{issuebook.authorName}}</td>
